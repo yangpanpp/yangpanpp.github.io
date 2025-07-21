@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>爱情信纸 💌</title>
+  <!-- 字体：标题专用字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "KaiTi", "Comic Sans MS", cursive, sans-serif;
+      background: url('./bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      animation: pageFadeIn 1.5s ease;
+    }
+
+    @keyframes pageFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .music-control {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 999;
+    }
+
+    .music-control button {
+      background: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #e94e77;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #e94e77;
+      margin: 60px 20px 20px 20px;
+      font-size: 6vw;
+      text-shadow: 1px 1px 3px #fff;
+      font-family: 'Dancing Script', 'ZCOOL KuaiLe', cursive;
+      animation: fadeIn 2s ease;
+    }
+
+    .letter-paper {
+      background: rgba(255, 255, 255, 0.85);
+      border: 5px dashed #ff9aa2;
+      border-radius: 20px;
+      padding: 6vw;
+      width: 90%;
+      max-width: 900px;
+      margin: 20px auto;
+      min-height: 400px;
+      font-size: 4.5vw;
+      color: #444;
+      white-space: pre-wrap;
+      line-height: 1.8;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+
+    .letter-paper.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 40px;
+      }
+      .letter-paper {
+        font-size: 20px;
+        padding: 40px;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* 爱心飘落 */
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      color: pink;
+      animation: fall 6s linear infinite;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="music-control">
+    <button onclick="toggleMusic()">🎵 播放 / 暂停</button>
+  </div>
+
+  <h1>南京先锋书店 · 13页分手信</h1>
+
+  <div class="letter-paper" id="content">
+    正在加载信件内容...
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="http://szrfi6fiz.hn-bkt.clouddn.com/%E7%88%B1%E6%AE%87.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    // 自动加载文本内容
+    fetch('http://szrfi6fiz.hn-bkt.clouddn.com/%E6%9C%80%E9%95%BF%E7%9A%84%E6%89%8B%E5%86%99%E4%BF%A1.txt')
+      .then(res => res.text())
+      .then(data => {
+        const paper = document.getElementById("content");
+        paper.textContent = data;
+      })
+      .catch(() => {
+        document.getElementById("content").textContent = "无法加载信件内容，请检查文件路径或网络。";
+      });
+
+    // 音乐控制
+    const music = document.getElementById('bgMusic');
+    function toggleMusic() {
+      if (music.paused) {
+        music.play().catch(() => alert("无法播放音乐，可能被浏览器限制"));
+      } else {
+        music.pause();
+      }
+    }
+
+    // 爱心飘落
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.textContent = '❤';
+      heart.style.fontSize = (16 + Math.random() * 20) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => document.body.removeChild(heart), 6000);
+    }, 300);
+
+    // 滚动丝滑显示信纸
+    const paper = document.getElementById("content");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          paper.classList.add("show");
+        }
+      });
+    });
+    observer.observe(paper);
+  </script>
+</body>
+</html>

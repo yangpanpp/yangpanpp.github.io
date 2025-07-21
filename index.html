@@ -1,370 +1,413 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>爱情信纸 💌</title>
-  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Dancing+Script&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "KaiTi", "Comic Sans MS", cursive, sans-serif;
-      background: url('./bg.jpg') no-repeat center center fixed;
-      background-size: cover;
-      overflow-x: hidden;
-      animation: pageFadeIn 1.5s ease;
-    }
-
-    @keyframes pageFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    h1 {
-      text-align: center;
-      color: #e94e77;
-      margin: 60px 20px 20px 20px;
-      font-size: 6vw;
-      text-shadow: 1px 1px 3px #fff;
-      font-family: 'Dancing Script', 'ZCOOL KuaiLe', cursive;
-      animation: fadeIn 2s ease;
-    }
-
-    .letter-paper {
-      background: rgba(255, 255, 255, 0.85);
-      border: 5px dashed #ff9aa2;
-      border-radius: 20px;
-      padding: 6vw;
-      width: 90%;
-      max-width: 900px;
-      margin: 20px auto;
-      min-height: 400px;
-      font-size: 4.5vw;
-      color: #444;
-      white-space: pre-wrap;
-      line-height: 1.8;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 1s ease;
-    }
-
-    .letter-paper.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (min-width: 768px) {
-      h1 { font-size: 40px; }
-      .letter-paper {
-        font-size: 20px;
-        padding: 40px;
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .heart {
-      position: fixed;
-      top: -10px;
-      font-size: 20px;
-      color: pink;
-      animation: fall 6s linear infinite;
-      pointer-events: none;
-      opacity: 0.7;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .music-icon-container {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      z-index: 999;
-      transition: transform 0.5s ease;
-    }
-
-    .icon-button {
-      width: 25px;
-      height: 25px;
-      font-size: 24px;
-      background: #fff;
-      border-radius: 50%;
-      padding: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .icon-button img {
-      width: 30px;
-      height: 30px;
-    }
-
-    .music-menu {
-      margin-top: 10px;
-      background: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      max-height: 0;
-      transition: max-height 0.4s ease, opacity 0.3s ease;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .music-menu.open {
-      max-height: 300px;
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .music-menu button {
-      background: none;
-      border: none;
-      color: #e94e77;
-      font-size: 16px;
-      font-weight: bold;
-      padding: 5px 0;
-      cursor: pointer;
-    }
-
-    #musicMenu img {
-      padding-top: 10px;
-      height: 25px;
-      width: 25px;
-    }
-
-    .hint-box {
-      position: fixed;
-      top: 60px;
-      right: 10px;
-      background: #fff8f8;
-      color: #e94e77;
-      padding: 10px 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      font-size: 14px;
-      animation: fadeIn 0.5s ease;
-      z-index: 998;
-      transition: opacity 0.5s ease;
-    }
-
-    .hint-box.hide {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* 查看图片版样式 */
-    #photoPage {
-      background: rgba(255, 255, 255, 0.95);
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      min-height: 100vh;
-      padding: 20px;
-      z-index: 999;
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .photo-grid img {
-      width: 100%;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease;
-    }
-
-    .photo-grid img:hover {
-      transform: scale(1.05);
-    }
-
-    #preview {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.85);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 1000;
-    }
-
-    #preview img {
-      max-width: 90vw;
-      max-height: 80vh;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #000;
-    }
-
-    #preview a {
-      margin-top: 20px;
-      color: #fff;
-      background: #e94e77;
-      padding: 10px 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-    }
-  </style>
-</head>
-<body>
-  <div class="music-icon-container" id="musicControl">
-    <div class="icon-button" onclick="toggleMenu()">
-      <img src="./photos/音乐.png" alt="菜单" />
-    </div>
-    <div class="music-menu animated" id="musicMenu">
-      <button onclick="playMusic()"><img src="./photos/播放.png" alt=""></button>
-      <button onclick="pauseMusic()"><img src="./photos/暂停.png" alt=""></button>
-      <button onclick="showPhotoPage()"><img src="./photos/图片.png" alt=""></button>
-    </div>
-  </div>
-  <div class="hint-box" id="hintBox">点击右上角图标可控制音乐和查看图片版</div>
-  <h1>南京先锋书店 · 13页分手信</h1>
-  <div class="letter-paper" id="content">
-    正在加载信件内容...
-  </div>
-  
-  <!-- 图片页面 -->
-  <div id="photoPage" style="display: none;">
-    <div style="text-align: center; margin: 20px;">
-      <button onclick="hidePhotoPage()" style="background: #fff; padding: 10px 20px; border-radius: 20px; color: #e94e77; font-size: 16px; font-weight: bold;">返回信纸页面</button>
-    </div>
-    <div class="photo-grid">
-      <!-- 替换为你的图片路径 -->
-      <img src="./photos/1.jpg" onclick="previewImage(this)" />
-      <img src="./photos/2.jpg" onclick="previewImage(this)" />
-      <img src="./photos/3.jpg" onclick="previewImage(this)" />
-      <img src="./photos/4.jpg" onclick="previewImage(this)" />
-      <img src="./photos/5.jpg" onclick="previewImage(this)" />
-      <img src="./photos/6.jpg" onclick="previewImage(this)" />
-      <img src="./photos/7.jpg" onclick="previewImage(this)" />
-      <img src="./photos/8.jpg" onclick="previewImage(this)" />
-      <img src="./photos/9.jpg" onclick="previewImage(this)" />
-      <img src="./photos/10.jpg" onclick="previewImage(this)" />
-      <img src="./photos/11.jpg" onclick="previewImage(this)" />
-      <img src="./photos/12.jpg" onclick="previewImage(this)" />
-      <img src="./photos/13.jpg" onclick="previewImage(this)" />
-    </div>
-  </div>
-
-  <!-- 预览大图 -->
-  <div id="preview" onclick="closePreview()">
-    <img id="previewImg" src="" />
-    <a id="saveLink" download target="_blank">📥 保存图片</a>
-  </div>
-
-  <!-- 背景音乐 -->
-  <audio id="bgMusic" loop>
-    <source src="./爱殇.mp3" type="audio/mpeg" />
-  </audio>
-
-
-  <script>
-
-      // 加载信纸内容
-    fetch('./loveletter.txt')
-      .then(res => res.text())
-      .then(data => {
-        const paper = document.getElementById("content");
-        paper.textContent = data;
-      })
-      .catch(() => {
-        document.getElementById("content").textContent = "无法加载信件内容，请检查文件路径或网络。";
-      });
-
-
-
-    const music = document.getElementById('bgMusic');
-    function playMusic() { music.play().catch(() => alert("无法播放音乐")); }
-    function pauseMusic() { music.pause(); }
-    function toggleMenu() {
-      document.getElementById("musicMenu").classList.toggle("open");
-    }
-    let lastScrollTop = 0;
-    window.addEventListener("scroll", function () {
-      const currentScroll = window.scrollY;
-      const control = document.getElementById("musicControl");
-      const menu = document.getElementById("musicMenu");
-      const hint = document.getElementById("hintBox");
-      if (currentScroll > lastScrollTop) {
-        control.style.transform = "translateY(-100px)";
-        menu.classList.remove("open");
-        hint.classList.add("hide");
-      } else {
-        control.style.transform = "translateY(0)";
-      }
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-    });
-
-    // 爱心飘落
-    setInterval(() => {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.textContent = '❤';
-      heart.style.fontSize = (16 + Math.random() * 20) + 'px';
-      document.body.appendChild(heart);
-      setTimeout(() => document.body.removeChild(heart), 6000);
-    }, 300);
-
-    // 滚动展示信纸
-    const paper = document.getElementById("content");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          paper.classList.add("show");
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>先锋书店 13页分手信</title>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Dancing+Script&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "KaiTi", "Comic Sans MS", cursive, sans-serif;
+            background: url('./bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+            animation: pageFadeIn 1.5s ease;
         }
-      });
-    });
-    observer.observe(paper);
 
-    // 查看照片页
-    function showPhotoPage() {
-      document.getElementById("photoPage").style.display = "block";
-      document.querySelector(".letter-paper").style.display = "none";
-      document.querySelector("h1").style.display = "none";
-    }
-    function hidePhotoPage() {
-      document.getElementById("photoPage").style.display = "none";
-      document.querySelector(".letter-paper").style.display = "block";
-      document.querySelector("h1").style.display = "block";
-    }
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+            }
 
-    // 查看大图
-    function previewImage(img) {
-      const preview = document.getElementById("preview");
-      const previewImg = document.getElementById("previewImg");
-      const saveLink = document.getElementById("saveLink");
-      previewImg.src = img.src;
-      saveLink.href = img.src;
-      preview.style.display = "flex";
-    }
-    function closePreview() {
-      document.getElementById("preview").style.display = "none";
-    }
-  </script>
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #e94e77;
+            margin: 60px 20px 20px 20px;
+            font-size: 6vw;
+            text-shadow: 1px 1px 3px #fff;
+            font-family: 'Dancing Script', 'ZCOOL KuaiLe', cursive;
+            animation: fadeIn 2s ease;
+        }
+
+        .letter-paper {
+            background: rgba(255, 255, 255, 0.85);
+            border: 5px dashed #ff9aa2;
+            border-radius: 20px;
+            padding: 6vw;
+            width: 90%;
+            max-width: 900px;
+            margin: 20px auto;
+            min-height: 400px;
+            font-size: 4.5vw;
+            color: #444;
+            white-space: pre-wrap;
+            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .letter-paper.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 40px;
+            }
+
+            .letter-paper {
+                font-size: 20px;
+                padding: 40px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .heart {
+            position: fixed;
+            top: -10px;
+            font-size: 20px;
+            color: pink;
+            animation: fall 6s linear infinite;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .music-icon-container {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 999;
+            transition: transform 0.5s ease;
+        }
+
+        .icon-button {
+            width: 25px;
+            height: 25px;
+            font-size: 24px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .icon-button img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .music-menu {
+            margin-top: 10px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-height: 0;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .music-menu.open {
+            max-height: 300px;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .music-menu button {
+            background: none;
+            border: none;
+            color: #e94e77;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 5px 10px;
+            cursor: pointer;
+
+            display: flex;
+            /* 横向排列 */
+            align-items: center;
+            /* 垂直居中 */
+            gap: 6px;
+            /* 图标和文字间距 */
+        }
+
+        .music-menu button img {
+            width: 20px;
+            height: 20px;
+        }
+
+
+        .hint-box {
+            position: fixed;
+            top: 60px;
+
+            background: #fff8f8;
+            color: #e94e77;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            animation: fadeIn 0.5s ease;
+            z-index: 998;
+            transition: opacity 0.5s ease;
+        }
+
+        .hint-box.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* 查看图片版样式 */
+        #photoPage {
+            background: rgba(255, 255, 255, 0.95);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100vh;
+            padding: 20px;
+            z-index: 999;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        #preview {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        #preview img {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #000;
+        }
+
+        #preview a {
+            margin-top: 20px;
+            color: #fff;
+            background: #e94e77;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="music-icon-container" id="musicControl">
+        <div class="icon-button" onclick="toggleMenu()">
+            <img src="./photos/音乐.png" alt="菜单" />
+        </div>
+        <div class="music-menu animated" id="musicMenu">
+            <button id="playBtn" onclick="playMusic()"><img src="./photos/播放.png" alt=""> 播放</button>
+            <button id="pauseBtn" onclick="pauseMusic()" style="display:none"><img src="./photos/暂停.png" alt="">
+                暂停</button>
+            <button onclick="showPhotoPage()"><img src="./photos/图片.png" alt=""> 查看图片版</button>
+        </div>
+
+    </div>
+    <div class="hint-box" id="hintBox">点击左上角图标可控制音乐和查看图片版</div>
+    <h1>南京先锋书店 · 13页分手信</h1>
+    <div class="letter-paper" id="content">
+        正在加载信件内容...
+    </div>
+
+    <!-- 图片页面 -->
+    <div id="photoPage" style="display: none;">
+        <div style="text-align: center; margin: 20px;">
+            <button onclick="hidePhotoPage()"
+                style="background: #fff; padding: 10px 20px; border-radius: 20px; color: #e94e77; font-size: 16px; font-weight: bold;">返回信纸页面</button>
+        </div>
+        <div class="photo-grid">
+            <!-- 替换为你的图片路径 -->
+            <img src="./photos/1.jpg" onclick="previewImage(this)" />
+            <img src="./photos/2.jpg" onclick="previewImage(this)" />
+            <img src="./photos/3.jpg" onclick="previewImage(this)" />
+            <img src="./photos/4.jpg" onclick="previewImage(this)" />
+            <img src="./photos/5.jpg" onclick="previewImage(this)" />
+            <img src="./photos/6.jpg" onclick="previewImage(this)" />
+            <img src="./photos/7.jpg" onclick="previewImage(this)" />
+            <img src="./photos/8.jpg" onclick="previewImage(this)" />
+            <img src="./photos/9.jpg" onclick="previewImage(this)" />
+            <img src="./photos/10.jpg" onclick="previewImage(this)" />
+            <img src="./photos/11.jpg" onclick="previewImage(this)" />
+            <img src="./photos/12.jpg" onclick="previewImage(this)" />
+            <img src="./photos/13.jpg" onclick="previewImage(this)" />
+        </div>
+    </div>
+
+    <!-- 预览大图 -->
+    <div id="preview" onclick="closePreview()">
+        <img id="previewImg" src="" />
+        <a id="saveLink" download target="_blank">📥 保存图片</a>
+    </div>
+
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="./爱殇.mp3" type="audio/mpeg" />\
+
+    </audio>
+
+
+    <script>
+
+        // 加载信纸内容
+        fetch('./loveletter.txt')
+            .then(res => res.text())
+            .then(data => {
+                const paper = document.getElementById("content");
+                paper.textContent = data;
+            })
+            .catch(() => {
+                document.getElementById("content").textContent = "无法加载信件内容，请检查文件路径或网络。";
+            });
+
+
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const music = document.getElementById('bgMusic');
+        function playMusic() { music.play().catch(() => alert("无法播放音乐")); }
+        function pauseMusic() { music.pause(); }
+        function toggleMenu() {
+            document.getElementById("musicMenu").classList.toggle("open");
+        }
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function () {
+            const currentScroll = window.scrollY;
+            const control = document.getElementById("musicControl");
+            const menu = document.getElementById("musicMenu");
+            const hint = document.getElementById("hintBox");
+            if (currentScroll > lastScrollTop) {
+                control.style.transform = "translateY(-100px)";
+                menu.classList.remove("open");
+                hint.classList.add("hide");
+            } else {
+                control.style.transform = "translateY(0)";
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+
+        function playMusic() {
+            music.play().then(() => {
+                playBtn.style.display = 'none';
+                pauseBtn.style.display = 'inline-block';
+            }).catch(() => alert("无法播放音乐"));
+        }
+
+        function pauseMusic() {
+            music.pause();
+            playBtn.style.display = 'inline-block';
+            pauseBtn.style.display = 'none';
+        }
+        // 爱心飘落
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.textContent = '❤';
+            heart.style.fontSize = (16 + Math.random() * 20) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => document.body.removeChild(heart), 6000);
+        }, 300);
+
+        // 滚动展示信纸
+        const paper = document.getElementById("content");
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    paper.classList.add("show");
+                }
+            });
+        });
+        observer.observe(paper);
+
+        // 查看照片页
+        function showPhotoPage() {
+            document.getElementById("photoPage").style.display = "block";
+            document.querySelector(".letter-paper").style.display = "none";
+            document.querySelector("h1").style.display = "none";
+        }
+        function hidePhotoPage() {
+            document.getElementById("photoPage").style.display = "none";
+            document.querySelector(".letter-paper").style.display = "block";
+            document.querySelector("h1").style.display = "block";
+        }
+
+        // 查看大图
+        function previewImage(img) {
+            const preview = document.getElementById("preview");
+            const previewImg = document.getElementById("previewImg");
+            const saveLink = document.getElementById("saveLink");
+            previewImg.src = img.src;
+            saveLink.href = img.src;
+            preview.style.display = "flex";
+        }
+        function closePreview() {
+            document.getElementById("preview").style.display = "none";
+        }
+    </script>
 </body>
+
 </html>

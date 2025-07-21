@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>爱情信纸 💌</title>
-  <!-- 字体：标题专用字体 -->
+  <title>先锋书店</title>
   <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Dancing+Script&display=swap" rel="stylesheet">
   <style>
     body {
@@ -39,6 +38,7 @@
       color: #e94e77;
       cursor: pointer;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      margin-bottom: 10px;
     }
 
     h1 {
@@ -76,9 +76,7 @@
     }
 
     @media (min-width: 768px) {
-      h1 {
-        font-size: 40px;
-      }
+      h1 { font-size: 40px; }
       .letter-paper {
         font-size: 20px;
         padding: 40px;
@@ -90,7 +88,6 @@
       to { opacity: 1; }
     }
 
-    /* 爱心飘落 */
     .heart {
       position: fixed;
       top: -10px;
@@ -107,11 +104,76 @@
         opacity: 0;
       }
     }
+
+    /* 图片页面样式 */
+    #photoPage {
+      background: rgba(255, 255, 255, 0.95);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      min-height: 100vh;
+      padding: 20px;
+      z-index: 999;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .photo-grid img {
+      width: 100%;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .photo-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    #preview {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    #preview img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #000;
+    }
+
+    #preview a {
+      margin-top: 20px;
+      color: #fff;
+      background: #e94e77;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
   <div class="music-control">
     <button onclick="toggleMusic()">🎵 播放 / 暂停</button>
+    <br />
+    <button onclick="showPhotoPage()">🖼️ 查看图片版</button>
   </div>
 
   <h1>南京先锋书店 · 13页分手信</h1>
@@ -120,13 +182,41 @@
     正在加载信件内容...
   </div>
 
+  <!-- 图片展示区 -->
+  <div id="photoPage" style="display: none;">
+    <div style="text-align: center; margin: 20px;">
+      <button onclick="hidePhotoPage()" style="background: #fff; padding: 10px 20px; border-radius: 20px; color: #e94e77; font-size: 16px; font-weight: bold;">返回信纸页面</button>
+    </div>
+    <div class="photo-grid">
+      <img src="./photos/1.jpg" alt="photo1" onclick="previewImage(this)" />
+      <img src="./photos/2.jpg" alt="photo2" onclick="previewImage(this)" />
+      <img src="./photos/3.jpg" alt="photo3" onclick="previewImage(this)" />
+      <img src="./photos/4.jpg" alt="photo4" onclick="previewImage(this)" />
+      <img src="./photos/5.jpg" alt="photo5" onclick="previewImage(this)" />
+      <img src="./photos/6.jpg" alt="photo6" onclick="previewImage(this)" />
+      <img src="./photos/7.jpg" alt="photo7" onclick="previewImage(this)" />
+      <img src="./photos/8.jpg" alt="photo8" onclick="previewImage(this)" />
+      <img src="./photos/9.jpg" alt="photo9" onclick="previewImage(this)" />
+      <img src="./photos/10.jpg" alt="photo10" onclick="previewImage(this)" />
+      <img src="./photos/11.jpg" alt="photo11" onclick="previewImage(this)" />
+      <img src="./photos/12.jpg" alt="photo12" onclick="previewImage(this)" />
+      <img src="./photos/13.jpg" alt="photo13" onclick="previewImage(this)" />
+    </div>
+  </div>
+
+  <!-- 大图预览 -->
+  <div id="preview" style="display: none;" onclick="closePreview()">
+    <img id="previewImg" src="" />
+    <a id="saveLink" download target="_blank">📥 保存图片</a>
+  </div>
+
   <audio id="bgMusic" loop>
     <source src="./爱殇.mp3" type="audio/mpeg" />
   </audio>
 
   <script>
     // 自动加载文本内容
-    fetch('./最长的手写信.txt')
+    fetch('./loveletter.txt')
       .then(res => res.text())
       .then(data => {
         const paper = document.getElementById("content");
@@ -157,7 +247,7 @@
       setTimeout(() => document.body.removeChild(heart), 6000);
     }, 300);
 
-    // 滚动丝滑显示信纸
+    // 滚动显示信纸
     const paper = document.getElementById("content");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -167,6 +257,33 @@
       });
     });
     observer.observe(paper);
+
+    // 图片查看切换
+    function showPhotoPage() {
+      document.getElementById("photoPage").style.display = "block";
+      document.querySelector(".letter-paper").style.display = "none";
+      document.querySelector("h1").style.display = "none";
+    }
+
+    function hidePhotoPage() {
+      document.getElementById("photoPage").style.display = "none";
+      document.querySelector(".letter-paper").style.display = "block";
+      document.querySelector("h1").style.display = "block";
+    }
+
+    function previewImage(img) {
+      const preview = document.getElementById("preview");
+      const previewImg = document.getElementById("previewImg");
+      const saveLink = document.getElementById("saveLink");
+
+      previewImg.src = img.src;
+      saveLink.href = img.src;
+      preview.style.display = "flex";
+    }
+
+    function closePreview() {
+      document.getElementById("preview").style.display = "none";
+    }
   </script>
 </body>
 </html>

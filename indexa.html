@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>恋爱小店 - 全世界仅此一家哦</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff4d6d',
+                        secondary: '#ffe4e6',
+                        dark: '#1f2937'
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+    <style>
+        body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .gradient-text { background: linear-gradient(135deg, #ff4d6d, #f43f5e, #fda4af); -webkit-background-clip: text; color: transparent; background-size: 200% 200%; animation: gradientMove 5s ease infinite; }
+        
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        /* 隐藏滚动条但保持可滚动 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: auto; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); }
+        
+        /* 团队卡片 3D 内部元素悬浮效果 */
+        .tilt-card { transform-style: preserve-3d; }
+        .tilt-card-content { transform: translateZ(50px); }
+        .tilt-image { transform: translateZ(80px); }
+
+        /* [完美修复] Swiper 轮播图控制按钮样式优化，增加背景和阴影，避免重叠看不清 */
+        .swiper-button-prev, .swiper-button-next {
+            color: #ff4d6d !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            width: 50px !important;
+            height: 50px !important;
+            border-radius: 50% !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important;
+            z-index: 50 !important;
+        }
+        .swiper-button-prev:after, .swiper-button-next:after {
+            font-size: 1.2rem !important;
+            font-weight: 900 !important;
+        }
+        .swiper-pagination-bullet-active {
+            background: #ff4d6d !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="fixed w-full top-0 glass-nav z-50 border-b border-rose-100 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3 cursor-pointer group">
+                    <div class="w-10 h-10 bg-gradient-to-tr from-primary to-rose-400 rounded-full flex items-center justify-center text-white shadow-lg shadow-rose-200 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fa-solid fa-heart animate-pulse"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-wider text-dark group-hover:text-primary transition-colors">恋爱小店</span>
+                </div>
+                
+                <nav class="hidden lg:flex space-x-6 xl:space-x-8">
+                    <a href="#home" class="text-slate-600 hover:text-primary font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300">首页</a>
+                    <a href="#features" class="text-slate-600 hover:text-primary font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300">特色玩法</a>
+                    <a href="#scenarios" class="text-slate-600 hover:text-primary font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300">心动场景</a>
+                    <a href="#showcase" class="text-slate-600 hover:text-primary font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300">精致橱窗</a>
+                    <a href="#team" class="text-slate-600 hover:text-primary font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-primary after:transition-all after:duration-300">幕后团队</a>
+                </nav>
+
+                <div class="hidden md:flex">
+                    <button class="bg-dark hover:bg-slate-800 text-white px-6 py-2.5 rounded-full font-medium transition-all transform hover:-translate-y-1 hover:shadow-xl shadow-md border-2 border-transparent hover:border-rose-300">
+                        邀请另一半
+                    </button>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-primary focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-md border-t border-slate-100 px-4 pt-2 pb-6 space-y-2 shadow-2xl absolute w-full z-40">
+            <a href="#home" class="block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:text-primary hover:bg-rose-50 transition-colors">首页</a>
+            <a href="#features" class="block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:text-primary hover:bg-rose-50 transition-colors">特色玩法</a>
+            <a href="#scenarios" class="block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:text-primary hover:bg-rose-50 transition-colors">心动场景</a>
+            <a href="#team" class="block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:text-primary hover:bg-rose-50 transition-colors">幕后团队</a>
+        </div>
+    </header>
+
+    <section id="home" class="relative pt-32 pb-16 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-b from-rose-50 to-white">
+        <div id="particles-js"></div>
+        
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob z-0"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-rose-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob animation-delay-2000 z-0"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob animation-delay-4000 z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right" data-aos-duration="1200">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm text-primary font-medium text-sm mb-6 border border-rose-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                        <span class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                        </span>
+                        今天也要认真宠爱彼此哦
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 text-dark tracking-tight">
+                        专属你们的 <br/> <span class="gradient-text">甜蜜互动空间</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-10 max-w-lg leading-relaxed text-justify">
+                        由沙蟹倾力打造。不仅是一个点单工具，更是情侣间的感情升温神器。互相下发任务赚取恋爱基金，为对方点一杯专属奶茶，让平淡的日常充满未知的惊喜。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-gradient-to-r from-primary to-rose-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-rose-600 hover:to-rose-600 transition-all shadow-lg shadow-rose-300/50 transform hover:-translate-y-1 flex items-center gap-2">
+                            <i class="fa-brands fa-apple text-xl"></i> App Store 下载
+                        </button>
+                        <button class="glass-card text-slate-700 hover:text-primary px-8 py-4 rounded-full font-bold text-lg transition-all shadow-sm transform hover:-translate-y-1 flex items-center gap-2 group">
+                            <i class="fa-brands fa-android text-xl group-hover:text-green-500 transition-colors"></i> Android 体验版
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="relative mx-auto w-full max-w-[340px] lg:ml-auto animate-float" data-aos="zoom-in-up" data-aos-duration="1500">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-rose-400 to-purple-300 rounded-[3rem] transform rotate-3 scale-105 filter blur-xl opacity-50"></div>
+                    
+                    <div class="relative bg-white border-[12px] border-slate-800 rounded-[3rem] h-[700px] overflow-hidden shadow-2xl z-10">
+                        <div class="w-full h-full relative group cursor-pointer bg-slate-50">
+                             <img src="http://tfe9mf4ol.hn-bkt.clouddn.com/9c862981b89756a73085d2e84de62c80.png" alt="首页截图" class="w-full h-full object-cover absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
+                        </div>
+                        <div class="absolute top-0 inset-x-0 h-6 bg-slate-800 rounded-b-2xl w-40 mx-auto z-20"></div>
+                    </div>
+                    
+                    <div class="absolute -left-12 top-1/4 glass-card p-3 rounded-2xl shadow-xl z-20 animate-float-delayed flex items-center gap-3">
+                        <div class="w-10 h-10 bg-green-100 text-green-500 rounded-full flex items-center justify-center"><i class="fa-solid fa-check"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">任务完成</p>
+                            <p class="text-sm font-bold text-dark">洗碗 +50分</p>
+                        </div>
+                    </div>
+                    <div class="absolute -right-8 bottom-1/4 glass-card p-3 rounded-2xl shadow-xl z-20 animate-float flex items-center gap-3">
+                        <div class="w-10 h-10 bg-rose-100 text-primary rounded-full flex items-center justify-center"><i class="fa-solid fa-mug-hot"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">收到惊喜</p>
+                            <p class="text-sm font-bold text-dark">专属奶茶制作中</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white py-12 relative z-20 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.05)] rounded-t-[3rem] -mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-rose-50">
+                <div data-aos="fade-up" data-aos-delay="0" class="group cursor-default">
+                    <div class="text-4xl font-black text-dark mb-2 group-hover:text-primary transition-colors">100%</div>
+                    <div class="text-sm text-slate-500 font-medium">私密二人世界</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="group cursor-default">
+                    <div class="text-4xl font-black text-dark mb-2 group-hover:text-primary transition-colors">0 距离</div>
+                    <div class="text-sm text-slate-500 font-medium">心动随时传达</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="group cursor-default">
+                    <div class="text-4xl font-black text-dark mb-2 group-hover:text-primary transition-colors">∞</div>
+                    <div class="text-sm text-slate-500 font-medium">恋爱基金额度</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300" class="group cursor-default">
+                    <div class="text-4xl font-black text-dark mb-2 group-hover:text-primary transition-colors">365 天</div>
+                    <div class="text-sm text-slate-500 font-medium">记录心动日常</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-24 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
+                <span class="text-primary font-bold tracking-widest text-sm uppercase mb-3 block">Features</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">把日常变成 <span class="text-primary relative inline-block">专属浪漫<svg class="absolute w-full h-3 -bottom-1 left-0 text-rose-200" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 15 100 5" stroke="currentColor" stroke-width="4" fill="transparent"/></svg></span></h2>
+                <p class="text-slate-500 text-lg">基于原生开发体验，界面丝滑。精心设计的功能模块，让你们的每一次互动都充满仪式感。</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-[2rem] p-10 hover:shadow-2xl transition-all duration-500 border border-slate-100 group hover:-translate-y-3 cursor-pointer relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-rose-50 rounded-bl-[100px] -z-10 group-hover:bg-rose-100 transition-colors duration-500"></div>
+                    <div class="w-16 h-16 bg-gradient-to-br from-rose-100 to-rose-50 text-primary rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-dark">专属点单系统</h3>
+                    <p class="text-slate-600 leading-relaxed">从奶茶到自制菜品，完全自定义菜单。给自己买，或是“送另一半”，心意一键送达，支持查看实时配送进度。</p>
+                </div>
+                <div class="bg-white rounded-[2rem] p-10 hover:shadow-2xl transition-all duration-500 border border-slate-100 group hover:-translate-y-3 cursor-pointer relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-rose-50 rounded-bl-[100px] -z-10 group-hover:bg-rose-100 transition-colors duration-500"></div>
+                    <div class="w-16 h-16 bg-gradient-to-br from-rose-100 to-rose-50 text-primary rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 shadow-sm">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-dark">恋爱任务板</h3>
+                    <p class="text-slate-600 leading-relaxed">发布“洗碗”、“倒垃圾”、“给个拥抱”等紧急或日常任务，完成后获取恋爱基金积分，让家务和互动变得有趣。</p>
+                </div>
+                <div class="bg-white rounded-[2rem] p-10 hover:shadow-2xl transition-all duration-500 border border-slate-100 group hover:-translate-y-3 cursor-pointer relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-rose-50 rounded-bl-[100px] -z-10 group-hover:bg-rose-100 transition-colors duration-500"></div>
+                    <div class="w-16 h-16 bg-gradient-to-br from-rose-100 to-rose-50 text-primary rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-dark">小店财务总管</h3>
+                    <p class="text-slate-600 leading-relaxed">余额充值、积分抵扣，更能自制余额和赠送专属优惠券。每一笔“消费”都是爱的见证，店长后台一目了然。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="scenarios" class="py-24 bg-slate-900 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
+                <span class="text-rose-400 font-bold tracking-widest text-sm uppercase mb-3 block">Scenarios</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">不止是工具，更是感情的粘合剂</h2>
+            </div>
+
+            <div class="space-y-24">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2" data-aos="fade-right">
+                        <div class="bg-slate-800 rounded-[2rem] h-80 w-full overflow-hidden relative group">
+                            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="异地恋" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            <div class="absolute bottom-6 left-6 bg-dark/80 backdrop-blur-md px-4 py-2 rounded-xl text-sm border border-slate-600">
+                                <i class="fa-solid fa-location-dot text-primary mr-2"></i> 相隔 1200 km
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2" data-aos="fade-left">
+                        <div class="w-12 h-12 bg-rose-900/50 text-rose-400 rounded-xl flex items-center justify-center text-2xl mb-6"><i class="fa-solid fa-plane"></i></div>
+                        <h3 class="text-3xl font-bold mb-4">异地恋？跨越距离的投喂</h3>
+                        <p class="text-slate-400 text-lg leading-relaxed mb-6">见不到面的日子里，用小店给TA点一杯奶茶。后台状态更新为“已送达”的那一刻，仿佛你就陪在TA身边。</p>
+                        <ul class="space-y-3 text-slate-300">
+                            <li><i class="fa-solid fa-check text-green-400 mr-2"></i> 弥补不在身边的遗憾</li>
+                            <li><i class="fa-solid fa-check text-green-400 mr-2"></i> 制造生活中的小惊喜</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+                    <div class="md:w-1/2" data-aos="fade-left">
+                        <div class="bg-slate-800 rounded-[2rem] h-80 w-full overflow-hidden relative group">
+                            <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="和好" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2" data-aos="fade-right">
+                        <div class="w-12 h-12 bg-blue-900/50 text-blue-400 rounded-xl flex items-center justify-center text-2xl mb-6"><i class="fa-solid fa-handshake-angle"></i></div>
+                        <h3 class="text-3xl font-bold mb-4">吵架了？最好的下台阶神器</h3>
+                        <p class="text-slate-400 text-lg leading-relaxed mb-6">谁也不好意思先开口？在小店里悄悄上架一张“原谅券”或者发一个“亲亲任务”，给彼此一个完美的台阶。</p>
+                        <ul class="space-y-3 text-slate-300">
+                            <li><i class="fa-solid fa-check text-green-400 mr-2"></i> 缓和尴尬气氛</li>
+                            <li><i class="fa-solid fa-check text-green-400 mr-2"></i> 用幽默化解矛盾</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-dark relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518199266791-5375a83164ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center bg-fixed opacity-20"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-purple-900/80"></div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center" data-aos="zoom-in">
+            <i class="fa-solid fa-quote-left text-4xl text-rose-300 mb-6 opacity-50"></i>
+            <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight mb-6 tracking-wide">
+                "爱不是互相凝望，<br/>而是平淡日子里一起经营这间小店。"
+            </h2>
+            <div class="w-20 h-1 bg-rose-400 mx-auto rounded-full"></div>
+        </div>
+    </section>
+
+    <section id="showcase" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16" data-aos="fade-up">
+                <div class="max-w-2xl">
+                    <span class="text-primary font-bold tracking-widest text-sm uppercase mb-3 block">Showcase</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">一瞥小店的精致角落</h2>
+                    <p class="text-slate-500 text-lg">极简温馨的 UI 设计，让每一次滑动都如丝般顺滑。<br><span class="text-primary text-sm font-medium">💡 点击截图即可查看全屏高清大图哦！</span></p>
+                </div>
+            </div>
+
+            <div class="relative px-2 md:px-12" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper showcase-swiper pb-16 group">
+                    <div class="swiper-wrapper items-center">
+                        
+                        <div class="swiper-slide hover:-translate-y-3 transition-transform duration-500">
+                            <div class="mx-auto w-full max-w-[280px] sm:max-w-[300px]">
+                                <div class="bg-slate-100 rounded-[2.5rem] p-3 shadow-xl border border-slate-200">
+                                    <div class="bg-white rounded-[2rem] h-[600px] w-full overflow-hidden relative">
+                                        <a href="http://tfe9mf4ol.hn-bkt.clouddn.com/9c862981b89756a73085d2e84de62c80.png" class="glightbox" data-gallery="showcase-gallery">
+                                            <img src="http://tfe9mf4ol.hn-bkt.clouddn.com/9c862981b89756a73085d2e84de62c80.png" class="w-full h-full object-cover transition-transform hover:scale-105" alt="首页">
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="text-center mt-6 text-dark font-bold text-lg">首页动态</p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide hover:-translate-y-3 transition-transform duration-500">
+                            <div class="mx-auto w-full max-w-[280px] sm:max-w-[300px]">
+                                <div class="bg-slate-100 rounded-[2.5rem] p-3 shadow-xl border-2 border-primary/20">
+                                    <div class="bg-white rounded-[2rem] h-[600px] w-full overflow-hidden relative">
+                                        <a href="http://tfe9mf4ol.hn-bkt.clouddn.com/b119bba4706f2e0f4e52a91ce21d3377.png" class="glightbox" data-gallery="showcase-gallery">
+                                            <img src="http://tfe9mf4ol.hn-bkt.clouddn.com/b119bba4706f2e0f4e52a91ce21d3377.png" class="w-full h-full object-cover transition-transform hover:scale-105" alt="个人中心">
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="text-center mt-6 text-primary font-bold text-lg">个人中心</p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide hover:-translate-y-3 transition-transform duration-500">
+                            <div class="mx-auto w-full max-w-[280px] sm:max-w-[300px]">
+                                <div class="bg-slate-100 rounded-[2.5rem] p-3 shadow-xl border border-slate-200">
+                                    <div class="bg-white rounded-[2rem] h-[600px] w-full overflow-hidden relative">
+                                        <a href="http://tfe9mf4ol.hn-bkt.clouddn.com/0e36e3d002e934920280f6b6a74bbfc7.png" class="glightbox" data-gallery="showcase-gallery">
+                                            <img src="http://tfe9mf4ol.hn-bkt.clouddn.com/0e36e3d002e934920280f6b6a74bbfc7.png" class="w-full h-full object-cover transition-transform hover:scale-105" alt="商品点单">
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="text-center mt-6 text-dark font-bold text-lg">专属商品点单</p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide hover:-translate-y-3 transition-transform duration-500">
+                            <div class="mx-auto w-full max-w-[280px] sm:max-w-[300px]">
+                                <div class="bg-slate-100 rounded-[2.5rem] p-3 shadow-xl border border-slate-200">
+                                    <div class="bg-white rounded-[2rem] h-[600px] w-full overflow-hidden relative">
+                                        <a href="http://tfe9mf4ol.hn-bkt.clouddn.com/6204ac9a37a1398c2522f3771208a374.png" class="glightbox" data-gallery="showcase-gallery">
+                                            <img src="http://tfe9mf4ol.hn-bkt.clouddn.com/6204ac9a37a1398c2522f3771208a374.png" class="w-full h-full object-cover transition-transform hover:scale-105" alt="恋爱任务板">
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="text-center mt-6 text-dark font-bold text-lg">恋爱任务广场</p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide hover:-translate-y-3 transition-transform duration-500">
+                            <div class="mx-auto w-full max-w-[280px] sm:max-w-[300px]">
+                                <div class="bg-slate-100 rounded-[2.5rem] p-3 shadow-xl border border-slate-200">
+                                    <div class="bg-white rounded-[2rem] h-[600px] w-full overflow-hidden relative">
+                                        <a href="http://tfe9mf4ol.hn-bkt.clouddn.com/08f87cde0e8c2c9f6c738ac7da7608ff.png" class="glightbox" data-gallery="showcase-gallery">
+                                            <img src="http://tfe9mf4ol.hn-bkt.clouddn.com/08f87cde0e8c2c9f6c738ac7da7608ff.png" class="w-full h-full object-cover transition-transform hover:scale-105" alt="恋爱基金">
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="text-center mt-6 text-dark font-bold text-lg">恋爱基金</p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide hover:-translate-y-3 transition-transform duration-500">
+                            <div class="mx-auto w-full max-w-[280px] sm:max-w-[300px]">
+                                <div class="bg-slate-100 rounded-[2.5rem] p-3 shadow-xl border border-slate-200">
+                                    <div class="bg-white rounded-[2rem] h-[600px] w-full overflow-hidden relative">
+                                        <a href="http://tfe9mf4ol.hn-bkt.clouddn.com/05fc9c1cd1b2a747105249e1ad5433fc.png" class="glightbox" data-gallery="showcase-gallery">
+                                            <img src="http://tfe9mf4ol.hn-bkt.clouddn.com/05fc9c1cd1b2a747105249e1ad5433fc.png" class="w-full h-full object-cover transition-transform hover:scale-105" alt="订单详情">
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="text-center mt-6 text-dark font-bold text-lg">订单详情</p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide hover:-translate-y-3 transition-transform duration-500">
+                            <div class="mx-auto w-full max-w-[280px] sm:max-w-[300px]">
+                                <div class="bg-slate-100 rounded-[2.5rem] p-3 shadow-xl border-2 border-primary/20">
+                                    <div class="bg-white rounded-[2rem] h-[600px] w-full overflow-hidden relative">
+                                        <a href="http://tfe9mf4ol.hn-bkt.clouddn.com/6b0422a1dea98696124db64244b84652.png" class="glightbox" data-gallery="showcase-gallery">
+                                            <img src="http://tfe9mf4ol.hn-bkt.clouddn.com/6b0422a1dea98696124db64244b84652.png" class="w-full h-full object-cover transition-transform hover:scale-105" alt="店长后台">
+                                        </a>
+                                    </div>
+                                </div>
+                                <p class="text-center mt-6 text-primary font-bold text-lg">店长专属管理</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="swiper-pagination showcase-pagination !-bottom-2"></div>
+                </div>
+                
+                <div class="swiper-button-prev !left-0 md:!-left-4 md:opacity-0 hover:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
+                <div class="swiper-button-next !right-0 md:!-right-4 md:opacity-0 hover:opacity-100 md:group-hover:opacity-100 transition-opacity"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-24 bg-rose-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-dark mb-4">来自情侣们的甜蜜吐槽</h2>
+                <p class="text-slate-500">看看大家是怎么利用小店“压榨”另一半的</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-lg transition-shadow border border-slate-100" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex text-yellow-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 mb-6 italic">"异地恋神器！每次想喝奶茶就在上面点单，虽然是他在这边点外卖，但看着后台状态变成'已送达'，感觉就像他亲手做的一样。"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-rose-200 rounded-full flex items-center justify-center font-bold text-primary">A</div>
+                        <div>
+                            <h4 class="font-bold text-dark">Alice & Bob</h4>
+                            <p class="text-xs text-slate-400">绑定天数: 128天</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-lg transition-shadow border border-slate-100" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex text-yellow-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 mb-6 italic">"因为任务板，男朋友现在每天主动抢着洗碗（为了赚50积分换免生气券）。开发者真的太懂我们女生了哈哈哈哈！"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-200 rounded-full flex items-center justify-center font-bold text-purple-600">C</div>
+                        <div>
+                            <h4 class="font-bold text-dark">猫咪与鱼</h4>
+                            <p class="text-xs text-slate-400">绑定天数: 365天</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-lg transition-shadow border border-slate-100" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex text-yellow-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-600 mb-6 italic">"UI非常干净清爽，没有乱七八糟的广告。给另一半做的专属商品可以直接上传图片，细节拉满，强烈推荐！"</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center font-bold text-blue-600">L</div>
+                        <div>
+                            <h4 class="font-bold text-dark">Liya</h4>
+                            <p class="text-xs text-slate-400">绑定天数: 42天</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-dark mb-4">签署恋爱契约</h2>
+                <p class="text-slate-500">选择适合你们的开店模式</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <div class="border-2 border-slate-100 rounded-3xl p-8 hover:border-rose-200 transition-colors" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold text-dark mb-2">普通试营版</h3>
+                    <div class="text-4xl font-black text-slate-800 mb-6">¥ 0 <span class="text-lg font-normal text-slate-400">/ 永远</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-check text-green-500"></i> 基础点单功能</li>
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-check text-green-500"></i> 发布日常任务</li>
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-check text-green-500"></i> 单店长后台</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full border-2 border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-colors">立即体验</button>
+                </div>
+                
+                <div class="border-2 border-primary bg-rose-50/30 rounded-3xl p-8 relative transform md:-translate-y-4 shadow-xl shadow-rose-100" data-aos="fade-left">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-primary to-rose-400 text-white px-4 py-1 rounded-full text-sm font-bold shadow-md">
+                        强烈推荐
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-2">一生一世 VIP版</h3>
+                    <div class="text-4xl font-black text-dark mb-6">一颗真心 <span class="text-lg font-normal text-slate-400">/ 无价</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-slate-800 font-medium"><i class="fa-solid fa-heart text-primary"></i> 解锁无限商品上架</li>
+                        <li class="flex items-center gap-3 text-slate-800 font-medium"><i class="fa-solid fa-heart text-primary"></i> 专属情侣头像与小店名</li>
+                        <li class="flex items-center gap-3 text-slate-800 font-medium"><i class="fa-solid fa-heart text-primary"></i> 终身防吵架保护机制 (其实没有)</li>
+                        <li class="flex items-center gap-3 text-slate-800 font-medium"><i class="fa-solid fa-heart text-primary"></i> 100% 爱的归属权</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-full bg-primary text-white font-bold hover:bg-rose-600 transition-colors shadow-lg shadow-rose-200">签署契约，绑定另一半</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-24 bg-rose-50 relative overflow-hidden">
+        <div class="absolute -top-20 -right-20 w-[40rem] h-[40rem] bg-white opacity-40 rounded-full blur-3xl"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-20" data-aos="fade-up">
+                <span class="text-primary font-bold tracking-widest text-sm uppercase mb-3 block">Our Team</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">打造这份心动的幕后推手</h2>
+                <p class="text-slate-500 text-lg">“用敲代码的手，写下最浪漫的逻辑。”<br>基于前沿架构倾情打造。</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-12">
+                <div class="w-full max-w-sm" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="tilt-card bg-white rounded-[2rem] p-8 shadow-xl border-t-4 border-primary hover:shadow-2xl transition-shadow cursor-pointer relative" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
+                        <div class="absolute -top-4 -right-4 bg-gradient-to-r from-rose-400 to-pink-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg tilt-card-content flex items-center gap-1 border border-white">
+                            <i class="fa-solid fa-crown text-yellow-300"></i> 公主心
+                        </div>
+                        
+                        <div class="flex flex-col items-center text-center tilt-card-content">
+                            <div class="w-32 h-32 mb-6 rounded-full p-1 bg-gradient-to-tr from-primary to-rose-300 tilt-image shadow-lg">
+                                <div class="w-full h-full bg-slate-800 rounded-full flex items-center justify-center border-4 border-white overflow-hidden shadow-inner">
+                                    <img src="http://tfe9mf4ol.hn-bkt.clouddn.com/039f52ca2b459a6c558e47c077525075.jpg" alt="沙蟹" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-2xl font-black text-dark mb-1 tracking-wider">沙蟹 <span class="text-sm font-normal text-slate-400 ml-1">(Sand Crab)</span></h3>
+                            <p class="text-primary font-bold mb-4">创始人 / 全栈开发工程师</p>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                                负责“恋爱小店”的所有底层逻辑与移动端开发。钟爱优雅的代码结构，致力于用技术构建出让人心动的产品体验。
+                            </p>
+                            <div class="flex gap-3 text-slate-400">
+                                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium">Spring Boot</span>
+                                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium">UniApp</span>
+                                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium">SwiftUI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full max-w-sm" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="tilt-card bg-white rounded-[2rem] p-8 shadow-xl border-t-4 border-purple-400 hover:shadow-2xl transition-shadow cursor-pointer" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
+                        <div class="flex flex-col items-center text-center tilt-card-content">
+                            <div class="w-32 h-32 mb-6 rounded-full p-1 bg-gradient-to-tr from-purple-400 to-pink-300 tilt-image shadow-lg">
+                                <div class="w-full h-full bg-slate-800 rounded-full flex items-center justify-center border-4 border-white overflow-hidden shadow-inner">
+                                     <img src="http://tfe9mf4ol.hn-bkt.clouddn.com/b90c1d0d2873b5a3012d9bebfc13e194.jpg" alt="苏眉" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <h3 class="text-2xl font-black text-dark mb-1 tracking-wider">苏眉 <span class="text-sm font-normal text-slate-400 ml-1">(Smei)</span></h3>
+                            <p class="text-purple-500 font-bold mb-4">视觉总监 / UI 设计师</p>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                                赋予小店灵魂的色彩魔术师。每一个圆角的大小，每一处粉色的饱和度，都经过了精心的调配与推敲。
+                            </p>
+                            <div class="flex gap-3 text-slate-400">
+                                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium">UI / UX</span>
+                                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium">插画</span>
+                                <span class="px-3 py-1 bg-slate-100 rounded-lg text-xs font-medium">动效设计</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-rose-400 via-primary to-purple-500"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-10 rounded-full transform -translate-x-1/3 translate-y-1/3"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center" data-aos="zoom-in" data-aos-duration="1000">
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-6">准备好开启你们的小店了吗？</h2>
+            <p class="text-xl text-rose-100 mb-10">生活需要仪式感，爱需要被记录。现在就下载，给TA一个惊喜。</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="bg-white text-primary px-10 py-4 rounded-full font-bold text-lg hover:bg-rose-50 transition-colors shadow-xl transform hover:scale-105">
+                    免费下载 App
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-300 pt-24 pb-12 border-t-[6px] border-primary relative overflow-hidden">
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-primary opacity-5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500 opacity-5 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center bg-slate-800/50 p-8 rounded-3xl mb-16 border border-slate-700/50">
+                <div class="mb-6 md:mb-0 text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-white mb-2">不想错过小店的新功能？</h3>
+                    <p class="text-slate-400 text-sm">订阅我们的更新邮件，获取最新版本动态与情侣互动灵感。</p>
+                </div>
+                <div class="flex w-full md:w-auto">
+                    <input type="email" placeholder="输入你的邮箱地址" class="bg-slate-900 text-white px-6 py-3 rounded-l-full border border-slate-700 focus:outline-none focus:border-primary w-full md:w-64">
+                    <button class="bg-primary text-white px-6 py-3 rounded-r-full font-bold hover:bg-rose-600 transition-colors">订阅</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
+                <div class="lg:col-span-4">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary to-rose-400 rounded-xl flex items-center justify-center text-white shadow-lg">
+                            <i class="fa-solid fa-heart text-xl"></i>
+                        </div>
+                        <span class="font-bold text-3xl text-white tracking-wider">恋爱小店</span>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed mb-8 text-sm">
+                        全世界仅此一家哦。由沙蟹团队匠心打造，致力于为情侣提供一个没有广告、纯粹且充满仪式感的私密互动空间。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all transform hover:scale-110"><i class="fa-brands fa-weixin"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all transform hover:scale-110"><i class="fa-brands fa-weibo"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all transform hover:scale-110"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 lg:col-start-6">
+                    <h4 class="text-white font-bold mb-6 text-lg">产品</h4>
+                    <ul class="space-y-4 text-sm text-slate-400">
+                        <li><a href="#features" class="hover:text-primary transition-colors">特色功能</a></li>
+                        <li><a href="#scenarios" class="hover:text-primary transition-colors">适用场景</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">版本日志 (v1.2.0)</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors flex items-center gap-2">iOS 下载 <span class="px-2 py-0.5 bg-rose-500/20 text-primary text-[10px] rounded border border-rose-500/30">Beta</span></a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <h4 class="text-white font-bold mb-6 text-lg">支持</h4>
+                    <ul class="space-y-4 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-primary transition-colors">帮助中心</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">如何绑定另一半</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">获取恋爱基金</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">意见反馈</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <h4 class="text-white font-bold mb-6 text-lg">关于</h4>
+                    <ul class="space-y-4 text-sm text-slate-400">
+                        <li><a href="#team" class="hover:text-primary transition-colors">关于团队</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">加入我们</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">品牌故事</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">联系合作</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8 flex flex-col lg:flex-row justify-between items-center text-sm text-slate-500">
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-4 lg:mb-0">
+                    <a href="#" class="hover:text-white transition-colors">隐私政策</a>
+                    <span class="hidden md:inline">|</span>
+                    <a href="#" class="hover:text-white transition-colors">用户服务协议</a>
+                    <span class="hidden md:inline">|</span>
+                    <a href="#" class="hover:text-white transition-colors">数据安全说明</a>
+                    <span class="hidden md:inline">|</span>
+                    <a href="#" class="hover:text-white transition-colors">Cookie 政策</a>
+                </div>
+                <div class="text-center lg:text-right">
+                    <p class="mb-2">&copy; 2026 恋爱小店. 全世界仅此一家哦. All rights reserved.</p>
+                    <p class="flex items-center justify-center lg:justify-end gap-1">
+                        Crafted with <i class="fa-solid fa-heart text-primary mx-1 animate-pulse"></i> by <span class="text-white font-medium ml-1">沙蟹 (Sand Crab)</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+    <script>
+        // 初始化 AOS 滚动动画
+        AOS.init({
+            once: true,
+            offset: 80,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // 移动端菜单切换逻辑
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => { menu.classList.toggle('hidden'); });
+
+        // [完美修复] 初始化响应式轮播图，解决空白间隙和对齐问题
+        const swiper = new Swiper('.showcase-swiper', {
+            loop: true,               // 无缝循环播放
+            centeredSlides: true,     // 确保当前焦点图在正中心
+            slidesPerView: 1,         // 手机端显示 1 个
+            spaceBetween: 20,         // 间距
+            autoplay: {
+                delay: 3500,          // 自动播放间隔
+                disableOnInteraction: false, 
+            },
+            pagination: {
+                el: '.showcase-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                // 平板设备显示 2 个
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30,
+                },
+                // 桌面端设备显示 3 个
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 40,
+                },
+            }
+        });
+
+        // 初始化 GLightbox，允许点击缩略图查看全屏高清原图
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+        });
+
+        // 初始化粒子特效 (针对首屏)
+        if(document.getElementById('particles-js')) {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": { "value": 30, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": ["#ff4d6d", "#fda4af", "#ffe4e6"] }, 
+                    "shape": { "type": "circle" },
+                    "opacity": { 
+                        "value": 0.5, 
+                        "random": true, 
+                        "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } 
+                    },
+                    "size": { 
+                        "value": 8, 
+                        "random": true, 
+                        "anim": { "enable": true, "speed": 2, "size_min": 3, "sync": false } 
+                    },
+                    "line_linked": { "enable": false }, 
+                    "move": { 
+                        "enable": true, 
+                        "speed": 1.5, 
+                        "direction": "top", 
+                        "random": true, 
+                        "straight": false, 
+                        "out_mode": "out", 
+                        "bounce": false 
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": { "enable": true, "mode": "bubble" },
+                        "onclick": { "enable": true, "mode": "repulse" }, 
+                        "resize": true
+                    },
+                    "modes": {
+                        "bubble": { "distance": 200, "size": 12, "duration": 2, "opacity": 1, "speed": 3 },
+                        "repulse": { "distance": 150, "duration": 0.4 }
+                    }
+                },
+                "retina_detect": true
+            });
+        }
+    </script>
+</body>
+</html>

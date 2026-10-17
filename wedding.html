@@ -1,0 +1,2704 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta property="og:title" content="陆景行 & 沈知意 | 婚礼诚挚邀约">
+    <meta property="og:description" content="一生所爱，一人相伴。陆景行与沈知意，诚邀您赴一场关于爱与幸福的约定，共见证我们的重要时刻。">
+    <meta property="og:image" content="https://th.bing.com/th/id/R.8d231186c885fe5ef3f1204e69f79f2c?rik=XrDuRqVAMhr2Xg&riu=http%3a%2f%2fwww.duolasheying.com%2fuploads%2f2020%2f06%2f191318021890.jpg&ehk=h6mnVGV6%2f1OsGL9TDbUnk%2fVv9EoYAqgnDwXHjKYP4X8%3d&risl=&pid=ImgRaw&r=0"> <!-- 封面图，1200×630最佳 -->
+    <meta property="og:type" content="website">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>陆景行 & 沈知意 | 婚礼诚挚邀约 Wedding Invitation</title>
+
+    <!-- Google Fonts: 法式衬线与现代中文衬线组合 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FFFDFA',
+                            100: '#F9F3EA',
+                            200: '#E8DFD1',
+                        },
+                        champagne: {
+                            light: '#E6D5B8',
+                            DEFAULT: '#C9A96E',
+                            dark: '#9E7B42',
+                        },
+                        rose: {
+                            soft: '#F9ECEC',
+                            mist: '#E6B8B7',
+                            deep: '#C48B8A',
+                        },
+                        taupe: {
+                            DEFAULT: '#3D3532',
+                            muted: '#7A6E69',
+                            light: '#A89C96'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif SC"', '"Cormorant Garamond"', 'serif'],
+                        en: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'romantic': '0 14px 34px -10px rgba(201, 169, 110, 0.18)',
+                        'card': '0 8px 22px -6px rgba(61, 53, 50, 0.06)',
+                        'wax': '0 12px 28px -4px rgba(158, 58, 56, 0.5), inset 0 2px 6px rgba(255, 255, 255, 0.38)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-cream: #FCF9F5;
+            --card-cream: #FFFDFA;
+            --border-gold: #E8DFD1;
+            --gold: #C9A96E;
+            --rose: #E6B8B7;
+            --taupe: #3D3532;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        *, *::before, *::after {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+
+        /* =========================================================
+           1. 严格锁定手机端视口：100% 居中、零横向偏移、禁止左右拖动
+           ========================================================= */
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden !important;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-cream);
+            color: var(--taupe);
+            font-family: 'Noto Serif SC', serif;
+            touch-action: pan-y;
+            -webkit-text-size-adjust: 100%;
+            overscroll-behavior-x: none;
+        }
+
+        #app-viewport {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden !important;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        /* 局部舞台严格裁切：防止待命动画的左右偏移撑大移动端宽度 */
+        .stage-clip {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 纯 GPU 加速卡片：不使用耗费移动端算力的 backdrop-filter */
+        .gpu-card {
+            background-color: var(--card-cream);
+            border: 1px solid var(--border-gold);
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+        }
+
+        /* =========================================================
+           2. 婚礼双层飘动纱幔开场样式 (纯 GPU 60fps 丝滑拉开)
+           ========================================================= */
+        #curtain-overlay {
+            perspective: 1200px;
+            contain: layout style paint;
+            transition: visibility 0.95s;
+        }
+
+        .curtain-panel-left {
+            transform-origin: top left;
+            will-change: transform, opacity;
+            transition: transform 1.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.15s ease;
+        }
+        .curtain-panel-right {
+            transform-origin: top right;
+            will-change: transform, opacity;
+            transition: transform 1.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.15s ease;
+        }
+        .tulle-panel-left {
+            transform-origin: top left;
+            will-change: transform, opacity;
+            transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.05s ease;
+        }
+        .tulle-panel-right {
+            transform-origin: top right;
+            will-change: transform, opacity;
+            transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.05s ease;
+        }
+
+        /* 拉开状态（Parted State） */
+        #curtain-overlay.is-open .tulle-panel-left {
+            transform: translate3d(-104%, 0, 0) scaleX(0.35) skewX(7deg);
+            opacity: 0;
+        }
+        #curtain-overlay.is-open .tulle-panel-right {
+            transform: translate3d(104%, 0, 0) scaleX(0.35) skewX(-7deg);
+            opacity: 0;
+        }
+        #curtain-overlay.is-open .curtain-panel-left {
+            transform: translate3d(-102%, -2%, 0) scaleX(0.28) rotate(4deg);
+            opacity: 0;
+        }
+        #curtain-overlay.is-open .curtain-panel-right {
+            transform: translate3d(102%, -2%, 0) scaleX(0.28) rotate(-4deg);
+            opacity: 0;
+        }
+        #curtain-overlay.is-open #curtain-ribbon-left {
+            transform: translate3d(-110%, -50%, 0) rotate(-6deg);
+            opacity: 0;
+        }
+        #curtain-overlay.is-open #curtain-ribbon-right {
+            transform: translate3d(110%, -50%, 0) rotate(6deg);
+            opacity: 0;
+        }
+        #curtain-overlay.is-open #curtain-center-card {
+            transform: translate3d(0, -28px, 0) scale(1.08);
+            opacity: 0;
+        }
+        #curtain-overlay.is-open #curtain-valance {
+            transform: translate3d(0, -110%, 0);
+            opacity: 0;
+        }
+
+        /* 外层香槟金丝绒主帷幔立体褶皱纹理 */
+        .velvet-drape-left {
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(255, 253, 250, 0.18) 0px,
+                    rgba(201, 169, 110, 0.28) 20px,
+                    rgba(148, 108, 62, 0.22) 40px,
+                    rgba(244, 232, 216, 0.26) 60px
+                ),
+                linear-gradient(135deg, #EFE3D2 0%, #DFC8AC 50%, #CBB08E 100%);
+            box-shadow: 10px 0 34px rgba(61, 53, 50, 0.22);
+        }
+        .velvet-drape-right {
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(244, 232, 216, 0.26) 0px,
+                    rgba(148, 108, 62, 0.22) 20px,
+                    rgba(201, 169, 110, 0.28) 40px,
+                    rgba(255, 253, 250, 0.18) 60px
+                ),
+                linear-gradient(225deg, #EFE3D2 0%, #DFC8AC 50%, #CBB08E 100%);
+            box-shadow: -10px 0 34px rgba(61, 53, 50, 0.22);
+        }
+
+        /* 内层珍珠白透光婚礼薄纱 */
+        .tulle-drape-left, .tulle-drape-right {
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.78) 0px,
+                    rgba(249, 236, 236, 0.48) 16px,
+                    rgba(255, 253, 250, 0.85) 32px
+                ),
+                linear-gradient(180deg, rgba(255,253,250,0.94) 0%, rgba(249,238,232,0.85) 100%);
+        }
+
+        /* 待机微风吹拂纱幔飘动动画 (Gentle Breeze Billowing) */
+        @keyframes breezeVelvetL {
+            0%, 100% { transform: translate3d(0, 0, 0) skewX(0deg) scaleX(1); }
+            50% { transform: translate3d(4px, 0, 0) skewX(-1.4deg) scaleX(1.018); }
+        }
+        @keyframes breezeVelvetR {
+            0%, 100% { transform: translate3d(0, 0, 0) skewX(0deg) scaleX(1); }
+            50% { transform: translate3d(-4px, 0, 0) skewX(1.4deg) scaleX(1.018); }
+        }
+        @keyframes breezeTulleL {
+            0%, 100% { transform: translate3d(0, 0, 0) skewX(0deg) scaleX(1); }
+            40% { transform: translate3d(7px, -2px, 0) skewX(-2.2deg) scaleX(1.028); }
+            75% { transform: translate3d(-2px, 1px, 0) skewX(0.8deg) scaleX(0.992); }
+        }
+        @keyframes breezeTulleR {
+            0%, 100% { transform: translate3d(0, 0, 0) skewX(0deg) scaleX(1); }
+            40% { transform: translate3d(-7px, -2px, 0) skewX(2.2deg) scaleX(1.028); }
+            75% { transform: translate3d(2px, 1px, 0) skewX(-0.8deg) scaleX(0.992); }
+        }
+        .breeze-velvet-l { animation: breezeVelvetL 4.4s ease-in-out infinite; }
+        .breeze-velvet-r { animation: breezeVelvetR 4.4s ease-in-out infinite; }
+        .breeze-tulle-l { animation: breezeTulleL 3.6s ease-in-out infinite; }
+        .breeze-tulle-r { animation: breezeTulleR 3.6s ease-in-out infinite; }
+
+        @keyframes sealPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+        .wax-seal-pulse { animation: sealPulse 2.2s infinite ease-in-out; }
+
+        /* =========================================================
+           3. 双向回滚重播动画系统 (Bi-directional Scroll Replay CSS)
+           ========================================================= */
+        .reveal-up {
+            opacity: 0;
+            transform: translate3d(0, 32px, 0) scale(0.97);
+            transition: transform 0.82s var(--ease-out-expo), opacity 0.72s ease;
+            will-change: transform, opacity;
+        }
+        .reveal-up.is-inview {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translate3d(-42px, 12px, 0);
+            transition: transform 0.85s var(--ease-out-expo), opacity 0.72s ease;
+            will-change: transform, opacity;
+        }
+        .reveal-left.is-inview {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translate3d(42px, 12px, 0);
+            transition: transform 0.85s var(--ease-out-expo), opacity 0.72s ease;
+            will-change: transform, opacity;
+        }
+        .reveal-right.is-inview {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        /* 章节标题金线自绘 */
+        .section-line-svg path {
+            stroke-dasharray: 240;
+            stroke-dashoffset: 240;
+            transition: stroke-dashoffset 1.15s var(--ease-out-expo);
+        }
+        .is-inview .section-line-svg path,
+        .section-header.is-inview .section-line-svg path {
+            stroke-dashoffset: 0;
+        }
+
+        /* =========================================================
+           4. 新郎 & 新娘左右丝滑滑入合体专属样式 (Pure GPU Merge)
+           ========================================================= */
+        #couple-groom-card {
+            opacity: 0;
+            transform: translate3d(-58%, 14px, 0) rotate(-5deg) scale(0.92);
+            transition: transform 1.05s var(--ease-out-expo), opacity 0.8s ease;
+            will-change: transform, opacity;
+        }
+        #couple-bride-card {
+            opacity: 0;
+            transform: translate3d(58%, 14px, 0) rotate(5deg) scale(0.92);
+            transition: transform 1.05s var(--ease-out-expo), opacity 0.8s ease;
+            will-change: transform, opacity;
+        }
+        #couple-merge-badge {
+            opacity: 0;
+            transform: translate3d(0, 0, 0) scale(0) rotate(-35deg);
+            transition: transform 0.75s var(--ease-spring) 0.42s, opacity 0.45s ease 0.42s;
+        }
+        #couple-ecg-path {
+            stroke-dasharray: 360;
+            stroke-dashoffset: 360;
+            transition: stroke-dashoffset 1.15s var(--ease-out-expo) 0.45s;
+        }
+        .couple-energy-bar {
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.95s var(--ease-out-expo) 0.65s;
+        }
+        @keyframes seamFlashAnim {
+            0% { opacity: 0; transform: translateX(-50%) scaleY(0.2); }
+            35% { opacity: 1; transform: translateX(-50%) scaleY(1.05); }
+            100% { opacity: 0; transform: translateX(-50%) scaleY(1.25); }
+        }
+        @keyframes rippleExpand {
+            0% { opacity: 0.85; transform: scale(0.75); }
+            100% { opacity: 0; transform: scale(2.35); }
+        }
+
+        /* 当合体舞台处于激活状态时 */
+        #couple-merge-stage.is-merged #couple-groom-card,
+        #couple-merge-stage.is-merged #couple-bride-card {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+        }
+        #couple-merge-stage.is-merged #couple-merge-badge {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+        }
+        #couple-merge-stage.is-merged #couple-ecg-path {
+            stroke-dashoffset: 0;
+        }
+        #couple-merge-stage.is-merged .couple-energy-bar {
+            transform: scaleX(1);
+        }
+        #couple-merge-stage.is-merged #couple-seam-flash {
+            animation: seamFlashAnim 0.85s ease-out 0.38s forwards;
+        }
+        #couple-merge-stage.is-merged #couple-ripple-1 {
+            animation: rippleExpand 1s ease-out 0.45s forwards;
+        }
+        #couple-merge-stage.is-merged #couple-ripple-2 {
+            animation: rippleExpand 1.2s ease-out 0.58s forwards;
+        }
+
+        /* =========================================================
+           5. 顶部双轨 60fps 零卡顿纯 GPU 弹幕引擎
+           ========================================================= */
+        #barrage-stage {
+            width: 100%;
+            max-width: 100vw;
+            overflow: hidden;
+            contain: layout style paint;
+            pointer-events: none;
+        }
+        .barrage-track {
+            position: relative;
+            width: 100%;
+            height: 34px;
+            overflow: hidden;
+            contain: strict;
+        }
+        @keyframes barrageGlide {
+            0% { transform: translate3d(100vw, 0, 0); }
+            100% { transform: translate3d(-120%, 0, 0); }
+        }
+        .barrage-pill {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            white-space: nowrap;
+            will-change: transform;
+            backface-visibility: hidden;
+            animation-name: barrageGlide;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+
+        /* =========================================================
+           6. 3D 翻转卡片、丝滑 3D 画廊与黑胶唱片
+           ========================================================= */
+        .flip-perspective { perspective: 1000px; }
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-inner.is-flipped { transform: rotateY(180deg); }
+        .flip-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flip-back { transform: rotateY(180deg); }
+
+        /* 自研 60fps 3D 婚纱画廊舞台 */
+        .gallery-3d-viewport {
+            perspective: 1100px;
+            position: relative;
+            width: 100%;
+            height: 330px;
+            overflow: hidden;
+            touch-action: pan-y;
+            user-select: none;
+        }
+        @media (min-width: 640px) {
+            .gallery-3d-viewport { height: 410px; }
+        }
+        .gallery-slide-card {
+            position: absolute;
+            top: 8px;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 82%;
+            max-width: 540px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            transition: transform 0.68s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.68s ease;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        .vinyl-spin { animation: spinSlow 9s linear infinite; }
+        .vinyl-paused { animation-play-state: paused; }
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes floatNote {
+            0% { transform: translate3d(0, 0, 0) scale(0.6); opacity: 0; }
+            35% { opacity: 0.95; }
+            100% { transform: translate3d(-14px, -28px, 0) scale(1.1) rotate(-14deg); opacity: 0; }
+        }
+        .music-note-1 { animation: floatNote 2.4s infinite ease-out; }
+        .music-note-2 { animation: floatNote 2.4s infinite 1.2s ease-out; }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, -5px, 0); }
+        }
+        .cartoon-float { animation: gentleFloat 3.8s ease-in-out infinite; }
+
+        /* 契约盖章与底部礼花筒弹射动效 */
+        @keyframes stampBounce {
+            0% { transform: scale(2.2) rotate(-25deg); opacity: 0; }
+            65% { transform: scale(0.92) rotate(-12deg); opacity: 1; }
+            100% { transform: scale(1) rotate(-14deg); opacity: 1; }
+        }
+        .stamp-active { animation: stampBounce 0.52s var(--ease-spring) forwards; }
+
+        @keyframes popperIdleLeft {
+            0%, 100% { transform: rotate(-10deg) scale(1); }
+            50% { transform: rotate(-4deg) scale(1.05); }
+        }
+        @keyframes popperIdleRight {
+            0%, 100% { transform: rotate(10deg) scale(1); }
+            50% { transform: rotate(4deg) scale(1.05); }
+        }
+        .popper-idle-l { animation: popperIdleLeft 2.6s ease-in-out infinite; transform-origin: bottom left; }
+        .popper-idle-r { animation: popperIdleRight 2.6s ease-in-out infinite; transform-origin: bottom right; }
+
+        @keyframes popperFireLeft {
+            0% { transform: translate3d(-12px, 12px, 0) rotate(-28deg) scale(0.75); }
+            45% { transform: translate3d(8px, -10px, 0) rotate(8deg) scale(1.18); }
+            100% { transform: translate3d(0, 0, 0) rotate(-8deg) scale(1); }
+        }
+        @keyframes popperFireRight {
+            0% { transform: translate3d(12px, 12px, 0) rotate(28deg) scale(0.75); }
+            45% { transform: translate3d(-8px, -10px, 0) rotate(-8deg) scale(1.18); }
+            100% { transform: translate3d(0, 0, 0) rotate(8deg) scale(1); }
+        }
+        .popper-firing-l { animation: popperFireLeft 0.65s var(--ease-spring); }
+        .popper-firing-r { animation: popperFireRight 0.65s var(--ease-spring); }
+    </style>
+</head>
+<body class="selection:bg-rose-mist/40 selection:text-taupe">
+
+    <!-- 严格防偏移根视口容器 -->
+    <div id="app-viewport">
+
+        <!-- ==========================================
+             0A. MP3 婚礼背景音乐播放器 (支持多曲目切换 + 离线降级保障)
+             ========================================== -->
+        <audio id="bgm-audio" loop preload="auto"></audio>
+
+        <!-- ==========================================
+             0B. 全屏 60fps 离屏预渲染画布：背景银杏落叶/玫瑰花瓣 + 礼花彩带粒子
+             ========================================== -->
+        <canvas id="fx-canvas" class="fixed inset-0 pointer-events-none z-[35] w-full h-full" aria-hidden="true"></canvas>
+
+        <!-- ==========================================
+             0C. 全屏流线美学背景（SVG Flowing Golden Line Art）
+             ========================================== -->
+        <div id="line-art-bg" class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+            <svg class="w-full h-full" viewBox="0 0 1000 2200" preserveAspectRatio="xMidYMin slice" fill="none">
+                <defs>
+                    <linearGradient id="goldLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#C9A96E" stop-opacity="0.34"/>
+                        <stop offset="50%" stop-color="#E6B8B7" stop-opacity="0.42"/>
+                        <stop offset="100%" stop-color="#C9A96E" stop-opacity="0.30"/>
+                    </linearGradient>
+                    <linearGradient id="activeLineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#C9A96E" stop-opacity="0.65"/>
+                        <stop offset="50%" stop-color="#C48B8A" stop-opacity="0.65"/>
+                        <stop offset="100%" stop-color="#C9A96E" stop-opacity="0.65"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- 法式极简几何细线拱门框 -->
+                <rect x="55" y="45" width="890" height="2110" rx="445" stroke="#E8DFD1" stroke-width="1.1" stroke-dasharray="6 6" opacity="0.72"/>
+                <rect x="90" y="80" width="820" height="2040" rx="410" stroke="#E8DFD1" stroke-width="0.9" opacity="0.55"/>
+
+                <!-- 静态双螺旋流线基准虚线 -->
+                <path d="M500,0 C790,260 210,540 500,820 C790,1100 210,1380 500,1660 C770,1900 310,2080 500,2200" 
+                      stroke="url(#goldLineGrad)" stroke-width="1.5" stroke-dasharray="6 6"/>
+                <path d="M500,0 C210,260 790,540 500,820 C210,1100 790,1380 500,1660 C230,1900 690,2080 500,2200" 
+                      stroke="#E6B8B7" stroke-width="1.2" opacity="0.30"/>
+
+                <!-- 随滚动实时生长延伸的黄金姻缘主线 -->
+                <path id="scroll-line-path"
+                      d="M500,0 C790,260 210,540 500,820 C790,1100 210,1380 500,1660 C770,1900 310,2080 500,2200" 
+                      stroke="url(#activeLineGrad)" stroke-width="2.6" stroke-linecap="round"
+                      stroke-dasharray="3200" stroke-dashoffset="3200"/>
+            </svg>
+        </div>
+
+        <!-- ==========================================
+             1. 婚礼双层飘动纱幔拉开开场 (Wedding Curtain Flutter & Parting)
+             ========================================== -->
+        <div id="curtain-overlay" class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden select-none">
+            
+            <!-- 右上角跳过按钮 -->
+            <button onclick="openWeddingCurtains(true)" class="absolute top-4 right-4 z-50 px-3.5 py-1.5 rounded-full bg-[#FFFDFA]/90 border border-[#E8DFD1] text-xs text-taupe-muted hover:text-taupe shadow-sm transition-all">
+                跳过开场 ➔
+            </button>
+
+            <!-- 顶部法式波浪垂穗幔头 -->
+            <div id="curtain-valance" class="absolute top-0 inset-x-0 z-40 pointer-events-none transition-all duration-700">
+                <svg class="w-full h-16 sm:h-24 drop-shadow-md" viewBox="0 0 1200 110" preserveAspectRatio="none" fill="none">
+                    <path d="M0,0 H1200 V45 Q1100,105 1000,45 Q900,105 800,45 Q700,105 600,45 Q500,105 400,45 Q300,105 200,45 Q100,105 0,45 Z" 
+                          fill="#EADAC5" stroke="#C9A96E" stroke-width="2"/>
+                    <path d="M0,32 Q100,90 200,32 Q300,90 400,32 Q500,90 600,32 Q700,90 800,32 Q900,90 1000,32 Q1100,90 1200,32" 
+                          stroke="#C9A96E" stroke-width="1.2" stroke-dasharray="5 4" fill="none"/>
+                </svg>
+            </div>
+
+            <!-- 内层：左/右珍珠白透光薄纱窗帘 -->
+            <div class="tulle-panel-left absolute top-0 left-0 w-[52%] h-full z-20 pointer-events-none">
+                <div class="w-full h-full tulle-drape-left breeze-tulle-l relative overflow-hidden">
+                    <svg class="absolute inset-y-0 right-0 h-full w-8 text-champagne/35" viewBox="0 0 40 800" preserveAspectRatio="none" fill="none">
+                        <path d="M35,0 Q10,50 35,100 Q10,150 35,200 Q10,250 35,300 Q10,350 35,400 Q10,450 35,500 Q10,550 35,600 Q10,650 35,700 Q10,750 35,800" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="tulle-panel-right absolute top-0 right-0 w-[52%] h-full z-20 pointer-events-none">
+                <div class="w-full h-full tulle-drape-right breeze-tulle-r relative overflow-hidden">
+                    <svg class="absolute inset-y-0 left-0 h-full w-8 text-champagne/35" viewBox="0 0 40 800" preserveAspectRatio="none" fill="none">
+                        <path d="M5,0 Q30,50 5,100 Q30,150 5,200 Q30,250 5,300 Q30,350 5,400 Q30,450 5,500 Q30,550 5,600 Q30,650 5,700 Q30,750 5,800" stroke="currentColor" stroke-width="1.8" stroke-dasharray="4 4"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- 外层：左/右香槟金丝绒礼堂大帷幔 -->
+            <div class="curtain-panel-left absolute top-0 left-0 w-[51%] h-full z-30 pointer-events-none">
+                <div class="w-full h-full velvet-drape-left breeze-velvet-l relative">
+                    <div class="absolute inset-y-0 right-3 w-0.5 bg-gradient-to-b from-champagne/60 via-rose-deep/40 to-champagne/60"></div>
+                </div>
+            </div>
+            <div class="curtain-panel-right absolute top-0 right-0 w-[51%] h-full z-30 pointer-events-none">
+                <div class="w-full h-full velvet-drape-right breeze-velvet-r relative">
+                    <div class="absolute inset-y-0 left-3 w-0.5 bg-gradient-to-b from-champagne/60 via-rose-deep/40 to-champagne/60"></div>
+                </div>
+            </div>
+
+            <!-- 横贯中央的香槟金丝绸礼带 -->
+            <div id="curtain-ribbon-left" class="absolute top-1/2 left-0 w-1/2 h-8 -translate-y-1/2 z-30 bg-gradient-to-r from-[#D5B47B] via-[#F2E2C4] to-[#C9A96E] border-y border-white/60 shadow-md pointer-events-none transition-all duration-700"></div>
+            <div id="curtain-ribbon-right" class="absolute top-1/2 right-0 w-1/2 h-8 -translate-y-1/2 z-30 bg-gradient-to-l from-[#D5B47B] via-[#F2E2C4] to-[#C9A96E] border-y border-white/60 shadow-md pointer-events-none transition-all duration-700"></div>
+
+            <!-- 中央邀请徽章面板与火漆印章 -->
+            <div id="curtain-center-card" class="relative z-40 flex flex-col items-center text-center px-4 transition-all duration-500">
+                <div class="bg-[#FFFDFA] border-2 border-champagne/60 rounded-3xl px-5 py-4 shadow-2xl max-w-[300px] sm:max-w-sm mb-5 relative">
+                    <div class="inline-flex items-center justify-center mb-1 cartoon-float">
+                        <svg class="w-16 h-12" viewBox="0 0 100 72" fill="none">
+                            <path d="M50 64C50 64 20 46 20 27C20 17 28 11 37 11C43 11 48 15 50 19C52 15 57 11 63 11C72 11 80 17 80 27C80 46 50 64 50 64Z" fill="#F9ECEC" stroke="#C9A96E" stroke-width="1.5"/>
+                            <circle cx="38" cy="34" r="10" fill="#FFFDFA" stroke="#3D3532" stroke-width="1.8"/>
+                            <path d="M28 31C29 23 36 21 44 23C47 24 48 27 48 31" fill="#3D3532"/>
+                            <circle cx="62" cy="35" r="9.5" fill="#FFFDFA" stroke="#3D3532" stroke-width="1.8"/>
+                            <path d="M52 33C52 25 57 23 63 23C69 23 72 26 72 33" fill="#3D3532"/>
+                            <path d="M57 23L59 19L62 21L65 19L67 23H57Z" fill="#C9A96E"/>
+                        </svg>
+                    </div>
+                    <p class="font-en tracking-[0.26em] text-[10px] uppercase text-champagne-dark">The Wedding Curtain</p>
+                    <h1 class="text-2xl sm:text-3xl font-serif font-semibold text-taupe tracking-wider mt-0.5">
+                        陆景行 <span class="text-champagne font-en italic">&amp;</span> 沈知意
+                    </h1>
+                    <p class="text-xs text-taupe-muted mt-1">2026年10月24日 · 云栖湖畔大酒店三楼星河宴会厅</p>
+                </div>
+
+                <!-- 拟真火漆印章开启按钮 -->
+                <button onclick="openWeddingCurtains(false)" aria-label="开启浪漫婚礼纱幔" class="wax-seal-pulse relative w-28 h-28 rounded-full bg-gradient-to-br from-[#D67B79] via-[#B85452] to-[#8C3533] text-cream-50 flex flex-col items-center justify-center cursor-pointer focus:outline-none shadow-wax group">
+                    <span class="absolute -inset-2 rounded-full border border-dashed border-champagne/80 animate-spin" style="animation-duration: 14s;"></span>
+                    <div class="w-[88px] h-[88px] rounded-full border-2 border-dashed border-[#F7D7D5]/65 flex flex-col items-center justify-center p-1">
+                        <svg class="w-9 h-9 text-[#FFF0EE] group-hover:scale-110 transition-transform" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 41C24 41 8 30 8 17.5C8 11.5 12.5 7.5 18 7.5C21.2 7.5 23.2 9.2 24 11.2C24.8 9.2 26.8 7.5 30 7.5C35.5 7.5 40 11.5 40 17.5C40 30 24 41 24 41Z" stroke="currentColor" stroke-width="1.8" fill="rgba(255,255,255,0.14)"/>
+                            <circle cx="20" cy="20" r="3.2" fill="currentColor"/>
+                            <circle cx="28" cy="21" r="3" fill="currentColor"/>
+                        </svg>
+                        <span class="text-xs tracking-widest font-semibold text-[#FFF0EE] mt-0.5">开启请柬</span>
+                    </div>
+                </button>
+
+                <p class="mt-4 text-xs text-taupe font-medium bg-[#FFFDFA]/90 px-4 py-1.5 rounded-full border border-champagne/40 shadow-sm flex items-center gap-2">
+                    <span class="inline-block w-2 h-2 rounded-full bg-rose-deep animate-ping"></span>
+                    <span>轻触火漆印章 · 拉开飘动婚礼纱幔</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             顶部悬浮控制区：60fps 双轨弹幕层 + 居中锁宽控制栏
+             ========================================== -->
+        <div id="barrage-stage" class="fixed top-14 inset-x-0 z-30 transition-opacity duration-300">
+            <div id="barrage-track-0" class="barrage-track"></div>
+            <div id="barrage-track-1" class="barrage-track mt-1"></div>
+        </div>
+
+        <div class="fixed top-2.5 inset-x-0 z-40 pointer-events-none">
+            <div class="w-full max-w-4xl mx-auto px-3 flex items-center justify-end gap-1.5">
+                <button onclick="replayWeddingCurtains()" class="pointer-events-auto px-2.5 py-1.5 rounded-full bg-[#FFFDFA]/95 border border-[#E8DFD1] shadow-card flex items-center gap-1 text-[11px] text-taupe hover:border-champagne transition-colors shrink-0">
+                    <span>✨</span>
+                    <span>重播纱幔</span>
+                </button>
+
+                <button id="toggle-barrage-btn" onclick="toggleBarrage()" class="pointer-events-auto px-2.5 py-1.5 rounded-full bg-[#FFFDFA]/95 border border-[#E8DFD1] shadow-card flex items-center gap-1.5 text-[11px] text-taupe hover:border-champagne transition-colors shrink-0">
+                    <span id="barrage-dot" class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span id="barrage-btn-text">弹幕开</span>
+                </button>
+
+                <button onclick="switchMp3Track()" class="pointer-events-auto px-2.5 py-1.5 rounded-full bg-[#FFFDFA]/95 border border-[#E8DFD1] shadow-card flex items-center gap-1 text-[11px] text-taupe hover:border-champagne transition-colors shrink-0" title="切换 MP3 婚礼背景音乐">
+                    <span>🎵</span>
+                    <span id="track-name-label">切歌</span>
+                </button>
+
+                <button id="music-toggle-btn" onclick="toggleMp3Music()" aria-label="MP3背景音乐开关" class="pointer-events-auto relative w-9 h-9 rounded-full bg-taupe text-cream-50 border-2 border-champagne shadow-md flex items-center justify-center focus:outline-none shrink-0">
+                    <span id="floating-notes" class="pointer-events-none hidden">
+                        <svg class="w-3.5 h-3.5 text-champagne absolute -top-2 -left-1 music-note-1" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                        <svg class="w-3 h-3 text-rose-deep absolute -top-3 right-0 music-note-2" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                    </span>
+                    <div id="vinyl-disc" class="w-full h-full rounded-full flex items-center justify-center vinyl-spin vinyl-paused" style="background: repeating-radial-gradient(#2A2422 0, #2A2422 2px, #3D3532 3px, #2A2422 4px);">
+                        <div class="w-3 h-3 rounded-full bg-champagne border border-cream-50 flex items-center justify-center">
+                            <div class="w-1 h-1 rounded-full bg-taupe"></div>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             主页面内容容器 (严格居中 mx-auto w-full overflow-hidden)
+             ========================================== -->
+        <main id="main-content" class="relative z-10 w-full max-w-4xl mx-auto px-3 sm:px-6 pb-14 pt-14 overflow-hidden">
+
+            <!-- ==========================================
+                 2. 首屏主视觉与实时倒计时 (Hero Section - 严格居中防溢出)
+                 ========================================== -->
+            <section id="section-hero" class="stage-clip pt-2 pb-8 sm:py-8">
+                <div class="reveal-up gpu-card rounded-[2rem] shadow-romantic p-4 sm:p-9 relative overflow-hidden w-full mx-auto">
+                    
+                    <!-- 内部法式双细线流线装饰框 -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 800 1000" fill="none">
+                        <rect x="14" y="14" width="772" height="972" rx="28" stroke="#C9A96E" stroke-width="1" opacity="0.38"/>
+                        <rect x="22" y="22" width="756" height="956" rx="22" stroke="#E8DFD1" stroke-width="0.9"/>
+                    </svg>
+                    
+                    <div class="flex flex-col items-center text-center relative z-10 w-full">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-soft border border-rose-mist/50 text-rose-deep text-xs tracking-widest mb-4">
+                            <span>✦</span>
+                            <span class="font-en uppercase tracking-[0.2em]">Save The Date · 2026.10.24</span>
+                            <span>✦</span>
+                        </div>
+
+                        <!-- 金色流线双拱门画框 + 严格内收的微卡通角标（防止移动端撑宽偏左） -->
+                        <div class="relative w-full max-w-sm sm:max-w-md mx-auto my-1 px-2">
+                            <!-- 左上角：微卡通浪漫热气球 -->
+                            <div class="absolute left-3 -top-2 z-20 cartoon-float pointer-events-none">
+                                <svg class="w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 72 72" fill="none">
+                                    <path d="M36 10C23 10 15 20 15 32C15 43 26 49 30 53H42C46 49 57 43 57 32C57 20 49 10 36 10Z" fill="#F9ECEC" stroke="#C9A96E" stroke-width="1.8"/>
+                                    <path d="M36 10C29 10 25 20 25 32C25 43 31 49 33 53H39C41 49 47 43 47 32C47 20 43 10 36 10Z" fill="#E6B8B7" fill-opacity="0.4" stroke="#C9A96E" stroke-width="1.4"/>
+                                    <rect x="31" y="57" width="10" height="6" rx="2" fill="#C9A96E"/>
+                                </svg>
+                            </div>
+
+                            <!-- 右下角：微卡通小橘猫“年糕”证婚员（严格内收于右边界内） -->
+                            <div class="absolute right-3 -bottom-3 z-20 cartoon-float">
+                                <div class="bg-[#FFFDFA] border border-champagne/50 rounded-2xl px-2.5 py-1.5 shadow-card flex items-center gap-1.5">
+                                    <svg class="w-7 h-7 shrink-0" viewBox="0 0 40 40" fill="none">
+                                        <path d="M10 17L12 9L17 14H23L28 9L30 17C32 19 32 25 29 28C26 31 14 31 11 28C8 25 8 19 10 17Z" fill="#F5E6C8" stroke="#C9A96E" stroke-width="1.8"/>
+                                        <circle cx="16" cy="21" r="1.5" fill="#3D3532"/>
+                                        <circle cx="24" cy="21" r="1.5" fill="#3D3532"/>
+                                        <path d="M18 24L20 25.5L22 24" stroke="#C48B8A" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                    <div class="text-left leading-tight">
+                                        <span class="text-[10px] font-bold text-taupe block">特派猫证婚员</span>
+                                        <span class="text-[9px] text-champagne-dark">橘猫“年糕”恭候</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 双层金色流线圆拱门主婚纱照 -->
+                            <div class="rounded-t-full rounded-b-3xl p-2 bg-gradient-to-b from-champagne/45 via-rose-mist/30 to-champagne/40 shadow-romantic relative">
+                                <div class="relative rounded-t-full rounded-b-2xl overflow-hidden aspect-[4/5] bg-cream-100">
+                                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" 
+                                         decoding="async"
+                                         onerror="this.src='https://placehold.co/800x1000/F7E8E8/3D3532?text=Lu+%26+Shen+Wedding'"
+                                         alt="陆景行与沈知意主婚纱照" 
+                                         class="w-full h-full object-cover object-center">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-taupe/60 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-5 inset-x-4 text-cream-50 text-center">
+                                        <p class="font-en italic text-lg sm:text-xl tracking-wide">“Two souls, one golden line”</p>
+                                        <p class="text-xs text-cream-100/90 tracking-widest mt-0.5">顺着时光的线条，我们终将交汇成永恒</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 新人姓名与婚礼核心地点 -->
+                        <div class="mt-7 w-full">
+                            <div class="flex items-center justify-center gap-4 sm:gap-7">
+                                <div class="text-right">
+                                    <span class="text-[10px] sm:text-[11px] text-taupe-muted tracking-widest block font-en">THE GROOM</span>
+                                    <h2 class="text-2xl sm:text-4xl font-serif font-semibold text-taupe tracking-wider mt-0.5">陆景行</h2>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-rose-soft border border-champagne/40 flex items-center justify-center shadow-sm">
+                                    <span class="text-rose-deep text-base">♥</span>
+                                </div>
+                                <div class="text-left">
+                                    <span class="text-[10px] sm:text-[11px] text-taupe-muted tracking-widest block font-en">THE BRIDE</span>
+                                    <h2 class="text-2xl sm:text-4xl font-serif font-semibold text-taupe tracking-wider mt-0.5">沈知意</h2>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 inline-flex flex-wrap items-center justify-center gap-2 sm:gap-5 px-4 sm:px-6 py-2.5 rounded-2xl bg-cream-100 border border-[#E8DFD1] text-xs sm:text-sm text-taupe">
+                                <div class="flex items-center gap-1.5">
+                                    <span>📅</span>
+                                    <span class="font-medium">2026年10月24日 (周六) 12:08</span>
+                                </div>
+                                <span class="hidden sm:inline text-champagne/50">|</span>
+                                <div class="flex items-center gap-1.5">
+                                    <span>📍</span>
+                                    <span class="font-medium">云栖湖畔大酒店 · 三楼星河宴会厅</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 实时动态倒计时器 -->
+                        <div class="mt-6 w-full max-w-md mx-auto">
+                            <p class="text-[10px] sm:text-[11px] text-taupe-muted tracking-[0.2em] uppercase mb-2.5 font-en">Countdown To Our Wedding Ceremony</p>
+                            <div class="grid grid-cols-4 gap-2 sm:gap-3.5">
+                                <div class="bg-cream-100/80 border border-[#E8DFD1] rounded-2xl py-2.5 px-1 flex flex-col items-center">
+                                    <span id="cd-days" class="font-en text-2xl sm:text-3xl font-bold text-taupe">07</span>
+                                    <span class="text-[10px] text-taupe-muted">天 Days</span>
+                                </div>
+                                <div class="bg-cream-100/80 border border-[#E8DFD1] rounded-2xl py-2.5 px-1 flex flex-col items-center">
+                                    <span id="cd-hours" class="font-en text-2xl sm:text-3xl font-bold text-taupe">02</span>
+                                    <span class="text-[10px] text-taupe-muted">时 Hours</span>
+                                </div>
+                                <div class="bg-cream-100/80 border border-[#E8DFD1] rounded-2xl py-2.5 px-1 flex flex-col items-center">
+                                    <span id="cd-mins" class="font-en text-2xl sm:text-3xl font-bold text-taupe">18</span>
+                                    <span class="text-[10px] text-taupe-muted">分 Mins</span>
+                                </div>
+                                <div class="bg-rose-soft border border-rose-mist/60 rounded-2xl py-2.5 px-1 flex flex-col items-center">
+                                    <span id="cd-secs" class="font-en text-2xl sm:text-3xl font-bold text-rose-deep">36</span>
+                                    <span class="text-[10px] text-taupe-muted">秒 Secs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 3. 新郎 & 新娘左右丝滑滑入合体档案 (手机端强制同屏并排 + 支持上下回滚重播)
+                 ========================================== -->
+            <section id="section-couple" class="stage-clip py-8 sm:py-12">
+                <div class="section-header reveal-up text-center mb-5 sm:mb-7">
+                    <span class="font-en text-xs tracking-[0.3em] uppercase text-champagne block">The Happy Couple</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-semibold text-taupe mt-1">新郎 &amp; 新娘档案</h2>
+                    <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                        <path d="M10 8 H78 L90 2 L102 8 H170" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <p class="text-xs text-taupe-muted mt-1">上下滑动至此自动左右合体 · 点击照片可 3D 翻转切换 Q 版手绘</p>
+
+                    <div class="inline-flex flex-wrap items-center justify-center gap-2 mt-3">
+                        <button onclick="replayCoupleMerge(event)" class="px-3.5 py-1.5 rounded-full bg-cream-100 border border-champagne/55 text-xs text-taupe hover:bg-champagne/15 transition-colors flex items-center gap-1 shadow-sm">
+                            <span>✨</span>
+                            <span>重播丝滑合体动画</span>
+                        </button>
+                        <button onclick="toggleAllCoupleAvatars()" class="px-3.5 py-1.5 rounded-full bg-rose-soft border border-rose-mist text-xs text-rose-deep font-medium hover:bg-rose-mist/30 transition-colors flex items-center gap-1 shadow-sm">
+                            <span>🎨</span>
+                            <span id="couple-avatar-mode-text">切换Q版手绘</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 强制双列同屏并排合体舞台 (stage-clip 确保左右待命卡片绝不撑宽手机屏幕) -->
+                <div id="couple-merge-stage" class="stage-clip max-w-3xl mx-auto pt-1 pb-3 px-0.5">
+                    
+                    <!-- 顶部横跨两卡的金色心电流线连接线 -->
+                    <div class="w-4/5 mx-auto mb-2.5 pointer-events-none">
+                        <svg class="w-full h-7 overflow-visible" viewBox="0 0 320 28" fill="none">
+                            <path d="M10 14 H125 L135 5 L146 24 L160 2 L174 24 L185 5 L195 14 H310" stroke="#E8DFD1" stroke-width="1.5" stroke-linecap="round"/>
+                            <path id="couple-ecg-path" d="M10 14 H125 L135 5 L146 24 L160 2 L174 24 L185 5 L195 14 H310" stroke="#C9A96E" stroke-width="2.2" stroke-linecap="round"/>
+                            <circle cx="10" cy="14" r="3.5" fill="#C9A96E"/>
+                            <circle cx="310" cy="14" r="3.5" fill="#C48B8A"/>
+                        </svg>
+                    </div>
+
+                    <!-- 严格双列无缝拼合网格：grid-cols-2 (手机端绝不上下折行) -->
+                    <div class="relative grid grid-cols-2 gap-1.5 sm:gap-3 items-stretch">
+
+                        <!-- 合体瞬间：中缝垂直流光束 -->
+                        <div id="couple-seam-flash" class="pointer-events-none absolute top-4 bottom-4 left-1/2 -translate-x-1/2 w-3 sm:w-5 z-20 opacity-0"
+                             style="background: radial-gradient(ellipse at center, rgba(201,169,110,0.85) 0%, rgba(230,184,183,0.4) 45%, transparent 80%);">
+                        </div>
+
+                        <!-- 中央悬浮：「100% 天作之合」同心锁合体徽章 -->
+                        <div class="absolute top-[33%] sm:top-[37%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none flex items-center justify-center">
+                            <span id="couple-ripple-1" class="absolute w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-champagne opacity-0"></span>
+                            <span id="couple-ripple-2" class="absolute w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-rose-deep opacity-0"></span>
+                            <button id="couple-merge-badge" onclick="burstConfettiFromElement(this, 36)" title="点击撒花祝福" class="pointer-events-auto relative w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#FFFDFA] border-2 border-champagne shadow-romantic flex flex-col items-center justify-center cursor-pointer focus:outline-none">
+                                <span class="text-xs sm:text-base leading-none">💞</span>
+                                <span class="font-en text-[10px] sm:text-xs font-bold text-taupe leading-tight mt-0.5">100%</span>
+                                <span class="text-[8px] sm:text-[9px] text-champagne-dark leading-none">天作之合</span>
+                            </button>
+                        </div>
+
+                        <!-- 左半联画：新郎卡片 -->
+                        <div id="couple-groom-card" class="gpu-card rounded-l-[1.6rem] rounded-r-lg sm:rounded-l-[2.2rem] sm:rounded-r-xl p-2.5 sm:p-6 shadow-romantic flex flex-col justify-between relative overflow-hidden border-r-champagne/50">
+                            <div>
+                                <div class="flex items-center justify-between border-b border-[#E8DFD1] pb-1.5 mb-2">
+                                    <span class="px-1.5 py-0.5 rounded-full bg-champagne/15 text-champagne-dark font-en text-[9px] sm:text-[11px] font-semibold tracking-wider uppercase">GROOM · 新郎</span>
+                                    <button onclick="flipSingleAvatar('groom')" class="text-[10px] sm:text-xs text-taupe-muted hover:text-taupe flex items-center gap-0.5">
+                                        <span>🔄</span><span class="hidden sm:inline">翻面</span>
+                                    </button>
+                                </div>
+
+                                <!-- 法式圆拱门 3D 翻转头像框 -->
+                                <div class="w-24 h-32 sm:w-36 sm:h-48 mx-auto flip-perspective cursor-pointer" onclick="flipSingleAvatar('groom')">
+                                    <div id="groom-flip-inner" class="flip-inner">
+                                        <div class="flip-face rounded-t-full rounded-b-2xl p-1 bg-gradient-to-b from-champagne/55 to-cream-200 shadow-sm">
+                                            <div class="relative w-full h-full rounded-t-full rounded-b-xl overflow-hidden bg-cream-100">
+                                                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" 
+                                                     decoding="async"
+                                                     onerror="this.src='https://placehold.co/400x520/F7F1E8/3D3532?text=Groom'"
+                                                     alt="新郎陆景行" 
+                                                     class="w-full h-full object-cover object-center">
+                                                <div class="absolute inset-x-0 bottom-0 bg-taupe/60 py-0.5 text-center">
+                                                    <span class="text-[9px] text-cream-50">点看Q版 ↻</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flip-face flip-back rounded-t-full rounded-b-2xl p-1 bg-gradient-to-b from-champagne to-rose-mist shadow-sm">
+                                            <div class="w-full h-full rounded-t-full rounded-b-xl bg-[#FFFDFA] flex flex-col items-center justify-center p-1">
+                                                <svg class="w-full h-full" viewBox="0 0 120 140" fill="none">
+                                                    <circle cx="60" cy="64" r="44" fill="#F9ECEC" opacity="0.65"/>
+                                                    <path d="M32 132C34 108 44 100 60 100C76 100 86 108 88 132" fill="#3D3532"/>
+                                                    <path d="M50 100L60 118L70 100" fill="#FFFDFA"/>
+                                                    <circle cx="60" cy="62" r="24" fill="#FFFDFA" stroke="#3D3532" stroke-width="2.2"/>
+                                                    <path d="M36 58C37 39 50 32 67 36C79 38 84 46 84 58C79 51 70 48 60 49C48 50 40 53 36 58Z" fill="#3D3532"/>
+                                                    <rect x="43" y="57" width="14" height="9" rx="4" fill="#FFFDFA" stroke="#C9A96E" stroke-width="2"/>
+                                                    <rect x="63" y="57" width="14" height="9" rx="4" fill="#FFFDFA" stroke="#C9A96E" stroke-width="2"/>
+                                                    <path d="M57 61H63" stroke="#C9A96E" stroke-width="2"/>
+                                                    <path d="M55 73C57.5 76 62.5 76 65 73" stroke="#3D3532" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center mt-2">
+                                    <h3 class="text-base sm:text-2xl font-serif font-semibold text-taupe">陆景行</h3>
+                                    <p class="font-en text-[9px] sm:text-xs text-champagne-dark tracking-wider">ENFJ · 天秤座</p>
+                                    <div class="flex flex-wrap justify-center gap-1 mt-1.5">
+                                        <span class="px-1.5 py-0.5 rounded-full text-[10px] sm:text-xs bg-champagne/15 text-champagne-dark font-medium">🏛️ 建筑师</span>
+                                        <span class="px-1.5 py-0.5 rounded-full text-[10px] sm:text-xs bg-rose-soft text-rose-deep font-medium">🍮 甜品大厨</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-2 pt-2 border-t border-[#E8DFD1]/70">
+                                    <div class="flex justify-between text-[10px] sm:text-xs text-taupe-muted mb-1">
+                                        <span>💖 宠妻指数</span>
+                                        <span class="font-en font-bold text-champagne-dark">100%</span>
+                                    </div>
+                                    <div class="w-full h-1.5 rounded-full bg-cream-100 overflow-hidden">
+                                        <div class="couple-energy-bar h-full rounded-full bg-gradient-to-r from-champagne to-rose-deep"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div onclick="likeCoupleCard(event, 'groom')" class="mt-2.5 p-2 sm:p-3.5 rounded-xl bg-cream-100/80 border border-[#E8DFD1] cursor-pointer hover:border-champagne transition-colors text-left">
+                                <div class="flex items-center justify-between text-[10px] sm:text-xs font-medium text-champagne-dark mb-0.5">
+                                    <span>💌 知意眼中的他</span>
+                                    <span class="text-rose-deep">♥ <span id="groom-like-num" class="font-en">99</span></span>
+                                </div>
+                                <p class="text-[10px] sm:text-xs text-taupe-muted leading-relaxed">
+                                    “画最精密的建筑图纸，也记得我爱吃的每一道甜点，有他在连迷路都是浪漫探险。”
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 右半联画：新娘卡片 -->
+                        <div id="couple-bride-card" class="gpu-card rounded-r-[1.6rem] rounded-l-lg sm:rounded-r-[2.2rem] sm:rounded-l-xl p-2.5 sm:p-6 shadow-romantic flex flex-col justify-between relative overflow-hidden border-l-rose-mist/50">
+                            <div>
+                                <div class="flex items-center justify-between border-b border-rose-mist/35 pb-1.5 mb-2">
+                                    <span class="px-1.5 py-0.5 rounded-full bg-rose-soft text-rose-deep font-en text-[9px] sm:text-[11px] font-semibold tracking-wider uppercase">BRIDE · 新娘</span>
+                                    <button onclick="flipSingleAvatar('bride')" class="text-[10px] sm:text-xs text-rose-deep flex items-center gap-0.5">
+                                        <span>🔄</span><span class="hidden sm:inline">翻面</span>
+                                    </button>
+                                </div>
+
+                                <div class="w-24 h-32 sm:w-36 sm:h-48 mx-auto flip-perspective cursor-pointer" onclick="flipSingleAvatar('bride')">
+                                    <div id="bride-flip-inner" class="flip-inner">
+                                        <div class="flip-face rounded-t-full rounded-b-2xl p-1 bg-gradient-to-b from-rose-mist/65 to-cream-200 shadow-sm">
+                                            <div class="relative w-full h-full rounded-t-full rounded-b-xl overflow-hidden bg-cream-100">
+                                                <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80" 
+                                                     decoding="async"
+                                                     onerror="this.src='https://placehold.co/400x520/F9ECEC/3D3532?text=Bride'"
+                                                     alt="新娘沈知意" 
+                                                     class="w-full h-full object-cover object-center">
+                                                <div class="absolute inset-x-0 bottom-0 bg-taupe/60 py-0.5 text-center">
+                                                    <span class="text-[9px] text-cream-50">点看Q版 ↻</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flip-face flip-back rounded-t-full rounded-b-2xl p-1 bg-gradient-to-b from-rose-mist to-champagne shadow-sm">
+                                            <div class="w-full h-full rounded-t-full rounded-b-xl bg-[#FFFDFA] flex flex-col items-center justify-center p-1">
+                                                <svg class="w-full h-full" viewBox="0 0 120 140" fill="none">
+                                                    <circle cx="60" cy="64" r="44" fill="#F9ECEC" opacity="0.75"/>
+                                                    <path d="M30 58C30 34 90 34 90 58L98 124H22L30 58Z" fill="#FFFDFA" stroke="#E6B8B7" stroke-width="1.5" stroke-dasharray="3 3"/>
+                                                    <circle cx="60" cy="62" r="23" fill="#FFFDFA" stroke="#3D3532" stroke-width="2.2"/>
+                                                    <path d="M37 60C37 40 47 34 60 34C73 34 83 40 83 60C78 50 69 46 60 46C51 46 42 50 37 60Z" fill="#3D3532"/>
+                                                    <path d="M47 35L51 23L60 30L69 23L73 35H47Z" fill="#F5E6C8" stroke="#C9A96E" stroke-width="1.8" stroke-linejoin="round"/>
+                                                    <circle cx="44" cy="66" r="3.5" fill="#E6B8B7"/>
+                                                    <circle cx="76" cy="66" r="3.5" fill="#E6B8B7"/>
+                                                    <path d="M55 72C57.5 75 62.5 75 65 72" stroke="#C48B8A" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center mt-2">
+                                    <h3 class="text-base sm:text-2xl font-serif font-semibold text-taupe">沈知意</h3>
+                                    <p class="font-en text-[9px] sm:text-xs text-rose-deep tracking-wider">INFP · 双鱼座</p>
+                                    <div class="flex flex-wrap justify-center gap-1 mt-1.5">
+                                        <span class="px-1.5 py-0.5 rounded-full text-[10px] sm:text-xs bg-rose-soft text-rose-deep font-medium">🎨 插画师</span>
+                                        <span class="px-1.5 py-0.5 rounded-full text-[10px] sm:text-xs bg-champagne/15 text-champagne-dark font-medium">🐱 猫铲屎官</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-2 pt-2 border-t border-rose-mist/35">
+                                    <div class="flex justify-between text-[10px] sm:text-xs text-taupe-muted mb-1">
+                                        <span>🌸 治愈甜度</span>
+                                        <span class="font-en font-bold text-rose-deep">100%</span>
+                                    </div>
+                                    <div class="w-full h-1.5 rounded-full bg-cream-100 overflow-hidden">
+                                        <div class="couple-energy-bar h-full rounded-full bg-gradient-to-r from-rose-mist to-rose-deep"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div onclick="likeCoupleCard(event, 'bride')" class="mt-2.5 p-2 sm:p-3.5 rounded-xl bg-rose-soft/50 border border-rose-mist/40 cursor-pointer hover:border-rose-deep transition-colors text-left">
+                                <div class="flex items-center justify-between text-[10px] sm:text-xs font-medium text-rose-deep mb-0.5">
+                                    <span>💌 景行眼中的她</span>
+                                    <span>♥ <span id="bride-like-num" class="font-en">108</span></span>
+                                </div>
+                                <p class="text-[10px] sm:text-xs text-taupe-muted leading-relaxed">
+                                    “她是把平凡日子画成童话的魔法师，遇见她之后，我的世界每一帧都染上了温柔的玫瑰色。”
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 4. 紧接新郎 & 新娘档案之后：丝滑光影婚纱画廊 (自研 60fps 3D GPU 轮播)
+                 ========================================== -->
+            <section id="section-gallery" class="stage-clip py-8 sm:py-12">
+                <div class="reveal-up gpu-card rounded-[2rem] shadow-romantic p-4 sm:p-8 relative overflow-hidden">
+                    
+                    <div class="section-header flex flex-col md:flex-row md:items-end justify-between gap-3 mb-4">
+                        <div>
+                            <span class="font-en text-xs tracking-[0.3em] uppercase text-champagne block">Moments Of Love</span>
+                            <h2 class="text-2xl sm:text-3xl font-serif font-semibold text-taupe mt-1">丝滑光影婚纱画廊</h2>
+                            <svg class="section-line-svg w-36 h-3.5 mt-1" viewBox="0 0 150 14" fill="none">
+                                <path d="M2 7 H140" stroke="#C9A96E" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                            <p class="text-xs text-taupe-muted mt-1">支持手指左右滑动、全屏灯箱预览，或切换 3 种 3D 丝滑模式</p>
+                        </div>
+
+                        <!-- 模式切换器胶囊 -->
+                        <div class="inline-flex bg-cream-100 p-1 rounded-2xl border border-[#E8DFD1] self-start md:self-auto">
+                            <button onclick="switchGalleryMode('coverflow')" id="mode-btn-coverflow" class="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all bg-taupe text-cream-50 shadow-sm">
+                                ✨ 立体流光
+                            </button>
+                            <button onclick="switchGalleryMode('cards')" id="mode-btn-cards" class="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all text-taupe-muted hover:text-taupe">
+                                🃏 趣味叠卡
+                            </button>
+                            <button onclick="switchGalleryMode('fade')" id="mode-btn-fade" class="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all text-taupe-muted hover:text-taupe">
+                                🌸 柔光呼吸
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 自研 60fps 3D 触摸画廊主舞台 -->
+                    <div id="gallery-viewport" class="gallery-3d-viewport">
+                        <div id="gallery-slides-track" class="w-full h-full relative"></div>
+                        <button onclick="stepGallery(-1)" aria-label="上一张" class="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-taupe/65 text-cream-50 flex items-center justify-center hover:bg-taupe transition-colors">❮</button>
+                        <button onclick="stepGallery(1)" aria-label="下一张" class="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-taupe/65 text-cream-50 flex items-center justify-center hover:bg-taupe transition-colors">❯</button>
+                    </div>
+
+                    <!-- 当前照片图注与点赞栏 -->
+                    <div class="mt-2 flex flex-col sm:flex-row items-center justify-between gap-2.5 px-3.5 py-2.5 rounded-2xl bg-cream-100 border border-[#E8DFD1]">
+                        <div class="flex items-center gap-2.5 text-center sm:text-left">
+                            <span id="gallery-index-badge" class="px-2.5 py-1 rounded-lg bg-champagne text-cream-50 font-en text-xs font-semibold shrink-0">01 / 06</span>
+                            <div>
+                                <h4 id="gallery-caption-title" class="text-sm font-serif font-semibold text-taupe">晨光里的第一封情书</h4>
+                                <p id="gallery-caption-sub" class="text-xs text-taupe-muted">微风吹动头纱的温柔瞬间，定格我们的永恒序曲</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button onclick="openLightboxCurrent()" class="px-3 py-1.5 rounded-full bg-[#FFFDFA] border border-[#E8DFD1] text-xs text-taupe hover:border-champagne flex items-center gap-1">
+                                <span>🔍</span> <span>全屏预览</span>
+                            </button>
+                            <button onclick="likeCurrentPhoto(event)" class="px-3.5 py-1.5 rounded-full bg-rose-soft border border-rose-mist text-xs text-rose-deep font-medium flex items-center gap-1">
+                                <span>♥</span> <span>沾喜气</span>
+                                <span id="photo-like-count" class="font-en font-bold">128</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 缩略图导航条 -->
+                    <div id="thumb-strip" class="mt-3.5 grid grid-cols-6 gap-2 sm:gap-3"></div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 5. 我们的恋爱故事时间轴 (支持上下回滚左右飞入)
+                 ========================================== -->
+            <section id="section-story" class="stage-clip py-8 sm:py-12">
+                <div class="section-header reveal-up text-center mb-9">
+                    <span class="font-en text-xs tracking-[0.3em] uppercase text-champagne block">Our Love Journey</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-semibold text-taupe mt-1">我们的恋爱故事</h2>
+                    <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                        <path d="M10 8 H78 L90 2 L102 8 H170" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <p class="text-xs text-taupe-muted mt-1">顺着时光流线 · 4 个心动坐标串联起我们的 1,890 天</p>
+                </div>
+
+                <div class="relative max-w-3xl mx-auto pl-6 sm:pl-0">
+                    <div class="absolute left-6 sm:left-1/2 top-2 bottom-2 w-0.5 bg-[#E8DFD1] -translate-x-1/2"></div>
+                    <div id="story-progress-line" class="absolute left-6 sm:left-1/2 top-2 bottom-2 w-0.5 bg-gradient-to-b from-champagne via-rose-deep to-champagne -translate-x-1/2 origin-top scale-y-0"></div>
+
+                    <!-- 节点 1 -->
+                    <div class="relative flex flex-col sm:flex-row items-start sm:items-center justify-between mb-9">
+                        <div class="reveal-left sm:w-[44%] sm:text-right pl-8 sm:pl-0 order-2 sm:order-1 mt-1 sm:mt-0">
+                            <div class="gpu-card p-4 sm:p-5 rounded-2xl shadow-card">
+                                <span class="font-en text-xs font-semibold text-champagne tracking-widest">2021.07.18 · FIRST MEET</span>
+                                <h3 class="text-base sm:text-lg font-serif font-semibold text-taupe mt-0.5">初遇 · 盛夏图书馆的光影</h3>
+                                <p class="text-xs text-taupe-muted mt-1.5 leading-relaxed">
+                                    在城市书房的建筑与插画书架转角，我们同时伸手去拿同一本《光影与色彩》。窗外蝉鸣喧嚣，而那一刻阳光刚好落在你的睫毛上。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="absolute left-0 sm:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#FFFDFA] border-2 border-champagne shadow-md flex items-center justify-center z-10 order-1 sm:order-2">
+                            <span class="text-sm">📖</span>
+                        </div>
+                        <div class="sm:w-[44%] order-3"></div>
+                    </div>
+
+                    <!-- 节点 2 -->
+                    <div class="relative flex flex-col sm:flex-row items-start sm:items-center justify-between mb-9">
+                        <div class="sm:w-[44%] order-1"></div>
+                        <div class="absolute left-0 sm:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#FFFDFA] border-2 border-rose-mist shadow-md flex items-center justify-center z-10 order-2">
+                            <span class="text-sm">🌅</span>
+                        </div>
+                        <div class="reveal-right sm:w-[44%] pl-8 sm:pl-0 order-3 mt-1 sm:mt-0">
+                            <div class="gpu-card p-4 sm:p-5 rounded-2xl shadow-card">
+                                <span class="font-en text-xs font-semibold text-rose-deep tracking-widest">2022.05.20 · FALL IN LOVE</span>
+                                <h3 class="text-base sm:text-lg font-serif font-semibold text-taupe mt-0.5">升温 · 橘子海日落约定</h3>
+                                <p class="text-xs text-taupe-muted mt-1.5 leading-relaxed">
+                                    傍晚六点的海风吹起裙摆，晚霞把整片海染成温柔的橘子汽水色。我们不约而同掏出准备好的信与速写本，相视一笑许下相伴四季的约定。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 节点 3 -->
+                    <div class="relative flex flex-col sm:flex-row items-start sm:items-center justify-between mb-9">
+                        <div class="reveal-left sm:w-[44%] sm:text-right pl-8 sm:pl-0 order-2 sm:order-1 mt-1 sm:mt-0">
+                            <div class="gpu-card p-4 sm:p-5 rounded-2xl shadow-card">
+                                <span class="font-en text-xs font-semibold text-champagne tracking-widest">2023.10.14 · SWEET HOME</span>
+                                <h3 class="text-base sm:text-lg font-serif font-semibold text-taupe mt-0.5">筑巢 · 领养小橘猫“年糕”</h3>
+                                <p class="text-xs text-taupe-muted mt-1.5 leading-relaxed">
+                                    布置好属于我们的第一间洒满阳光的小屋，迎来了喵星人“年糕”。一屋两人，三餐四季，猫在怀里打呼，你在厨房煲汤。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="absolute left-0 sm:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#FFFDFA] border-2 border-champagne shadow-md flex items-center justify-center z-10 order-1 sm:order-2">
+                            <span class="text-sm">🐱</span>
+                        </div>
+                        <div class="sm:w-[44%] order-3"></div>
+                    </div>
+
+                    <!-- 节点 4 -->
+                    <div class="relative flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                        <div class="sm:w-[44%] order-1"></div>
+                        <div class="absolute left-0 sm:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-champagne text-cream-50 border-2 border-cream-50 shadow-md flex items-center justify-center z-10 order-2">
+                            <span class="text-sm">💍</span>
+                        </div>
+                        <div class="reveal-right sm:w-[44%] pl-8 sm:pl-0 order-3 mt-1 sm:mt-0">
+                            <div class="gpu-card p-4 sm:p-5 rounded-2xl shadow-card border-champagne/60">
+                                <span class="font-en text-xs font-semibold text-rose-deep tracking-widest">2025.12.24 · SHE SAID YES</span>
+                                <h3 class="text-base sm:text-lg font-serif font-semibold text-taupe mt-0.5">求婚 · 银河星空营地</h3>
+                                <p class="text-xs text-taupe-muted mt-1.5 leading-relaxed">
+                                    当篝火映亮星河，你单膝跪地拿出亲手设计戒托的钻戒（激动得把戒盒拿反了），在笑声与泪光中，我们定下了 2026.10.24 的婚期！
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 6. 🍬 恋爱默契小问答（3D 翻牌互动）
+                 ========================================== -->
+            <section id="section-quiz" class="stage-clip py-8">
+                <div class="reveal-up gpu-card rounded-[2rem] p-5 sm:p-8 shadow-card">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+                        <div>
+                            <span class="font-en text-xs tracking-[0.25em] uppercase text-rose-deep">Interactive Love Quiz</span>
+                            <h3 class="text-xl sm:text-2xl font-serif font-semibold text-taupe mt-0.5">🍬 恋爱默契小问答 · 点击翻牌揭秘</h3>
+                        </div>
+                        <span class="text-xs text-taupe-muted">轻触任意卡片即可 3D 丝滑翻转</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="h-44 flip-perspective cursor-pointer" onclick="toggleQuizCard(this)">
+                            <div class="flip-inner">
+                                <div class="flip-face rounded-2xl bg-cream-100/85 border border-[#E8DFD1] p-4 flex flex-col items-center justify-between text-center">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-[#FFFDFA] text-champagne-dark text-[11px] border border-[#E8DFD1]">默契问答 Q1</span>
+                                    <div>
+                                        <div class="text-2xl mb-1">💌</div>
+                                        <h4 class="font-serif font-semibold text-taupe text-sm sm:text-base">猜猜当年是谁先主动表白的？</h4>
+                                    </div>
+                                    <span class="text-[11px] text-rose-deep font-medium">点击翻牌揭晓答案 ↻</span>
+                                </div>
+                                <div class="flip-face flip-back rounded-2xl bg-taupe text-cream-50 border border-champagne p-4 flex flex-col items-center justify-center text-center">
+                                    <span class="text-xs text-champagne font-medium mb-1">✨ 答案：同时开口！</span>
+                                    <p class="text-xs text-cream-100/90 leading-relaxed">
+                                        在橘子海日落那天，陆工准备了手写信，没想到知意先递出了画着两人牵手的速写本，两人相视一笑同时说出了“在一起吧”！
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="h-44 flip-perspective cursor-pointer" onclick="toggleQuizCard(this)">
+                            <div class="flip-inner">
+                                <div class="flip-face rounded-2xl bg-cream-100/85 border border-[#E8DFD1] p-4 flex flex-col items-center justify-between text-center">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-[#FFFDFA] text-champagne-dark text-[11px] border border-[#E8DFD1]">默契问答 Q2</span>
+                                    <div>
+                                        <div class="text-2xl mb-1">🐱</div>
+                                        <h4 class="font-serif font-semibold text-taupe text-sm sm:text-base">家里的小橘猫为什么叫“年糕”？</h4>
+                                    </div>
+                                    <span class="text-[11px] text-champagne-dark font-medium">点击翻牌揭晓答案 ↻</span>
+                                </div>
+                                <div class="flip-face flip-back rounded-2xl bg-taupe text-cream-50 border border-champagne p-4 flex flex-col items-center justify-center text-center">
+                                    <span class="text-xs text-champagne font-medium mb-1">🐾 答案：因为粘人又软糯！</span>
+                                    <p class="text-xs text-cream-100/90 leading-relaxed">
+                                        抱回家的第一天，它就像一块刚出锅的桂花糖年糕一样粘在新娘脚边打呼噜，寓意我们的生活也岁岁年年甜如蜜糕。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="h-44 flip-perspective cursor-pointer" onclick="toggleQuizCard(this)">
+                            <div class="flip-inner">
+                                <div class="flip-face rounded-2xl bg-cream-100/85 border border-[#E8DFD1] p-4 flex flex-col items-center justify-between text-center">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-[#FFFDFA] text-champagne-dark text-[11px] border border-[#E8DFD1]">默契问答 Q3</span>
+                                    <div>
+                                        <div class="text-2xl mb-1">💍</div>
+                                        <h4 class="font-serif font-semibold text-taupe text-sm sm:text-base">求婚时发生了什么可爱小插曲？</h4>
+                                    </div>
+                                    <span class="text-[11px] text-rose-deep font-medium">点击翻牌揭晓答案 ↻</span>
+                                </div>
+                                <div class="flip-face flip-back rounded-2xl bg-taupe text-cream-50 border border-champagne p-4 flex flex-col items-center justify-center text-center">
+                                    <span class="text-xs text-champagne font-medium mb-1">😂 答案：戒指盒拿反啦！</span>
+                                    <p class="text-xs text-cream-100/90 leading-relaxed">
+                                        平时画几万平建筑图纸都不手抖的陆工，单膝跪地时紧张得把胡桃木戒盒上下拿反了，把全场朋友逗得又哭又笑！
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 7. 📜 爱情永恒契约书（邀您盖章见证）
+                 ========================================== -->
+            <section id="section-contract" class="stage-clip py-8">
+                <div class="reveal-up gpu-card rounded-[2rem] p-4 sm:p-8 shadow-romantic relative overflow-hidden">
+                    <div class="border-2 border-double border-champagne/45 rounded-2xl p-4 sm:p-7 relative bg-gradient-to-b from-[#FFFDFA] to-[#FAF4EB]">
+                        
+                        <div class="section-header text-center">
+                            <span class="font-en text-xs tracking-[0.3em] uppercase text-champagne-dark">Marriage Covenant</span>
+                            <h2 class="text-2xl sm:text-3xl font-serif font-semibold text-taupe mt-1">📜 爱情永恒契约书</h2>
+                            <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                                <path d="M10 8 H78 L90 2 L102 8 H170" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            <p class="text-xs text-taupe-muted mt-1">以岁月为笔，以星河为盟 · 诚邀您按下喜印成为我们的幸福见证人</p>
+                        </div>
+
+                        <div class="max-w-xl mx-auto my-5 space-y-2.5 text-xs sm:text-sm text-taupe leading-relaxed">
+                            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-[#FFFDFA] border border-[#E8DFD1]">
+                                <span class="text-champagne-dark font-en font-bold">Ⅰ.</span>
+                                <p>无论顺境或逆境，承诺每天清晨给对方一个拥抱，建筑师负责搭建遮风挡雨的港湾，插画师负责把每个寻常日子涂满绚烂色彩。</p>
+                            </div>
+                            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-[#FFFDFA] border border-[#E8DFD1]">
+                                <span class="text-champagne-dark font-en font-bold">Ⅱ.</span>
+                                <p>遇到分歧绝不冷战过夜，一顿热腾腾的私房甜品或一次牵手散步即可化解；家中小橘猫“年糕”享有永久罐头监督权。</p>
+                            </div>
+                            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-[#FFFDFA] border border-[#E8DFD1]">
+                                <span class="text-champagne-dark font-en font-bold">Ⅲ.</span>
+                                <p>本契约自 <strong>2026年10月24日</strong> 起正式生效，有效期为：<strong>生生世世 · 岁岁年年</strong>。</p>
+                            </div>
+                        </div>
+
+                        <div class="max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-champagne/30 relative">
+                            <div class="flex items-center gap-6 text-xs text-taupe">
+                                <div>
+                                    <span class="text-taupe-muted block text-[11px]">缔约新郎：</span>
+                                    <span class="font-serif text-base font-semibold">陆景行</span>
+                                </div>
+                                <div>
+                                    <span class="text-taupe-muted block text-[11px]">缔约新娘：</span>
+                                    <span class="font-serif text-base font-semibold">沈知意</span>
+                                </div>
+                                <div>
+                                    <span class="text-taupe-muted block text-[11px]">特邀喵证婚：</span>
+                                    <span class="font-serif text-sm font-medium text-champagne-dark">🐾 年糕</span>
+                                </div>
+                            </div>
+
+                            <!-- 微卡通喜字红印章 -->
+                            <div id="contract-stamp-mark" class="hidden absolute right-4 sm:right-40 -top-2 sm:-top-5 w-20 h-20 sm:w-24 sm:h-24 pointer-events-none select-none z-20">
+                                <svg class="w-full h-full" viewBox="0 0 100 100" fill="none">
+                                    <circle cx="50" cy="50" r="44" stroke="#B84A48" stroke-width="3" stroke-dasharray="6 3" fill="rgba(184, 74, 72, 0.1)"/>
+                                    <circle cx="50" cy="50" r="38" stroke="#B84A48" stroke-width="1.5"/>
+                                    <text x="50" y="44" text-anchor="middle" fill="#B84A48" font-size="16" font-weight="bold" font-family="serif">囍 · 见证</text>
+                                    <text x="50" y="62" text-anchor="middle" fill="#B84A48" font-size="9">百年好合</text>
+                                    <text x="50" y="75" text-anchor="middle" fill="#B84A48" font-size="8">2026.10.24</text>
+                                </svg>
+                            </div>
+
+                            <div class="flex flex-col items-center sm:items-end">
+                                <button id="stamp-contract-btn" onclick="stampLoveContract(event)" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#C85A58] to-[#A83E3C] text-cream-50 text-xs font-medium shadow-md hover:opacity-95 active:scale-95 transition-all flex items-center gap-1.5">
+                                    <span>💮</span>
+                                    <span id="stamp-btn-text">加盖见证喜印</span>
+                                </button>
+                                <span class="text-[11px] text-taupe-muted mt-1.5">已有 <strong id="witness-count" class="font-en text-rose-deep text-sm">186</strong> 位亲友盖章见证</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 8. ⏳ 婚礼当日浪漫流程 & 穿搭伴手礼剧透
+                 ========================================== -->
+            <section id="section-schedule" class="stage-clip py-8">
+                <div class="section-header reveal-up text-center mb-7">
+                    <span class="font-en text-xs tracking-[0.3em] uppercase text-champagne block">Wedding Timeline</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-semibold text-taupe mt-1">⏳ 婚礼当日浪漫流程</h2>
+                    <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                        <path d="M10 8 H78 L90 2 L102 8 H170" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <p class="text-xs text-taupe-muted mt-1">2026年10月24日 (周六) · 云栖湖畔大酒店三楼 · 星河宴会厅</p>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+                    <div class="reveal-up gpu-card rounded-3xl p-4 sm:p-5 shadow-card flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-champagne/15 text-champagne-dark font-en font-bold text-xs">11:00 AM</span>
+                            <h3 class="text-sm sm:text-base font-serif font-semibold text-taupe mt-2.5">📸 迎宾签到留影</h3>
+                            <p class="text-[11px] text-taupe-muted mt-1 leading-relaxed">迎宾长廊领取定制伴手礼，复古拍立得合影留念。</p>
+                        </div>
+                        <div class="mt-2.5 pt-2 border-t border-[#E8DFD1] text-[10px] text-champagne-dark">📍 3F 星河迎宾长廊</div>
+                    </div>
+
+                    <div class="reveal-up gpu-card rounded-3xl p-4 sm:p-5 shadow-card flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-rose-soft text-rose-deep font-en font-bold text-xs">11:38 AM</span>
+                            <h3 class="text-sm sm:text-base font-serif font-semibold text-taupe mt-2.5">🧁 浪漫甜品茶歇</h3>
+                            <p class="text-[11px] text-taupe-muted mt-1 leading-relaxed">享用新郎特调树莓马卡龙、伯爵茶巴斯克与鲜果饮。</p>
+                        </div>
+                        <div class="mt-2.5 pt-2 border-t border-[#E8DFD1] text-[10px] text-rose-deep">📍 3F 法式甜品台</div>
+                    </div>
+
+                    <div class="reveal-up gpu-card rounded-3xl p-4 sm:p-5 shadow-card flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-champagne text-cream-50 font-en font-bold text-xs">12:08 PM</span>
+                            <h3 class="text-sm sm:text-base font-serif font-semibold text-taupe mt-2.5">💍 交换誓言主仪式</h3>
+                            <p class="text-[11px] text-taupe-muted mt-1 leading-relaxed">星河穹顶灯光点亮，在挚友亲朋见证下交换誓言。</p>
+                        </div>
+                        <div class="mt-2.5 pt-2 border-t border-[#E8DFD1] text-[10px] text-champagne-dark">📍 3F 无柱星河主礼堂</div>
+                    </div>
+
+                    <div class="reveal-up gpu-card rounded-3xl p-4 sm:p-5 shadow-card flex flex-col justify-between">
+                        <div>
+                            <span class="px-2.5 py-0.5 rounded-full bg-taupe text-cream-50 font-en font-bold text-xs">12:38 PM</span>
+                            <h3 class="text-sm sm:text-base font-serif font-semibold text-taupe mt-2.5">🥂 喜宴开席 &amp; 抽奖</h3>
+                            <p class="text-[11px] text-taupe-muted mt-1 leading-relaxed">珍馐佳肴开席，席间开启手捧花传递与锦鲤抽奖。</p>
+                        </div>
+                        <div class="mt-2.5 pt-2 border-t border-[#E8DFD1] text-[10px] text-taupe-muted">📍 3F 星河宴会厅席位区</div>
+                    </div>
+                </div>
+
+                <!-- 穿搭色卡与伴手礼拆盒 -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                    <div class="reveal-up lg:col-span-6 gpu-card rounded-3xl p-4 sm:p-6 shadow-card flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-base sm:text-lg font-serif font-semibold text-taupe">👗 宾客赴宴穿搭色卡</h3>
+                                <span class="text-[11px] text-taupe-muted">点击切换建议</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2 my-3">
+                                <button onclick="selectDressSwatch('香槟暖金', '#C9A96E', '香槟色缎面裙、米金针织或卡其休闲西装，在星河主厅暖光下格外温润高级。')" class="flex flex-col items-center gap-1 p-2 rounded-2xl bg-cream-100/70 hover:bg-cream-100">
+                                    <span class="w-8 h-8 rounded-full bg-[#C9A96E] border-2 border-white shadow-sm"></span>
+                                    <span class="text-[11px] text-taupe">香槟金</span>
+                                </button>
+                                <button onclick="selectDressSwatch('雾霾玫瑰', '#E6B8B7', '低饱和莫兰迪粉连衣裙、丝巾或领带点缀，浪漫柔和且非常显气色。')" class="flex flex-col items-center gap-1 p-2 rounded-2xl bg-cream-100/70 hover:bg-cream-100">
+                                    <span class="w-8 h-8 rounded-full bg-[#E6B8B7] border-2 border-white shadow-sm"></span>
+                                    <span class="text-[11px] text-taupe">雾霾玫瑰</span>
+                                </button>
+                                <button onclick="selectDressSwatch('奶油柔杏', '#F3E5D8', '法式奶油杏色衬衫、羊毛小外套或浅米色裤装，松弛感与出片率满分。')" class="flex flex-col items-center gap-1 p-2 rounded-2xl bg-cream-100/70 hover:bg-cream-100">
+                                    <span class="w-8 h-8 rounded-full bg-[#F3E5D8] border-2 border-champagne/40 shadow-sm"></span>
+                                    <span class="text-[11px] text-taupe">奶油杏</span>
+                                </button>
+                                <button onclick="selectDressSwatch('鼠尾草绿', '#9CAF9E', '清新雅致的莫兰迪鼠尾草绿系，如秋日微风般清爽治愈。')" class="flex flex-col items-center gap-1 p-2 rounded-2xl bg-cream-100/70 hover:bg-cream-100">
+                                    <span class="w-8 h-8 rounded-full bg-[#9CAF9E] border-2 border-white shadow-sm"></span>
+                                    <span class="text-[11px] text-taupe">鼠尾草绿</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-rose-soft/60 border border-rose-mist/40 text-xs text-taupe flex items-start gap-2">
+                            <span id="dress-swatch-dot" class="w-3.5 h-3.5 rounded-full bg-[#C9A96E] border border-white shrink-0 mt-0.5"></span>
+                            <p id="dress-swatch-desc" class="leading-relaxed"><strong>香槟暖金</strong>：香槟色缎面裙、米金针织或卡其休闲西装，在星河主厅暖光下格外温润高级。</p>
+                        </div>
+                    </div>
+
+                    <div class="reveal-up lg:col-span-6 gpu-card rounded-3xl p-4 sm:p-6 shadow-card flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-base sm:text-lg font-serif font-semibold text-taupe">🎁 定制伴手礼盒剧透</h3>
+                                <button onclick="toggleGiftBox()" id="gift-toggle-btn" class="px-3 py-1 rounded-full bg-champagne text-cream-50 text-xs font-medium shadow-sm">✨ 点击拆开礼盒</button>
+                            </div>
+                            <div id="gift-closed-view" onclick="toggleGiftBox()" class="cursor-pointer my-2 py-5 px-4 rounded-2xl bg-gradient-to-br from-cream-100 to-rose-soft/50 border border-dashed border-champagne/60 flex flex-col items-center justify-center text-center">
+                                <span class="text-3xl">🎀</span>
+                                <p class="text-xs font-medium text-taupe mt-1.5">轻触丝带礼盒 · 提前解锁新郎新娘准备的 4 份心意</p>
+                            </div>
+                            <div id="gift-opened-view" class="hidden grid-cols-2 gap-2 my-2">
+                                <div class="p-2.5 rounded-xl bg-cream-100/90 border border-[#E8DFD1] flex items-center gap-2">
+                                    <span class="text-lg">🍵</span>
+                                    <div><h5 class="text-xs font-semibold text-taupe">桂花乌龙茗茶</h5><p class="text-[10px] text-taupe-muted">金秋限定手采茶礼</p></div>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-cream-100/90 border border-[#E8DFD1] flex items-center gap-2">
+                                    <span class="text-lg">🍬</span>
+                                    <div><h5 class="text-xs font-semibold text-taupe">法式手工喜糖</h5><p class="text-[10px] text-taupe-muted">海盐焦糖 &amp; 树莓牛轧</p></div>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-cream-100/90 border border-[#E8DFD1] flex items-center gap-2">
+                                    <span class="text-lg">☕</span>
+                                    <div><h5 class="text-xs font-semibold text-taupe">流线骨瓷手握杯</h5><p class="text-[10px] text-taupe-muted">建筑师手绘线条款</p></div>
+                                </div>
+                                <div class="p-2.5 rounded-xl bg-rose-soft/70 border border-rose-mist/50 flex items-center gap-2">
+                                    <span class="text-lg">🐱</span>
+                                    <div><h5 class="text-xs font-semibold text-rose-deep">“年糕”插画香片</h5><p class="text-[10px] text-taupe-muted">新娘亲绘白桃乌龙香挂</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-taupe-muted">💡 签到时凭回执姓名即可于 3F 迎宾台领取定制伴手礼袋。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 9. 📍 星河宴会厅手绘流线导览（云栖湖畔大酒店 3F）
+                 ========================================== -->
+            <section id="section-venue" class="stage-clip py-8 sm:py-12">
+                <div class="section-header reveal-up text-center mb-7">
+                    <span class="font-en text-xs tracking-[0.3em] uppercase text-champagne block">Starry Hall Interactive Guide</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-semibold text-taupe mt-1">📍 星河宴会厅手绘流线导览</h2>
+                    <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                        <path d="M10 8 H78 L90 2 L102 8 H170" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <p class="text-xs text-taupe-muted mt-1">云栖湖畔大酒店 · 三楼星河宴会厅 · 点击平面图热点 ①②③④ 查看详情</p>
+                </div>
+
+                <div class="reveal-up gpu-card rounded-[2rem] shadow-romantic p-4 sm:p-7">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+                        <div class="lg:col-span-7">
+                            <div class="rounded-2xl bg-[#FAF6F0] border border-[#E8DFD1] p-2.5">
+                                <svg class="w-full h-auto rounded-xl bg-[#FFFDFA] border border-[#E8DFD1]" viewBox="0 0 520 310" fill="none">
+                                    <rect x="16" y="16" width="488" height="278" rx="16" stroke="#C9A96E" stroke-width="1.8"/>
+                                    <line x1="175" y1="22" x2="175" y2="288" stroke="#C9A96E" stroke-width="1.4" stroke-dasharray="5 4"/>
+                                    <line x1="365" y1="22" x2="365" y2="288" stroke="#C9A96E" stroke-width="1.4" stroke-dasharray="5 4"/>
+
+                                    <g onclick="selectHallZone('welcome')" class="cursor-pointer">
+                                        <rect id="map-rect-welcome" x="30" y="32" width="132" height="118" rx="10" fill="#F9ECEC" stroke="#C48B8A" stroke-width="2"/>
+                                        <text x="96" y="68" text-anchor="middle" fill="#3D3532" font-size="12" font-weight="bold">迎宾留影长廊</text>
+                                        <circle cx="96" cy="112" r="15" fill="#C48B8A"/>
+                                        <text x="96" y="116" text-anchor="middle" fill="#FFFDFA" font-size="11" font-weight="bold">①</text>
+                                    </g>
+
+                                    <g onclick="selectHallZone('parking')" class="cursor-pointer">
+                                        <rect id="map-rect-parking" x="30" y="164" width="132" height="114" rx="10" fill="#FAF6F0" stroke="#E8DFD1" stroke-width="1.5"/>
+                                        <text x="96" y="198" text-anchor="middle" fill="#3D3532" font-size="12" font-weight="bold">景观直达电梯厅</text>
+                                        <circle cx="96" cy="244" r="15" fill="#C9A96E"/>
+                                        <text x="96" y="248" text-anchor="middle" fill="#FFFDFA" font-size="11" font-weight="bold">④</text>
+                                    </g>
+
+                                    <g onclick="selectHallZone('stage')" class="cursor-pointer">
+                                        <rect id="map-rect-stage" x="186" y="32" width="168" height="246" rx="12" fill="#FAF6F0" stroke="#E8DFD1" stroke-width="1.5"/>
+                                        <rect x="220" y="42" width="100" height="26" rx="6" fill="#F5E6C8" stroke="#C9A96E" stroke-width="1.2"/>
+                                        <text x="270" y="59" text-anchor="middle" fill="#9E7B42" font-size="10" font-weight="bold">✦ 星河主舞台 ✦</text>
+                                        <line x1="270" y1="68" x2="270" y2="210" stroke="#C9A96E" stroke-width="2"/>
+                                        <text x="270" y="232" text-anchor="middle" fill="#3D3532" font-size="12" font-weight="bold">无柱星河主礼堂</text>
+                                        <circle cx="270" cy="256" r="15" fill="#C9A96E"/>
+                                        <text x="270" y="260" text-anchor="middle" fill="#FFFDFA" font-size="11" font-weight="bold">②</text>
+                                    </g>
+
+                                    <g onclick="selectHallZone('dessert')" class="cursor-pointer">
+                                        <rect id="map-rect-dessert" x="376" y="32" width="114" height="246" rx="10" fill="#FAF6F0" stroke="#E8DFD1" stroke-width="1.5"/>
+                                        <text x="433" y="105" text-anchor="middle" fill="#3D3532" font-size="12" font-weight="bold">法式甜品茶歇</text>
+                                        <circle cx="433" cy="175" r="15" fill="#C9A96E"/>
+                                        <text x="433" y="179" text-anchor="middle" fill="#FFFDFA" font-size="11" font-weight="bold">③</text>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 flex flex-col justify-between gap-3.5">
+                            <div class="grid grid-cols-4 gap-1.5">
+                                <button onclick="selectHallZone('welcome')" id="zone-btn-welcome" class="py-2 px-1 rounded-xl border border-rose-deep bg-rose-soft text-taupe text-xs font-medium">① 迎宾区</button>
+                                <button onclick="selectHallZone('stage')" id="zone-btn-stage" class="py-2 px-1 rounded-xl border border-[#E8DFD1] bg-[#FFFDFA] text-taupe-muted text-xs font-medium">② 主礼堂</button>
+                                <button onclick="selectHallZone('dessert')" id="zone-btn-dessert" class="py-2 px-1 rounded-xl border border-[#E8DFD1] bg-[#FFFDFA] text-taupe-muted text-xs font-medium">③ 甜品台</button>
+                                <button onclick="selectHallZone('parking')" id="zone-btn-parking" class="py-2 px-1 rounded-xl border border-[#E8DFD1] bg-[#FFFDFA] text-taupe-muted text-xs font-medium">④ 停车梯</button>
+                            </div>
+
+                            <div class="p-4 rounded-2xl bg-cream-100/85 border border-[#E8DFD1]">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span id="zone-badge" class="px-2.5 py-0.5 rounded-full bg-rose-deep text-cream-50 text-[11px] font-medium">热点 ① · 迎宾留影区</span>
+                                    <span id="zone-time" class="text-xs text-champagne-dark font-medium">11:00 开放迎宾</span>
+                                </div>
+                                <h4 id="zone-title" class="text-base font-serif font-semibold text-taupe">星河迎宾长廊 &amp; 拍立得留影区</h4>
+                                <p id="zone-desc" class="text-xs text-taupe-muted mt-1 leading-relaxed">
+                                    出三楼电梯右转即达。现场备有复古拍立得相机与手写祝福相册，签到即可领取定制伴手礼盒，并由礼宾人员引导您入座。
+                                </p>
+                            </div>
+
+                            <div class="p-3.5 rounded-2xl bg-[#FFFDFA] border border-[#E8DFD1] space-y-2 text-xs">
+                                <p class="text-taupe">📍 <strong>地址：</strong>上海市长宁区云栖湖畔大道 520 号（云栖湖畔大酒店 3F 星河宴会厅）</p>
+                                <div class="grid grid-cols-2 gap-2 pt-1">
+                                    <button onclick="copyVenueAddress()" class="py-2 px-3 rounded-xl bg-cream-100 border border-[#E8DFD1] text-xs font-medium text-taupe">📋 复制地址</button>
+                                    <button onclick="openNavModal()" class="py-2 px-3 rounded-xl bg-taupe text-cream-50 text-xs font-medium">🧭 地图导航</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 10. 💌 赴宴回执 RSVP & 实时祝福墙 (完整补齐)
+                 ========================================== -->
+            <section id="section-rsvp" class="stage-clip py-8 sm:py-12">
+                <div class="section-header reveal-up text-center mb-7">
+                    <span class="font-en text-xs tracking-[0.3em] uppercase text-champagne block">RSVP &amp; Blessings</span>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-semibold text-taupe mt-1">💌 赴宴回执 &amp; 亲友祝福墙</h2>
+                    <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                        <path d="M10 8 H78 L90 2 L102 8 H170" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <p class="text-xs text-taupe-muted mt-1">填写回执即可生成专属 VIP 席位卡，您的祝福将实时飘过顶部弹幕</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                    <!-- 左侧：RSVP 表单 -->
+                    <form id="rsvp-form" onsubmit="submitRSVP(event)" class="reveal-up lg:col-span-6 gpu-card rounded-3xl p-5 sm:p-7 shadow-romantic space-y-4">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs text-taupe font-medium mb-1">您的姓名 *</label>
+                                <input id="rsvp-name" type="text" required placeholder="请输入您的姓名" class="w-full px-3.5 py-2.5 rounded-xl bg-cream-100/80 border border-[#E8DFD1] text-xs text-taupe focus:outline-none focus:border-champagne">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-taupe font-medium mb-1">出席状态</label>
+                                <select id="rsvp-status" class="w-full px-3 py-2.5 rounded-xl bg-cream-100/80 border border-[#E8DFD1] text-xs text-taupe focus:outline-none focus:border-champagne">
+                                    <option value="欣然赴约">✨ 欣然赴约</option>
+                                    <option value="礼到人未到">🎁 礼到人未到</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-2xl bg-cream-100/70 border border-[#E8DFD1]">
+                            <span class="text-xs text-taupe font-medium">👨‍👩‍👧 随行赴宴人数</span>
+                            <div class="flex items-center gap-3">
+                                <button type="button" onclick="adjustGuests(-1)" class="w-7 h-7 rounded-full bg-white border border-[#E8DFD1] text-xs font-bold">-</button>
+                                <span id="rsvp-guest-count" class="text-xs font-semibold text-taupe w-10 text-center">1 人</span>
+                                <button type="button" onclick="adjustGuests(1)" class="w-7 h-7 rounded-full bg-white border border-[#E8DFD1] text-xs font-bold">+</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label class="text-xs text-taupe font-medium">送上新婚祝福 *</label>
+                                <div class="flex gap-1.5">
+                                    <button type="button" onclick="fillQuickWish('祝景行和知意新婚快乐，百年好合，永远幸福浪漫！🥂')" class="text-[10px] px-2 py-0.5 rounded-full bg-rose-soft text-rose-deep">✨ 一键甜美祝福</button>
+                                    <button type="button" onclick="fillQuickWish('恭喜陆工抱得美人归！周六星河宴会厅准时赴约沾喜气！🎉')" class="text-[10px] px-2 py-0.5 rounded-full bg-champagne/15 text-champagne-dark">🎊 准时赴约</button>
+                                </div>
+                            </div>
+                            <textarea id="rsvp-wish" rows="3" required placeholder="写下您对新郎新娘的美好祝福，提交后将立即化作顶部流光弹幕..." class="w-full px-3.5 py-2.5 rounded-xl bg-cream-100/80 border border-[#E8DFD1] text-xs text-taupe focus:outline-none focus:border-champagne">祝景行和知意新婚快乐，百年好合，岁岁年年皆欢喜！🥂</textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 rounded-2xl bg-gradient-to-r from-taupe via-[#4F4440] to-taupe text-cream-50 text-xs sm:text-sm font-medium shadow-md hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+                            <span>💌</span>
+                            <span>提交赴宴回执 · 发射祝福弹幕</span>
+                        </button>
+                    </form>
+
+                    <!-- 右侧：实时亲友祝福墙 -->
+                    <div class="reveal-up lg:col-span-6 gpu-card rounded-3xl p-5 sm:p-7 shadow-card flex flex-col justify-between">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-base sm:text-lg font-serif font-semibold text-taupe">🥂 亲友祝福墙 (<span id="wish-total-count" class="font-en text-rose-deep">6</span>)</h3>
+                            <span class="text-[11px] text-taupe-muted">实时同步至顶部弹幕</span>
+                        </div>
+                        <div id="wishes-wall-list" class="space-y-2.5 max-h-[290px] overflow-y-auto pr-1"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 11. 🎉 底部谢幕：双侧微卡通礼花筒 & 自动喷射礼花特效 (Finale Party Poppers)
+                 - 滑到最底部时自动拉响左右礼花筒，喷射漫天香槟金与玫瑰粉礼花
+                 - 支持回滚再次触发，或点击礼花筒无限次手动拉响
+                 ========================================== -->
+            <footer id="finale-popper-stage" class="stage-clip pt-6 pb-10 text-center">
+                <div class="reveal-up gpu-card rounded-[2rem] p-5 sm:p-9 shadow-romantic relative overflow-hidden border-champagne/60">
+                    
+                    <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-soft border border-rose-mist/60 text-rose-deep text-xs font-medium mb-3">
+                        <span>🎉</span>
+                        <span>Grand Finale · 滑至底部双侧礼花筒自动绽放</span>
+                    </div>
+
+                    <h3 class="text-xl sm:text-3xl font-serif font-semibold text-taupe">期待与您共赴这场星河浪漫</h3>
+                    <p class="text-xs sm:text-sm text-taupe-muted mt-1.5">轻触左右两侧的「微卡通新婚礼花筒」，为陆景行 &amp; 沈知意再添一份喜气！</p>
+
+                    <!-- 左右双礼花筒 + 中央拉响按钮互动区 -->
+                    <div class="my-6 flex items-center justify-between sm:justify-around max-w-lg mx-auto px-1">
+                        
+                        <!-- 左侧微卡通礼花筒 -->
+                        <div onclick="fireFinalePartyPoppers(true)" class="cursor-pointer select-none group flex flex-col items-center">
+                            <div id="popper-left-svg" class="w-20 h-20 sm:w-24 sm:h-24 popper-idle-l">
+                                <svg class="w-full h-full overflow-visible" viewBox="0 0 100 100" fill="none">
+                                    <g class="popper-sparks">
+                                        <path d="M58 38 C70 20 85 18 94 25" stroke="#C9A96E" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 3"/>
+                                        <path d="M52 44 C72 34 86 40 95 52" stroke="#C48B8A" stroke-width="2.2" stroke-linecap="round"/>
+                                        <circle cx="84" cy="18" r="3.5" fill="#C9A96E"/>
+                                        <circle cx="92" cy="36" r="3" fill="#C48B8A"/>
+                                    </g>
+                                    <path d="M18 82 L38 34 L66 62 L18 82 Z" fill="#F9ECEC" stroke="#C9A96E" stroke-width="2.2" stroke-linejoin="round"/>
+                                    <path d="M25 66 L47 43 M31 51 L56 52" stroke="#C9A96E" stroke-width="3" stroke-linecap="round"/>
+                                    <ellipse cx="52" cy="48" rx="7" ry="19" transform="rotate(-45 52 48)" fill="#EADAC5" stroke="#9E7B42" stroke-width="2"/>
+                                    <circle cx="15" cy="85" r="4.5" fill="#C48B8A"/>
+                                </svg>
+                            </div>
+                            <span class="text-[11px] text-champagne-dark font-medium mt-1">👈 点我喷射左礼花</span>
+                        </div>
+
+                        <!-- 中央 L&S 纪念徽章与一键拉响按钮 -->
+                        <div class="flex flex-col items-center mx-1">
+                            <div class="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-rose-soft border-2 border-champagne shadow-md flex items-center justify-center mb-3 px-3 py-2.5 cartoon-float">
+                                <span class="font-en italic text-lg sm:text-2xl text-champagne-dark font-bold">L&amp;S</span>
+                            </div>
+                            <button onclick="fireFinalePartyPoppers(true)" class="px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-champagne via-[#D4B075] to-rose-deep text-cream-50 text-xs font-medium shadow-md hover:opacity-95 active:scale-95 transition-all flex items-center gap-1.5">
+                                <span>🎉</span>
+                                <span>拉响双侧礼花筒</span>
+                            </button>
+                        </div>
+
+                        <!-- 右侧微卡通礼花筒 -->
+                        <div onclick="fireFinalePartyPoppers(true)" class="cursor-pointer select-none group flex flex-col items-center">
+                            <div id="popper-right-svg" class="w-20 h-20 sm:w-24 sm:h-24 popper-idle-r">
+                                <svg class="w-full h-full overflow-visible" viewBox="0 0 100 100" fill="none">
+                                    <g class="popper-sparks">
+                                        <path d="M42 38 C30 20 15 18 6 25" stroke="#C9A96E" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 3"/>
+                                        <path d="M48 44 C28 34 14 40 5 52" stroke="#C48B8A" stroke-width="2.2" stroke-linecap="round"/>
+                                        <circle cx="16" cy="18" r="3.5" fill="#C9A96E"/>
+                                        <circle cx="8" cy="36" r="3" fill="#C48B8A"/>
+                                    </g>
+                                    <path d="M82 82 L62 34 L34 62 L82 82 Z" fill="#F9ECEC" stroke="#C48B8A" stroke-width="2.2" stroke-linejoin="round"/>
+                                    <path d="M75 66 L53 43 M69 51 L44 52" stroke="#C9A96E" stroke-width="3" stroke-linecap="round"/>
+                                    <ellipse cx="48" cy="48" rx="7" ry="19" transform="rotate(45 48 48)" fill="#EADAC5" stroke="#9E7B42" stroke-width="2"/>
+                                    <circle cx="85" cy="85" r="4.5" fill="#C9A96E"/>
+                                </svg>
+                            </div>
+                            <span class="text-[11px] text-rose-deep font-medium mt-1">点我喷射右礼花 👉</span>
+                        </div>
+
+                    </div>
+
+                    <div class="pt-4 border-t border-[#E8DFD1]">
+                        <p class="font-en text-xs sm:text-sm tracking-[0.25em] text-champagne-dark uppercase">Thank You For Being Part Of Our Story</p>
+                        <p class="text-xs text-taupe-muted mt-1">陆景行 &amp; 沈知意 · 2026年10月24日 · 云栖湖畔大酒店三楼星河宴会厅</p>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+
+        <!-- 全屏高清照片灯箱 -->
+        <div id="lightbox-modal" onclick="closeLightbox()" class="fixed inset-0 z-50 bg-taupe/95 hidden items-center justify-center p-4">
+            <button onclick="closeLightbox()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/15 text-cream-50 flex items-center justify-center text-lg">✕</button>
+            <div class="max-w-3xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
+                <div class="rounded-2xl overflow-hidden border border-champagne/40 max-h-[78vh]">
+                    <img id="lightbox-img" src="" alt="高清婚纱照预览" class="w-full h-full object-contain max-h-[75vh]">
+                </div>
+                <div class="mt-3 text-center text-cream-50">
+                    <h4 id="lightbox-title" class="font-serif text-base sm:text-lg"></h4>
+                    <p id="lightbox-sub" class="text-xs text-cream-200/80 mt-0.5"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIP 席位纪念卡 & 地图导航弹窗 -->
+        <div id="custom-modal" onclick="closeCustomModal()" class="fixed inset-0 z-50 bg-taupe/70 hidden items-center justify-center p-4">
+            <div id="custom-modal-card" onclick="event.stopPropagation()" class="bg-[#FFFDFA] rounded-3xl border border-champagne/50 shadow-2xl max-w-sm w-full p-6 text-center relative"></div>
+        </div>
+
+        <!-- 轻提示 Toast -->
+        <div id="toast-box" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-4 py-2 rounded-full bg-taupe text-cream-50 text-xs shadow-lg border border-champagne/40 opacity-0 pointer-events-none transition-all duration-300 whitespace-nowrap">
+            提示信息
+        </div>
+
+    </div><!-- /#app-viewport -->
+
+    <script>
+        /* =========================================================
+           1. 核心数据配置
+           ========================================================= */
+        const galleryPhotos = [
+            {
+                url: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80',
+                title: '晨光里的第一封情书',
+                sub: '微风吹动头纱的温柔瞬间，定格我们的永恒序曲',
+                likes: 128
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80',
+                title: '香槟色落日下的华尔兹',
+                sub: '不用排练的舞步，只要看着彼此的眼睛就足够默契',
+                likes: 96
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=80',
+                title: '复古长廊的心动耳语',
+                sub: '你在我耳边说了一句悄悄话，逗得摄影师也跟着笑起来',
+                likes: 142
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80',
+                title: '十指紧扣的永恒誓言',
+                sub: '建筑师亲手绘制的戒托，藏着只属于插画师的星辰浪漫',
+                likes: 185
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=900&q=80',
+                title: '奔向山海与自由的风',
+                sub: '裙摆扬起的弧度，是我们迫不及待奔向未来的模样',
+                likes: 119
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=900&q=80',
+                title: '星河与烛火的交响曲',
+                sub: '所有的美好都已在路上，10月24日期待与您举杯同庆',
+                likes: 164
+            }
+        ];
+
+        const wishesData = [
+            { name: '周叙白 · 伴郎', status: '欣然赴约 · 1人', time: '刚刚', text: '见证了陆工从图书馆偶遇到求婚的全过程！祝景行和知意新婚快乐，永远热烈浪漫！', likes: 24 },
+            { name: '许星眠 · 伴娘', status: '欣然赴约 · 1人', time: '12分钟前', text: '我们最甜的插画师新娘要出嫁啦！周六星河宴会厅见，一定要幸福一辈子呀💕', likes: 31 },
+            { name: '陈建筑师事务所', status: '欣然赴约 · 4人', time: '35分钟前', text: '恭喜陆总抱得美人归！建筑与艺术的完美结合，祝百年好合，早生贵子！', likes: 19 },
+            { name: '林知夏 & 顾言', status: '欣然赴约 · 2人', time: '1小时前', text: '开头纱幔拉开和新郎新娘左右滑入合体太惊艳了！准时带着祝福赴约🥂', likes: 15 },
+            { name: '小姨 & 姨夫', status: '欣然赴约 · 3人', time: '2小时前', text: '看着知意从小姑娘长成这么美的新娘，满心欢喜。祝两个孩子岁岁平安！', likes: 28 },
+            { name: '巴黎的苏苏', status: '礼到人未到', time: '3小时前', text: '人在巴黎赶不回来，但祝福必须第一时间送到！La vie est belle！', likes: 16 }
+        ];
+
+        const hallZonesInfo = {
+            welcome: {
+                badge: '热点 ① · 迎宾留影区',
+                time: '11:00 开放迎宾',
+                title: '星河迎宾长廊 & 拍立得留影区',
+                desc: '出三楼电梯右转即达。现场备有复古拍立得相机与手写祝福相册，签到即可领取定制伴手礼盒，并由专人引导您入座。'
+            },
+            stage: {
+                badge: '热点 ② · 无柱主礼堂',
+                time: '12:08 主仪式 / 12:38 喜宴',
+                title: '无柱星河全景主礼堂',
+                desc: '挑高 9 米全景无柱大厅，配备环绕式星河水晶灯与沉浸式大屏。厅内恒温 23°C，前排设有长辈舒适软座与婴儿座椅。'
+            },
+            dessert: {
+                badge: '热点 ③ · 法式甜品台',
+                time: '11:38 - 12:08 无限享',
+                title: '法式甜品茶歇 & 喜糖长廊',
+                desc: '由新郎与甜品师定制的树莓马卡龙、伯爵茶巴斯克与鲜果气泡饮，毗邻安静母婴室与沙发休息区，方便提前抵达的亲友小憩。'
+            },
+            parking: {
+                badge: '热点 ④ · 停车与直达梯',
+                time: '全天免费泊车',
+                title: 'B1/B2 免费停车场 & 尊享直达梯',
+                desc: '酒店 B1/B2 层预留 200 个婚宴专属车位（含充电桩），请认准香槟金「陆&沈婚宴」指示牌，乘 1-3 号电梯直达三楼。'
+            }
+        };
+
+        /* =========================================================
+           2. 60fps 离屏缓存统一特效画布 (背景银杏落叶/玫瑰花瓣 + 礼花彩带粒子)
+           ========================================================= */
+        let fxCanvas, fxCtx, fxW = 0, fxH = 0;
+        const leafSprites = [];
+        const bgLeaves = [];
+        const confettiParticles = [];
+
+        function createLeafSprites() {
+            leafSprites.length = 0;
+            const configs = [
+                { type: 'ginkgo', fill: 'rgba(222, 192, 132, 0.78)', stroke: 'rgba(175, 138, 72, 0.55)' }, // 香槟金银杏叶
+                { type: 'maple',  fill: 'rgba(201, 169, 110, 0.68)', stroke: 'rgba(158, 123, 66, 0.50)' }, // 法式秋叶
+                { type: 'petal',  fill: 'rgba(230, 184, 183, 0.76)', stroke: 'rgba(196, 139, 138, 0.45)' }, // 雾霾玫瑰花瓣
+                { type: 'petal',  fill: 'rgba(249, 226, 226, 0.85)', stroke: 'rgba(230, 184, 183, 0.55)' }  // 柔粉花瓣
+            ];
+
+            configs.forEach(cfg => {
+                const c = document.createElement('canvas');
+                c.width = 36;
+                c.height = 36;
+                const g = c.getContext('2d');
+                g.translate(18, 18);
+                g.fillStyle = cfg.fill;
+                g.strokeStyle = cfg.stroke;
+                g.lineWidth = 1.1;
+                const s = 11;
+
+                g.beginPath();
+                if (cfg.type === 'ginkgo') {
+                    g.moveTo(0, s * 0.75);
+                    g.quadraticCurveTo(-s, -s * 0.1, -s * 0.75, -s * 0.75);
+                    g.quadraticCurveTo(-s * 0.15, -s * 0.4, 0, -s * 0.2);
+                    g.quadraticCurveTo(s * 0.15, -s * 0.4, s * 0.75, -s * 0.75);
+                    g.quadraticCurveTo(s, -s * 0.1, 0, s * 0.75);
+                    g.fill();
+                    g.stroke();
+                } else if (cfg.type === 'maple') {
+                    g.moveTo(0, -s);
+                    g.quadraticCurveTo(s * 0.78, 0, 0, s);
+                    g.quadraticCurveTo(-s * 0.78, 0, 0, -s);
+                    g.fill();
+                    g.moveTo(0, -s * 0.8);
+                    g.lineTo(0, s * 0.9);
+                    g.stroke();
+                } else {
+                    g.moveTo(0, -s * 0.75);
+                    g.bezierCurveTo(s * 0.85, -s * 0.6, s * 0.8, s * 0.65, 0, s * 0.85);
+                    g.bezierCurveTo(-s * 0.8, s * 0.65, -s * 0.85, -s * 0.6, 0, -s * 0.75);
+                    g.fill();
+                }
+                leafSprites.push(c);
+            });
+        }
+
+        function initUnifiedFxEngine() {
+            fxCanvas = document.getElementById('fx-canvas');
+            if (!fxCanvas) return;
+            fxCtx = fxCanvas.getContext('2d');
+
+            function resize() {
+                fxW = window.innerWidth;
+                fxH = window.innerHeight;
+                fxCanvas.width = fxW;
+                fxCanvas.height = fxH;
+            }
+            resize();
+            window.addEventListener('resize', resize, { passive: true });
+
+            createLeafSprites();
+
+            const count = fxW < 640 ? 16 : 24;
+            bgLeaves.length = 0;
+            for (let i = 0; i < count; i++) {
+                bgLeaves.push({
+                    x: Math.random() * fxW,
+                    y: Math.random() * fxH,
+                    vy: 0.48 + Math.random() * 0.62,
+                    vx: -0.22 + Math.random() * 0.44,
+                    swayAmp: 0.35 + Math.random() * 0.65,
+                    swaySpeed: 0.012 + Math.random() * 0.015,
+                    phase: Math.random() * Math.PI * 2,
+                    angle: Math.random() * Math.PI * 2,
+                    spin: (Math.random() - 0.5) * 0.02,
+                    scale: 0.65 + Math.random() * 0.55,
+                    sprite: leafSprites[i % leafSprites.length]
+                });
+            }
+
+            function renderLoop() {
+                if (!document.hidden && fxCtx) {
+                    fxCtx.clearRect(0, 0, fxW, fxH);
+
+                    // 1) 渲染背景飘落的银杏秋叶与玫瑰花瓣
+                    for (let i = 0; i < bgLeaves.length; i++) {
+                        const p = bgLeaves[i];
+                        p.phase += p.swaySpeed;
+                        p.y += p.vy;
+                        p.x += p.vx + Math.sin(p.phase) * p.swayAmp;
+                        p.angle += p.spin;
+
+                        if (p.y > fxH + 24) {
+                            p.y = -24;
+                            p.x = Math.random() * fxW;
+                        }
+                        if (p.x > fxW + 24) p.x = -20;
+                        if (p.x < -24) p.x = fxW + 20;
+
+                        fxCtx.save();
+                        fxCtx.translate(p.x, p.y);
+                        fxCtx.rotate(p.angle);
+                        const drawSize = 32 * p.scale;
+                        fxCtx.drawImage(p.sprite, -drawSize / 2, -drawSize / 2, drawSize, drawSize);
+                        fxCtx.restore();
+                    }
+
+                    // 2) 渲染礼花筒与庆典爆发的彩带粒子
+                    for (let i = confettiParticles.length - 1; i >= 0; i--) {
+                        const c = confettiParticles[i];
+                        c.x += c.vx;
+                        c.y += c.vy;
+                        c.vy += c.gravity;
+                        c.vx *= 0.985;
+                        c.rotation += c.vRot;
+                        c.alpha -= c.decay;
+
+                        if (c.alpha <= 0 || c.y > fxH + 40) {
+                            confettiParticles.splice(i, 1);
+                            continue;
+                        }
+
+                        fxCtx.save();
+                        fxCtx.globalAlpha = Math.max(0, c.alpha);
+                        fxCtx.translate(c.x, c.y);
+                        fxCtx.rotate(c.rotation);
+                        fxCtx.fillStyle = c.color;
+                        fxCtx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
+                        fxCtx.restore();
+                    }
+                }
+                requestAnimationFrame(renderLoop);
+            }
+            requestAnimationFrame(renderLoop);
+        }
+
+        function spawnConfettiBurst(originX, originY, count = 42, angleDeg = 90, spreadDeg = 75, speed = 11) {
+            const colors = ['#C9A96E', '#E6B8B7', '#C48B8A', '#F5E6C8', '#D67B79', '#E8C574'];
+            const baseRad = (angleDeg * Math.PI) / 180;
+            const spreadRad = (spreadDeg * Math.PI) / 180;
+
+            for (let i = 0; i < count; i++) {
+                const theta = baseRad + (Math.random() - 0.5) * spreadRad;
+                const v = speed * (0.55 + Math.random() * 0.75);
+                confettiParticles.push({
+                    x: originX,
+                    y: originY,
+                    vx: Math.cos(theta) * v,
+                    vy: -Math.sin(theta) * v,
+                    gravity: 0.24 + Math.random() * 0.1,
+                    rotation: Math.random() * Math.PI * 2,
+                    vRot: (Math.random() - 0.5) * 0.22,
+                    w: 6 + Math.random() * 6,
+                    h: 4 + Math.random() * 4,
+                    color: colors[i % colors.length],
+                    alpha: 1,
+                    decay: 0.011 + Math.random() * 0.008
+                });
+            }
+        }
+
+        function burstConfettiFromElement(el, count = 24) {
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            spawnConfettiBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, count, 90, 110, 9);
+        }
+
+        /* =========================================================
+           3. 婚礼双层飘动纱幔拉开与重播
+           ========================================================= */
+        function openWeddingCurtains(isSkip = false) {
+            const overlay = document.getElementById('curtain-overlay');
+            if (!overlay) return;
+
+            startMp3Music();
+            if (!isSkip) {
+                spawnConfettiBurst(window.innerWidth / 2, window.innerHeight / 2, 50, 90, 130, 12);
+            }
+
+            overlay.classList.add('is-open');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, isSkip ? 150 : 1180);
+        }
+
+        function replayWeddingCurtains() {
+            const overlay = document.getElementById('curtain-overlay');
+            if (!overlay) return;
+            overlay.style.display = 'flex';
+            overlay.classList.remove('is-open');
+            showToast('✨ 请轻触火漆印章，体验飘动婚礼纱幔拉开动画');
+        }
+
+        /* =========================================================
+           4. MP3 婚礼背景音乐播放器 (支持切歌 + Web Audio 备用旋律保障)
+           ========================================================= */
+        const mp3Tracks = [
+            { name: '浪漫钢琴曲', url: './一年.mp3' },
+            { name: '星河华尔兹', url: 'https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3' },
+            { name: '晨光小夜曲', url: 'https://actions.google.com/sounds/v1/ambiences/warm_evening_outdoors.ogg' }
+        ];
+        let currentTrackIdx = 0;
+        let isMusicPlaying = false;
+        let fallbackAudioCtx = null;
+        let fallbackTimer = null;
+        let fallbackStep = 0;
+
+        function updateMusicUI(playing) {
+            isMusicPlaying = playing;
+            const disc = document.getElementById('vinyl-disc');
+            const notes = document.getElementById('floating-notes');
+            if (playing) {
+                disc.classList.remove('vinyl-paused');
+                notes.classList.remove('hidden');
+            } else {
+                disc.classList.add('vinyl-paused');
+                notes.classList.add('hidden');
+            }
+        }
+
+        function startFallbackMelody() {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!fallbackAudioCtx) fallbackAudioCtx = new AudioCtx();
+                if (fallbackAudioCtx.state === 'suspended') fallbackAudioCtx.resume();
+                clearInterval(fallbackTimer);
+                const notes = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 659.25, 523.25];
+                fallbackTimer = setInterval(() => {
+                    if (!isMusicPlaying) return;
+                    const now = fallbackAudioCtx.currentTime;
+                    const osc = fallbackAudioCtx.createOscillator();
+                    const gain = fallbackAudioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(notes[fallbackStep % notes.length], now);
+                    gain.gain.setValueAtTime(0.001, now);
+                    gain.gain.exponentialRampToValueAtTime(0.045, now + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.1);
+                    osc.connect(gain);
+                    gain.connect(fallbackAudioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 1.15);
+                    fallbackStep++;
+                }, 460);
+            } catch (e) {}
+        }
+
+        function startMp3Music() {
+            const audioEl = document.getElementById('bgm-audio');
+            if (!audioEl) return;
+            if (!audioEl.src) {
+                audioEl.src = mp3Tracks[currentTrackIdx].url;
+            }
+            audioEl.volume = 0.65;
+            updateMusicUI(true);
+            const p = audioEl.play();
+            if (p !== undefined) {
+                p.then(() => {
+                    clearInterval(fallbackTimer);
+                }).catch(() => {
+                    startFallbackMelody();
+                });
+            }
+        }
+
+        function stopMp3Music() {
+            const audioEl = document.getElementById('bgm-audio');
+            if (audioEl) audioEl.pause();
+            clearInterval(fallbackTimer);
+            updateMusicUI(false);
+        }
+
+        function toggleMp3Music() {
+            if (isMusicPlaying) {
+                stopMp3Music();
+                showToast('🔇 MP3 婚礼音乐已暂停');
+            } else {
+                startMp3Music();
+                showToast(`🎵 正在播放：${mp3Tracks[currentTrackIdx].name} (MP3)`);
+            }
+        }
+
+        function switchMp3Track() {
+            currentTrackIdx = (currentTrackIdx + 1) % mp3Tracks.length;
+            const audioEl = document.getElementById('bgm-audio');
+            if (audioEl) {
+                audioEl.src = mp3Tracks[currentTrackIdx].url;
+                startMp3Music();
+            }
+            showToast(`🎵 已切换 MP3 曲目：《${mp3Tracks[currentTrackIdx].name}》`);
+        }
+
+        /* =========================================================
+           5. 全站双向回滚重新触发动画引擎 (Bi-Directional Scroll Replay)
+           ========================================================= */
+        function replayCoupleMerge(e) {
+            const stage = document.getElementById('couple-merge-stage');
+            if (!stage) return;
+            stage.classList.remove('is-merged');
+            void stage.offsetWidth;
+            setTimeout(() => {
+                stage.classList.add('is-merged');
+            }, 60);
+            if (e && e.currentTarget) {
+                burstConfettiFromElement(e.currentTarget, 26);
+                showToast('✨ 正在重播：新郎 & 新娘左右丝滑合体动画');
+            }
+        }
+
+        function initBiDirectionalScrollObserver() {
+            // 1) 通用双向出现/重置观察器（往下滑与往上回滚均重新触发丝滑入场）
+            const revealEls = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .section-header');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-inview');
+                    } else {
+                        entry.target.classList.remove('is-inview');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealEls.forEach(el => revealObserver.observe(el));
+
+            // 2) 新郎 & 新娘左右滑入合体双向观察器
+            const coupleStage = document.getElementById('couple-merge-stage');
+            if (coupleStage) {
+                const coupleObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            coupleStage.classList.add('is-merged');
+                        } else {
+                            coupleStage.classList.remove('is-merged');
+                        }
+                    });
+                }, { threshold: 0.12 });
+                coupleObserver.observe(coupleStage);
+            }
+
+            // 3) 底部双侧礼花筒自动拉响观察器（滑到底部自动喷射，滑走再滑回再次喷射）
+            const finaleStage = document.getElementById('finale-popper-stage');
+            if (finaleStage) {
+                const finaleObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            fireFinalePartyPoppers(false);
+                        }
+                    });
+                }, { threshold: 0.32 });
+                finaleObserver.observe(finaleStage);
+            }
+
+            // 4) 全屏黄金流线背景 + 故事时间轴金线随滚动实时生长
+            const scrollPath = document.getElementById('scroll-line-path');
+            const storySection = document.getElementById('section-story');
+            const storyProgressLine = document.getElementById('story-progress-line');
+            const totalLen = 3200;
+            let ticking = false;
+
+            function onScrollUpdate() {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                const progress = Math.min(1, Math.max(0, scrollTop / docHeight));
+
+                if (scrollPath) {
+                    scrollPath.style.strokeDashoffset = String((totalLen * (1 - progress)).toFixed(1));
+                }
+                if (storySection && storyProgressLine) {
+                    const rect = storySection.getBoundingClientRect();
+                    const viewH = window.innerHeight;
+                    const storyRatio = Math.min(1, Math.max(0, (viewH * 0.72 - rect.top) / Math.max(1, rect.height)));
+                    storyProgressLine.style.transform = `translateX(-50%) scaleY(${storyRatio.toFixed(3)})`;
+                }
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(onScrollUpdate);
+                    ticking = true;
+                }
+            }, { passive: true });
+            onScrollUpdate();
+        }
+
+        /* =========================================================
+           6. 自研 60fps 3D 丝滑婚纱画廊 (Coverflow / Cards / Fade + 手势滑动)
+           ========================================================= */
+        let galleryMode = 'coverflow';
+        let activePhotoIndex = 0;
+        let galleryAutoTimer = null;
+
+        function init3DGallery() {
+            const track = document.getElementById('gallery-slides-track');
+            const strip = document.getElementById('thumb-strip');
+            if (!track || !strip) return;
+
+            track.innerHTML = galleryPhotos.map((item, idx) => `
+                <div id="gallery-slide-${idx}" onclick="handleSlideClick(${idx})" class="gallery-slide-card cursor-pointer border border-champagne/45 shadow-romantic bg-cream-100">
+                    <img src="${item.url}" decoding="async" alt="${item.title}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-taupe/65 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-3.5 left-4 right-4 flex items-end justify-between text-cream-50">
+                        <div>
+                            <span class="text-[10px] font-en tracking-[0.2em] uppercase text-champagne-light">Photo 0${idx + 1}</span>
+                            <h4 class="text-sm sm:text-lg font-serif font-medium">${item.title}</h4>
+                        </div>
+                        <span class="w-7 h-7 rounded-full bg-taupe/70 flex items-center justify-center text-xs">🔍</span>
+                    </div>
+                </div>
+            `).join('');
+
+            strip.innerHTML = galleryPhotos.map((item, idx) => `
+                <button onclick="jumpToSlide(${idx})" id="thumb-item-${idx}" class="relative rounded-xl overflow-hidden h-12 sm:h-16 border-2 transition-all focus:outline-none">
+                    <img src="${item.url}" decoding="async" alt="缩略图${idx+1}" class="w-full h-full object-cover">
+                </button>
+            `).join('');
+
+            // 绑定触摸滑动手势
+            const viewport = document.getElementById('gallery-viewport');
+            let startX = 0, startY = 0;
+            viewport.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+
+            viewport.addEventListener('touchend', (e) => {
+                const dx = e.changedTouches[0].clientX - startX;
+                const dy = e.changedTouches[0].clientY - startY;
+                if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy)) {
+                    stepGallery(dx < 0 ? 1 : -1);
+                }
+            }, { passive: true });
+
+            updateGalleryTransforms();
+            resetGalleryAutoplay();
+        }
+
+        function updateGalleryTransforms() {
+            const total = galleryPhotos.length;
+            for (let i = 0; i < total; i++) {
+                const el = document.getElementById(`gallery-slide-${i}`);
+                if (!el) continue;
+
+                let diff = i - activePhotoIndex;
+                if (diff > total / 2) diff -= total;
+                if (diff < -total / 2) diff += total;
+
+                if (galleryMode === 'coverflow') {
+                    if (diff === 0) {
+                        el.style.transform = 'translate3d(0%, 0, 0) scale(1) rotateY(0deg)';
+                        el.style.opacity = '1';
+                        el.style.zIndex = '20';
+                    } else if (diff === 1 || diff === -1) {
+                        const sign = diff > 0 ? 1 : -1;
+                        el.style.transform = `translate3d(${sign * 52}%, 0, -110px) scale(0.84) rotateY(${-sign * 22}deg)`;
+                        el.style.opacity = '0.68';
+                        el.style.zIndex = '12';
+                    } else {
+                        const sign = diff > 0 ? 1 : -1;
+                        el.style.transform = `translate3d(${sign * 85}%, 0, -220px) scale(0.7)`;
+                        el.style.opacity = '0';
+                        el.style.zIndex = '5';
+                    }
+                } else if (galleryMode === 'cards') {
+                    if (diff === 0) {
+                        el.style.transform = 'translate3d(0, 0, 0) scale(1) rotate(0deg)';
+                        el.style.opacity = '1';
+                        el.style.zIndex = '20';
+                    } else if (diff === 1 || diff === 2) {
+                        el.style.transform = `translate3d(${diff * 18}px, ${diff * 6}px, -${diff * 60}px) scale(${1 - diff * 0.07}) rotate(${diff * 3.5}deg)`;
+                        el.style.opacity = String(1 - diff * 0.28);
+                        el.style.zIndex = String(20 - diff);
+                    } else if (diff === -1) {
+                        el.style.transform = 'translate3d(-24px, 8px, -80px) scale(0.9) rotate(-4deg)';
+                        el.style.opacity = '0.45';
+                        el.style.zIndex = '10';
+                    } else {
+                        el.style.transform = 'translate3d(0, 20px, -160px) scale(0.8)';
+                        el.style.opacity = '0';
+                        el.style.zIndex = '5';
+                    }
+                } else {
+                    // fade 模式
+                    el.style.transform = diff === 0 ? 'translate3d(0, 0, 0) scale(1)' : 'translate3d(0, 0, 0) scale(1.04)';
+                    el.style.opacity = diff === 0 ? '1' : '0';
+                    el.style.zIndex = diff === 0 ? '20' : '5';
+                }
+            }
+
+            const photo = galleryPhotos[activePhotoIndex];
+            document.getElementById('gallery-index-badge').textContent = `0${activePhotoIndex + 1} / 0${total}`;
+            document.getElementById('gallery-caption-title').textContent = photo.title;
+            document.getElementById('gallery-caption-sub').textContent = photo.sub;
+            document.getElementById('photo-like-count').textContent = photo.likes;
+
+            galleryPhotos.forEach((_, idx) => {
+                const btn = document.getElementById(`thumb-item-${idx}`);
+                if (!btn) return;
+                btn.className = idx === activePhotoIndex
+                    ? 'relative rounded-xl overflow-hidden h-12 sm:h-16 border-2 transition-all focus:outline-none border-champagne scale-105 opacity-100'
+                    : 'relative rounded-xl overflow-hidden h-12 sm:h-16 border-2 transition-all focus:outline-none border-transparent opacity-50';
+            });
+        }
+
+        function stepGallery(dir) {
+            const total = galleryPhotos.length;
+            activePhotoIndex = (activePhotoIndex + dir + total) % total;
+            updateGalleryTransforms();
+            resetGalleryAutoplay();
+        }
+
+        function jumpToSlide(idx) {
+            activePhotoIndex = idx;
+            updateGalleryTransforms();
+            resetGalleryAutoplay();
+        }
+
+        function handleSlideClick(idx) {
+            if (idx === activePhotoIndex) {
+                openLightbox(idx);
+            } else {
+                jumpToSlide(idx);
+            }
+        }
+
+        function switchGalleryMode(mode) {
+            galleryMode = mode;
+            ['coverflow', 'cards', 'fade'].forEach(m => {
+                const btn = document.getElementById(`mode-btn-${m}`);
+                if (!btn) return;
+                btn.className = m === mode
+                    ? 'px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all bg-taupe text-cream-50 shadow-sm'
+                    : 'px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-medium transition-all text-taupe-muted hover:text-taupe';
+            });
+            updateGalleryTransforms();
+        }
+
+        function resetGalleryAutoplay() {
+            clearInterval(galleryAutoTimer);
+            galleryAutoTimer = setInterval(() => {
+                if (!document.hidden) stepGallery(1);
+            }, 4200);
+        }
+
+        function likeCurrentPhoto(e) {
+            galleryPhotos[activePhotoIndex].likes++;
+            document.getElementById('photo-like-count').textContent = galleryPhotos[activePhotoIndex].likes;
+            burstConfettiFromElement(e.currentTarget, 22);
+        }
+
+        function openLightbox(idx) {
+            const photo = galleryPhotos[idx];
+            if (!photo) return;
+            document.getElementById('lightbox-img').src = photo.url;
+            document.getElementById('lightbox-title').textContent = photo.title;
+            document.getElementById('lightbox-sub').textContent = photo.sub;
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        function openLightboxCurrent() { openLightbox(activePhotoIndex); }
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        /* =========================================================
+           7. 顶部 60fps 纯 GPU 祝福弹幕引擎 (完整定义)
+           ========================================================= */
+        let isBarrageOn = true;
+        let barrageCursor = 0;
+        let barrageTimer = null;
+
+        function launchBarragePill(wishItem, forceTrack = null) {
+            if (!isBarrageOn || !wishItem) return;
+            const trackIdx = forceTrack !== null ? forceTrack : (barrageCursor % 2);
+            const trackEl = document.getElementById(`barrage-track-${trackIdx}`);
+            if (!trackEl) return;
+
+            const pill = document.createElement('div');
+            pill.className = 'barrage-pill px-3 py-1 rounded-full bg-[#FFFDFA]/95 border border-champagne/45 shadow-sm flex items-center gap-1.5 text-xs text-taupe';
+            pill.style.animationDuration = `${11 + (barrageCursor % 4) * 1.4}s`;
+            pill.innerHTML = `
+                <span class="text-rose-deep">♥</span>
+                <strong class="font-medium text-champagne-dark">${escapeHtml(wishItem.name)}：</strong>
+                <span class="text-taupe-muted max-w-[210px] sm:max-w-xs truncate">${escapeHtml(wishItem.text)}</span>
+            `;
+
+            pill.addEventListener('animationend', () => pill.remove());
+            trackEl.appendChild(pill);
+            barrageCursor++;
+        }
+
+        function startBarrageEngine() {
+            clearInterval(barrageTimer);
+            launchBarragePill(wishesData[0], 0);
+            setTimeout(() => launchBarragePill(wishesData[1], 1), 1600);
+            barrageTimer = setInterval(() => {
+                if (!document.hidden && isBarrageOn && wishesData.length > 0) {
+                    const item = wishesData[barrageCursor % wishesData.length];
+                    launchBarragePill(item);
+                }
+            }, 3400);
+        }
+
+        function toggleBarrage() {
+            isBarrageOn = !isBarrageOn;
+            const stage = document.getElementById('barrage-stage');
+            const dot = document.getElementById('barrage-dot');
+            const text = document.getElementById('barrage-btn-text');
+            if (isBarrageOn) {
+                stage.style.opacity = '1';
+                dot.className = 'w-2 h-2 rounded-full bg-emerald-500';
+                text.textContent = '弹幕开';
+                showToast('💬 顶部祝福弹幕已开启');
+            } else {
+                stage.style.opacity = '0';
+                dot.className = 'w-2 h-2 rounded-full bg-taupe-light';
+                text.textContent = '弹幕关';
+                showToast('🙈 顶部祝福弹幕已隐藏');
+            }
+        }
+
+        /* =========================================================
+           8. 底部双侧礼花筒喷射特效 + 页面交互模块
+           ========================================================= */
+        let lastPopperFire = 0;
+
+        function fireFinalePartyPoppers(isManual = false) {
+            const now = Date.now();
+            if (!isManual && now - lastPopperFire < 1300) return;
+            lastPopperFire = now;
+
+            const leftPop = document.getElementById('popper-left-svg');
+            const rightPop = document.getElementById('popper-right-svg');
+
+            if (leftPop && rightPop) {
+                leftPop.classList.remove('popper-firing-l');
+                rightPop.classList.remove('popper-firing-r');
+                void leftPop.offsetWidth;
+                leftPop.classList.add('popper-firing-l');
+                rightPop.classList.add('popper-firing-r');
+            }
+
+            // 从左下礼花筒与右下礼花筒交叉喷射漫天彩带礼花
+            const yPos = window.innerHeight * 0.85;
+            spawnConfettiBurst(window.innerWidth * 0.16, yPos, 46, 62, 55, 14.5);
+            spawnConfettiBurst(window.innerWidth * 0.84, yPos, 46, 118, 55, 14.5);
+
+            setTimeout(() => {
+                spawnConfettiBurst(window.innerWidth * 0.5, window.innerHeight * 0.68, 38, 90, 115, 11);
+            }, 220);
+
+            if (isManual) {
+                showToast('🎉 砰！双侧礼花筒已拉响，祝新婚快乐、百年好合！');
+            }
+        }
+
+        let allInQMode = false;
+        function flipSingleAvatar(who) {
+            const inner = document.getElementById(`${who}-flip-inner`);
+            if (inner) inner.classList.toggle('is-flipped');
+        }
+
+        function toggleAllCoupleAvatars() {
+            allInQMode = !allInQMode;
+            const groomInner = document.getElementById('groom-flip-inner');
+            const brideInner = document.getElementById('bride-flip-inner');
+            const btnText = document.getElementById('couple-avatar-mode-text');
+
+            if (allInQMode) {
+                groomInner.classList.add('is-flipped');
+                brideInner.classList.add('is-flipped');
+                btnText.textContent = '切换唯美写真';
+                showToast('🎨 已切换为：手绘 Q 版新郎新娘插画');
+            } else {
+                groomInner.classList.remove('is-flipped');
+                brideInner.classList.remove('is-flipped');
+                btnText.textContent = '切换Q版手绘';
+                showToast('📷 已切换为：唯美婚礼写真');
+            }
+        }
+
+        function likeCoupleCard(e, who) {
+            const el = document.getElementById(`${who}-like-num`);
+            if (el) el.textContent = parseInt(el.textContent, 10) + 1;
+            burstConfettiFromElement(e.currentTarget, 20);
+        }
+
+        function toggleQuizCard(cardEl) {
+            const inner = cardEl.querySelector('.flip-inner');
+            if (!inner) return;
+            const flipped = inner.classList.toggle('is-flipped');
+            if (flipped) burstConfettiFromElement(cardEl, 20);
+        }
+
+        let isContractStamped = false;
+        function stampLoveContract(e) {
+            const stampMark = document.getElementById('contract-stamp-mark');
+            const countEl = document.getElementById('witness-count');
+            const btnText = document.getElementById('stamp-btn-text');
+
+            stampMark.classList.remove('hidden', 'stamp-active');
+            void stampMark.offsetWidth;
+            stampMark.classList.add('stamp-active');
+
+            if (!isContractStamped) {
+                isContractStamped = true;
+                countEl.textContent = parseInt(countEl.textContent, 10) + 1;
+                btnText.textContent = '已加盖喜印 (再盖一次)';
+                showToast('💮 喜印加盖成功！感谢您见证我们的爱情契约');
+            }
+            burstConfettiFromElement(e.currentTarget, 28);
+        }
+
+        function selectDressSwatch(name, hex, desc) {
+            document.getElementById('dress-swatch-dot').style.backgroundColor = hex;
+            document.getElementById('dress-swatch-desc').innerHTML = `<strong>${name}</strong>：${desc}`;
+        }
+
+        let isGiftOpened = false;
+        function toggleGiftBox() {
+            isGiftOpened = !isGiftOpened;
+            const closedView = document.getElementById('gift-closed-view');
+            const openedView = document.getElementById('gift-opened-view');
+            const btn = document.getElementById('gift-toggle-btn');
+
+            if (isGiftOpened) {
+                closedView.classList.add('hidden');
+                openedView.classList.remove('hidden');
+                openedView.classList.add('grid');
+                btn.textContent = '🎀 收起礼盒';
+                showToast('🎁 伴手礼盒已拆开！4 份定制心意敬请期待');
+            } else {
+                closedView.classList.remove('hidden');
+                openedView.classList.add('hidden');
+                openedView.classList.remove('grid');
+                btn.textContent = '✨ 点击拆开礼盒';
+            }
+        }
+
+        function selectHallZone(zoneKey) {
+            const info = hallZonesInfo[zoneKey];
+            if (!info) return;
+
+            ['welcome', 'stage', 'dessert', 'parking'].forEach(k => {
+                const btn = document.getElementById(`zone-btn-${k}`);
+                const rect = document.getElementById(`map-rect-${k}`);
+                if (btn) {
+                    btn.className = k === zoneKey
+                        ? 'py-2 px-1 rounded-xl border border-rose-deep bg-rose-soft text-taupe text-xs font-medium'
+                        : 'py-2 px-1 rounded-xl border border-[#E8DFD1] bg-[#FFFDFA] text-taupe-muted text-xs font-medium';
+                }
+                if (rect) {
+                    rect.setAttribute('fill', k === zoneKey ? '#F9ECEC' : '#FAF6F0');
+                    rect.setAttribute('stroke', k === zoneKey ? '#C48B8A' : '#E8DFD1');
+                    rect.setAttribute('stroke-width', k === zoneKey ? '2' : '1.5');
+                }
+            });
+
+            document.getElementById('zone-badge').textContent = info.badge;
+            document.getElementById('zone-time').textContent = info.time;
+            document.getElementById('zone-title').textContent = info.title;
+            document.getElementById('zone-desc').textContent = info.desc;
+        }
+
+        function copyVenueAddress() {
+            const addr = '上海市长宁区云栖湖畔大道 520 号（云栖湖畔大酒店 · 三楼星河宴会厅）';
+            const temp = document.createElement('textarea');
+            temp.value = addr;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast('📋 酒店地址已复制，可直接粘贴至导航软件');
+        }
+
+        function openNavModal() {
+            const modal = document.getElementById('custom-modal');
+            const card = document.getElementById('custom-modal-card');
+            card.innerHTML = `
+                <div class="w-12 h-12 rounded-full bg-rose-soft text-rose-deep flex items-center justify-center mx-auto mb-3 text-xl">🧭</div>
+                <h4 class="font-serif font-semibold text-lg text-taupe">选择地图导航方式</h4>
+                <p class="text-xs text-taupe-muted mt-1">目的地：云栖湖畔大酒店（三楼星河宴会厅）</p>
+                <div class="space-y-2.5 mt-4">
+                    <button onclick="closeCustomModal(); showToast('🚗 正在为您呼起高德地图导航...');" class="w-full py-2.5 rounded-xl bg-cream-100 border border-[#E8DFD1] text-xs font-medium text-taupe">高德地图导航（定位至B1/B2免费车库）</button>
+                    <button onclick="closeCustomModal(); showToast('🗺️ 正在为您呼起百度地图导航...');" class="w-full py-2.5 rounded-xl bg-cream-100 border border-[#E8DFD1] text-xs font-medium text-taupe">百度地图导航</button>
+                    <button onclick="copyVenueAddress(); closeCustomModal();" class="w-full py-2.5 rounded-xl bg-taupe text-cream-50 text-xs font-medium">复制详细地址</button>
+                </div>
+                <button onclick="closeCustomModal()" class="mt-4 text-xs text-taupe-muted">关闭窗口</button>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeCustomModal() {
+            const modal = document.getElementById('custom-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        const weddingTargetTime = new Date('2026-10-24T12:08:00+08:00').getTime();
+        function updateCountdown() {
+            const diff = Math.max(0, Math.abs(weddingTargetTime - Date.now()));
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / 1000 / 60) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+            document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+        }
+
+        let guestCount = 1;
+        function adjustGuests(delta) {
+            guestCount = Math.max(1, Math.min(10, guestCount + delta));
+            document.getElementById('rsvp-guest-count').textContent = `${guestCount} 人`;
+        }
+
+        function fillQuickWish(text) {
+            const el = document.getElementById('rsvp-wish');
+            if (el) el.value = text;
+        }
+
+        function renderWishesWall() {
+            const list = document.getElementById('wishes-wall-list');
+            const countEl = document.getElementById('wish-total-count');
+            if (!list || !countEl) return;
+            countEl.textContent = wishesData.length;
+            list.innerHTML = wishesData.map((w, idx) => `
+                <div class="p-3 rounded-2xl bg-white border border-[#E8DFD1]">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-rose-soft text-rose-deep font-serif text-xs font-bold flex items-center justify-center">
+                                ${escapeHtml(w.name.charAt(0))}
+                            </span>
+                            <div>
+                                <h5 class="text-xs font-semibold text-taupe">${escapeHtml(w.name)}</h5>
+                                <span class="text-[10px] text-champagne-dark">${escapeHtml(w.status)} · ${escapeHtml(w.time)}</span>
+                            </div>
+                        </div>
+                        <button onclick="likeWishItem(${idx}, event)" class="px-2 py-0.5 rounded-full bg-rose-soft text-rose-deep text-[11px] flex items-center gap-1">
+                            <span>♥</span> <span>${w.likes}</span>
+                        </button>
+                    </div>
+                    <p class="text-xs text-taupe-muted mt-1.5 leading-relaxed">${escapeHtml(w.text)}</p>
+                </div>
+            `).join('');
+        }
+
+        function likeWishItem(idx, e) {
+            wishesData[idx].likes++;
+            renderWishesWall();
+            if (e && e.currentTarget) burstConfettiFromElement(e.currentTarget, 16);
+        }
+
+        function submitRSVP(e) {
+            e.preventDefault();
+            const name = document.getElementById('rsvp-name').value.trim();
+            const status = document.getElementById('rsvp-status').value;
+            const wishText = document.getElementById('rsvp-wish').value.trim();
+            if (!name || !wishText) return;
+
+            const newEntry = {
+                name: name,
+                status: status === '欣然赴约' ? `欣然赴约 · ${guestCount}人` : '礼到人未到',
+                time: '刚刚',
+                text: wishText,
+                likes: 1
+            };
+
+            wishesData.unshift(newEntry);
+            renderWishesWall();
+            launchBarragePill(newEntry, 0);
+            spawnConfettiBurst(window.innerWidth / 2, window.innerHeight * 0.65, 48, 90, 120, 12);
+
+            const modal = document.getElementById('custom-modal');
+            const card = document.getElementById('custom-modal-card');
+            card.innerHTML = `
+                <div class="border border-champagne/50 rounded-2xl p-4 bg-gradient-to-b from-[#FFFDFA] to-[#FAF4EB]">
+                    <div class="w-12 h-12 rounded-full bg-champagne text-cream-50 flex items-center justify-center mx-auto mb-2 text-xl">🥂</div>
+                    <span class="font-en text-[10px] tracking-[0.25em] uppercase text-champagne-dark">Golden Line VIP Pass</span>
+                    <h4 class="font-serif font-semibold text-lg text-taupe mt-0.5">${escapeHtml(name)} · 专属席位卡</h4>
+                    <p class="text-xs text-taupe-muted mt-1">您的祝福已实时发射至顶部弹幕池！</p>
+                    <div class="my-3.5 p-3 rounded-xl bg-white border border-[#E8DFD1] text-left text-xs space-y-1 text-taupe">
+                        <div><strong>出席状态：</strong>${escapeHtml(newEntry.status)}</div>
+                        <div><strong>婚礼时间：</strong>2026.10.24 (周六) 12:08</div>
+                        <div><strong>婚宴地点：</strong>云栖湖畔大酒店 · 3F 星河宴会厅</div>
+                    </div>
+                    <button onclick="closeCustomModal()" class="w-full py-2.5 rounded-xl bg-taupe text-cream-50 text-xs font-medium">收下喜气 · 期待相见</button>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            document.getElementById('rsvp-name').value = '';
+            guestCount = 1;
+            document.getElementById('rsvp-guest-count').textContent = '1 人';
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-box');
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.style.opacity = '1';
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2400);
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, function (m) {
+                return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m];
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            init3DGallery();
+            renderWishesWall();
+            startBarrageEngine();
+            initUnifiedFxEngine();
+            initBiDirectionalScrollObserver();
+        });
+    </script>
+</body>
+</html>

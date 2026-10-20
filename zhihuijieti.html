@@ -606,6 +606,92 @@
         </div>
     </main>
 
+    <!-- ===== 接口配置入口：底部低调按钮，点击弹出配置面板 ===== -->
+    <div class="w-full max-w-6xl mx-auto px-3.5 sm:px-6 pb-8 flex justify-center">
+        <button type="button" onclick="openApiConfigModal()" title="配置接口地址与 API Key"
+            class="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium text-slate-400 hover:text-indigo-600 hover:bg-indigo-50/70 transition">
+            <i data-lucide="plug-zap" class="w-3.5 h-3.5"></i>
+            <span>接口配置</span>
+            <span id="apiConfigDot" class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+        </button>
+    </div>
+
+    <!-- 接口配置弹窗 -->
+    <div id="apiConfigModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4"
+         onclick="if (event.target === this) closeApiConfigModal()">
+        <div class="bg-white rounded-3xl max-w-xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+            <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="plug-zap" class="w-5 h-5 text-indigo-600"></i>
+                    <h3 class="font-bold text-slate-800 text-base">接口配置</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span id="apiConfigStateLabel" class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-500">读取中…</span>
+                    <button type="button" onclick="closeApiConfigModal()" class="p-1.5 rounded-xl hover:bg-slate-100 text-slate-500">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-5 space-y-4 overflow-y-auto">
+                <div id="apiConfigRuntimeWarning" class="hidden text-xs leading-relaxed px-3.5 py-2.5 rounded-xl bg-amber-50 text-amber-700 border border-amber-200">
+                    检测到同目录 config.js 已定义 <code class="font-mono">window.PATI_CONFIG</code>：页面会优先使用它，这里保存的配置不会生效。要改用本面板，请先把 config.js 里的 PATI_CONFIG 注释掉。
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <label class="block">
+                        <span class="text-xs font-semibold text-slate-600 mb-1.5 block">服务商</span>
+                        <select id="cfgProvider" onchange="onApiProviderChange()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/60 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:bg-white transition">
+                            <option value="openai">OpenAI / 千问 兼容接口</option>
+                            <option value="gemini">Google Gemini</option>
+                        </select>
+                    </label>
+                    <label class="block">
+                        <span class="text-xs font-semibold text-slate-600 mb-1.5 block">API Key <span id="cfgKeyHint" class="text-slate-400 font-normal"></span></span>
+                        <div class="relative">
+                            <input id="cfgApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-..."
+                                class="w-full pl-3.5 pr-16 py-2.5 rounded-xl border border-slate-200 bg-slate-50/60 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:bg-white transition">
+                            <button type="button" onclick="toggleApiKeyVisibility()" class="absolute right-2 top-1/2 -translate-y-1/2 text-[11px] font-medium text-indigo-600 hover:text-indigo-700 px-2 py-1 rounded-lg hover:bg-indigo-50">显示</button>
+                        </div>
+                    </label>
+                </div>
+
+                <label class="block">
+                    <span class="text-xs font-semibold text-slate-600 mb-1.5 block">接口地址</span>
+                    <input id="cfgBaseUrl" type="text" spellcheck="false" placeholder="https://maas.qianwenaiapi.com/compatible-mode/v1/chat/completions"
+                        class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/60 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:bg-white transition">
+                    <span id="cfgBaseUrlHint" class="text-[11px] text-slate-400 mt-1.5 block"></span>
+                </label>
+
+                <div id="cfgModelRow" class="grid grid-cols-1 sm:grid-cols-2 gap-4 transition">
+                    <label class="block">
+                        <span class="text-xs font-semibold text-slate-600 mb-1.5 block">识图模型 <span class="text-slate-400 font-normal">（视觉 / OCR）</span></span>
+                        <input id="cfgVisionModel" type="text" spellcheck="false" placeholder="qwen-vl-max"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/60 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:bg-white transition">
+                    </label>
+                    <label class="block">
+                        <span class="text-xs font-semibold text-slate-600 mb-1.5 block">推理模型 <span class="text-slate-400 font-normal">（讲题 / 追问）</span></span>
+                        <input id="cfgReasoningModel" type="text" spellcheck="false" placeholder="qwen-plus"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/60 text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 focus:bg-white transition">
+                    </label>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 pt-1">
+                    <button type="button" onclick="saveApiConfigFromForm()" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-500/20 transition active:scale-95">
+                        <i data-lucide="save" class="w-4 h-4"></i><span>保存配置</span>
+                    </button>
+                    <button type="button" onclick="resetApiConfigToDefault()" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-slate-50 text-slate-600 font-semibold text-sm border border-slate-200 transition active:scale-95">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i><span>恢复默认</span>
+                    </button>
+                </div>
+
+                <p class="text-[11px] text-slate-400 leading-relaxed">
+                    配置只保存在本机浏览器 localStorage（键名 <code class="font-mono text-slate-500">smartsnap_api_config_v1</code>），不会上传到任何服务器。切换服务商时，两套配置会各自保留，互不覆盖。
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- History / Mistake Book Modal -->
     <div id="historyModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
@@ -668,6 +754,7 @@
             initCropInteractions();
             initDragAndDropAndPaste();
             updateHistoryBadge();
+            initApiConfigForm();
             if (currentSolutionData) {
                 sanitizeSolutionObject(currentSolutionData);
                 renderSolutionUI(currentSolutionData);
@@ -983,6 +1070,174 @@
                 }
             } catch (e) {}
             return { ...BUILTIN_DEFAULT_CONFIG };
+        }
+
+        // ===================== 接口配置面板（页面最底部） =====================
+        // 表单 <-> localStorage(smartsnap_api_config_v1) 的双向映射。
+        // openai / gemini 两套配置各自独立保存，切换服务商不会互相覆盖。
+        let apiConfigDraft = null;
+        // 表单此刻显示的是哪一套（openai / gemini）。
+        // 切换服务商时 <select> 会先变成新值，而其余字段还是旧值，必须靠它区分。
+        let apiConfigShownProvider = null;
+
+        function apiEl(id) {
+            return document.getElementById(id);
+        }
+
+        function currentProviderFromSelect() {
+            return apiEl("cfgProvider").value === "openai" ? "openai" : "gemini";
+        }
+
+        /** 打开接口配置弹窗（每次打开都重新读取当前真正生效的配置） */
+        function openApiConfigModal() {
+            const modal = apiEl("apiConfigModal");
+            if (!modal) return;
+            modal.classList.remove("hidden");
+            initApiConfigForm();
+            if (window.lucide && typeof lucide.createIcons === "function") lucide.createIcons();
+        }
+
+        function closeApiConfigModal() {
+            const modal = apiEl("apiConfigModal");
+            if (modal) modal.classList.add("hidden");
+        }
+
+        // Esc 关闭弹窗
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") closeApiConfigModal();
+        });
+
+        /** 页面载入时把已保存的配置填进表单 */
+        function initApiConfigForm() {
+            if (!apiEl("cfgProvider")) return;
+            apiConfigDraft = { ...BUILTIN_DEFAULT_CONFIG, ...getSavedApiConfig() };
+            apiEl("cfgProvider").value = apiConfigDraft.provider === "openai" ? "openai" : "gemini";
+            applyApiConfigToForm();
+            const warn = apiEl("apiConfigRuntimeWarning");
+            if (warn) {
+                const overridden = !!(window.PATI_CONFIG && typeof window.PATI_CONFIG === "object");
+                warn.classList.toggle("hidden", !overridden);
+            }
+            refreshApiConfigStateLabel();
+        }
+
+        /** 把 draft 里「当前服务商」的值渲染到表单 */
+        function applyApiConfigToForm() {
+            const shown = currentProviderFromSelect();
+            apiConfigShownProvider = shown;
+            const isOpenai = shown === "openai";
+            apiEl("cfgBaseUrl").value = isOpenai ? (apiConfigDraft.openaiUrl || "") : (apiConfigDraft.geminiBaseUrl || "");
+            apiEl("cfgApiKey").value = isOpenai ? (apiConfigDraft.openaiKey || "") : (apiConfigDraft.geminiKey || "");
+            apiEl("cfgVisionModel").value = apiConfigDraft.openaiModel || "";
+            apiEl("cfgReasoningModel").value = apiConfigDraft.ocrReasoningModel || "";
+            apiEl("cfgBaseUrlHint").textContent = isOpenai
+                ? "填完整地址最稳妥；只填到 /v1 或只填域名时，会自动补全 /chat/completions"
+                : "Gemini 基址，例如 https://generativelanguage.googleapis.com（不要带 /v1beta）";
+            apiEl("cfgKeyHint").textContent = isOpenai ? "（千问 / OpenAI 兼容）" : "（Gemini）";
+            const row = apiEl("cfgModelRow");
+            if (row) {
+                row.classList.toggle("opacity-40", !isOpenai);
+                row.classList.toggle("pointer-events-none", !isOpenai);
+            }
+        }
+
+        /** 把表单当前值收集回 draft；targetProvider 指定存回哪一套（默认=表单正在显示的那套） */
+        function syncApiFormIntoDraft(targetProvider) {
+            const target = (targetProvider === "openai" || targetProvider === "gemini")
+                ? targetProvider
+                : (apiConfigShownProvider || currentProviderFromSelect());
+            const isOpenai = target === "openai";
+            const url = apiEl("cfgBaseUrl").value.trim();
+            const key = apiEl("cfgApiKey").value.trim();
+            apiConfigDraft = { ...BUILTIN_DEFAULT_CONFIG, ...apiConfigDraft };
+            if (isOpenai) {
+                apiConfigDraft.openaiUrl = url;
+                apiConfigDraft.openaiKey = key;
+                apiConfigDraft.openaiModel = apiEl("cfgVisionModel").value.trim() || "qwen-vl-max";
+                apiConfigDraft.ocrReasoningModel = apiEl("cfgReasoningModel").value.trim() || "qwen-plus";
+            } else {
+                apiConfigDraft.geminiBaseUrl = url;
+                apiConfigDraft.geminiKey = key;
+            }
+        }
+
+        /** 切换服务商：先把当前表单值存回「旧」那套，再渲染「新」那套 */
+        function onApiProviderChange() {
+            // 注意顺序：此刻 <select> 已是新值，其余字段还是旧值
+            syncApiFormIntoDraft(apiConfigShownProvider);
+            applyApiConfigToForm();
+        }
+
+        function saveApiConfigFromForm() {
+            syncApiFormIntoDraft(apiConfigShownProvider);
+            apiConfigDraft.provider = currentProviderFromSelect();
+            const payload = { ...BUILTIN_DEFAULT_CONFIG, ...apiConfigDraft };
+            if (payload.openaiUrl) payload.openaiUrl = normalizeOpenAiEndpoint(payload.openaiUrl);
+            if (payload.provider === "gemini" && payload.geminiBaseUrl) {
+                payload.geminiBaseUrl = payload.geminiBaseUrl.trim().replace(/\/+$/, "");
+            }
+            try {
+                localStorage.setItem("smartsnap_api_config_v1", JSON.stringify(payload));
+            } catch (e) {
+                showToast("保存失败：浏览器存储不可用（可能是隐私模式）", "error");
+                return;
+            }
+            apiConfigDraft = payload;
+            applyApiConfigToForm();
+            refreshApiConfigStateLabel();
+            if (window.PATI_CONFIG && typeof window.PATI_CONFIG === "object") {
+                showToast("已保存，但 config.js 中的 PATI_CONFIG 仍优先生效", "info");
+            } else if (payload.provider === "openai" && !payload.openaiKey) {
+                showToast("已保存，但还没填 API Key，解题会失败", "error");
+            } else if (payload.provider === "gemini" && !payload.geminiKey) {
+                showToast("已保存，但还没填 Gemini Key，解题会失败", "error");
+            } else {
+                showToast("接口配置已保存", "success");
+            }
+        }
+
+        function resetApiConfigToDefault() {
+            apiConfigDraft = { ...BUILTIN_DEFAULT_CONFIG };
+            try {
+                localStorage.removeItem("smartsnap_api_config_v1");
+            } catch (e) {}
+            applyApiConfigToForm();
+            refreshApiConfigStateLabel();
+            showToast("已恢复默认配置（密钥已清空）", "info");
+        }
+
+        function toggleApiKeyVisibility() {
+            const input = apiEl("cfgApiKey");
+            const btn = input.parentElement.querySelector("button");
+            const show = input.type === "password";
+            input.type = show ? "text" : "password";
+            if (btn) btn.textContent = show ? "隐藏" : "显示";
+        }
+
+        /** 顶部状态标签：显示当前真正生效的配置 */
+        function refreshApiConfigStateLabel() {
+            const el = apiEl("apiConfigStateLabel");
+            if (!el) return;
+            let cfg;
+            try {
+                cfg = getSavedApiConfig();
+            } catch (e) {
+                cfg = { ...BUILTIN_DEFAULT_CONFIG };
+            }
+            const isOpenai = cfg.provider === "openai";
+            const hasKey = isOpenai ? !!cfg.openaiKey : !!cfg.geminiKey;
+            const model = isOpenai ? (cfg.openaiModel || "qwen-vl-max") : "gemini-3-flash-preview";
+            el.textContent = (isOpenai ? "千问兼容" : "Gemini") + " · " + model + " · " + (hasKey ? "Key 已设置" : "未填 Key");
+            el.className = hasKey
+                ? "text-xs font-medium px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600"
+                : "text-xs font-medium px-2.5 py-1 rounded-full bg-rose-50 text-rose-600";
+            // 底部低调按钮上的状态点：绿=已配置 Key，红=未配置
+            const dot = apiEl("apiConfigDot");
+            if (dot) {
+                dot.className = hasKey
+                    ? "w-1.5 h-1.5 rounded-full bg-emerald-500"
+                    : "w-1.5 h-1.5 rounded-full bg-rose-400";
+            }
         }
 
         /**
@@ -1783,7 +2038,7 @@
 
                 if (cfg.provider === "openai") {
                     if (!cfg.openaiKey) {
-                        throw new Error("您选择了 OpenAI/千问 兼容接口模式，但尚未填写 API Key，请在右上角「接口配置」中填入 Key");
+                        throw new Error("您选择了 OpenAI/千问 兼容接口模式，但尚未填写 API Key，请点击页面最底部的「接口配置」按钮填入 Key");
                     }
                     const endpointUrl = normalizeOpenAiEndpoint(cfg.openaiUrl);
                     const visionModelName = (cfg.openaiModel || "qwen-vl-max").trim();

@@ -1,0 +1,2388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta property="og:title" content="智慧解题">
+    <meta property="og:description" content="一款搭载ai伴学的软件，有不懂先拍一拍，拍完不会可以询问ai老师。">
+    <meta property="og:image" content="https://c-ssl.duitang.com/uploads/item/202006/11/20200611100141_f8KTu.jpeg"> <!-- 封面图，1200×630最佳 -->
+    <meta property="og:type" content="website">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>智慧解题</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <!-- Marked.js for Markdown Rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- 外部全局配置文件：只需将 config.js 放在与本 HTML 同一文件夹下，任何人打开页面都会自动读取其中的 API 配置 -->
+    <script src="./config.js" onerror="window.__CONFIG_JS_MISSING__ = true;"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Scanning laser animation */
+        @keyframes scanLaser {
+            0% { top: 4%; opacity: 0.9; }
+            50% { top: 92%; opacity: 1; }
+            100% { top: 4%; opacity: 0.9; }
+        }
+        .scan-laser {
+            position: absolute;
+            left: 4%;
+            right: 4%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #4f46e5, #06b6d4, #4f46e5, transparent);
+            box-shadow: 0 0 16px 3px rgba(79, 70, 229, 0.65);
+            border-radius: 999px;
+            animation: scanLaser 2.4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 20;
+        }
+        /* Crop selection overlay handles */
+        .crop-handle {
+            width: 18px;
+            height: 18px;
+            background: #4f46e5;
+            border: 2.5px solid #ffffff;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            z-index: 30;
+            touch-action: none;
+        }
+        /* KaTeX overflow protection on mobile */
+        .katex-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.5rem 0;
+            margin: 0.5rem 0 !important;
+        }
+        .prose-math p {
+            margin-bottom: 0.5rem;
+            line-height: 1.75;
+        }
+        .prose-math p:last-child {
+            margin-bottom: 0;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        /* Subtle animated glow for AI Tutor Card */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 10px 30px -5px rgba(79, 70, 229, 0.18); }
+            50% { box-shadow: 0 12px 36px -2px rgba(6, 182, 212, 0.28); }
+        }
+        .ai-tutor-card {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 via-indigo-50/20 to-slate-100 text-slate-900 selection:bg-indigo-600 selection:text-white">
+
+    <!-- Top Navigation Bar (Mobile-First & Clean) -->
+    <header class="sticky top-0 z-40 glass-header border-b border-slate-200/80 shadow-2xs">
+        <div class="max-w-6xl mx-auto px-3.5 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2">
+            <!-- Brand Identity -->
+            <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/25 shrink-0">
+                    <i data-lucide="scan-eye" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                </div>
+                <div class="min-w-0">
+                    <div class="flex items-center gap-1.5">
+                        <h1 class="font-extrabold text-base sm:text-lg tracking-tight text-slate-900 truncate">慧眼拍题 <span class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">AI</span></h1>
+                        <span class="hidden xs:inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold bg-emerald-50 text-emerald-600 rounded-full border border-emerald-200/70">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                            名师在线
+                        </span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 hidden sm:block truncate">拍照秒出详解 · 1对1 AI 老师随时追问</p>
+                </div>
+            </div>
+
+            <!-- Right Actions (Mobile Adaptive, No API Config Button) -->
+            <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+                <button onclick="scrollToAiTeacher()" class="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold text-indigo-700 bg-indigo-50/90 hover:bg-indigo-100 border border-indigo-200/80 transition active:scale-95">
+                    <i data-lucide="bot" class="w-4 h-4 text-indigo-600"></i>
+                    <span>问AI老师</span>
+                </button>
+                <button onclick="openHistoryModal()" class="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200/90 shadow-2xs transition active:scale-95">
+                    <i data-lucide="bookmark-check" class="w-4 h-4 text-indigo-600"></i>
+                    <span>错题本</span>
+                    <span id="historyCountBadge" class="px-1.5 py-0.2 bg-indigo-100 text-indigo-700 rounded-full text-[11px] font-bold">0</span>
+                </button>
+                <button onclick="resetToNewQuestion()" class="flex items-center gap-1 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-indigo-600 to-violet-600 text-white hover:from-indigo-700 hover:to-violet-700 transition shadow-sm shadow-indigo-500/20 active:scale-95">
+                    <i data-lucide="camera" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                    <span>拍新题</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-6xl w-full mx-auto px-3.5 sm:px-6 py-4 sm:py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
+
+            <!-- Left Column: Image Capture, Crop & Config (5 cols on desktop) -->
+            <div class="lg:col-span-5 flex flex-col gap-5">
+
+                <!-- Capture & Preview Card -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 overflow-hidden">
+                    <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+                            <h2 class="font-semibold text-slate-800 text-sm sm:text-base">第一步：拍摄或上传题目</h2>
+                        </div>
+                        <span id="captureStateLabel" class="text-xs font-medium text-slate-400">支持单题框选 / 手写识别</span>
+                    </div>
+
+                    <!-- Stage 1: Empty / Upload & Camera Trigger State -->
+                    <div id="uploadDropzone" class="p-5">
+                        <div id="dropArea" class="border-2 border-dashed border-indigo-200 hover:border-indigo-400 bg-gradient-to-b from-indigo-50/40 to-slate-50/60 rounded-2xl p-6 text-center transition-all cursor-pointer group" onclick="triggerFileInput()">
+                            <input type="file" id="fileInput" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+                            <!-- Direct mobile camera capture input as quick fallback -->
+                            <input type="file" id="mobileCameraInput" accept="image/*" capture="environment" class="hidden" onchange="handleFileSelect(event)">
+
+                            <div class="w-16 h-16 rounded-2xl bg-indigo-600/10 text-indigo-600 mx-auto flex items-center justify-center mb-4 group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-200 shadow-sm">
+                                <i data-lucide="camera" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-base mb-1">点击上传题目照片，或直接拖拽至此</h3>
+                            <p class="text-xs text-slate-500 mb-5">支持 JPG、PNG、WebP，电脑端可直接按 <kbd class="px-1.5 py-0.5 bg-white border border-slate-200 rounded text-[11px] font-mono">Ctrl + V</kbd> 粘贴截图</p>
+
+                            <!-- Action Buttons inside Dropzone -->
+                            <div class="grid grid-cols-2 gap-3" onclick="event.stopPropagation()">
+                                <button onclick="startLiveCamera()" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-500/20 transition active:scale-95">
+                                    <i data-lucide="Aperture" class="w-4 h-4"></i>
+                                    <span>打开相机实拍</span>
+                                </button>
+                                <button onclick="triggerFileInput()" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm border border-slate-200 shadow-sm transition active:scale-95">
+                                    <i data-lucide="image-plus" class="w-4 h-4 text-indigo-600"></i>
+                                    <span>从相册选图</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Built-in Sample Problems for Instant Testing -->
+                        <!-- <div class="mt-5">
+                            <div class="flex items-center justify-between mb-2.5">
+                                <span class="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
+                                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
+                                    手边没卷子？点击下方仿真样题立即体验拍题：
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-2">
+                                <button onclick="loadSampleQuestion('math')" class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200/80 hover:border-indigo-300 hover:bg-indigo-50/40 text-left transition group">
+                                    <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 font-bold text-xs">数学</div>
+                                    <div class="min-w-0">
+                                        <div class="text-xs font-semibold text-slate-800 truncate group-hover:text-indigo-600">二次函数与方程</div>
+                                        <div class="text-[10px] text-slate-400 truncate">含手写批注试卷</div>
+                                    </div>
+                                </button>
+                                <button onclick="loadSampleQuestion('physics')" class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200/80 hover:border-indigo-300 hover:bg-indigo-50/40 text-left transition group">
+                                    <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 font-bold text-xs">物理</div>
+                                    <div class="min-w-0">
+                                        <div class="text-xs font-semibold text-slate-800 truncate group-hover:text-indigo-600">斜面力学综合题</div>
+                                        <div class="text-[10px] text-slate-400 truncate">带受力分析图示</div>
+                                    </div>
+                                </button>
+                                <button onclick="loadSampleQuestion('chemistry')" class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200/80 hover:border-indigo-300 hover:bg-indigo-50/40 text-left transition group">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 font-bold text-xs">化学</div>
+                                    <div class="min-w-0">
+                                        <div class="text-xs font-semibold text-slate-800 truncate group-hover:text-indigo-600">氧化还原配平计算</div>
+                                        <div class="text-[10px] text-slate-400 truncate">离子反应方程式</div>
+                                    </div>
+                                </button>
+                                <button onclick="loadSampleQuestion('calculus')" class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200/80 hover:border-indigo-300 hover:bg-indigo-50/40 text-left transition group">
+                                    <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 font-bold text-xs">高数</div>
+                                    <div class="min-w-0">
+                                        <div class="text-xs font-semibold text-slate-800 truncate group-hover:text-indigo-600">定积分与极限求解</div>
+                                        <div class="text-[10px] text-slate-400 truncate">大学微积分真题</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <!-- Stage 2: Live WebRTC Camera Viewfinder (Hidden by default) -->
+                    <div id="cameraViewfinder" class="hidden relative bg-slate-950">
+                        <div class="relative w-full aspect-[4/3] overflow-hidden flex items-center justify-center">
+                            <video id="cameraVideo" autoplay playsinline class="w-full h-full object-cover"></video>
+                            <!-- Framing Guide Overlay -->
+                            <div class="absolute inset-6 border-2 border-white/60 rounded-2xl pointer-events-none flex flex-col justify-between p-3">
+                                <div class="flex justify-between">
+                                    <span class="w-4 h-4 border-t-4 border-l-4 border-indigo-400 rounded-tl"></span>
+                                    <span class="text-[11px] bg-black/50 text-white px-2.5 py-0.5 rounded-full backdrop-blur-sm">请将题目置于参考框内并保持清晰</span>
+                                    <span class="w-4 h-4 border-t-4 border-r-4 border-indigo-400 rounded-tr"></span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="w-4 h-4 border-b-4 border-l-4 border-indigo-400 rounded-bl"></span>
+                                    <span class="w-4 h-4 border-b-4 border-r-4 border-indigo-400 rounded-br"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-slate-900 flex items-center justify-between">
+                            <button onclick="stopLiveCamera()" class="px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-xs font-medium flex items-center gap-1.5">
+                                <i data-lucide="x" class="w-4 h-4"></i>
+                                <span>取消</span>
+                            </button>
+                            <button onclick="takeCameraSnapshot()" class="w-14 h-14 rounded-full bg-white p-1 shadow-lg active:scale-90 transition flex items-center justify-center">
+                                <span class="w-full h-full rounded-full border-2 border-slate-900 bg-indigo-600 flex items-center justify-center text-white">
+                                    <i data-lucide="camera" class="w-6 h-6"></i>
+                                </span>
+                            </button>
+                            <button onclick="switchCameraFacing()" class="px-3.5 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-xs font-medium flex items-center gap-1.5">
+                                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                                <span>切换镜头</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stage 3: Image Preview & Interactive Crop Workspace (Hidden by default) -->
+                    <div id="imageEditorWorkspace" class="hidden p-4 bg-slate-900/95">
+                        <div class="flex items-center justify-between mb-2.5 text-xs text-slate-300">
+                            <span class="flex items-center gap-1.5">
+                                <i data-lucide="crop" class="w-3.5 h-3.5 text-indigo-400"></i>
+                                <span>拖动蓝框可只截取一道题</span>
+                            </span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="rotateLoadedImage()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 flex items-center gap-1 transition" title="旋转90度">
+                                    <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+                                    <span>旋转</span>
+                                </button>
+                                <button onclick="toggleBWEnhance()" id="bwEnhanceBtn" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 flex items-center gap-1 transition">
+                                    <i data-lucide="contrast" class="w-3.5 h-3.5"></i>
+                                    <span>扫描增强</span>
+                                </button>
+                                <button onclick="resetCropFull()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition">
+                                    全图
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Crop Container -->
+                        <div id="cropStageContainer" class="relative w-full max-h-[340px] flex items-center justify-center bg-slate-950 rounded-2xl overflow-hidden select-none">
+                            <canvas id="sourceImageCanvas" class="max-w-full max-h-[340px] block"></canvas>
+                            <!-- Scanning Laser Effect during AI solving -->
+                            <div id="scanningLaser" class="scan-laser hidden"></div>
+                            <!-- Interactive Crop Box Overlay -->
+                            <div id="cropBox" class="absolute border-2 border-indigo-400 bg-indigo-500/10 shadow-[0_0_0_9999px_rgba(2,6,23,0.58)] cursor-move touch-none">
+                                <!-- Rule of thirds grid lines -->
+                                <div class="w-full h-full grid grid-cols-3 grid-rows-3 pointer-events-none">
+                                    <div class="border-r border-b border-white/25"></div>
+                                    <div class="border-r border-b border-white/25"></div>
+                                    <div class="border-b border-white/25"></div>
+                                    <div class="border-r border-b border-white/25"></div>
+                                    <div class="border-r border-b border-white/25"></div>
+                                    <div class="border-b border-white/25"></div>
+                                    <div class="border-r border-white/25"></div>
+                                    <div class="border-r border-white/25"></div>
+                                    <div></div>
+                                </div>
+                                <!-- 4 Corner Resize Handles -->
+                                <div class="crop-handle -top-2 -left-2 cursor-nwse-resize" data-handle="nw"></div>
+                                <div class="crop-handle -top-2 -right-2 cursor-nesw-resize" data-handle="ne"></div>
+                                <div class="crop-handle -bottom-2 -left-2 cursor-nesw-resize" data-handle="sw"></div>
+                                <div class="crop-handle -bottom-2 -right-2 cursor-nwse-resize" data-handle="se"></div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Re-upload / Change Bar -->
+                        <div class="mt-3 flex items-center justify-between gap-2">
+                            <button onclick="resetToNewQuestion()" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium flex items-center gap-1.5 transition">
+                                <i data-lucide="refresh-ccw" class="w-3.5 h-3.5"></i>
+                                <span>重拍 / 换一张图</span>
+                            </button>
+                            <span class="text-[11px] text-slate-400">已准备就绪，点击下方按钮开始解答</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solver Preferences & Action Card -->
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+                            <h2 class="font-semibold text-slate-800 text-sm sm:text-base">第二步：解题偏好与要求</h2>
+                        </div>
+                        <span class="text-xs text-slate-400">自适应学段方法</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1.5">适用学段（防超纲）</label>
+                            <select id="gradeSelect" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
+                                <option value="自动识别学段">🤖 自动匹配学段</option>
+                                <option value="小学阶段（严禁使用超纲方程，多用算术或画图法）">🎒 小学（算术/思维）</option>
+                                <option value="初中阶段">📘 初中（中考标准）</option>
+                                <option value="高中阶段">📗 高中（高考标准）</option>
+                                <option value="大学及竞赛阶段">🎓 大学/考研/竞赛</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1.5">解析讲解模式</label>
+                            <select id="modeSelect" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
+                                <option value="detailed">📝 名师分步详解（默认）</option>
+                                <option value="check">🔍 批改我手写的作答对错</option>
+                                <option value="hint">💡 启发式提示（先不看答案）</option>
+                                <option value="concise">⚡ 极简速查（直接看结果）</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1.5">补充要求（选填，也可直接输入文字题目）</label>
+                        <input id="customPromptInput" type="text" placeholder="例如：只解第(2)问、用动能定理求解、或者直接输入一道文字题..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
+                    </div>
+
+                    <!-- Primary Solve Trigger Button -->
+                    <button id="solveBtn" onclick="solveCurrentQuestion()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-600 to-cyan-600 hover:from-indigo-700 hover:to-cyan-700 text-white font-bold text-base shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2.5 transition-all active:scale-[0.99]">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                        <span id="solveBtnText">AI 立即拍题解答</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: AI Solution & Interactive Follow-up (7 cols on desktop) -->
+            <div class="lg:col-span-7 flex flex-col gap-5">
+
+                <!-- Empty Welcome State -->
+                <div id="solutionEmptyState" class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-8 sm:p-12 text-center">
+                    <div class="w-20 h-20 rounded-3xl bg-indigo-50 text-indigo-600 mx-auto flex items-center justify-center mb-5 shadow-inner">
+                        <i data-lucide="graduation-cap" class="w-10 h-10"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-800 mb-2">等待拍题，AI 名师随时待命</h2>
+                    <p class="text-sm text-slate-500 max-w-md mx-auto leading-relaxed mb-8">
+                        在左侧拍照、上传题目图片，或点击一套<strong>内置仿真样题</strong>。AI 将自动识别题干与公式，为您提供标准分步解析、易错点提醒与举一反三练习。
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-lg mx-auto text-left">
+                        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div class="flex items-center gap-2 text-indigo-600 font-semibold text-xs mb-1">
+                                <i data-lucide="scan-text" class="w-4 h-4"></i>
+                                <span>精准公式 OCR</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500">支持印刷体与手写数学、物理、化学符号还原</p>
+                        </div>
+                        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div class="flex items-center gap-2 text-cyan-600 font-semibold text-xs mb-1">
+                                <i data-lucide="list-ordered" class="w-4 h-4"></i>
+                                <span>逻辑分步拆解</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500">严密推导过程 + 语音讲题，知其然更知其所以然</p>
+                        </div>
+                        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                            <div class="flex items-center gap-2 text-emerald-600 font-semibold text-xs mb-1">
+                                <i data-lucide="message-Square-more" class="w-4 h-4"></i>
+                                <span>多轮互动追问</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500">哪一步没看懂？随时向 AI 老师提问直到彻底弄懂</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading Skeleton State -->
+                <div id="solutionLoadingState" class="hidden bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-indigo-600 text-white flex items-center justify-center animate-pulse">
+                                <i data-lucide="cpu" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 id="loadingStepTitle" class="font-bold text-slate-800 text-base">正在识别图片中的题目与公式...</h3>
+                                <p class="text-xs text-slate-400">Gemini 视觉推理引擎正在演算步骤，通常只需 3~6 秒</p>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-600 animate-pulse">思考中...</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="h-4 bg-slate-100 rounded-full w-1/3 animate-pulse"></div>
+                        <div class="h-16 bg-slate-100 rounded-2xl w-full animate-pulse"></div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="h-4 bg-slate-100 rounded-full w-1/4 animate-pulse"></div>
+                        <div class="h-24 bg-slate-100 rounded-2xl w-full animate-pulse"></div>
+                        <div class="h-24 bg-slate-100 rounded-2xl w-full animate-pulse"></div>
+                    </div>
+                </div>
+
+                <!-- Solved Result Container -->
+                <div id="solutionResultContainer" class="hidden space-y-5">
+
+                    <!-- Result Top Card: Subject Badges + OCR Question + TTS & Save Actions -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 overflow-hidden">
+                        <div class="px-5 py-4 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span id="resSubjectBadge" class="px-2.5 py-1 rounded-lg bg-indigo-500/30 border border-indigo-400/40 text-indigo-200 text-xs font-semibold">数学</span>
+                                <span id="resDifficultyBadge" class="px-2.5 py-1 rounded-lg bg-white/10 text-slate-200 text-xs font-medium">⭐⭐⭐ 中等难度</span>
+                                <span id="resGradeBadge" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-200 text-xs font-medium">智能匹配</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button id="ttsPlayBtn" onclick="speakSolutionSummary()" class="px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-medium flex items-center gap-1.5 transition">
+                                    <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+                                    <span id="ttsBtnLabel">语音讲题</span>
+                                </button>
+                                <button onclick="copyFullSolution()" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-medium flex items-center gap-1.5 transition">
+                                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                    <span>复制解析</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- OCR Recognized Question Section -->
+                        <div class="p-5 sm:p-6 border-b border-slate-100 bg-slate-50/50">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                                    <i data-lucide="scan-line" class="w-3.5 h-3.5 text-indigo-500"></i>
+                                    题目识别还原
+                                </span>
+                                <button onclick="copyTextField('ocr')" class="text-xs text-indigo-600 hover:text-indigo-700 font-medium">复制题干</button>
+                            </div>
+                            <div id="resOcrContent" class="prose-math text-sm sm:text-base text-slate-800 bg-white p-4 rounded-2xl border border-slate-200/70 shadow-2xs"></div>
+                        </div>
+
+                        <!-- Highlighted Final Answer Box -->
+                        <div class="p-5 sm:p-6 bg-gradient-to-br from-emerald-50 via-teal-50/70 to-white border-b border-emerald-100">
+                            <div class="flex items-center justify-between mb-2.5">
+                                <span class="px-3 py-1 rounded-xl bg-emerald-600 text-white text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                                    最终答案结论
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="scrollToAiTeacher()" class="text-xs text-indigo-700 hover:text-indigo-800 font-semibold bg-indigo-100/90 hover:bg-indigo-200/70 px-2.5 py-1 rounded-lg transition flex items-center gap-1">
+                                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                                        <span>向AI老师提问</span>
+                                    </button>
+                                    <button onclick="copyTextField('answer')" class="text-xs text-emerald-700 hover:text-emerald-800 font-semibold bg-emerald-100/80 hover:bg-emerald-200/70 px-2.5 py-1 rounded-lg transition">复制答案</button>
+                                </div>
+                            </div>
+                            <div id="resFinalAnswer" class="prose-math text-base sm:text-lg font-bold text-emerald-950 bg-white/95 p-4 rounded-2xl border-2 border-emerald-300/80 shadow-xs"></div>
+                        </div>
+
+                        <!-- Step-by-Step Solution Timeline -->
+                        <div class="p-5 sm:p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                                    <i data-lucide="Footprints" class="w-4 h-4 text-indigo-600"></i>
+                                    <span>名师分步推导解析</span>
+                                </h3>
+                                <span class="text-xs text-slate-400">严密推导 · 自动验算</span>
+                            </div>
+                            <div id="resStepsList" class="space-y-4"></div>
+                            <!-- Bottom Final Answer Confirmation Banner -->
+                            <div id="resBottomAnswerBanner" class="mt-5 p-4 rounded-2xl bg-emerald-50/90 border border-emerald-200 flex items-start gap-3">
+                                <div class="w-7 h-7 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5">
+                                    <i data-lucide="award" class="w-4 h-4"></i>
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="text-xs font-bold text-emerald-800 mb-1">推导完毕 · 最终答案汇总：</div>
+                                    <div id="resBottomFinalAnswer" class="prose-math text-sm sm:text-base font-bold text-slate-900"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROMINENT AI TEACHER CARD (1对1 AI 名师在线答疑舱 - 显眼核心位置) -->
+                    <div id="aiTeacherSection" class="ai-tutor-card bg-white rounded-3xl border-2 border-indigo-500/80 overflow-hidden transition-all">
+                        <!-- Prominent Gradient Tutor Header -->
+                        <div class="px-5 py-4 bg-gradient-to-r from-indigo-600 via-violet-600 to-cyan-600 text-white flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="relative">
+                                    <div class="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-inner">
+                                        <i data-lucide="bot" class="w-6 h-6"></i>
+                                    </div>
+                                    <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-indigo-700"></span>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h3 class="font-extrabold text-base sm:text-lg tracking-tight text-white">AI 金牌老师 · 1对1 互动答疑</h3>
+                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/20 text-white backdrop-blur-xs">高准度推理</span>
+                                    </div>
+                                    <p class="text-xs text-indigo-100">对答案有疑问？某一步没看懂？直接点下方按钮或输入问题，AI 老师为您深度重算与讲解</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick-Ask Preset Chips -->
+                        <div class="px-4 sm:px-5 pt-3.5 pb-2 bg-indigo-50/50 border-b border-indigo-100/80">
+                            <div class="text-[11px] font-semibold text-indigo-600 mb-2 flex items-center gap-1">
+                                <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                                <span>点按快捷提问 AI 老师：</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="sendQuickFollowup('请帮我重新一步步仔细验算一下这道题，确认最终答案到底是多少？')" class="text-xs px-3 py-1.5 rounded-xl bg-white hover:bg-indigo-600 hover:text-white text-indigo-700 font-semibold border border-indigo-200/80 shadow-2xs transition active:scale-95">✅ 帮我重新验算确认最终答案</button>
+                                <button onclick="sendQuickFollowup('能用更通俗简单的方法再讲一遍吗？')" class="text-xs px-3 py-1.5 rounded-xl bg-white hover:bg-indigo-600 hover:text-white text-slate-700 font-medium border border-slate-200/90 shadow-2xs transition active:scale-95">💡 用更通俗简单的方法讲一遍</button>
+                                <button onclick="sendQuickFollowup('这道题还有没有别的解法（一题多解）？')" class="text-xs px-3 py-1.5 rounded-xl bg-white hover:bg-indigo-600 hover:text-white text-slate-700 font-medium border border-slate-200/90 shadow-2xs transition active:scale-95">🔄 有没有第二种解法？</button>
+                                <button onclick="sendQuickFollowup('能帮我详细解释一下关键步骤是怎么推导出来的吗？')" class="text-xs px-3 py-1.5 rounded-xl bg-white hover:bg-indigo-600 hover:text-white text-slate-700 font-medium border border-slate-200/90 shadow-2xs transition active:scale-95">🔍 详细拆解推导过程</button>
+                            </div>
+                        </div>
+
+                        <!-- Chat Messages Container -->
+                        <div id="followupChatList" class="p-4 sm:p-5 space-y-3.5 max-h-96 overflow-y-auto bg-gradient-to-b from-white to-slate-50/50">
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">
+                                    AI
+                                </div>
+                                <div class="bg-slate-100/90 text-slate-700 text-xs sm:text-sm px-4 py-3 rounded-2xl rounded-tl-xs border border-slate-200/60 leading-relaxed">
+                                    同学你好！我已经读完上面这道题啦。如果你觉得某一步跳步太快、想让老师<strong>重新核对验算一遍答案</strong>，或者想学更巧的解题秒杀法，随时在下方告诉我！
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Input Bar -->
+                        <div class="p-3.5 sm:p-4 border-t border-slate-200/80 bg-white flex items-center gap-2.5">
+                            <input id="followupInput" type="text" placeholder="向 AI 老师提问（例如：第(2)问为什么这样算？按回车发送）..." onkeydown="if(event.key==='Enter') sendFollowupMessage()" class="flex-1 px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/25 focus:border-indigo-500 focus:bg-white transition">
+                            <button id="followupSendBtn" onclick="sendFollowupMessage()" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white text-sm font-bold flex items-center gap-1.5 shadow-md shadow-indigo-500/20 transition shrink-0 active:scale-95">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                <span>提问</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Key Concepts, Pitfalls & Similar Practice Card -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-5 sm:p-6 space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 rounded-2xl bg-indigo-50/50 border border-indigo-100">
+                                <div class="text-xs font-bold text-indigo-700 mb-2 flex items-center gap-1.5">
+                                    <i data-lucide="Lightbulb" class="w-4 h-4"></i>
+                                    <span>核心考察知识点</span>
+                                </div>
+                                <div id="resKeyPoints" class="flex flex-wrap gap-1.5"></div>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-amber-50/60 border border-amber-200/60">
+                                <div class="text-xs font-bold text-amber-800 mb-1.5 flex items-center gap-1.5">
+                                    <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600"></i>
+                                    <span>易错点与避坑提醒</span>
+                                </div>
+                                <div id="resPitfalls" class="prose-math text-xs text-amber-900/90 leading-relaxed"></div>
+                            </div>
+                        </div>
+
+                        <!-- Practice / Similar Question Section (举一反三) -->
+                        <div class="pt-4 border-t border-slate-100">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center">
+                                        <i data-lucide="brain-circuit" class="w-4 h-4"></i>
+                                    </div>
+                                    <h3 class="font-bold text-slate-800 text-sm sm:text-base">举一反三 · 变式巩固训练</h3>
+                                </div>
+                                <button onclick="toggleSimilarAnswer()" id="toggleSimBtn" class="px-3 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-semibold transition">
+                                    查看变式题答案
+                                </button>
+                            </div>
+                            <div id="resSimilarQuestion" class="prose-math text-sm text-slate-700 bg-slate-50 p-4 rounded-2xl border border-slate-200/60"></div>
+                            <div id="resSimilarAnswerBox" class="hidden mt-3 p-4 rounded-2xl bg-purple-50/60 border border-purple-200/60 prose-math text-sm text-slate-800"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- History / Mistake Book Modal -->
+    <div id="historyModal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="bookmark-check" class="w-5 h-5 text-indigo-600"></i>
+                    <h3 class="font-bold text-slate-800 text-base">我的拍题历史与错题本</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="clearAllHistory()" class="text-xs text-rose-600 hover:bg-rose-50 px-2.5 py-1.5 rounded-lg font-medium transition">清空记录</button>
+                    <button onclick="closeHistoryModal()" class="p-1.5 rounded-xl hover:bg-slate-100 text-slate-500">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="historyModalList" class="p-6 overflow-y-auto space-y-3 flex-1"></div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Hidden Audio Element for TTS Playback -->
+    <audio id="ttsAudioPlayer" class="hidden"></audio>
+
+    <script>
+        // Gemini API Key (Automatically injected by Canvas environment at runtime)
+        const apiKey = "";
+
+        /**
+         * 默认全局配置（如果同目录下存在 config.js 并定义了 window.PATI_CONFIG，则直接自动读取 config.js 中的配置）
+         */
+        const BUILTIN_DEFAULT_CONFIG = {
+            provider: "gemini",
+            geminiKey: "",
+            geminiBaseUrl: "https://generativelanguage.googleapis.com",
+            openaiUrl: "https://maas.qianwenaiapi.com/compatible-mode/v1/chat/completions",
+            openaiKey: "",
+            openaiModel: "qwen-vl-max",
+            ocrReasoningModel: "qwen-plus"
+        };
+
+        // Global State
+        let currentImageObj = null;       // HTMLImageElement currently loaded
+        let imageRotation = 0;            // 0, 90, 180, 270
+        let bwEnhanced = false;           // Whether B&W high-contrast filter is active
+        let cropRect = { x: 0, y: 0, w: 100, h: 100 }; // In canvas pixel coordinates
+        let activeStream = null;          // WebRTC MediaStream
+        let cameraFacingMode = "environment"; // "environment" or "user"
+        let currentSolutionData = null;   // Last structured JSON solution
+        let currentCroppedBase64 = null;  // Base64 string of cropped question sent to Gemini
+        let followupHistory = [];         // Multi-turn chat context for follow-up questions
+        let isSolving = false;
+        let isPlayingTTS = false;
+
+        // Initialize Lucide icons & event listeners on load
+        window.onload = function () {
+            syncExternalConfigFileOnBoot();
+            lucide.createIcons();
+            initCropInteractions();
+            initDragAndDropAndPaste();
+            updateHistoryBadge();
+            if (currentSolutionData) {
+                sanitizeSolutionObject(currentSolutionData);
+                renderSolutionUI(currentSolutionData);
+            }
+        };
+
+        /**
+         * 一键平滑滚动并聚焦到「AI 老师一对一互动答疑」区域
+         */
+        function scrollToAiTeacher() {
+            const section = document.getElementById("aiTeacherSection");
+            const resultContainer = document.getElementById("solutionResultContainer");
+            if (resultContainer && resultContainer.classList.contains("hidden")) {
+                showToast("请先拍摄上传题目或点击左侧样题，AI老师即可为您一对一答疑", "info");
+                return;
+            }
+            if (section) {
+                section.scrollIntoView({ behavior: "smooth", block: "center" });
+                setTimeout(() => {
+                    const input = document.getElementById("followupInput");
+                    if (input) input.focus();
+                }, 450);
+            }
+        }
+
+        /**
+         * 触发系统文件选择器（从相册 / 电脑选择图片）
+         * 说明：按钮与整个上传区都用内联 onclick="triggerFileInput()" 调用，
+         * 必须挂在全局作用域，否则会报 triggerFileInput is not defined。
+         */
+        function triggerFileInput() {
+            const input = document.getElementById("fileInput");
+            if (!input) return;
+            input.click();
+        }
+
+        /**
+         * 处理用户从相册/电脑选择图片文件
+         */
+        function handleFileSelect(event) {
+            const file = event?.target?.files?.[0];
+            if (!file) return;
+            if (!file.type.startsWith("image/")) {
+                showToast("请选择有效的图片文件（JPG / PNG / WebP）", "error");
+                return;
+            }
+            loadImageFile(file);
+            // 清空 value 以便重复上传同一张图片时仍能触发 onchange
+            event.target.value = "";
+        }
+
+        /**
+         * 初始化拖拽上传与 Ctrl+V 粘贴截图事件
+         */
+        function initDragAndDropAndPaste() {
+            const dropArea = document.getElementById("dropArea");
+            if (dropArea) {
+                dropArea.addEventListener("dragover", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropArea.classList.add("border-indigo-500", "bg-indigo-50/80");
+                });
+                dropArea.addEventListener("dragleave", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropArea.classList.remove("border-indigo-500", "bg-indigo-50/80");
+                });
+                dropArea.addEventListener("drop", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropArea.classList.remove("border-indigo-500", "bg-indigo-50/80");
+                    const file = e.dataTransfer?.files?.[0];
+                    if (file && file.type.startsWith("image/")) {
+                        loadImageFile(file);
+                        showToast("已加载拖入的题目图片", "success");
+                    } else {
+                        showToast("请拖入图片格式文件", "error");
+                    }
+                });
+            }
+
+            // 全局监听 Ctrl + V 粘贴截图
+            window.addEventListener("paste", (e) => {
+                // 如果焦点在输入框中且粘贴的是纯文字，则不拦截
+                const items = e.clipboardData?.items;
+                if (!items) return;
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf("image") !== -1) {
+                        const file = items[i].getAsFile();
+                        if (file) {
+                            e.preventDefault();
+                            loadImageFile(file);
+                            showToast("已从剪贴板粘贴题目截图", "success");
+                            break;
+                        }
+                    }
+                }
+            });
+        }
+
+        /**
+         * 弹出轻量提示框（替代浏览器 alert）
+         */
+        function showToast(message, type = "info") {
+            const container = document.getElementById("toastContainer");
+            if (!container) return;
+
+            const colorMap = {
+                success: "bg-emerald-600 text-white border-emerald-500",
+                error: "bg-rose-600 text-white border-rose-500",
+                info: "bg-slate-900 text-white border-slate-700"
+            };
+
+            const toast = document.createElement("div");
+            toast.className = `px-4 py-2.5 rounded-2xl shadow-lg border text-xs sm:text-sm font-medium flex items-center gap-2 transition-all duration-300 pointer-events-auto ${colorMap[type] || colorMap.info}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add("opacity-0", "translate-y-2");
+                setTimeout(() => toast.remove(), 300);
+            }, 3200);
+        }
+
+        /**
+         * 复制文本到剪贴板
+         */
+        function copyTextToClipboard(text) {
+            if (!text) return;
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand("copy");
+                showToast("已复制到剪贴板", "success");
+            } catch (err) {
+                showToast("复制失败，请手动选择复制", "error");
+            }
+            document.body.removeChild(textarea);
+        }
+
+        /**
+         * STREAMING_CHUNK:增强LaTeX文档标签清洗引擎以消除\begin{enumerate}和\item乱码...
+         * Repairs JSON control-character collisions with LaTeX commands (e.g., \times -> [TAB]imes, \frac -> [FF]rac),
+         * converts LaTeX document environments (\begin{enumerate}, \item, \end{enumerate}, etc.) into clean readable text,
+         * and converts multiplication/division commands into crisp mathematical symbols (×, ÷).
+         */
+        function normalizeMathText(str) {
+            if (typeof str !== "string" || !str) return "";
+            let s = str;
+
+            // 1. Restore control characters that JSON.parse turned from single-backslash LaTeX commands
+            // \t (0x09) collisions: \times, \text, \theta, \tan, \triangle, \tau, \therefore, \to, \tilde, \top
+            s = s.replace(/\u0009(imes|ext|heta|an|riangle|au|herefore|o\b|ilde|op)/g, "\\t$1");
+            // \f (0x0C) collisions: \frac, \forall, \flat
+            s = s.replace(/\u000c(rac|orall|lat)/g, "\\f$1");
+            // \b (0x08) collisions: \begin, \beta, \bar, \binom, \boxed, \bullet, \big
+            s = s.replace(/\u0008(egin|eta|ar|inom|oxed|ullet|ig)/g, "\\b$1");
+            // \r (0x0D) collisions: \right, \rho, \rightarrow, \rangle
+            s = s.replace(/\u000d(ight|ho|ightarrow|angle)/g, "\\r$1");
+
+            // 2. Convert literal escaped "\\n" sequences (not part of LaTeX commands like \neq, \nu, \nabla, \notin, \neg, \natural) into real line breaks
+            s = s.replace(/\\n(?![a-zA-Z])/g, "\n");
+
+            // 3. Clean up LaTeX document environments (\begin{enumerate} ... \end{enumerate}, \begin{itemize} ... \end{itemize})
+            // Support nested or multiple enumerate blocks and transform \item into (1), (2), (3)...
+            for (let pass = 0; pass < 3; pass++) {
+                s = s.replace(/\\begin\{enumerate\}(?:\s*\[[^\]]*\])?([\s\S]*?)\\end\{enumerate\}/gi, (_, inner) => {
+                    let count = 0;
+                    const replaced = inner.replace(/\\item(?:\s*\[([^\]]*)\])?\s*/gi, (__, customLabel) => {
+                        count++;
+                        const label = customLabel ? customLabel.trim() : `(${count})`;
+                        return `\n${label} `;
+                    });
+                    return "\n" + replaced.trim() + "\n";
+                });
+
+                s = s.replace(/\\begin\{itemize\}(?:\s*\[[^\]]*\])?([\s\S]*?)\\end\{itemize\}/gi, (_, inner) => {
+                    const replaced = inner.replace(/\\item(?:\s*\[([^\]]*)\])?\s*/gi, (__, customLabel) => {
+                        return `\n${customLabel ? customLabel.trim() : "•"} `;
+                    });
+                    return "\n" + replaced.trim() + "\n";
+                });
+            }
+
+            // Catch any remaining unclosed or stray \begin{enumerate}, \end{enumerate}, \begin{itemize}, \end{itemize}, etc.
+            s = s.replace(/\\(?:begin|end)\{(?:enumerate|itemize|description|center|flushleft|flushright|document|tabular|figure|table)\}(?:\s*\[[^\]]*\])?/gi, "\n");
+
+            // Catch any remaining standalone \item and convert to numbered sub-questions (1), (2)...
+            if (/\\item\b/i.test(s)) {
+                let itemIdx = 0;
+                s = s.replace(/\\item(?:\s*\[([^\]]*)\])?\s*/gi, (_, customLabel) => {
+                    itemIdx++;
+                    return `\n${customLabel ? customLabel.trim() : `(${itemIdx})`} `;
+                });
+            }
+
+            // 4. Clean up common non-math LaTeX text formatting macros outside math mode
+            s = s.replace(/\\textbf\{([^{}]*)\}/g, "**$1**");
+            s = s.replace(/\\textit\{([^{}]*)\}/g, "*$1*");
+            s = s.replace(/\\emph\{([^{}]*)\}/g, "*$1*");
+            s = s.replace(/\\underline\{([^{}]*)\}/g, "<u>$1</u>");
+            s = s.replace(/\\(?:noindent|par)\b\s*/g, "");
+            s = s.replace(/\\(?:vspace|hspace)\*?\{[^{}]*\}/g, " ");
+            s = s.replace(/\\(?:quad|qquad)\b/g, "  ");
+
+            // 5. Fix cases where "imes" or "\times" appears and convert to clear symbol ×
+            s = s.replace(/\\times\b/g, " × ");
+            s = s.replace(/\\div\b/g, " ÷ ");
+            s = s.replace(/\\cdot\b/g, " · ");
+            s = s.replace(/([0-9a-zA-Z\)\]\}\s])imes(?=[0-9a-zA-Z\(\[\{\s])/g, "$1 × ");
+            s = s.replace(/\bimes\b/g, "×");
+
+            // Catch standalone corrupted "rac{" -> "\frac{"
+            s = s.replace(/(^|[^\\a-zA-Z])rac\{/g, "$1\\frac{");
+
+            // Collapse excessive blank lines (more than 2 consecutive newlines)
+            s = s.replace(/\n{3,}/g, "\n\n").trim();
+
+            return s;
+        }
+
+        function sanitizeSolutionObject(data) {
+            if (!data || typeof data !== "object") return data;
+            if (data.ocrText) data.ocrText = normalizeMathText(data.ocrText);
+            if (data.finalAnswer) data.finalAnswer = normalizeMathText(data.finalAnswer);
+            if (data.pitfalls) data.pitfalls = normalizeMathText(data.pitfalls);
+            if (data.voiceScript) data.voiceScript = normalizeMathText(data.voiceScript);
+            if (Array.isArray(data.steps)) {
+                data.steps.forEach(step => {
+                    if (step.title) step.title = normalizeMathText(step.title);
+                    if (step.explanation) step.explanation = normalizeMathText(step.explanation);
+                });
+            }
+            if (data.similarQuestion) {
+                if (data.similarQuestion.question) {
+                    data.similarQuestion.question = normalizeMathText(data.similarQuestion.question);
+                }
+                if (data.similarQuestion.answerAndAnalysis) {
+                    data.similarQuestion.answerAndAnalysis = normalizeMathText(data.similarQuestion.answerAndAnalysis);
+                }
+            }
+            return data;
+        }
+
+        /**
+         * Automatically normalizes Base URLs like https://maas.qianwenaiapi.com/compatible-mode/v1
+         * into full chat completion endpoints (.../v1/chat/completions) to prevent HTTP 404 errors.
+         */
+        function normalizeOpenAiEndpoint(rawUrl) {
+            const fallback = "https://maas.qianwenaiapi.com/compatible-mode/v1/chat/completions";
+            if (!rawUrl || !rawUrl.trim()) return fallback;
+            let u = rawUrl.trim().replace(/\/+$/, "");
+            if (u.endsWith("/chat/completions")) {
+                return u;
+            }
+            if (u.endsWith("/compatible-mode")) {
+                return `${u}/v1/chat/completions`;
+            }
+            if (u.endsWith("/v1")) {
+                return `${u}/chat/completions`;
+            }
+            // If user entered a bare domain without path
+            try {
+                const parsed = new URL(u);
+                if (!parsed.pathname || parsed.pathname === "/") {
+                    return `${u}/v1/chat/completions`;
+                }
+            } catch (e) {}
+            return `${u}/chat/completions`;
+        }
+
+        /**
+         * STREAMING_CHUNK:简化配置读取逻辑，直接静默读取同目录config.js配置文件...
+         * 启动时直接检测并读取同目录下的 config.js (window.PATI_CONFIG)
+         */
+        function syncExternalConfigFileOnBoot() {
+            if (window.PATI_CONFIG && typeof window.PATI_CONFIG === "object") {
+                const extCfg = {
+                    ...BUILTIN_DEFAULT_CONFIG,
+                    ...window.PATI_CONFIG
+                };
+                if (extCfg.openaiUrl) {
+                    extCfg.openaiUrl = normalizeOpenAiEndpoint(extCfg.openaiUrl);
+                }
+                localStorage.setItem("smartsnap_api_config_v1", JSON.stringify(extCfg));
+            }
+        }
+
+        function getSavedApiConfig() {
+            // 直接优先读取同目录下 config.js 中的 window.PATI_CONFIG
+            if (window.PATI_CONFIG && typeof window.PATI_CONFIG === "object") {
+                const merged = {
+                    ...BUILTIN_DEFAULT_CONFIG,
+                    ...window.PATI_CONFIG
+                };
+                if (merged.openaiUrl) {
+                    merged.openaiUrl = normalizeOpenAiEndpoint(merged.openaiUrl);
+                }
+                return merged;
+            }
+            try {
+                const raw = localStorage.getItem("smartsnap_api_config_v1");
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed.openaiUrl) {
+                        parsed.openaiUrl = normalizeOpenAiEndpoint(parsed.openaiUrl);
+                    }
+                    return { ...BUILTIN_DEFAULT_CONFIG, ...parsed };
+                }
+            } catch (e) {}
+            return { ...BUILTIN_DEFAULT_CONFIG };
+        }
+
+        /**
+         * 修复大模型输出 JSON 字符串时内含 LaTeX 单反斜杠（如 \frac, \sqrt, \times, \pm, \sin）
+         * 导致 JSON.parse 报错崩溃从而丢失 finalAnswer 的核心问题
+         */
+        function repairLatexInJsonString(jsonStr) {
+            if (!jsonStr || typeof jsonStr !== "string") return "";
+            let out = "";
+            let inString = false;
+            const len = jsonStr.length;
+
+            const latexCommandsStartingWithControlLetters = /^(times|text|theta|tan|triangle|tau|therefore|to\b|tilde|top|tfrac|textbf|textrm|frac|forall|flat|fbox|begin|beta|bar|binom|boxed|bullet|big|Big|backslash|bot|mathbf|mathbb|mathcal|mathrm|right|rho|rightarrow|Rightarrow|rangle|rceil|rfloor|neq|nabla|nu\b|notin|neg\b|natural|newline)/;
+
+            for (let i = 0; i < len; i++) {
+                const ch = jsonStr[i];
+
+                if (!inString) {
+                    if (ch === '"') {
+                        inString = true;
+                    }
+                    out += ch;
+                } else {
+                    if (ch === '"') {
+                        inString = false;
+                        out += ch;
+                    } else if (ch === '\n') {
+                        out += "\\n";
+                    } else if (ch === '\r') {
+                        out += "\\r";
+                    } else if (ch === '\t') {
+                        out += "\\t";
+                    } else if (ch === '\\') {
+                        const next = jsonStr[i + 1];
+                        if (next === undefined) {
+                            out += "\\\\";
+                            continue;
+                        }
+                        // 已经是双反斜杠 \\，保持原样并跳过下一个 \
+                        if (next === '\\') {
+                            out += "\\\\";
+                            i++;
+                            continue;
+                        }
+                        // 合法的引号或斜杠转义 \" \/
+                        if (next === '"' || next === '/') {
+                            out += "\\" + next;
+                            i++;
+                            continue;
+                        }
+                        // 合法的 Unicode 转义 \uXXXX
+                        if (next === 'u' && /^[0-9a-fA-F]{4}$/.test(jsonStr.slice(i + 2, i + 6))) {
+                            out += jsonStr.slice(i, i + 6);
+                            i += 5;
+                            continue;
+                        }
+                        // 检查以 t/f/b/r/n 开头的究竟是 JSON 控制符还是 LaTeX 命令（如 \frac, \times, \theta, \begin, \right, \neq）
+                        const rest = jsonStr.slice(i + 1);
+                        if (latexCommandsStartingWithControlLetters.test(rest) || next === 'b' || next === 'f') {
+                            out += "\\\\";
+                            continue;
+                        }
+                        if (next === 'n' || next === 'r' || next === 't') {
+                            out += "\\" + next;
+                            i++;
+                            continue;
+                        }
+                        // 其他所有单反斜杠（如 \sqrt, \sin, \cos, \pm, \cdot, \div, \alpha, \leq, \(, \) 等）全部补齐为双反斜杠
+                        out += "\\\\";
+                    } else {
+                        out += ch;
+                    }
+                }
+            }
+            return out;
+        }
+
+        /**
+         * 当模型返回非标准 JSON 或带有未转义引号时，精准提取各个字段及最终答案
+         */
+        function extractFieldsFallback(text) {
+            const extractStringField = (key) => {
+                const regex = new RegExp(`"${key}"\\s*:\\s*"([\\s\\S]*?)"(?=\\s*,\\s*"(?:subject|difficulty|matchedGrade|ocrText|steps|verification|finalAnswer|keyPoints|pitfalls|similarQuestion|voiceScript)"|\\s*\\})`, "i");
+                const m = text.match(regex);
+                return m ? m[1].replace(/\\n/g, "\n").replace(/\\"/g, '"') : "";
+            };
+
+            let finalAns = extractStringField("finalAnswer");
+            if (!finalAns) {
+                // 从文本中匹配【最终答案】或“答：”
+                const ansMatch = text.match(/(?:最终答案|【答案】|答案结论|答)[:：]\s*([^\n]+(?:\n(?!(?:【|第一步|步骤))[^\n]+)*)/i);
+                if (ansMatch) finalAns = ansMatch[1].trim();
+            }
+
+            const ocrText = extractStringField("ocrText");
+            const pitfalls = extractStringField("pitfalls");
+            const subject = extractStringField("subject") || "智能学科";
+            const difficulty = extractStringField("difficulty") || "⭐⭐⭐ 中等";
+
+            // 尝试提取 steps 数组
+            const steps = [];
+            const stepRegex = /"title"\s*:\s*"([^"]*)"\s*,\s*"explanation"\s*:\s*"([\s\S]*?)"(?=\s*\})/g;
+            let sm;
+            while ((sm = stepRegex.exec(text)) !== null) {
+                steps.push({
+                    title: sm[1],
+                    explanation: sm[2].replace(/\\n/g, "\n").replace(/\\"/g, '"')
+                });
+            }
+
+            if (finalAns || ocrText || steps.length > 0) {
+                return {
+                    subject,
+                    difficulty,
+                    matchedGrade: "AI 名师精算",
+                    ocrText: ocrText || "详见下方题目分析",
+                    finalAnswer: finalAns || (steps.length > 0 ? steps[steps.length - 1].explanation : "请见下方推导结论"),
+                    steps: steps.length > 0 ? steps : [{ title: "名师推导过程", explanation: text }],
+                    keyPoints: ["核心考点解析"],
+                    pitfalls: pitfalls || "注意审题与计算过程核对。",
+                    similarQuestion: {
+                        question: "可在下方追问框向 AI 老师索取同类变式练习题。",
+                        answerAndAnalysis: "在下方输入「再出一道变式题」即可。"
+                    },
+                    voiceScript: (finalAns || "").replace(/[\$\*\#\`]/g, "").slice(0, 140)
+                };
+            }
+            return null;
+        }
+
+        /**
+         * Safely parses AI response into our structured solution schema.
+         * Automatically repairs LaTeX backslashes in JSON and guarantees finalAnswer is extracted.
+         */
+        function parseOrWrapSolutionResponse(rawText, modelName = "") {
+            if (!rawText) throw new Error("模型返回内容为空");
+            let cleaned = rawText.trim();
+            // Strip markdown code fences if present
+            cleaned = cleaned.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/i, "").trim();
+
+            // Extract first {...} block if surrounded by extra text
+            const firstBrace = cleaned.indexOf("{");
+            const lastBrace = cleaned.lastIndexOf("}");
+            const jsonCandidate = (firstBrace !== -1 && lastBrace > firstBrace)
+                ? cleaned.slice(firstBrace, lastBrace + 1)
+                : cleaned;
+
+            // 1. Try parsing with LaTeX backslash repair first (prevents \frac, \sqrt, \times from breaking JSON.parse)
+            try {
+                const repaired = repairLatexInJsonString(jsonCandidate);
+                const parsed = JSON.parse(repaired);
+                if (parsed && typeof parsed === "object") {
+                    return ensureFinalAnswerPresent(sanitizeSolutionObject(parsed));
+                }
+            } catch (e) {}
+
+            // 2. Try direct JSON.parse as backup
+            try {
+                const parsed = JSON.parse(jsonCandidate);
+                if (parsed && typeof parsed === "object") {
+                    return ensureFinalAnswerPresent(sanitizeSolutionObject(parsed));
+                }
+            } catch (e) {}
+
+            // 3. Try regex field extraction if JSON had unescaped quotes
+            const extracted = extractFieldsFallback(jsonCandidate);
+            if (extracted) {
+                return ensureFinalAnswerPresent(sanitizeSolutionObject(extracted));
+            }
+
+            // 4. Plain text / Markdown intelligent parser
+            const safeContent = normalizeMathText(cleaned);
+            let deducedAnswer = "";
+            const ansBlockMatch = safeContent.match(/(?:【最终答案】|最终答案|【答案】|答案结论|综上所述，|答：|所以最终答案为)[:：\s]*([\s\S]+?)(?:\n\n|\n(?:【|易错|考点)|$)/i);
+            if (ansBlockMatch && ansBlockMatch[1]) {
+                deducedAnswer = ansBlockMatch[1].trim();
+            } else {
+                const nonEmptyLines = safeContent.split("\n").map(l => l.trim()).filter(Boolean);
+                deducedAnswer = nonEmptyLines[nonEmptyLines.length - 1] || safeContent;
+            }
+
+            return ensureFinalAnswerPresent(sanitizeSolutionObject({
+                subject: "智能识别",
+                difficulty: "⭐⭐⭐ 综合",
+                matchedGrade: modelName || "AI 名师精讲",
+                ocrText: "题目已识别（见下方推导）",
+                finalAnswer: deducedAnswer,
+                steps: [
+                    {
+                        title: "名师完整推导与解答",
+                        explanation: safeContent
+                    }
+                ],
+                keyPoints: ["图文识别", "逻辑推导"],
+                pitfalls: "请注意核对题目中的已知条件与单位换算。",
+                similarQuestion: {
+                    question: "可根据上方解析，在下方追问框向 AI 老师提问具体步骤。",
+                    answerAndAnalysis: "在下方输入您的疑问即可开启互动答疑。"
+                },
+                voiceScript: deducedAnswer.replace(/[\$\*\#\`]/g, "").slice(0, 140)
+            }));
+        }
+
+        /**
+         * 确保 finalAnswer 一定有具体答案内容，绝不留空或显示敷衍占位符
+         */
+        function ensureFinalAnswerPresent(data) {
+            if (!data) return data;
+            const invalidPlaceholders = ["详见下方识别与推导内容", "详见下方", "略", "见解析", ""];
+            const ans = (data.finalAnswer || "").trim();
+            if (!ans || invalidPlaceholders.includes(ans)) {
+                if (Array.isArray(data.steps) && data.steps.length > 0) {
+                    const lastStep = data.steps[data.steps.length - 1];
+                    data.finalAnswer = lastStep.explanation || lastStep.title || "请查看下方最后一步推导结论";
+                } else if (data.verification) {
+                    data.finalAnswer = data.verification;
+                }
+            }
+            return data;
+        }
+
+        function loadImageFile(file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                loadImageFromDataUrl(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function loadImageFromDataUrl(dataUrl, autoSolve = false) {
+            stopLiveCamera();
+            const img = new Image();
+            img.onload = function () {
+                currentImageObj = img;
+                imageRotation = 0;
+                bwEnhanced = false;
+                document.getElementById("uploadDropzone").classList.add("hidden");
+                document.getElementById("cameraViewfinder").classList.add("hidden");
+                document.getElementById("imageEditorWorkspace").classList.remove("hidden");
+                document.getElementById("captureStateLabel").textContent = "可拖动选框截取单题";
+                renderImageToCanvas(true);
+                if (autoSolve) {
+                    solveCurrentQuestion();
+                }
+            };
+            img.src = dataUrl;
+        }
+
+        /**
+         * 是否为触摸 / 移动设备。
+         * 只有移动端的 <input capture> 才会真正调起系统相机；
+         * 桌面浏览器会忽略 capture 属性，退化成普通文件选择框——
+         * 那样「拍照」和「从相册选图」就变成完全一样的操作了。
+         */
+        function canUseNativeCameraInput() {
+            const ua = navigator.userAgent || "";
+            return /Android|iPhone|iPad|iPod|Mobile|HarmonyOS|MiuiBrowser/i.test(ua)
+                || (navigator.maxTouchPoints || 0) > 1;
+        }
+
+        /**
+         * 「拍照」入口：只调用摄像头，绝不打开文件选择框。
+         * 桌面端失败时给出可操作的错误提示，而不是退化成选图（那是「从相册选图」的职责）。
+         */
+        async function startLiveCamera() {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                if (canUseNativeCameraInput()) {
+                    document.getElementById("mobileCameraInput").click();
+                    return;
+                }
+                showToast("当前环境无法调用摄像头（需要通过 http(s)/localhost 打开页面）", "error");
+                return;
+            }
+            try {
+                stopLiveCamera();
+                activeStream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: cameraFacingMode,
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 }
+                    },
+                    audio: false
+                });
+                const videoEl = document.getElementById("cameraVideo");
+                videoEl.srcObject = activeStream;
+                document.getElementById("uploadDropzone").classList.add("hidden");
+                document.getElementById("imageEditorWorkspace").classList.add("hidden");
+                document.getElementById("cameraViewfinder").classList.remove("hidden");
+                document.getElementById("captureStateLabel").textContent = "相机实拍取景中";
+            } catch (err) {
+                const name = err && err.name ? err.name : "";
+                const reason = name === "NotAllowedError" || name === "SecurityError"
+                    ? "摄像头权限被拒绝，请点击地址栏的相机图标选择「允许」后重试"
+                    : name === "NotFoundError" || name === "DevicesNotFoundError"
+                        ? "没有检测到可用摄像头"
+                        : name === "NotReadableError" || name === "TrackStartError"
+                            ? "摄像头正被其它程序占用"
+                            : name === "OverconstrainedError"
+                                ? "摄像头不支持所需的分辨率"
+                                : "无法调起摄像头（" + (name || "未知错误") + "）";
+                // 移动端：capture 输入会真正打开相机，可以兜底
+                // 桌面端：capture 无效，点击 input 只会弹出选图框，因此绝不回退
+                if (canUseNativeCameraInput()) {
+                    showToast(reason + "，已切换为系统相机", "info");
+                    document.getElementById("mobileCameraInput").click();
+                    return;
+                }
+                showToast(reason + "；若要上传已有照片，请使用「从相册选图」", "error");
+                console.error("[startLiveCamera]", err);
+            }
+        }
+
+        function stopLiveCamera() {
+            if (activeStream) {
+                activeStream.getTracks().forEach(track => track.stop());
+                activeStream = null;
+            }
+            document.getElementById("cameraViewfinder").classList.add("hidden");
+        }
+
+        function switchCameraFacing() {
+            cameraFacingMode = cameraFacingMode === "environment" ? "user" : "environment";
+            startLiveCamera();
+        }
+
+        function takeCameraSnapshot() {
+            const videoEl = document.getElementById("cameraVideo");
+            if (!videoEl.videoWidth) return;
+            const tempCanvas = document.createElement("canvas");
+            tempCanvas.width = videoEl.videoWidth;
+            tempCanvas.height = videoEl.videoHeight;
+            const ctx = tempCanvas.getContext("2d");
+            ctx.drawImage(videoEl, 0, 0);
+            const dataUrl = tempCanvas.toDataURL("image/jpeg", 0.92);
+            stopLiveCamera();
+            loadImageFromDataUrl(dataUrl);
+            showToast("拍照成功！您可以框选需要解答的题目", "success");
+        }
+
+        function renderImageToCanvas(resetCrop = false) {
+            if (!currentImageObj) return;
+            const canvas = document.getElementById("sourceImageCanvas");
+            const ctx = canvas.getContext("2d");
+
+            const isRotated90 = (imageRotation % 180) !== 0;
+            const rawW = isRotated90 ? currentImageObj.height : currentImageObj.width;
+            const rawH = isRotated90 ? currentImageObj.width : currentImageObj.height;
+
+            // Scale down reasonably to fit display & keep crisp OCR resolution
+            const maxDim = 1000;
+            let scale = 1;
+            if (rawW > maxDim || rawH > maxDim) {
+                scale = Math.min(maxDim / rawW, maxDim / rawH);
+            }
+
+            canvas.width = Math.round(rawW * scale);
+            canvas.height = Math.round(rawH * scale);
+
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.rotate((imageRotation * Math.PI) / 180);
+            const drawW = isRotated90 ? canvas.height : canvas.width;
+            const drawH = isRotated90 ? canvas.width : canvas.height;
+            ctx.drawImage(currentImageObj, -drawW / 2, -drawH / 2, drawW, drawH);
+            ctx.restore();
+
+            if (bwEnhanced) {
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const d = imgData.data;
+                for (let i = 0; i < d.length; i += 4) {
+                    const gray = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+                    // Soft adaptive contrast stretch for clearer text
+                    const enhanced = gray < 165 ? Math.max(0, (gray - 60) * 0.7) : Math.min(255, gray * 1.15);
+                    d[i] = d[i + 1] = d[i + 2] = enhanced;
+                }
+                ctx.putImageData(imgData, 0, 0);
+            }
+
+            // Wait for layout paint to sync crop overlay
+            requestAnimationFrame(() => {
+                if (resetCrop) {
+                    resetCropFull();
+                } else {
+                    updateCropBoxDOM();
+                }
+            });
+        }
+
+        function rotateLoadedImage() {
+            imageRotation = (imageRotation + 90) % 360;
+            renderImageToCanvas(true);
+        }
+
+        function toggleBWEnhance() {
+            bwEnhanced = !bwEnhanced;
+            const btn = document.getElementById("bwEnhanceBtn");
+            if (bwEnhanced) {
+                btn.classList.add("bg-indigo-600", "text-white");
+                btn.classList.remove("bg-slate-800", "text-slate-200");
+                showToast("已开启试卷黑白扫描增强", "info");
+            } else {
+                btn.classList.remove("bg-indigo-600", "text-white");
+                btn.classList.add("bg-slate-800", "text-slate-200");
+            }
+            renderImageToCanvas(false);
+        }
+
+        function resetCropFull() {
+            const canvas = document.getElementById("sourceImageCanvas");
+            const rect = canvas.getBoundingClientRect();
+            const padX = Math.round(rect.width * 0.04);
+            const padY = Math.round(rect.height * 0.04);
+            cropRect = {
+                x: padX,
+                y: padY,
+                w: Math.max(60, rect.width - padX * 2),
+                h: Math.max(50, rect.height - padY * 2)
+            };
+            updateCropBoxDOM();
+        }
+
+        function updateCropBoxDOM() {
+            const canvas = document.getElementById("sourceImageCanvas");
+            const container = document.getElementById("cropStageContainer");
+            const cropBox = document.getElementById("cropBox");
+
+            const canvasBounds = canvas.getBoundingClientRect();
+            const containerBounds = container.getBoundingClientRect();
+
+            const offsetX = canvasBounds.left - containerBounds.left;
+            const offsetY = canvasBounds.top - containerBounds.top;
+
+            cropBox.style.left = `${offsetX + cropRect.x}px`;
+            cropBox.style.top = `${offsetY + cropRect.y}px`;
+            cropBox.style.width = `${cropRect.w}px`;
+            cropBox.style.height = `${cropRect.h}px`;
+        }
+
+        function initCropInteractions() {
+            const cropBox = document.getElementById("cropBox");
+            let dragMode = null; // 'move' or 'nw','ne','sw','se'
+            let startX = 0, startY = 0;
+            let initialCrop = { ...cropRect };
+
+            function onPointerDown(e) {
+                if (isSolving) return;
+                const touch = e.touches ? e.touches[0] : e;
+                const handle = e.target.getAttribute("data-handle");
+                dragMode = handle ? handle : "move";
+                startX = touch.clientX;
+                startY = touch.clientY;
+                initialCrop = { ...cropRect };
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            function onPointerMove(e) {
+                if (!dragMode) return;
+                const touch = e.touches ? e.touches[0] : e;
+                const dx = touch.clientX - startX;
+                const dy = touch.clientY - startY;
+
+                const canvas = document.getElementById("sourceImageCanvas");
+                const bounds = canvas.getBoundingClientRect();
+                const minSize = 44;
+
+                if (dragMode === "move") {
+                    cropRect.x = Math.max(0, Math.min(bounds.width - initialCrop.w, initialCrop.x + dx));
+                    cropRect.y = Math.max(0, Math.min(bounds.height - initialCrop.h, initialCrop.y + dy));
+                } else {
+                    if (dragMode.includes("e")) {
+                        cropRect.w = Math.max(minSize, Math.min(bounds.width - initialCrop.x, initialCrop.w + dx));
+                    }
+                    if (dragMode.includes("s")) {
+                        cropRect.h = Math.max(minSize, Math.min(bounds.height - initialCrop.y, initialCrop.h + dy));
+                    }
+                    if (dragMode.includes("w")) {
+                        const maxDx = initialCrop.w - minSize;
+                        const clampedDx = Math.max(-initialCrop.x, Math.min(maxDx, dx));
+                        cropRect.x = initialCrop.x + clampedDx;
+                        cropRect.w = initialCrop.w - clampedDx;
+                    }
+                    if (dragMode.includes("n")) {
+                        const maxDy = initialCrop.h - minSize;
+                        const clampedDy = Math.max(-initialCrop.y, Math.min(maxDy, dy));
+                        cropRect.y = initialCrop.y + clampedDy;
+                        cropRect.h = initialCrop.h - clampedDy;
+                    }
+                }
+                updateCropBoxDOM();
+            }
+
+            function onPointerUp() {
+                dragMode = null;
+            }
+
+            cropBox.addEventListener("mousedown", onPointerDown);
+            cropBox.addEventListener("touchstart", onPointerDown, { passive: false });
+            window.addEventListener("mousemove", onPointerMove);
+            window.addEventListener("touchmove", onPointerMove, { passive: false });
+            window.addEventListener("mouseup", onPointerUp);
+            window.addEventListener("touchend", onPointerUp);
+            window.addEventListener("resize", () => {
+                if (currentImageObj) resetCropFull();
+            });
+        }
+
+        function getCroppedBase64Image() {
+            if (!currentImageObj) return null;
+            const canvas = document.getElementById("sourceImageCanvas");
+            const bounds = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / bounds.width;
+            const scaleY = canvas.height / bounds.height;
+
+            const sx = Math.max(0, Math.round(cropRect.x * scaleX));
+            const sy = Math.max(0, Math.round(cropRect.y * scaleY));
+            const sw = Math.min(canvas.width - sx, Math.round(cropRect.w * scaleX));
+            const sh = Math.min(canvas.height - sy, Math.round(cropRect.h * scaleY));
+
+            const outCanvas = document.createElement("canvas");
+            outCanvas.width = Math.max(1, sw);
+            outCanvas.height = Math.max(1, sh);
+            const outCtx = outCanvas.getContext("2d");
+            outCtx.drawImage(canvas, sx, sy, sw, sh, 0, 0, outCanvas.width, outCanvas.height);
+
+            const dataUrl = outCanvas.toDataURL("image/jpeg", 0.9);
+            return dataUrl.split(",")[1];
+        }
+
+        function resetToNewQuestion() {
+            stopLiveCamera();
+            currentImageObj = null;
+            document.getElementById("imageEditorWorkspace").classList.add("hidden");
+            document.getElementById("cameraViewfinder").classList.add("hidden");
+            document.getElementById("uploadDropzone").classList.remove("hidden");
+            document.getElementById("captureStateLabel").textContent = "支持单题框选 / 手写识别";
+            document.getElementById("customPromptInput").value = "";
+        }
+
+        function loadSampleQuestion(type) {
+            const sampleCanvas = document.createElement("canvas");
+            sampleCanvas.width = 760;
+            sampleCanvas.height = 420;
+            const ctx = sampleCanvas.getContext("2d");
+
+            // Realistic warm paper background with subtle grain lines
+            ctx.fillStyle = "#fdfcf7";
+            ctx.fillRect(0, 0, sampleCanvas.width, sampleCanvas.height);
+
+            // Subtle notebook/exam grid lines
+            ctx.strokeStyle = "#f1efe6";
+            ctx.lineWidth = 1;
+            for (let y = 40; y < sampleCanvas.height; y += 36) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(sampleCanvas.width, y);
+                ctx.stroke();
+            }
+
+            // Header stamp
+            ctx.fillStyle = "#64748b";
+            ctx.font = "500 15px 'Noto Sans SC', sans-serif";
+            ctx.fillText("2026 学年名校联考模拟卷 · 拍照识别样题", 38, 42);
+
+            ctx.strokeStyle = "#cbd5e1";
+            ctx.beginPath();
+            ctx.moveTo(38, 55);
+            ctx.lineTo(722, 55);
+            ctx.stroke();
+
+            ctx.fillStyle = "#0f172a";
+            if (type === "math") {
+                ctx.font = "bold 22px 'Noto Sans SC', sans-serif";
+                ctx.fillText("15.（本小题满分 12 分）", 38, 100);
+                ctx.font = "21px 'Noto Sans SC', serif";
+                ctx.fillText("已知二次函数 f(x) = x² - 4x + 3 的图像与 x 轴交于 A、B 两点", 38, 145);
+                ctx.fillText("（点 A 在点 B 左侧），与 y 轴交于点 C，顶点为 D。", 38, 185);
+                ctx.fillText("（1）求点 A、B、C 及顶点 D 的坐标；", 38, 240);
+                ctx.fillText("（2）求四边形 ABCD 的面积。", 38, 285);
+
+                // Simulated student handwritten note in blue pen
+                ctx.fillStyle = "#2563eb";
+                ctx.font = "italic 18px 'Noto Sans SC', cursive";
+                ctx.fillText("手写笔记：令 x² - 4x + 3 = 0, (x-1)(x-3)=0，所以 A(1,0), B(3,0) 对吗？", 50, 355);
+            } else if (type === "physics") {
+                ctx.font = "bold 22px 'Noto Sans SC', sans-serif";
+                ctx.fillText("8.（力学计算题 · 14 分）", 38, 100);
+                ctx.font = "20px 'Noto Sans SC', serif";
+                ctx.fillText("如图所示，倾角 θ = 37° 的足够长固定斜面上，有一质量 m = 2 kg", 38, 145);
+                ctx.fillText("的物块。物块与斜面间的动摩擦因数 μ = 0.5。现由静止释放物块，", 38, 185);
+                ctx.fillText("取重力加速度 g = 10 m/s²，sin37° = 0.6，cos37° = 0.8。求：", 38, 225);
+                ctx.fillText("（1）物块沿斜面下滑的加速度大小 a；", 38, 275);
+                ctx.fillText("（2）物块下滑 t = 3 s 末的速度大小 v 和下滑的位移大小 x。", 38, 315);
+
+                // Draw inclined plane diagram on the right
+                ctx.strokeStyle = "#1e293b";
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+                ctx.moveTo(540, 360);
+                ctx.lineTo(710, 360);
+                ctx.lineTo(540, 240);
+                ctx.closePath();
+                ctx.stroke();
+                ctx.fillStyle = "#4f46e5";
+                ctx.save();
+                ctx.translate(600, 282);
+                ctx.rotate(Math.atan2(120, 170));
+                ctx.fillRect(-20, -28, 40, 28);
+                ctx.restore();
+                ctx.fillStyle = "#0f172a";
+                ctx.font = "16px sans-serif";
+                ctx.fillText("θ=37°", 640, 352);
+            } else if (type === "chemistry") {
+                ctx.font = "bold 22px 'Noto Sans SC', sans-serif";
+                ctx.fillText("12.（氧化还原反应与计算 · 10 分）", 38, 100);
+                ctx.font = "20px 'Noto Sans SC', serif";
+                ctx.fillText("实验室常用高锰酸钾与浓盐酸反应制取氯气，其未配平的化学反应为：", 38, 150);
+                ctx.font = "bold 22px 'Inter', serif";
+                ctx.fillText("___ KMnO₄ + ___ HCl(浓) === ___ KCl + ___ MnCl₂ + ___ Cl₂↑ + ___ H₂O", 38, 200);
+                ctx.font = "20px 'Noto Sans SC', serif";
+                ctx.fillText("（1）请配平上述化学方程式，并指出氧化剂与还原剂；", 38, 260);
+                ctx.fillText("（2）若反应生成标准状况下 11.2 L 氯气（Cl₂），求转移电子的物质的量。", 38, 310);
+            } else if (type === "calculus") {
+                ctx.font = "bold 22px 'Noto Sans SC', sans-serif";
+                ctx.fillText("三、高等数学计算题（本题满分 10 分）", 38, 100);
+                ctx.font = "21px 'Noto Sans SC', serif";
+                ctx.fillText("计算下列极限与定积分：", 38, 150);
+                ctx.font = "bold 23px 'Inter', serif";
+                ctx.fillText("(1)  求极限： lim (x → 0)  [ (1 + x)^(1/x) - e ] / x", 52, 215);
+                ctx.fillText("(2)  计算定积分： ∫ (从 0 到 π/2)  x · cos(x) dx", 52, 285);
+                ctx.font = "17px 'Noto Sans SC', sans-serif";
+                ctx.fillStyle = "#475569";
+                ctx.fillText("提示：第(2)题请使用分部积分法写出详细推导过程。", 52, 345);
+            }
+
+            const dataUrl = sampleCanvas.toDataURL("image/jpeg", 0.92);
+            loadImageFromDataUrl(dataUrl, true);
+        }
+
+        async function callGeminiWithRetry(url, payload, maxRetries = 4) {
+            let delay = 1000;
+            for (let attempt = 0; attempt <= maxRetries; attempt++) {
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) {
+                        if ((response.status === 429 || response.status >= 500) && attempt < maxRetries) {
+                            await new Promise(r => setTimeout(r, delay));
+                            delay *= 2;
+                            continue;
+                        }
+                        const errText = await response.text();
+                        throw new Error(`API 请求状态异常 (${response.status}): ${errText}`);
+                    }
+                    return await response.json();
+                } catch (err) {
+                    if (attempt === maxRetries) throw err;
+                    await new Promise(r => setTimeout(r, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        async function solveCurrentQuestion() {
+            if (isSolving) return;
+
+            const customPrompt = document.getElementById("customPromptInput").value.trim();
+            const croppedBase64 = getCroppedBase64Image();
+
+            if (!croppedBase64 && !customPrompt) {
+                showToast("请先拍摄/上传一张题目图片，或在补充框输入文字题目", "error");
+                return;
+            }
+
+            isSolving = true;
+            currentCroppedBase64 = croppedBase64;
+            const solveBtn = document.getElementById("solveBtn");
+            const solveBtnText = document.getElementById("solveBtnText");
+            const laser = document.getElementById("scanningLaser");
+
+            solveBtn.disabled = true;
+            solveBtn.classList.add("opacity-75");
+            solveBtnText.textContent = "AI 名师正在审题与演算...";
+            if (laser) laser.classList.remove("hidden");
+
+            // Switch right panel to loading skeleton
+            document.getElementById("solutionEmptyState").classList.add("hidden");
+            document.getElementById("solutionResultContainer").classList.add("hidden");
+            document.getElementById("solutionLoadingState").classList.remove("hidden");
+
+            const gradeLevel = document.getElementById("gradeSelect").value;
+            const solveMode = document.getElementById("modeSelect").value;
+
+            const modeInstructionMap = {
+                detailed: "请提供完整、详尽的分步推导过程，每一步都要写清依据或公式。",
+                check: "如果图片中包含手写作答或批注，请重点先判断手写步骤是否正确，指出对错原因，再给出标准解答。",
+                hint: "采用启发式教学：在分步解析中先给思路引导和关键公式提示，帮助学生自己思考，但在 finalAnswer 中仍给出准确结果供核对。",
+                concise: "采用极简速查模式：步骤尽量精炼扼要，直击核心算式与最终结论。"
+            };
+
+            const systemInstruction = `你是一位全科金牌名师与智能拍题解题专家。
+请仔细识别用户上传的题目图片（或文字题目），并严格按照指定的 JSON 结构返回解答。
+【核心铁律：先分步严密推导验算，最后再写最终答案！】：
+1. 严禁在未推导前直接猜测答案！你必须按照以下思维链顺序生成 JSON：
+   - 第一步（ocrText）：逐字核对并完整还原题干、数字、正负号、上下标、选项及几何/物理图表中的已知条件。如果有多个小问，请直接用 (1)、(2) 换行排版，**严禁使用 \\begin{enumerate}、\\item、\\end{enumerate}、\\begin{itemize} 等 LaTeX 排版列表标签**！
+   - 第二步（steps）：在 steps 数组中一步一步列出公式、代入数据、严密计算每一个环节，并在最后一步进行验算核对。
+   - 第三步（finalAnswer）：**必须在 steps 全部推导并验算完毕后**，将最终算出的准确答案清晰汇总填入 finalAnswer（如果有多个小问或选择题选项，必须明确写出如：(1) ...；(2) ... 或 选 C，答案是 ...），严禁留空或写“见解析”！
+2. 数学、物理、化学公式或变量符号必须使用标准 LaTeX 语法包裹：行内公式用单美元符号如 $x^2 + 2x + 1 = 0$，独立成行公式用双美元符号如 $$\\int_0^1 x^2 dx = \\frac{1}{3}$$。
+3. 乘号请直接使用符号 ×，除号请直接使用符号 ÷。严禁输出 \\begin{enumerate} 或 \\item。
+4. 适用学段要求：${gradeLevel}。
+5. 讲解风格要求：${modeInstructionMap[solveMode] || modeInstructionMap.detailed}`;
+
+            const userParts = [];
+            let promptText = "请先完整识别题目，然后一步步严谨推导验算，最后给出准确的最终答案。";
+            if (customPrompt) {
+                promptText += `\n用户额外补充要求或题干：${customPrompt}`;
+            }
+            userParts.push({ text: promptText });
+
+            if (croppedBase64) {
+                userParts.push({
+                    inlineData: {
+                        mimeType: "image/jpeg",
+                        data: croppedBase64
+                    }
+                });
+            }
+
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: userParts
+                }],
+                systemInstruction: {
+                    parts: [{ text: systemInstruction }]
+                },
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            subject: { type: "STRING", description: "学科名称，如：数学、物理、化学、英语、生物等" },
+                            difficulty: { type: "STRING", description: "难度评级，如：⭐⭐ 基础、⭐⭐⭐ 中等、⭐⭐⭐⭐ 较难" },
+                            matchedGrade: { type: "STRING", description: "识别出的适用学段，如：初中数学、高中物理、大学高数等" },
+                            ocrText: { type: "STRING", description: "第一步：完整准确还原识别出的题干文本与已知条件，公式用 $...$ 包裹" },
+                            steps: {
+                                type: "ARRAY",
+                                description: "第二步：先一步一步进行严密的公式推导与数值计算，最后一步进行结果验算",
+                                items: {
+                                    type: "OBJECT",
+                                    properties: {
+                                        title: { type: "STRING", description: "本步骤简短标题，如：第一步：审题与列式" },
+                                        explanation: { type: "STRING", description: "本步骤的详细推导过程与公式演算，使用 $...$ 或 $$...$$ 表示公式" }
+                                    },
+                                    propertyOrdering: ["title", "explanation"]
+                                }
+                            },
+                            finalAnswer: { type: "STRING", description: "第三步（最重要）：在完成上面所有 steps 推导和验算后，将最终得出的准确答案明确写在这里！包含具体数值、表达式或选项字母，严禁写'见下方解析'" },
+                            keyPoints: {
+                                type: "ARRAY",
+                                items: { type: "STRING" },
+                                description: "本题考察的 2-4 个核心知识点标签"
+                            },
+                            pitfalls: { type: "STRING", description: "本题常见易错点提醒或解题技巧总结" },
+                            similarQuestion: {
+                                type: "OBJECT",
+                                properties: {
+                                    question: { type: "STRING", description: "一道紧扣本题考点的举一反三同类变式练习题" },
+                                    answerAndAnalysis: { type: "STRING", description: "该变式题的答案与简要解析" }
+                                },
+                                propertyOrdering: ["question", "answerAndAnalysis"]
+                            },
+                            voiceScript: {
+                                type: "STRING",
+                                description: "一段适合老师口语朗读的100字左右纯文本讲题总结"
+                            }
+                        },
+                        // 关键顺序：强制先生成 ocrText -> 再生成 steps 一步步算完 -> 最后才生成 finalAnswer！
+                        propertyOrdering: [
+                            "subject", "difficulty", "matchedGrade", "ocrText",
+                            "steps", "finalAnswer", "keyPoints", "pitfalls",
+                            "similarQuestion", "voiceScript"
+                        ]
+                    }
+                }
+            };
+
+            const cfg = getSavedApiConfig();
+            const effectiveGeminiKey = cfg.geminiKey || apiKey;
+            const baseUrl = cfg.geminiBaseUrl || "https://generativelanguage.googleapis.com";
+            const apiUrl = `${baseUrl}/v1beta/models/gemini-3-flash-preview:generateContent?key=${effectiveGeminiKey}`;
+
+            try {
+                let rawJsonText = "";
+
+                if (cfg.provider === "openai") {
+                    if (!cfg.openaiKey) {
+                        throw new Error("您选择了 OpenAI/千问 兼容接口模式，但尚未填写 API Key，请在右上角「接口配置」中填入 Key");
+                    }
+                    const endpointUrl = normalizeOpenAiEndpoint(cfg.openaiUrl);
+                    const visionModelName = (cfg.openaiModel || "qwen-vl-max").trim();
+                    const reasoningModelName = (cfg.ocrReasoningModel || "qwen-plus").trim();
+                    const solveStepTitle = document.getElementById("loadingStepTitle");
+
+                    // 严格遵循思维链顺序的 JSON 模板：先 ocrText，再 steps 一步步算完，最后才填 finalAnswer！
+                    const buildCoTJsonPrompt = (recognizedQuestionText) => `${systemInstruction}
+
+${recognizedQuestionText ? `【已从试卷图片精准提取的题目内容】：\n${recognizedQuestionText}\n` : ""}
+${promptText}
+
+请务必**先在 steps 中一步步推导计算出正确结果**，**最后再把算出的准确答案写入 finalAnswer**！
+严格输出如下 JSON 格式（不要输出任何多余解释）：
+{
+  "subject": "学科名称",
+  "difficulty": "⭐⭐⭐ 中等",
+  "matchedGrade": "适用学段",
+  "ocrText": "完整准确的题目文本（含选项或各小问），公式用 $...$ 包裹",
+  "steps": [
+    { "title": "第一步：审题与提取已知条件", "explanation": "详细推导与公式演算过程..." },
+    { "title": "第二步：代入公式求解与验算", "explanation": "详细计算过程并核对结果..." }
+  ],
+  "finalAnswer": "明确的最终答案（例如：(1) A(1,0), B(3,0)；(2) 面积为 4，或者选择题选项+结果，绝不能写'见解析'）",
+  "keyPoints": ["核心考点1", "核心考点2"],
+  "pitfalls": "易错点提醒",
+  "similarQuestion": { "question": "同类变式题", "answerAndAnalysis": "变式题答案与解析" },
+  "voiceScript": "100字左右口语讲题总结"
+}`;
+
+                    let extractedQuestionFromImage = "";
+
+                    // 第一阶段：如果有图片，先调用视觉/OCR模型专注100%精准识图（不做复杂JSON算题，避免OCR模型算错题！）
+                    if (croppedBase64) {
+                        if (solveStepTitle) {
+                            solveStepTitle.textContent = `第一步：正在使用 ${visionModelName} 精准识别题干与公式...`;
+                        }
+                        const isOcrDedicated = visionModelName.toLowerCase().includes("ocr");
+                        const ocrPrompt = isOcrDedicated
+                            ? "请精准识别并原样输出图片中的所有题目文字、数学物理化学公式、数字、上下标、选项及手写批注。公式请用 $...$ 表示，小题序号请直接用 (1) (2) 表示，不要输出 \\begin{enumerate} 或 \\item。"
+                            : "请仔细观察并完整提取图片中的题目原文、所有数学/物理/化学公式（用 $...$ 包裹）、选项，以及几何图形/函数图像/受力图中的所有标注、角度、数值和位置关系，小题序号直接用 (1) (2) 表示，不要使用 \\begin{enumerate} 或 \\item。";
+
+                        const ocrRes = await fetch(endpointUrl, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${cfg.openaiKey}`
+                            },
+                            body: JSON.stringify({
+                                model: visionModelName,
+                                messages: [{
+                                    role: "user",
+                                    content: [
+                                        { type: "image_url", image_url: { url: `data:image/jpeg;base64,${croppedBase64}` } },
+                                        { type: "text", text: ocrPrompt }
+                                    ]
+                                }]
+                            })
+                        });
+
+                        if (!ocrRes.ok) {
+                            const errBody = await ocrRes.text();
+                            throw new Error(`视觉识图接口返回 HTTP ${ocrRes.status} (${endpointUrl})：${errBody.slice(0, 180)}`);
+                        }
+
+                        const ocrData = await ocrRes.json();
+                        extractedQuestionFromImage = (ocrData?.choices?.[0]?.message?.content || "").trim();
+                    }
+
+                    // 第二阶段：调用与下方「AI 老师」完全同款的推理模型（如 qwen-plus）进行深度演算与分步解答
+                    if (solveStepTitle) {
+                        solveStepTitle.textContent = `第二步：AI 名师 (${reasoningModelName}) 正在严密推导与验算答案...`;
+                    }
+
+                    const reasoningPrompt = buildCoTJsonPrompt(extractedQuestionFromImage);
+                    let solveSuccess = false;
+
+                    try {
+                        const secondRes = await fetch(endpointUrl, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${cfg.openaiKey}`
+                            },
+                            body: JSON.stringify({
+                                model: reasoningModelName,
+                                messages: [
+                                    { role: "system", content: systemInstruction },
+                                    { role: "user", content: reasoningPrompt }
+                                ],
+                                temperature: 0.2
+                            })
+                        });
+
+                        if (secondRes.ok) {
+                            const secondData = await secondRes.json();
+                            const secondText = secondData?.choices?.[0]?.message?.content;
+                            if (secondText) {
+                                rawJsonText = secondText;
+                                solveSuccess = true;
+                            }
+                        }
+                    } catch (e) {
+                        console.warn("Reasoning model fallback triggered:", e);
+                    }
+
+                    // 如果用户配置的推理模型未开通，则自动回退使用视觉模型本身完成 CoT 推理
+                    if (!solveSuccess) {
+                        const fallbackContent = [];
+                        if (croppedBase64 && !visionModelName.toLowerCase().includes("ocr")) {
+                            fallbackContent.push({
+                                type: "image_url",
+                                image_url: { url: `data:image/jpeg;base64,${croppedBase64}` }
+                            });
+                        }
+                        fallbackContent.push({ type: "text", text: reasoningPrompt });
+
+                        const fallbackRes = await fetch(endpointUrl, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${cfg.openaiKey}`
+                            },
+                            body: JSON.stringify({
+                                model: visionModelName,
+                                messages: [{ role: "user", content: fallbackContent }]
+                            })
+                        });
+
+                        if (!fallbackRes.ok) {
+                            const errBody = await fallbackRes.text();
+                            throw new Error(`解题推理接口返回 HTTP ${fallbackRes.status}：${errBody.slice(0, 180)}`);
+                        }
+                        const fallbackData = await fallbackRes.json();
+                        rawJsonText = fallbackData?.choices?.[0]?.message?.content || "";
+                    }
+                } else {
+                    const result = await callGeminiWithRetry(apiUrl, payload);
+                    rawJsonText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                }
+
+                if (!rawJsonText) {
+                    throw new Error("未获取到有效的 AI 解析内容");
+                }
+
+                const parsedData = parseOrWrapSolutionResponse(rawJsonText, cfg.provider === "openai" ? (cfg.ocrReasoningModel || cfg.openaiModel) : "Gemini 名师");
+                currentSolutionData = parsedData;
+
+                // Reset follow-up chat context with the solved question
+                followupHistory = [
+                    {
+                        role: "user",
+                        parts: userParts
+                    },
+                    {
+                        role: "model",
+                        parts: [{
+                            text: `我已完成题目识别与解析：\n题目：${parsedData.ocrText}\n最终答案：${parsedData.finalAnswer}\n解析步骤：${parsedData.steps.map(s => s.title + ": " + s.explanation).join("\n")}`
+                        }]
+                    }
+                ];
+
+                renderSolutionUI(parsedData);
+                saveToHistory(parsedData, croppedBase64);
+                showToast("解析完成！", "success");
+            } catch (error) {
+                console.error("Solve Error:", error);
+                showToast(error.message || "解题请求失败，请检查 config.js 配置文件中的接口与密钥", "error");
+                document.getElementById("solutionLoadingState").classList.add("hidden");
+                document.getElementById("solutionEmptyState").classList.remove("hidden");
+            } finally {
+                isSolving = false;
+                solveBtn.disabled = false;
+                solveBtn.classList.remove("opacity-75");
+                solveBtnText.textContent = "AI 立即拍题解答";
+                if (laser) laser.classList.add("hidden");
+            }
+        }
+
+        function renderMathAndMarkdown(element, rawText) {
+            if (!element) return;
+            const safeText = normalizeMathText(rawText || "");
+            // Protect LaTeX blocks before Marked.js parses markdown
+            const mathBlocks = [];
+            let tokenized = safeText.replace(/\$\$([\s\S]*?)\$\$/g, (match) => {
+                mathBlocks.push(match);
+                return `@@MATH_BLOCK_${mathBlocks.length - 1}@@`;
+            });
+            tokenized = tokenized.replace(/\$([^\$\n]+?)\$/g, (match) => {
+                mathBlocks.push(match);
+                return `@@MATH_BLOCK_${mathBlocks.length - 1}@@`;
+            });
+
+            let html = marked.parse(tokenized);
+            html = html.replace(/@@MATH_BLOCK_(\d+)@@/g, (_, idx) => mathBlocks[Number(idx)]);
+            element.innerHTML = html;
+
+            if (window.renderMathInElement) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+
+        function renderSolutionUI(data) {
+            document.getElementById("solutionLoadingState").classList.add("hidden");
+            document.getElementById("solutionEmptyState").classList.add("hidden");
+            document.getElementById("solutionResultContainer").classList.remove("hidden");
+
+            document.getElementById("resSubjectBadge").textContent = data.subject || "综合学科";
+            document.getElementById("resDifficultyBadge").textContent = data.difficulty || "⭐⭐⭐ 中等";
+            document.getElementById("resGradeBadge").textContent = data.matchedGrade || "智能学段";
+
+            const finalAnsText = data.finalAnswer || (data.steps?.length ? data.steps[data.steps.length - 1].explanation : "请见下方分步解析");
+            renderMathAndMarkdown(document.getElementById("resOcrContent"), data.ocrText);
+            renderMathAndMarkdown(document.getElementById("resFinalAnswer"), finalAnsText);
+
+            const bottomAnsEl = document.getElementById("resBottomFinalAnswer");
+            if (bottomAnsEl) {
+                renderMathAndMarkdown(bottomAnsEl, finalAnsText);
+            }
+
+            // Render Step-by-Step list
+            const stepsContainer = document.getElementById("resStepsList");
+            stepsContainer.innerHTML = "";
+            (data.steps || []).forEach((step, idx) => {
+                const stepEl = document.createElement("div");
+                stepEl.className = "relative pl-4 sm:pl-5 border-l-2 border-indigo-200 hover:border-indigo-500 transition-colors";
+                const headerEl = document.createElement("div");
+                headerEl.className = "flex items-center gap-2 mb-1.5";
+                headerEl.innerHTML = `
+                    <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white text-xs font-bold flex items-center justify-center shrink-0">${idx + 1}</span>
+                    <h4 class="font-bold text-slate-800 text-sm sm:text-base">${step.title || `步骤 ${idx + 1}`}</h4>
+                `;
+                const bodyEl = document.createElement("div");
+                bodyEl.className = "prose-math text-sm text-slate-700 bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/60";
+                renderMathAndMarkdown(bodyEl, step.explanation);
+
+                stepEl.appendChild(headerEl);
+                stepEl.appendChild(bodyEl);
+                stepsContainer.appendChild(stepEl);
+            });
+
+            // Key Points
+            const kpContainer = document.getElementById("resKeyPoints");
+            kpContainer.innerHTML = "";
+            (data.keyPoints || []).forEach(kp => {
+                const span = document.createElement("span");
+                span.className = "px-2.5 py-1 rounded-lg bg-white text-indigo-700 border border-indigo-200/80 text-xs font-medium shadow-2xs";
+                span.textContent = kp;
+                kpContainer.appendChild(span);
+            });
+
+            // Pitfalls
+            renderMathAndMarkdown(document.getElementById("resPitfalls"), data.pitfalls || "注意审题细节与计算准确性。");
+
+            // Similar Practice Question
+            const simQ = data.similarQuestion?.question || "暂无同类变式题";
+            const simA = data.similarQuestion?.answerAndAnalysis || "暂无解析";
+            renderMathAndMarkdown(document.getElementById("resSimilarQuestion"), simQ);
+            renderMathAndMarkdown(document.getElementById("resSimilarAnswerBox"), `**参考答案与解析：**\n\n${simA}`);
+            document.getElementById("resSimilarAnswerBox").classList.add("hidden");
+            document.getElementById("toggleSimBtn").textContent = "查看变式题答案";
+
+            // Reset Follow-up Chat UI
+            const chatList = document.getElementById("followupChatList");
+            chatList.innerHTML = `
+                <div class="flex items-start gap-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">
+                        AI
+                    </div>
+                    <div class="bg-slate-100/90 text-slate-700 text-xs sm:text-sm px-4 py-3 rounded-2xl rounded-tl-xs border border-slate-200/60 leading-relaxed">
+                        同学你好！这道 <strong>${data.subject || "题目"}</strong> 我已经为你拆解完毕。如果你对上方某一步推导有疑问，或者想让我<strong>重新验算核对一遍答案</strong>，点击上方快捷按钮或在下方直接输入即可！
+                    </div>
+                </div>
+            `;
+
+            lucide.createIcons();
+        }
+
+        function toggleSimilarAnswer() {
+            const box = document.getElementById("resSimilarAnswerBox");
+            const btn = document.getElementById("toggleSimBtn");
+            if (box.classList.contains("hidden")) {
+                box.classList.remove("hidden");
+                btn.textContent = "收起变式题答案";
+            } else {
+                box.classList.add("hidden");
+                btn.textContent = "查看变式题答案";
+            }
+        }
+
+        function sendQuickFollowup(text) {
+            document.getElementById("followupInput").value = text;
+            sendFollowupMessage();
+        }
+
+        async function sendFollowupMessage() {
+            const inputEl = document.getElementById("followupInput");
+            const question = inputEl.value.trim();
+            if (!question || !currentSolutionData) return;
+
+            inputEl.value = "";
+            const chatList = document.getElementById("followupChatList");
+
+            // Append User Message Bubble
+            const userDiv = document.createElement("div");
+            userDiv.className = "flex justify-end";
+            userDiv.innerHTML = `<div class="bg-indigo-600 text-white text-xs sm:text-sm px-4 py-2.5 rounded-2xl rounded-tr-xs max-w-[85%] shadow-xs">${question.replace(/</g, "&lt;")}</div>`;
+            chatList.appendChild(userDiv);
+
+            // Append AI Thinking Bubble
+            const aiDiv = document.createElement("div");
+            aiDiv.className = "flex justify-start";
+            const aiBubble = document.createElement("div");
+            aiBubble.className = "bg-slate-100 text-slate-800 text-xs sm:text-sm px-4 py-3 rounded-2xl rounded-tl-xs max-w-[90%] prose-math border border-slate-200/70";
+            aiBubble.innerHTML = `<span class="text-slate-400 animate-pulse">AI 老师正在解答您的追问...</span>`;
+            aiDiv.appendChild(aiBubble);
+            chatList.appendChild(aiDiv);
+            chatList.scrollTop = chatList.scrollHeight;
+
+            followupHistory.push({
+                role: "user",
+                parts: [{ text: question }]
+            });
+
+            const payload = {
+                contents: followupHistory,
+                systemInstruction: {
+                    parts: [{
+                        text: "你是一位耐心的名师，正在回答学生关于刚才那道题目的追问。请针对学生的疑问进行清晰、直接、易懂的解答。乘号请用 ×，数学物理公式请用标准 LaTeX 符号 $...$ 或 $$...$$ 包裹。"
+                    }]
+                }
+            };
+
+            const cfg = getSavedApiConfig();
+            const effectiveGeminiKey = cfg.geminiKey || apiKey;
+            const baseUrl = cfg.geminiBaseUrl || "https://generativelanguage.googleapis.com";
+            const apiUrl = `${baseUrl}/v1beta/models/gemini-3-flash-preview:generateContent?key=${effectiveGeminiKey}`;
+
+            try {
+                let replyText = "";
+                if (cfg.provider === "openai" && cfg.openaiKey) {
+                    const endpointUrl = normalizeOpenAiEndpoint(cfg.openaiUrl);
+                    const modelName = (cfg.openaiModel || "qwen-vl-max").trim();
+                    const chatModel = (cfg.ocrReasoningModel || (modelName.toLowerCase().includes("ocr") ? "qwen-plus" : modelName)).trim();
+                    const oaiRes = await fetch(endpointUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${cfg.openaiKey}`
+                        },
+                        body: JSON.stringify({
+                            model: chatModel,
+                            messages: [
+                                { role: "system", content: "你是一位耐心的金牌名师。乘号请用 ×，数学公式请用 $...$ 包裹。" },
+                                { role: "user", content: `题目背景：${currentSolutionData.ocrText}\n已算出的分步解析：${(currentSolutionData.steps || []).map(s => s.title + ": " + s.explanation).join("\n")}\n最终答案：${currentSolutionData.finalAnswer}\n\n学生追问：${question}` }
+                            ]
+                        })
+                    });
+                    const oaiData = await oaiRes.json();
+                    replyText = oaiData?.choices?.[0]?.message?.content || "抱歉，未能生成追问回复。";
+                } else {
+                    const res = await callGeminiWithRetry(apiUrl, payload);
+                    replyText = res?.candidates?.[0]?.content?.parts?.[0]?.text || "抱歉，未能生成追问回复。";
+                }
+                replyText = normalizeMathText(replyText);
+                followupHistory.push({
+                    role: "model",
+                    parts: [{ text: replyText }]
+                });
+                renderMathAndMarkdown(aiBubble, replyText);
+                chatList.scrollTop = chatList.scrollHeight;
+            } catch (err) {
+                aiBubble.innerHTML = `<span class="text-rose-600">追问请求失败，请检查接口配置或重试。</span>`;
+            }
+        }
+
+        function pcmToWav(pcm16, sampleRate = 24000) {
+            const numChannels = 1;
+            const byteRate = sampleRate * numChannels * 2;
+            const blockAlign = numChannels * 2;
+            const buffer = new ArrayBuffer(44 + pcm16.byteLength);
+            const view = new DataView(buffer);
+
+            function writeString(offset, str) {
+                for (let i = 0; i < str.length; i++) {
+                    view.setUint8(offset + i, str.charCodeAt(i));
+                }
+            }
+
+            writeString(0, "RIFF");
+            view.setUint32(4, 36 + pcm16.byteLength, true);
+            writeString(8, "WAVE");
+            writeString(12, "fmt ");
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true);
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, byteRate, true);
+            view.setUint16(32, blockAlign, true);
+            view.setUint16(34, 16, true);
+            writeString(36, "data");
+            view.setUint32(40, pcm16.byteLength, true);
+
+            const offset = 44;
+            for (let i = 0; i < pcm16.length; i++) {
+                view.setInt16(offset + i * 2, pcm16[i], true);
+            }
+            return new Blob([buffer], { type: "audio/wav" });
+        }
+
+        async function speakSolutionSummary() {
+            const audioEl = document.getElementById("ttsAudioPlayer");
+            const btnLabel = document.getElementById("ttsBtnLabel");
+
+            if (isPlayingTTS) {
+                audioEl.pause();
+                isPlayingTTS = false;
+                btnLabel.textContent = "语音讲题";
+                return;
+            }
+
+            if (!currentSolutionData) return;
+
+            const scriptToRead = currentSolutionData.voiceScript ||
+                `这道${currentSolutionData.subject || ""}题的最终答案是：${currentSolutionData.finalAnswer}。关键易错点是：${currentSolutionData.pitfalls}`;
+
+            btnLabel.textContent = "合成语音中...";
+            isPlayingTTS = true;
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: `请用亲切、清晰的老师讲课语气朗读以下解题总结：${scriptToRead}` }]
+                }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: "Aoede" }
+                        }
+                    }
+                },
+                model: "gemini-2.5-flash-preview-tts"
+            };
+
+            const ttsUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+
+            try {
+                const result = await callGeminiWithRetry(ttsUrl, payload);
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioBase64 = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType || "audio/L16;rate=24000";
+
+                if (!audioBase64) throw new Error("No audio data");
+
+                const rateMatch = mimeType.match(/rate=(\d+)/);
+                const sampleRate = rateMatch ? parseInt(rateMatch[1], 10) : 24000;
+
+                const binary = atob(audioBase64);
+                const bytes = new Uint8Array(binary.length);
+                for (let i = 0; i < binary.length; i++) {
+                    bytes[i] = binary.charCodeAt(i);
+                }
+                const pcm16 = new Int16Array(bytes.buffer);
+                const wavBlob = pcmToWav(pcm16, sampleRate);
+                const url = URL.createObjectURL(wavBlob);
+
+                audioEl.src = url;
+                btnLabel.textContent = "停止朗读";
+                audioEl.onended = () => {
+                    isPlayingTTS = false;
+                    btnLabel.textContent = "语音讲题";
+                };
+                await audioEl.play();
+            } catch (err) {
+                isPlayingTTS = false;
+                btnLabel.textContent = "语音讲题";
+                showToast("语音合成繁忙，请稍后再试", "error");
+            }
+        }
+
+        function copyTextField(type) {
+            if (!currentSolutionData) return;
+            if (type === "ocr") {
+                copyTextToClipboard(currentSolutionData.ocrText || "");
+            } else if (type === "answer") {
+                copyTextToClipboard(currentSolutionData.finalAnswer || "");
+            }
+        }
+
+        function copyFullSolution() {
+            if (!currentSolutionData) return;
+            const d = currentSolutionData;
+            const stepsText = (d.steps || []).map((s, i) => `${i + 1}. ${s.title}\n${s.explanation}`).join("\n\n");
+            const full = `【题目】\n${d.ocrText}\n\n【最终答案】\n${d.finalAnswer}\n\n【分步解析】\n${stepsText}\n\n【易错提醒】\n${d.pitfalls}`;
+            copyTextToClipboard(full);
+        }
+
+        function getHistoryList() {
+            try {
+                return JSON.parse(localStorage.getItem("smartsnap_history_v1") || "[]");
+            } catch {
+                return [];
+            }
+        }
+
+        function saveToHistory(solutionData, thumbBase64) {
+            try {
+                const list = getHistoryList();
+                const item = {
+                    id: Date.now(),
+                    time: new Date().toLocaleString("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }),
+                    data: solutionData,
+                    thumb: thumbBase64 ? `data:image/jpeg;base64,${thumbBase64}` : null
+                };
+                list.unshift(item);
+                // Keep latest 15 items to avoid storage quota overflow
+                const trimmed = list.slice(0, 15);
+                localStorage.setItem("smartsnap_history_v1", JSON.stringify(trimmed));
+                updateHistoryBadge();
+            } catch (e) {
+                console.warn("History storage full", e);
+            }
+        }
+
+        function updateHistoryBadge() {
+            const list = getHistoryList();
+            document.getElementById("historyCountBadge").textContent = list.length;
+        }
+
+        function openHistoryModal() {
+            const modal = document.getElementById("historyModal");
+            const listEl = document.getElementById("historyModalList");
+            const list = getHistoryList();
+            modal.classList.remove("hidden");
+
+            if (list.length === 0) {
+                listEl.innerHTML = `
+                    <div class="text-center py-12 text-slate-400">
+                        <p class="text-sm">暂无拍题记录，快去拍一道题试试吧！</p>
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = "";
+            list.forEach((item, index) => {
+                const row = document.createElement("div");
+                row.className = "p-4 rounded-2xl border border-slate-200 hover:border-indigo-300 bg-slate-50/50 hover:bg-indigo-50/20 flex items-start justify-between gap-4 transition cursor-pointer";
+                row.onclick = () => {
+                    currentSolutionData = sanitizeSolutionObject(item.data);
+                    renderSolutionUI(currentSolutionData);
+                    if (item.thumb) {
+                        loadImageFromDataUrl(item.thumb, false);
+                    }
+                    closeHistoryModal();
+                    showToast("已恢复该题目的完整解析", "info");
+                };
+
+                row.innerHTML = `
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-700 text-xs font-semibold">${item.data.subject || "题目"}</span>
+                            <span class="text-xs text-slate-400">${item.time}</span>
+                        </div>
+                        <p class="text-sm font-medium text-slate-800 line-clamp-2">${(item.data.ocrText || "").replace(/\$/g, "")}</p>
+                        <p class="text-xs text-emerald-700 font-semibold mt-1 truncate">答案：${(item.data.finalAnswer || "").replace(/\$/g, "")}</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); deleteHistoryItem(${index})" class="text-xs text-slate-400 hover:text-rose-600 p-1.5">删除</button>
+                `;
+                listEl.appendChild(row);
+            });
+        }
+
+        function closeHistoryModal() {
+            document.getElementById("historyModal").classList.add("hidden");
+        }
+
+        function deleteHistoryItem(index) {
+            const list = getHistoryList();
+            list.splice(index, 1);
+            localStorage.setItem("smartsnap_history_v1", JSON.stringify(list));
+            updateHistoryBadge();
+            openHistoryModal();
+        }
+
+        function clearAllHistory() {
+            localStorage.removeItem("smartsnap_history_v1");
+            updateHistoryBadge();
+            openHistoryModal();
+            showToast("已清空所有错题记录", "info");
+        }
+    </script>
+</body>
+</html>

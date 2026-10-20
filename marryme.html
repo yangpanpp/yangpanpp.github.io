@@ -1,0 +1,2620 @@
+   <!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta property="og:title" content="陆景行 & 沈知意 | 婚礼诚挚邀约">
+    <meta property="og:description" content="一生所爱，一人相伴。陆景行与沈知意，诚邀您赴一场关于爱与幸福的约定，共见证我们的重要时刻。">
+    <meta property="og:image" content="https://th.bing.com/th/id/R.8d231186c885fe5ef3f1204e69f79f2c?rik=XrDuRqVAMhr2Xg&riu=http%3a%2f%2fwww.duolasheying.com%2fuploads%2f2020%2f06%2f191318021890.jpg&ehk=h6mnVGV6%2f1OsGL9TDbUnk%2fVv9EoYAqgnDwXHjKYP4X8%3d&risl=&pid=ImgRaw&r=0">
+    <meta property="og:type" content="website">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>陆景行 & 沈知意的婚礼诚挚邀约</title>
+
+    <!-- Google Fonts: 手绘可爱体与温暖手写感字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        doodle: {
+                            ink: '#3D312A',         // 手绘墨水咖黑
+                            paper: '#FDFBF7',       // 奶昔手账白纸
+                            warm: '#FAF5EC',        // 暖杏手撕纸
+                            border: '#4A3E38',      // 手绘墨线边框
+                            cream: '#FFF9F0',       // 奶油卡纸
+                            yellow: '#FCE794',      // 芝士小黄
+                            pink: '#FFCCD2',        // 蜜桃草莓粉
+                            rose: '#F28482',        // 治愈山茶红
+                            green: '#CBE5B8',       // 浅草嫩绿
+                            blue: '#D2E7F9'         // 晴空棉花糖蓝
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        cute: ['"ZCOOL KuaiLe"', '"Gaegu"', 'cursive', 'sans-serif'],
+                        en: ['"Gaegu"', 'cursive', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --ink: #3D312A;
+            --paper-bg: #FAF5EB;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        *, *::before, *::after {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+
+        /* 锁死视口，禁止横向滚动 */
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden !important;
+            margin: 0;
+            padding: 0;
+            background-color: var(--paper-bg);
+            /* 手账可爱点阵背景纸 */
+            background-image: 
+                radial-gradient(#E8DCC8 1.4px, transparent 1.4px),
+                radial-gradient(#E8DCC8 1.4px, var(--paper-bg) 1.4px);
+            background-size: 26px 26px;
+            background-position: 0 0, 13px 13px;
+            color: var(--ink);
+            font-family: 'Noto Serif SC', -apple-system, sans-serif;
+            touch-action: pan-y;
+            -webkit-text-size-adjust: 100%;
+            overscroll-behavior-x: none;
+        }
+
+        #app-viewport {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden !important;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .stage-clip {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* =========================================================
+           1. 经典手绘贴纸、和纸胶带与不规则有机边框核心系统
+           ========================================================= */
+        .doodle-card {
+            background-color: #FFFDFA;
+            border: 2.2px solid var(--ink);
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            box-shadow: 4px 5px 0px var(--ink);
+            position: relative;
+        }
+
+        .doodle-btn {
+            border: 2px solid var(--ink);
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            box-shadow: 2.5px 3.5px 0px var(--ink);
+            transition: all 0.15s ease;
+        }
+        .doodle-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0.5px 1px 0px var(--ink);
+        }
+
+        .doodle-pill {
+            border: 1.8px solid var(--ink);
+            border-radius: 999px;
+            box-shadow: 2px 2.5px 0px var(--ink);
+        }
+
+        /* 和纸胶带装饰贴 (Washi Tape) */
+        .washi-tape-top {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-1.5deg);
+            width: 88px;
+            height: 22px;
+            background: rgba(254, 215, 215, 0.85);
+            border-left: 3px dashed rgba(61,49,42,0.3);
+            border-right: 3px dashed rgba(61,49,42,0.3);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            z-index: 20;
+            pointer-events: none;
+        }
+        .washi-tape-yellow {
+            background: repeating-linear-gradient(45deg, #FCE794, #FCE794 6px, #FFF0B3 6px, #FFF0B3 12px);
+            opacity: 0.88;
+        }
+        .washi-tape-green {
+            background: repeating-linear-gradient(-45deg, #CBE5B8, #CBE5B8 6px, #E2F5D5 6px, #E2F5D5 12px);
+            opacity: 0.88;
+        }
+
+        /* =========================================================
+           2. 手绘大帐篷婚礼帷幔开场
+           ========================================================= */
+        #curtain-overlay {
+            perspective: 1000px;
+            contain: layout style paint;
+            transition: visibility 0.9s;
+            background: transparent;
+        }
+
+        .curtain-panel-left {
+            transform-origin: top left;
+            will-change: transform, opacity;
+            transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+        .curtain-panel-right {
+            transform-origin: top right;
+            will-change: transform, opacity;
+            transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+        }
+
+        #curtain-overlay.is-open .curtain-panel-left {
+            transform: translate3d(-105%, 0, 0) rotate(-6deg);
+            opacity: 0;
+        }
+        #curtain-overlay.is-open .curtain-panel-right {
+            transform: translate3d(105%, 0, 0) rotate(6deg);
+            opacity: 0;
+        }
+        #curtain-overlay.is-open #curtain-center-card {
+            transform: translate3d(0, -35px, 0) scale(1.1);
+            opacity: 0;
+        }
+        #curtain-overlay.is-open #curtain-valance {
+            transform: translate3d(0, -110%, 0);
+            opacity: 0;
+        }
+
+        /* 帐篷帷幔手绘条纹纹理 */
+        .handdrawn-drape-left {
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    #FFF7EB 0px,
+                    #FFF7EB 26px,
+                    #F6C1BD 26px,
+                    #F6C1BD 52px
+                );
+            border-right: 3px solid var(--ink);
+            box-shadow: 8px 0 24px rgba(61,49,42,0.18);
+        }
+        .handdrawn-drape-right {
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    #F6C1BD 0px,
+                    #F6C1BD 26px,
+                    #FFF7EB 26px,
+                    #FFF7EB 52px
+                );
+            border-left: 3px solid var(--ink);
+            box-shadow: -8px 0 24px rgba(61,49,42,0.18);
+        }
+
+        @keyframes doodleWiggle {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+        .doodle-wiggle {
+            animation: doodleWiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes cuteFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-7px) rotate(1.5deg); }
+        }
+        .cute-float {
+            animation: cuteFloat 3.5s ease-in-out infinite;
+        }
+
+        @keyframes stampPop {
+            0% { transform: scale(2.4) rotate(-28deg); opacity: 0; }
+            65% { transform: scale(0.9) rotate(8deg); opacity: 1; }
+            100% { transform: scale(1) rotate(5deg); opacity: 1; }
+        }
+        .stamp-active {
+            animation: stampPop 0.5s var(--ease-spring) forwards;
+        }
+
+        /* =========================================================
+           3. 双向滚动重播动画
+           ========================================================= */
+        .reveal-up {
+            opacity: 0;
+            transform: translate3d(0, 32px, 0);
+            transition: transform 0.8s var(--ease-out-expo), opacity 0.7s ease;
+            will-change: transform, opacity;
+        }
+        .reveal-up.is-inview {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translate3d(-40px, 0, 0);
+            transition: transform 0.85s var(--ease-out-expo), opacity 0.7s ease;
+        }
+        .reveal-left.is-inview {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translate3d(40px, 0, 0);
+            transition: transform 0.85s var(--ease-out-expo), opacity 0.7s ease;
+        }
+        .reveal-right.is-inview {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        /* 章节手绘金线自绘动画 */
+        .section-line-svg path {
+            stroke-dasharray: 260;
+            stroke-dashoffset: 260;
+            transition: stroke-dashoffset 1.1s var(--ease-out-expo);
+        }
+        .is-inview .section-line-svg path,
+        .section-header.is-inview .section-line-svg path {
+            stroke-dashoffset: 0;
+        }
+
+        /* =========================================================
+           4. 新郎 & 新娘左右滑入合体 (手绘红线联结)
+           ========================================================= */
+        #couple-groom-card {
+            opacity: 0;
+            transform: translate3d(-60%, 15px, 0) rotate(-6deg);
+            transition: transform 1.05s var(--ease-out-expo), opacity 0.8s ease;
+        }
+        #couple-bride-card {
+            opacity: 0;
+            transform: translate3d(60%, 15px, 0) rotate(6deg);
+            transition: transform 1.05s var(--ease-out-expo), opacity 0.8s ease;
+        }
+        #couple-merge-badge {
+            opacity: 0;
+            transform: scale(0) rotate(-40deg);
+            transition: transform 0.7s var(--ease-spring) 0.4s, opacity 0.4s ease 0.4s;
+        }
+        #couple-ecg-path {
+            stroke-dasharray: 380;
+            stroke-dashoffset: 380;
+            transition: stroke-dashoffset 1.1s var(--ease-out-expo) 0.4s;
+        }
+
+        #couple-merge-stage.is-merged #couple-groom-card,
+        #couple-merge-stage.is-merged #couple-bride-card {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) rotate(0deg);
+        }
+        #couple-merge-stage.is-merged #couple-merge-badge {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+        #couple-merge-stage.is-merged #couple-ecg-path {
+            stroke-dashoffset: 0;
+        }
+
+        /* =========================================================
+           5. 顶部 60fps 弹幕引擎
+           ========================================================= */
+        #barrage-stage {
+            width: 100%;
+            max-width: 100vw;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .barrage-track {
+            position: relative;
+            width: 100%;
+            height: 38px;
+            overflow: hidden;
+        }
+        @keyframes barrageGlide {
+            0% { transform: translate3d(100vw, 0, 0); }
+            100% { transform: translate3d(-125%, 0, 0); }
+        }
+        .barrage-pill {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            white-space: nowrap;
+            will-change: transform;
+            animation-name: barrageGlide;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+
+        /* 3D 翻面与画廊 */
+        .flip-perspective { perspective: 900px; }
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-inner.is-flipped { transform: rotateY(180deg); }
+        .flip-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flip-back { transform: rotateY(180deg); }
+
+        .gallery-3d-viewport {
+            perspective: 1100px;
+            position: relative;
+            width: 100%;
+            height: 340px;
+            overflow: hidden;
+            touch-action: pan-y;
+            user-select: none;
+        }
+        @media (min-width: 640px) {
+            .gallery-3d-viewport { height: 420px; }
+        }
+        .gallery-slide-card {
+            position: absolute;
+            top: 10px;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 82%;
+            max-width: 520px;
+            transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.65s ease;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        .vinyl-spin { animation: spinDoodle 10s linear infinite; }
+        .vinyl-paused { animation-play-state: paused; }
+        @keyframes spinDoodle {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 礼花筒手绘摇晃与发射 */
+        @keyframes popperWobbleL {
+            0%, 100% { transform: rotate(-14deg) scale(1); }
+            50% { transform: rotate(-6deg) scale(1.08); }
+        }
+        @keyframes popperWobbleR {
+            0%, 100% { transform: rotate(14deg) scale(1); }
+            50% { transform: rotate(6deg) scale(1.08); }
+        }
+        .popper-idle-l { animation: popperWobbleL 2.4s ease-in-out infinite; transform-origin: bottom left; }
+        .popper-idle-r { animation: popperWobbleR 2.4s ease-in-out infinite; transform-origin: bottom right; }
+
+        @keyframes popperBoomL {
+            0% { transform: scale(0.8) rotate(-30deg); }
+            40% { transform: scale(1.25) rotate(10deg); }
+            100% { transform: scale(1) rotate(-12deg); }
+        }
+        @keyframes popperBoomR {
+            0% { transform: scale(0.8) rotate(30deg); }
+            40% { transform: scale(1.25) rotate(-10deg); }
+            100% { transform: scale(1) rotate(12deg); }
+        }
+        .popper-firing-l { animation: popperBoomL 0.6s var(--ease-spring); }
+        .popper-firing-r { animation: popperBoomR 0.6s var(--ease-spring); }
+
+        /* 统一的手绘 SVG 表情图标 */
+        .svg-doodle-icon {
+            display: inline-block;
+            width: 1.15em;
+            height: 1.15em;
+            vertical-align: -0.18em;
+            flex: 0 0 auto;
+        }
+        .svg-doodle-icon svg { width: 100%; height: 100%; overflow: visible; }
+
+        /* 滚动到底部时升起的手绘气球 */
+        #balloon-rise-layer { position: fixed; inset: 0; z-index: 36; pointer-events: none; overflow: hidden; }
+        .rise-balloon { position: absolute; bottom: -70px; width: 34px; height: 45px; border: 2px solid var(--ink); border-radius: 52% 48% 55% 45%; box-shadow: 2px 3px 0 var(--ink); animation: balloonRise 4.8s cubic-bezier(.2,.75,.25,1) forwards; }
+        .rise-balloon::before { content: ''; position: absolute; left: 50%; bottom: -8px; width: 7px; height: 7px; background: inherit; border: 2px solid var(--ink); transform: translateX(-50%) rotate(45deg); }
+        .rise-balloon::after { content: ''; position: absolute; left: 50%; top: 100%; height: 100px; border-left: 1.5px dashed var(--ink); transform: rotate(3deg); transform-origin: top; }
+        .rise-balloon.pink { background: #FFCCD2; }
+        .rise-balloon.yellow { background: #FCE794; }
+        .rise-balloon.blue { background: #D2E7F9; }
+        @keyframes balloonRise { 0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(-8deg) scale(.8); } 12% { opacity: 1; } 100% { opacity: 0; transform: translate3d(var(--drift), -115vh, 0) rotate(12deg) scale(1.05); } }
+    </style>
+</head>
+<body class="selection:bg-doodle-pink selection:text-doodle-ink">
+
+    <!-- 严格防偏移根视口容器 -->
+    <div id="app-viewport">
+
+        <!-- 0A. MP3 婚礼背景音乐播放器 -->
+        <audio id="bgm-audio" loop preload="auto"></audio>
+
+        <!-- 0B. 60fps 统一特效画布：手绘爱心、小黄星、玫瑰花瓣与糖果色彩纸 -->
+        <canvas id="fx-canvas" class="fixed inset-0 pointer-events-none z-[35] w-full h-full" aria-hidden="true"></canvas>
+
+        <!-- 0C. 全屏手绘涂鸦流动姻缘线背景 (Doodle SVG Line) -->
+        <div id="line-art-bg" class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+            <svg class="w-full h-full" viewBox="0 0 1000 2200" preserveAspectRatio="xMidYMin slice" fill="none">
+                <!-- 手绘可爱小涂鸦点缀背景 -->
+                <path d="M120 180 Q140 160 160 180 Q180 200 160 220 Q140 240 120 220 Z" stroke="#F6C1BD" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+                <circle cx="880" cy="340" r="14" stroke="#FCE794" stroke-width="2.5" stroke-dasharray="4 4" fill="none"/>
+                <path d="M860 850 L875 840 L890 855 L905 845" stroke="#CBE5B8" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <path d="M80 1200 Q105 1180 130 1200 T180 1200" stroke="#F6C1BD" stroke-width="2.5" fill="none" opacity="0.5"/>
+                <circle cx="920" cy="1650" r="8" fill="#FCE794" opacity="0.6"/>
+
+                <!-- 随滚动延伸的手绘波浪姻缘线 -->
+                <path d="M500,0 C740,240 260,520 500,800 C740,1080 260,1360 500,1640 C720,1880 340,2060 500,2200" 
+                      stroke="#E5DAC8" stroke-width="3" stroke-linecap="round" stroke-dasharray="10 8"/>
+                <path id="scroll-line-path"
+                      d="M500,0 C740,240 260,520 500,800 C740,1080 260,1360 500,1640 C720,1880 340,2060 500,2200" 
+                      stroke="#F28482" stroke-width="3.5" stroke-linecap="round"
+                      stroke-dasharray="3200" stroke-dashoffset="3200"/>
+            </svg>
+        </div>
+
+        <!-- 底部自动庆祝时使用的气球升空层 -->
+        <div id="balloon-rise-layer" aria-hidden="true"></div>
+
+        <!-- ==========================================
+             1. 婚礼大帐篷手绘帷幔开场
+             ========================================== -->
+        <div id="curtain-overlay" class="fixed inset-0 z-50 flex items-center justify-center overflow-hidden select-none bg-doodle-warm/70">
+            
+            <!-- 跳过开场按钮 -->
+            <button onclick="openWeddingCurtains(true)" class="absolute top-4 right-4 z-50 px-3.5 py-1.5 doodle-btn bg-white text-xs font-cute font-bold text-doodle-ink">
+                跳过开场 ➔
+            </button>
+
+            <!-- 顶部波浪形手撕彩旗幔头 -->
+            <div id="curtain-valance" class="absolute top-0 inset-x-0 z-40 pointer-events-none transition-all duration-750">
+                <svg class="w-full h-16 sm:h-20" viewBox="0 0 1200 90" preserveAspectRatio="none" fill="none">
+                    <path d="M0,0 H1200 V40 Q1125,85 1050,40 Q975,85 900,40 Q825,85 750,40 Q675,85 600,40 Q525,85 450,40 Q375,85 300,40 Q225,85 150,40 Q75,85 0,40 Z" 
+                          fill="#FFF7EB" stroke="#3D312A" stroke-width="3"/>
+                    <path d="M0,35 Q75,75 150,35 Q225,75 300,35 Q375,75 450,35 Q525,75 600,35 Q675,75 750,35 Q825,75 900,35 Q975,75 1050,35 Q1125,75 1200,35" 
+                          stroke="#F28482" stroke-width="2.5" stroke-dasharray="5 5" fill="none"/>
+                </svg>
+            </div>
+
+            <!-- 左/右香槟粉条纹手绘大帷幔 -->
+            <div class="curtain-panel-left absolute top-0 left-0 w-[52%] h-full z-30 pointer-events-none">
+                <div class="w-full h-full handdrawn-drape-left relative">
+                    <!-- 左侧绑带蝴蝶结 -->
+                    <div class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-14 text-doodle-rose">
+                        <svg viewBox="0 0 40 60" fill="currentColor"><path d="M10 20 C0 0 0 40 10 30 C15 25 15 35 10 20 Z M30 20 C40 0 40 40 30 30 C25 25 25 35 30 20 Z"/><circle cx="20" cy="25" r="5" fill="#FCE794" stroke="#3D312A" stroke-width="2"/></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="curtain-panel-right absolute top-0 right-0 w-[52%] h-full z-30 pointer-events-none">
+                <div class="w-full h-full handdrawn-drape-right relative">
+                    <!-- 右侧绑带蝴蝶结 -->
+                    <div class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-14 text-doodle-rose">
+                        <svg viewBox="0 0 40 60" fill="currentColor"><path d="M10 20 C0 0 0 40 10 30 C15 25 15 35 10 20 Z M30 20 C40 0 40 40 30 30 C25 25 25 35 30 20 Z"/><circle cx="20" cy="25" r="5" fill="#FCE794" stroke="#3D312A" stroke-width="2"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中央手绘请柬卡片与火漆猫爪盖章 -->
+            <div id="curtain-center-card" class="relative z-40 flex flex-col items-center text-center px-4 transition-all duration-500">
+                <div class="doodle-card px-6 py-5 max-w-[310px] sm:max-w-sm mb-5 bg-[#FFFEFC]">
+                    <div class="washi-tape-top washi-tape-yellow"></div>
+                    
+                    <!-- 卡通小情侣贴纸头像 -->
+                    <div class="inline-flex items-center justify-center mb-1 cute-float">
+                        <svg class="w-24 h-16" viewBox="0 0 168 88" fill="none" aria-label="新郎新娘Q版手绘，与档案卡造型一致">
+                            <g transform="scale(.72)">
+                                <path d="M18 109 Q20 91 36 86 L50 96 L64 86 Q81 91 83 109 Q50 119 18 109Z" fill="#D2E7F9" stroke="#3D312A" stroke-width="2.5" stroke-linejoin="round"/>
+                                <path d="M40 83 L50 96 L60 83 L57 112 H43Z" fill="#FFFEFC" stroke="#3D312A" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M45 91 L50 96 L55 91 L54 103 L50 106 L46 103Z" fill="#F28482" stroke="#3D312A" stroke-width="1.5"/>
+                                <path d="M24 50 Q20 24 50 21 Q80 24 76 53 L72 73 Q68 87 50 89 Q32 87 28 73Z" fill="#FFE8D6" stroke="#3D312A" stroke-width="2.5"/>
+                                <path d="M23 48 Q18 24 38 18 Q58 10 74 26 Q81 35 76 51 Q70 43 69 34 Q58 40 41 36 Q32 35 25 43Z" fill="#3D312A" stroke="#3D312A" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M29 48 Q38 42 46 48 M54 48 Q62 42 71 48" stroke="#3D312A" stroke-width="2.3" stroke-linecap="round"/>
+                                <circle cx="39" cy="54" r="8" fill="#FFFDF8" fill-opacity=".7" stroke="#3D312A" stroke-width="2.4"/><circle cx="61" cy="54" r="8" fill="#FFFDF8" fill-opacity=".7" stroke="#3D312A" stroke-width="2.4"/>
+                                <path d="M47 53 H53" stroke="#3D312A" stroke-width="2.2" stroke-linecap="round"/><ellipse cx="40" cy="55" rx="2.2" ry="3" fill="#3D312A"/><ellipse cx="60" cy="55" rx="2.2" ry="3" fill="#3D312A"/>
+                                <circle cx="29" cy="66" r="5" fill="#FF9EAA" opacity=".75"/><circle cx="71" cy="66" r="5" fill="#FF9EAA" opacity=".75"/>
+                                <path d="M45 69 Q50 75 55 69" stroke="#B84F57" stroke-width="2.2" stroke-linecap="round"/><path d="M50 7 L52 13 L59 14 L54 19 L55 26 L50 22 L45 26 L46 19 L41 14 L48 13Z" fill="#FCE794" stroke="#3D312A" stroke-width="1.5"/>
+                            </g>
+                            <g transform="translate(78 0) scale(.72)">
+                                <path d="M16 111 Q19 90 36 86 L50 96 L64 86 Q81 90 84 111 Q50 121 16 111Z" fill="#FFF7EB" stroke="#3D312A" stroke-width="2.5" stroke-linejoin="round"/>
+                                <path d="M40 85 L50 96 L60 85 L56 112 H44Z" fill="#FFCCD2" stroke="#3D312A" stroke-width="2"/>
+                                <path d="M21 55 Q16 23 48 18 Q81 20 79 56 L75 81 Q69 91 64 99 L58 83 Q50 91 42 83 L35 100 Q22 82 21 55Z" fill="#755B4D" stroke="#3D312A" stroke-width="2.5" stroke-linejoin="round"/>
+                                <path d="M24 48 Q26 29 49 27 Q69 28 76 47 Q67 39 61 37 Q47 43 28 39Z" fill="#755B4D"/>
+                                <path d="M26 54 Q20 77 29 104 M74 54 Q81 79 71 104" stroke="#FFFEFC" stroke-width="2.5" stroke-dasharray="3 3" opacity=".9"/>
+                                <ellipse cx="50" cy="58" rx="25" ry="27" fill="#FFE8D6" stroke="#3D312A" stroke-width="2.5"/>
+                                <path d="M28 50 Q36 44 44 50 M56 50 Q64 44 72 50" stroke="#3D312A" stroke-width="2.2" stroke-linecap="round"/>
+                                <ellipse cx="39" cy="57" rx="3.3" ry="4.5" fill="#3D312A"/><ellipse cx="61" cy="57" rx="3.3" ry="4.5" fill="#3D312A"/>
+                                <circle cx="29" cy="68" r="5.5" fill="#FF9EAA" opacity=".72"/><circle cx="71" cy="68" r="5.5" fill="#FF9EAA" opacity=".72"/>
+                                <path d="M44 71 Q50 79 56 71" stroke="#B84F57" stroke-width="2.3" stroke-linecap="round"/>
+                                <path d="M40 24 L43 15 L50 21 L57 14 L60 25Z" fill="#FCE794" stroke="#3D312A" stroke-width="2" stroke-linejoin="round"/><circle cx="50" cy="17" r="2" fill="#F28482"/>
+                                <path d="M17 38 Q10 34 14 28 Q19 24 22 31 Q25 24 30 28 Q34 35 24 40Z" fill="#FFCCD2" stroke="#3D312A" stroke-width="1.5"/>
+                            </g>
+                            <path d="M84 15 C81 9 74 14 78 19 L84 25 L90 19 C94 14 87 9 84 15Z" fill="#F28482" stroke="#3D312A" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+
+                    <p class="font-cute tracking-widest text-xs uppercase text-doodle-rose font-bold">♥ OUR WEDDING INVITATION ♥</p>
+                    <h1 class="text-2xl sm:text-3xl font-cute font-bold text-doodle-ink tracking-wider mt-1">
+                        陆景行 <span class="text-doodle-rose">&amp;</span> 沈知意
+                    </h1>
+                    <p class="text-xs text-doodle-ink/70 font-cute mt-1">2026.10.24 · 云栖湖畔星河宴会厅</p>
+                </div>
+
+                <!-- 拟真可爱小猫爪火漆印章按钮 -->
+                <button onclick="openWeddingCurtains(false)" aria-label="开启浪漫婚礼纱幔" class="doodle-wiggle relative w-24 h-24 rounded-full bg-[#E56B6F] text-white flex flex-col items-center justify-center cursor-pointer focus:outline-none border-2 border-doodle-ink shadow-[3px_4px_0px_#3D312A] hover:scale-105 active:scale-95 transition-transform group">
+                    <span class="absolute -inset-1.5 rounded-full border-2 border-dashed border-[#FCE794] animate-spin" style="animation-duration: 12s;"></span>
+                    <div class="flex flex-col items-center justify-center">
+                        <svg class="w-8 h-8 text-[#FFF5F5]" viewBox="0 0 40 40" fill="currentColor">
+                            <!-- 猫爪肉垫 SVG -->
+                            <ellipse cx="20" cy="25" rx="8" ry="6"/>
+                            <circle cx="12" cy="16" r="3.2"/>
+                            <circle cx="17.5" cy="13" r="3.2"/>
+                            <circle cx="23" cy="13" r="3.2"/>
+                            <circle cx="28.5" cy="16" r="3.2"/>
+                        </svg>
+                        <span class="text-xs font-cute font-bold tracking-widest text-white mt-0.5">戳我开启</span>
+                    </div>
+                </button>
+
+                <p class="mt-3 text-xs font-cute font-bold text-doodle-ink bg-white px-3.5 py-1 rounded-full border border-doodle-ink shadow-[2px_2px_0px_#3D312A] flex items-center gap-1.5">
+                    <span>🐾</span>
+                    <span>轻触印章 · 揭开童话序幕</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             顶部悬浮控制栏 + 60fps 双轨弹幕
+             ========================================== -->
+        <div id="barrage-stage" class="fixed top-14 inset-x-0 z-30 transition-opacity duration-300">
+            <div id="barrage-track-0" class="barrage-track"></div>
+            <div id="barrage-track-1" class="barrage-track mt-1"></div>
+        </div>
+
+        <div class="fixed top-2.5 inset-x-0 z-40 pointer-events-none">
+            <div class="w-full max-w-4xl mx-auto px-3 flex items-center justify-end gap-1.5">
+                <button onclick="replayWeddingCurtains()" class="pointer-events-auto px-2.5 py-1.5 doodle-btn bg-white flex items-center gap-1 text-xs font-cute text-doodle-ink shrink-0">
+                    <span>🎪</span>
+                    <span>重播幕布</span>
+                </button>
+
+                <button id="toggle-barrage-btn" onclick="toggleBarrage()" class="pointer-events-auto px-2.5 py-1.5 doodle-btn bg-white flex items-center gap-1 text-xs font-cute text-doodle-ink shrink-0">
+                    <span id="barrage-dot" class="w-2 h-2 rounded-full bg-emerald-500 border border-doodle-ink"></span>
+                    <span id="barrage-btn-text">弹幕开</span>
+                </button>
+
+                <button onclick="switchMp3Track()" class="pointer-events-auto px-2.5 py-1.5 doodle-btn bg-white flex items-center gap-1 text-xs font-cute text-doodle-ink shrink-0" title="切换 MP3 婚礼背景音乐">
+                    <span>🎵</span>
+                    <span id="track-name-label">切歌</span>
+                </button>
+
+                <!-- 手绘黑胶/磁带播放器按键 -->
+                <button id="music-toggle-btn" onclick="toggleMp3Music()" aria-label="MP3背景音乐开关" class="pointer-events-auto relative w-9 h-9 rounded-full bg-doodle-yellow border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A] flex items-center justify-center shrink-0">
+                    <span id="floating-notes" class="pointer-events-none hidden">
+                        <span class="absolute -top-2 -left-1 text-xs text-doodle-rose animate-bounce">♪</span>
+                        <span class="absolute -top-3 right-0 text-xs text-doodle-ink animate-bounce" style="animation-delay: 0.3s;">♫</span>
+                    </span>
+                    <div id="vinyl-disc" class="w-7 h-7 rounded-full bg-doodle-ink flex items-center justify-center vinyl-spin vinyl-paused">
+                        <div class="w-2.5 h-2.5 rounded-full bg-doodle-pink border border-white"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             主页面内容容器
+             ========================================== -->
+        <main id="main-content" class="relative z-10 w-full max-w-4xl mx-auto px-3 sm:px-6 pb-14 pt-14 overflow-hidden">
+
+            <!-- 2. 首屏主视觉与实时倒计时 -->
+            <section id="section-hero" class="stage-clip pt-2 pb-8 sm:py-8">
+                <div class="reveal-up doodle-card p-4 sm:p-8 w-full mx-auto bg-[#FFFEFC]">
+                    <!-- 和纸胶带 -->
+                    <div class="washi-tape-top washi-tape-yellow"></div>
+
+                    <div class="flex flex-col items-center text-center relative z-10 w-full">
+                        <div class="inline-flex items-center gap-1.5 px-3 py-1 doodle-pill bg-doodle-pink/70 text-xs font-cute font-bold text-doodle-ink mb-3">
+                            <span>✦</span>
+                            <span>Save The Date · 2026.10.24</span>
+                            <span>✦</span>
+                        </div>
+
+                        <!-- 拍立得画框 + 探头的小橘猫 -->
+                        <div class="relative w-full max-w-sm sm:max-w-md mx-auto my-1 px-1">
+                            <!-- 左上角手绘小气球 -->
+                            <div class="absolute -left-2 -top-4 z-20 cute-float pointer-events-none">
+                                <svg class="w-12 h-14" viewBox="0 0 50 65" fill="none">
+                                    <ellipse cx="25" cy="25" rx="18" ry="22" fill="#FFCCD2" stroke="#3D312A" stroke-width="2"/>
+                                    <path d="M25 47 L22 52 H28 L25 47 Z" fill="#FFCCD2" stroke="#3D312A" stroke-width="1.8"/>
+                                    <path d="M25 52 Q20 58 25 64" stroke="#3D312A" stroke-width="1.5" fill="none"/>
+                                    <ellipse cx="19" cy="16" rx="4" ry="7" fill="white" opacity="0.6"/>
+                                </svg>
+                            </div>
+
+                            <!-- 右下角特派橘猫证婚员贴纸 -->
+                            <div class="absolute -right-2 -bottom-3 z-20 cute-float" style="animation-delay: 1.5s;">
+                                <div class="bg-white border-2 border-doodle-ink rounded-2xl px-2.5 py-1 shadow-[2px_2px_0px_#3D312A] flex items-center gap-1.5">
+                                    <svg class="w-7 h-7 shrink-0" viewBox="0 0 36 36" fill="none">
+                                        <!-- 小橘猫头 -->
+                                        <ellipse cx="18" cy="20" rx="14" ry="12" fill="#FCE794" stroke="#3D312A" stroke-width="2"/>
+                                        <polygon points="6,14 10,6 14,12" fill="#FCE794" stroke="#3D312A" stroke-width="2"/>
+                                        <polygon points="22,12 26,6 30,14" fill="#FCE794" stroke="#3D312A" stroke-width="2"/>
+                                        <!-- 耳蜗粉色 -->
+                                        <polygon points="8,12 10,8 12,11" fill="#FFCCD2"/>
+                                        <polygon points="24,11 26,8 28,12" fill="#FFCCD2"/>
+                                        <!-- 表情 -->
+                                        <circle cx="13" cy="19" r="1.8" fill="#3D312A"/>
+                                        <circle cx="23" cy="19" r="1.8" fill="#3D312A"/>
+                                        <polygon points="18,22 16.5,20.5 19.5,20.5" fill="#F28482"/>
+                                        <path d="M15 24 Q18 26 21 24" stroke="#3D312A" stroke-width="1.5" fill="none"/>
+                                        <circle cx="9" cy="22" r="2.5" fill="#FFB7B2" opacity="0.6"/>
+                                        <circle cx="27" cy="22" r="2.5" fill="#FFB7B2" opacity="0.6"/>
+                                    </svg>
+                                    <div class="text-left font-cute leading-tight">
+                                        <span class="text-[11px] font-bold text-doodle-ink block">橘猫“年糕”</span>
+                                        <span class="text-[9px] text-doodle-rose">在认真证婚喵~</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 拍立得照片卡 -->
+                            <div class="p-2 sm:p-3 bg-white border-2 border-doodle-ink rounded-3xl shadow-[3px_4px_0px_#3D312A]">
+                                <div class="relative rounded-2xl overflow-hidden aspect-[4/5] bg-doodle-warm border border-doodle-ink/30">
+                                    <img src="./image/1.jpg" 
+                                         decoding="async"
+                                         onerror="this.src='https://placehold.co/800x1000/F7E8E8/3D3532?text=Lu+%26+Shen+Wedding'"
+                                         alt="陆景行与沈知意主婚纱照" 
+                                         class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-doodle-ink/65 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-3 inset-x-3 text-white text-center">
+                                        <p class="font-en text-lg sm:text-xl font-bold tracking-wide">“Two souls, one cute story”</p>
+                                        <p class="font-cute text-xs text-white/95 mt-0.5">顺着手绘的虚线，我们终于相撞进同一个世界！</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 名字与心动标签 -->
+                        <div class="mt-6 w-full">
+                            <div class="flex items-center justify-center gap-4 sm:gap-6">
+                                <div class="text-right">
+                                    <span class="text-[10px] sm:text-xs font-cute text-doodle-rose font-bold block">GROOM · 新郎</span>
+                                    <h2 class="text-2xl sm:text-4xl font-cute font-bold text-doodle-ink mt-0.5">陆景行</h2>
+                                </div>
+                                <div class="w-10 h-10 rounded-full bg-doodle-pink border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A] flex items-center justify-center">
+                                    <span class="text-doodle-rose text-lg">♥</span>
+                                </div>
+                                <div class="text-left">
+                                    <span class="text-[10px] sm:text-xs font-cute text-doodle-rose font-bold block">BRIDE · 新娘</span>
+                                    <h2 class="text-2xl sm:text-4xl font-cute font-bold text-doodle-ink mt-0.5">沈知意</h2>
+                                </div>
+                            </div>
+
+                            <div class="mt-3.5 inline-flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-4 py-2 doodle-card bg-doodle-warm/70 text-xs sm:text-sm font-cute font-bold text-doodle-ink">
+                                <span>📅 2026年10月24日 (周六) 12:08</span>
+                                <span class="hidden sm:inline text-doodle-ink/30">|</span>
+                                <span>📍 云栖湖畔大酒店 · 三楼星河宴会厅</span>
+                            </div>
+                        </div>
+
+                        <!-- 实时倒计时器 (手绘木格风) -->
+                        <div class="mt-6 w-full max-w-md mx-auto">
+                            <p class="font-cute text-xs text-doodle-ink/75 font-bold mb-2">✦ 婚礼倒计时 · 甜蜜迫近中 ✦</p>
+                            <div class="grid grid-cols-4 gap-2 sm:gap-3">
+                                <div class="doodle-card p-2 flex flex-col items-center bg-white">
+                                    <span id="cd-days" class="font-en text-2xl sm:text-3xl font-bold text-doodle-ink">07</span>
+                                    <span class="font-cute text-[10px] text-doodle-ink/70 font-bold">天 Days</span>
+                                </div>
+                                <div class="doodle-card p-2 flex flex-col items-center bg-white">
+                                    <span id="cd-hours" class="font-en text-2xl sm:text-3xl font-bold text-doodle-ink">02</span>
+                                    <span class="font-cute text-[10px] text-doodle-ink/70 font-bold">时 Hours</span>
+                                </div>
+                                <div class="doodle-card p-2 flex flex-col items-center bg-white">
+                                    <span id="cd-mins" class="font-en text-2xl sm:text-3xl font-bold text-doodle-ink">18</span>
+                                    <span class="font-cute text-[10px] text-doodle-ink/70 font-bold">分 Mins</span>
+                                </div>
+                                <div class="doodle-card p-2 flex flex-col items-center bg-doodle-pink/70">
+                                    <span id="cd-secs" class="font-en text-2xl sm:text-3xl font-bold text-doodle-rose">36</span>
+                                    <span class="font-cute text-[10px] text-doodle-ink font-bold">秒 Secs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 3. 新郎 & 新娘档案：左右丝滑合体 (手绘情侣大卡片)
+                 ========================================== -->
+            <section id="section-couple" class="stage-clip py-7 sm:py-10">
+                <div class="section-header reveal-up text-center mb-5">
+                    <span class="font-cute text-xs tracking-widest text-doodle-rose font-bold block">♥ THE HAPPY COUPLE ♥</span>
+                    <h2 class="text-2xl sm:text-3xl font-cute font-bold text-doodle-ink mt-0.5">新郎 &amp; 新娘档案</h2>
+                    <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                        <path d="M10 8 Q45 2 80 8 T150 8 Q165 4 170 8" stroke="#F28482" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                    <p class="font-cute text-xs text-doodle-ink/70 mt-1">下滑自动左右丝滑合体 · 点击卡片可 3D 翻面查看 Q 版手绘手账</p>
+
+                    <div class="inline-flex flex-wrap items-center justify-center gap-2 mt-3">
+                        <button onclick="replayCoupleMerge(event)" class="px-3.5 py-1.5 doodle-btn bg-doodle-yellow text-xs font-cute font-bold text-doodle-ink flex items-center gap-1">
+                            <span>✨</span>
+                            <span>重播合体动画</span>
+                        </button>
+                        <button onclick="toggleAllCoupleAvatars()" class="px-3.5 py-1.5 doodle-btn bg-doodle-pink text-xs font-cute font-bold text-doodle-rose flex items-center gap-1">
+                            <span>🎨</span>
+                            <span id="couple-avatar-mode-text">切换Q版手绘</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 强制手机端同屏双列并排 (grid-cols-2) -->
+                <div id="couple-merge-stage" class="stage-clip max-w-3xl mx-auto pt-1 pb-3 px-0.5">
+                    
+                    <!-- 顶部月老手绘红线 -->
+                    <div class="w-4/5 mx-auto mb-2 pointer-events-none">
+                        <svg class="w-full h-8 overflow-visible" viewBox="0 0 320 28" fill="none">
+                            <path d="M10 14 H110 Q120 4 130 14 T150 14 T170 14 T190 14 H310" stroke="#E5DAC8" stroke-width="2" stroke-dasharray="4 4"/>
+                            <path id="couple-ecg-path" d="M10 14 H110 Q120 4 130 14 T150 14 T170 14 T190 14 H310" stroke="#F28482" stroke-width="3" stroke-linecap="round"/>
+                            <!-- 两端手绘蝴蝶结 -->
+                            <circle cx="10" cy="14" r="4" fill="#FCE794" stroke="#3D312A" stroke-width="1.8"/>
+                            <circle cx="310" cy="14" r="4" fill="#FFCCD2" stroke="#3D312A" stroke-width="1.8"/>
+                        </svg>
+                    </div>
+
+                    <div class="relative grid grid-cols-2 gap-1.5 sm:gap-3 items-stretch">
+
+                        <!-- 中央悬浮天作之合手绘徽章 -->
+                        <div class="absolute top-[35%] sm:top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none flex items-center justify-center">
+                            <button id="couple-merge-badge" onclick="burstConfettiFromElement(this, 32)" title="点我撒花" class="pointer-events-auto relative w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-white border-2 border-doodle-ink shadow-[2.5px_3px_0px_#3D312A] flex flex-col items-center justify-center cursor-pointer hover:scale-110 active:scale-95 transition-transform">
+                                <span class="text-xs sm:text-base leading-none">💖</span>
+                                <span class="font-cute text-[10px] sm:text-xs font-bold text-doodle-ink leading-tight">100%</span>
+                                <span class="font-cute text-[8px] sm:text-[9px] text-doodle-rose leading-none font-bold">天作之合</span>
+                            </button>
+                        </div>
+
+                        <!-- 左卡：新郎档案 -->
+                        <div id="couple-groom-card" class="doodle-card rounded-r-lg p-2.5 sm:p-5 flex flex-col justify-between bg-[#FFFEFC]">
+                            <div class="washi-tape-top washi-tape-green" style="width: 60px;"></div>
+                            <div>
+                                <div class="flex items-center justify-between border-b-2 border-dashed border-doodle-ink/20 pb-1.5 mb-2">
+                                    <span class="px-2 py-0.5 doodle-pill bg-doodle-blue text-[9px] sm:text-[11px] font-cute font-bold text-doodle-ink">GROOM · 新郎</span>
+                                    <button onclick="flipSingleAvatar('groom')" class="font-cute text-[10px] sm:text-xs text-doodle-ink/70 hover:text-doodle-ink flex items-center gap-0.5">
+                                        <span>🔄</span><span>翻面</span>
+                                    </button>
+                                </div>
+
+                                <!-- 3D 翻转头像框 -->
+                                <div class="w-24 h-32 sm:w-36 sm:h-44 mx-auto flip-perspective cursor-pointer" onclick="flipSingleAvatar('groom')">
+                                    <div id="groom-flip-inner" class="flip-inner">
+                                        <div class="flip-face rounded-2xl p-1 bg-white border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A]">
+                                            <div class="relative w-full h-full rounded-xl overflow-hidden bg-doodle-warm">
+                                                <img src="./image/7.jpg" 
+                                                     decoding="async"
+                                                     alt="新郎陆景行" 
+                                                     class="w-full h-full object-cover">
+                                                <div class="absolute inset-x-0 bottom-0 bg-doodle-ink/70 py-0.5 text-center">
+                                                    <span class="font-cute text-[9px] text-white font-bold">点看Q版 ↻</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Q 版手绘背面 -->
+                                        <div class="flip-face flip-back rounded-2xl p-1 bg-doodle-warm border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A] flex flex-col items-center justify-center">
+                                            <svg class="w-20 h-24" viewBox="0 0 100 120" fill="none" aria-label="可爱的新郎Q版手绘">
+                                                <path d="M18 109 Q20 91 36 86 L50 96 L64 86 Q81 91 83 109 Q50 119 18 109Z" fill="#D2E7F9" stroke="#3D312A" stroke-width="2.5" stroke-linejoin="round"/>
+                                                <path d="M40 83 L50 96 L60 83 L57 112 H43Z" fill="#FFFEFC" stroke="#3D312A" stroke-width="2" stroke-linejoin="round"/>
+                                                <path d="M45 91 L50 96 L55 91 L54 103 L50 106 L46 103Z" fill="#F28482" stroke="#3D312A" stroke-width="1.5"/>
+                                                <path d="M24 50 Q20 24 50 21 Q80 24 76 53 L72 73 Q68 87 50 89 Q32 87 28 73Z" fill="#FFE8D6" stroke="#3D312A" stroke-width="2.5"/>
+                                                <path d="M23 48 Q18 24 38 18 Q58 10 74 26 Q81 35 76 51 Q70 43 69 34 Q58 40 41 36 Q32 35 25 43Z" fill="#3D312A" stroke="#3D312A" stroke-width="2" stroke-linejoin="round"/>
+                                                <path d="M29 48 Q38 42 46 48 M54 48 Q62 42 71 48" stroke="#3D312A" stroke-width="2.3" stroke-linecap="round"/>
+                                                <circle cx="39" cy="54" r="8" fill="#FFFDF8" fill-opacity=".7" stroke="#3D312A" stroke-width="2.4"/><circle cx="61" cy="54" r="8" fill="#FFFDF8" fill-opacity=".7" stroke="#3D312A" stroke-width="2.4"/>
+                                                <path d="M47 53 H53" stroke="#3D312A" stroke-width="2.2" stroke-linecap="round"/><ellipse cx="40" cy="55" rx="2.2" ry="3" fill="#3D312A"/><ellipse cx="60" cy="55" rx="2.2" ry="3" fill="#3D312A"/>
+                                                <circle cx="29" cy="66" r="5" fill="#FF9EAA" opacity=".75"/><circle cx="71" cy="66" r="5" fill="#FF9EAA" opacity=".75"/>
+                                                <path d="M45 69 Q50 75 55 69" stroke="#B84F57" stroke-width="2.2" stroke-linecap="round"/><path d="M50 7 L52 13 L59 14 L54 19 L55 26 L50 22 L45 26 L46 19 L41 14 L48 13Z" fill="#FCE794" stroke="#3D312A" stroke-width="1.5"/>
+                                            </svg>
+                                            <span class="font-cute text-[10px] text-doodle-ink font-bold mt-1">手绘陆工 ✨</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center mt-2">
+                                    <h3 class="text-base sm:text-2xl font-cute font-bold text-doodle-ink">陆景行</h3>
+                                    <p class="font-cute text-[10px] sm:text-xs text-doodle-rose font-bold">ENFJ · 稳重天秤座</p>
+                                    <div class="flex flex-wrap justify-center gap-1 mt-1">
+                                        <span class="px-2 py-0.5 doodle-pill bg-doodle-yellow text-[10px] font-cute font-bold text-doodle-ink">🏛️ 建筑师</span>
+                                        <span class="px-2 py-0.5 doodle-pill bg-doodle-pink text-[10px] font-cute font-bold text-doodle-ink">🍮 甜品控</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div onclick="likeCoupleCard(event, 'groom')" class="mt-2.5 p-2 sm:p-3 rounded-2xl bg-doodle-warm/80 border border-doodle-ink/40 cursor-pointer text-left">
+                                <div class="flex items-center justify-between text-[10px] sm:text-xs font-cute font-bold text-doodle-ink mb-0.5">
+                                    <span>💌 知意写他：</span>
+                                    <span class="text-doodle-rose">♥ <span id="groom-like-num" class="font-en">99</span></span>
+                                </div>
+                                <p class="text-[10px] sm:text-xs text-doodle-ink/80 leading-relaxed font-cute">
+                                    “画最工整的图纸，也记得我爱喝半糖少冰；有他在，连雨天都像漫画里的特别篇。”
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 右卡：新娘档案 -->
+                        <div id="couple-bride-card" class="doodle-card rounded-l-lg p-2.5 sm:p-5 flex flex-col justify-between bg-[#FFFEFC]">
+                            <div class="washi-tape-top washi-tape-yellow" style="width: 60px;"></div>
+                            <div>
+                                <div class="flex items-center justify-between border-b-2 border-dashed border-doodle-ink/20 pb-1.5 mb-2">
+                                    <span class="px-2 py-0.5 doodle-pill bg-doodle-pink text-[9px] sm:text-[11px] font-cute font-bold text-doodle-rose">BRIDE · 新娘</span>
+                                    <button onclick="flipSingleAvatar('bride')" class="font-cute text-[10px] sm:text-xs text-doodle-rose hover:text-doodle-ink flex items-center gap-0.5">
+                                        <span>🔄</span><span>翻面</span>
+                                    </button>
+                                </div>
+
+                                <div class="w-24 h-32 sm:w-36 sm:h-44 mx-auto flip-perspective cursor-pointer" onclick="flipSingleAvatar('bride')">
+                                    <div id="bride-flip-inner" class="flip-inner">
+                                        <div class="flip-face rounded-2xl p-1 bg-white border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A]">
+                                            <div class="relative w-full h-full rounded-xl overflow-hidden bg-doodle-warm">
+                                                <img src="./image/2.jpg" 
+                                                     decoding="async"
+                                                     alt="新娘沈知意" 
+                                                     class="w-full h-full object-cover">
+                                                <div class="absolute inset-x-0 bottom-0 bg-doodle-ink/70 py-0.5 text-center">
+                                                    <span class="font-cute text-[9px] text-white font-bold">点看Q版 ↻</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Q 版手绘背面 -->
+                                        <div class="flip-face flip-back rounded-2xl p-1 bg-doodle-warm border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A] flex flex-col items-center justify-center">
+                                            <svg class="w-20 h-24" viewBox="0 0 100 120" fill="none" aria-label="可爱的新娘Q版手绘">
+                                                <path d="M16 111 Q19 90 36 86 L50 96 L64 86 Q81 90 84 111 Q50 121 16 111Z" fill="#FFF7EB" stroke="#3D312A" stroke-width="2.5" stroke-linejoin="round"/>
+                                                <path d="M40 85 L50 96 L60 85 L56 112 H44Z" fill="#FFCCD2" stroke="#3D312A" stroke-width="2"/>
+                                                <path d="M21 55 Q16 23 48 18 Q81 20 79 56 L75 81 Q69 91 64 99 L58 83 Q50 91 42 83 L35 100 Q22 82 21 55Z" fill="#755B4D" stroke="#3D312A" stroke-width="2.5" stroke-linejoin="round"/>
+                                                <path d="M24 48 Q26 29 49 27 Q69 28 76 47 Q67 39 61 37 Q47 43 28 39Z" fill="#755B4D"/>
+                                                <path d="M26 54 Q20 77 29 104 M74 54 Q81 79 71 104" stroke="#FFFEFC" stroke-width="2.5" stroke-dasharray="3 3" opacity=".9"/>
+                                                <ellipse cx="50" cy="58" rx="25" ry="27" fill="#FFE8D6" stroke="#3D312A" stroke-width="2.5"/>
+                                                <path d="M28 50 Q36 44 44 50 M56 50 Q64 44 72 50" stroke="#3D312A" stroke-width="2.2" stroke-linecap="round"/>
+                                                <ellipse cx="39" cy="57" rx="3.3" ry="4.5" fill="#3D312A"/><ellipse cx="61" cy="57" rx="3.3" ry="4.5" fill="#3D312A"/>
+                                                <circle cx="29" cy="68" r="5.5" fill="#FF9EAA" opacity=".72"/><circle cx="71" cy="68" r="5.5" fill="#FF9EAA" opacity=".72"/>
+                                                <path d="M44 71 Q50 79 56 71" stroke="#B84F57" stroke-width="2.3" stroke-linecap="round"/>
+                                                <path d="M40 24 L43 15 L50 21 L57 14 L60 25Z" fill="#FCE794" stroke="#3D312A" stroke-width="2" stroke-linejoin="round"/><circle cx="50" cy="17" r="2" fill="#F28482"/>
+                                                <path d="M17 38 Q10 34 14 28 Q19 24 22 31 Q25 24 30 28 Q34 35 24 40Z" fill="#FFCCD2" stroke="#3D312A" stroke-width="1.5"/>
+                                            </svg>
+                                            <span class="font-cute text-[10px] text-doodle-rose font-bold mt-1">手绘知意 🌸</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center mt-2">
+                                    <h3 class="text-base sm:text-2xl font-cute font-bold text-doodle-ink">沈知意</h3>
+                                    <p class="font-cute text-[10px] sm:text-xs text-doodle-rose font-bold">INFP · 浪漫双鱼座</p>
+                                    <div class="flex flex-wrap justify-center gap-1 mt-1">
+                                        <span class="px-2 py-0.5 doodle-pill bg-doodle-pink text-[10px] font-cute font-bold text-doodle-ink">🎨 插画师</span>
+                                        <span class="px-2 py-0.5 doodle-pill bg-doodle-yellow text-[10px] font-cute font-bold text-doodle-ink">🐱 猫奴</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div onclick="likeCoupleCard(event, 'bride')" class="mt-2.5 p-2 sm:p-3 rounded-2xl bg-doodle-pink/40 border border-doodle-ink/40 cursor-pointer text-left">
+                                <div class="flex items-center justify-between text-[10px] sm:text-xs font-cute font-bold text-doodle-rose mb-0.5">
+                                    <span>💌 景行写她：</span>
+                                    <span>♥ <span id="bride-like-num" class="font-en">108</span></span>
+                                </div>
+                                <p class="text-[10px] sm:text-xs text-doodle-ink/80 leading-relaxed font-cute">
+                                    “她是把平凡柴米油盐画成童话的神奇少女；有她在，整个家就像刚出炉的面包般柔软温暖。”
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 4. 丝滑光影婚纱画廊 (手绘拍立得相册)
+                 ========================================== -->
+            <section id="section-gallery" class="stage-clip py-7 sm:py-10">
+                <div class="reveal-up doodle-card p-4 sm:p-7 relative bg-[#FFFEFC]">
+                    <div class="washi-tape-top washi-tape-green"></div>
+                    <button onclick="toggleGalleryAutoplay()" id="gallery-autoplay-btn" class="absolute top-3 right-3 z-20 px-2.5 py-1 doodle-btn bg-doodle-yellow text-xs font-cute font-bold text-doodle-ink flex items-center gap-1" aria-pressed="true">
+                        <span aria-hidden="true">Ⅱ</span><span>暂停轮播</span>
+                    </button>
+
+                    <div class="section-header flex flex-col md:flex-row md:items-end justify-between gap-3 mb-4 pr-24">
+                        <div>
+                            <span class="font-cute text-xs tracking-widest text-doodle-rose font-bold block">♥ MOMENTS OF LOVE ♥</span>
+                            <h2 class="text-2xl sm:text-3xl font-cute font-bold text-doodle-ink mt-0.5">📸 丝滑拍立得婚纱画廊</h2>
+                            <svg class="section-line-svg w-36 h-3 mt-1" viewBox="0 0 150 14" fill="none">
+                                <path d="M2 7 Q40 2 80 8 T145 7" stroke="#F28482" stroke-width="2.5" stroke-linecap="round"/>
+                            </svg>
+                            <p class="font-cute text-xs text-doodle-ink/70 mt-1">支持手指左右滑动、全屏预览，可切换四种手账视角</p>
+                        </div>
+
+                        <!-- 模式切换手绘小胶囊 -->
+                        <div class="inline-flex flex-wrap bg-doodle-warm p-1 rounded-2xl border-2 border-doodle-ink self-start md:self-auto gap-1">
+                            <button onclick="switchGalleryMode('coverflow')" id="mode-btn-coverflow" class="px-2.5 py-1 rounded-xl text-xs font-cute font-bold transition-all bg-doodle-ink text-white">
+                                🎨 立体画廊
+                            </button>
+                            <button onclick="switchGalleryMode('cards')" id="mode-btn-cards" class="px-2.5 py-1 rounded-xl text-xs font-cute font-bold transition-all text-doodle-ink">
+                                🃏 趣味叠卡
+                            </button>
+                            <button onclick="switchGalleryMode('fade')" id="mode-btn-fade" class="px-2.5 py-1 rounded-xl text-xs font-cute font-bold transition-all text-doodle-ink">
+                                🌸 柔光呼吸
+                            </button>
+                            <button onclick="switchGalleryMode('filmstrip')" id="mode-btn-filmstrip" class="px-2.5 py-1 rounded-xl text-xs font-cute font-bold transition-all text-doodle-ink">
+                                ▤ 胶片长廊
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3D 触摸舞台 -->
+                    <div id="gallery-viewport" class="gallery-3d-viewport">
+                        <div id="gallery-slides-track" class="w-full h-full relative"></div>
+                        <button onclick="stepGallery(-1)" aria-label="上一张" class="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white border-2 border-doodle-ink text-doodle-ink flex items-center justify-center font-bold shadow-[2px_2px_0px_#3D312A]">❮</button>
+                        <button onclick="stepGallery(1)" aria-label="下一张" class="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white border-2 border-doodle-ink text-doodle-ink flex items-center justify-center font-bold shadow-[2px_2px_0px_#3D312A]">❯</button>
+                    </div>
+
+                    <!-- 图注与点赞 -->
+                    <div class="mt-2.5 flex flex-col sm:flex-row items-center justify-between gap-2 p-3 rounded-2xl bg-doodle-warm/80 border-2 border-doodle-ink">
+                        <div class="flex items-center gap-2.5 text-center sm:text-left">
+                            <span id="gallery-index-badge" class="px-2.5 py-1 doodle-pill bg-doodle-yellow text-doodle-ink font-cute text-xs font-bold shrink-0">01 / 06</span>
+                            <div>
+                                <h4 id="gallery-caption-title" class="text-sm font-cute font-bold text-doodle-ink">晨光里的第一封情书</h4>
+                                <p id="gallery-caption-sub" class="text-xs font-cute text-doodle-ink/75">微风吹动头纱的温柔瞬间，定格我们的永恒序曲</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button onclick="openLightboxCurrent()" class="px-3 py-1 doodle-btn bg-white text-xs font-cute font-bold text-doodle-ink flex items-center gap-1">
+                                <span>🔍</span><span>放大看</span>
+                            </button>
+                            <button onclick="likeCurrentPhoto(event)" class="px-3 py-1 doodle-btn bg-doodle-pink text-xs font-cute font-bold text-doodle-rose flex items-center gap-1">
+                                <span>♥</span><span>沾喜气</span>
+                                <span id="photo-like-count" class="font-en font-bold">128</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 缩略图条 -->
+                    <div id="thumb-strip" class="mt-3 grid grid-cols-7 gap-1.5 sm:gap-2"></div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 5. 恋爱日记手账时间轴
+                 ========================================== -->
+            <section id="section-story" class="stage-clip py-7 sm:py-10">
+                <div class="section-header reveal-up text-center mb-7">
+                    <span class="font-cute text-xs tracking-widest text-doodle-rose font-bold block">♥ OUR LOVE DIARY ♥</span>
+                    <h2 class="text-2xl sm:text-3xl font-cute font-bold text-doodle-ink mt-0.5">📖 恋爱手账·心动坐标</h2>
+                    <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                        <path d="M10 8 Q45 2 80 8 T150 8 Q165 4 170 8" stroke="#F28482" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                    <p class="font-cute text-xs text-doodle-ink/70 mt-1">顺着小爪印 · 4 个重要日子串联起我们 1,890 天的甜宠小事</p>
+                </div>
+
+                <div class="relative max-w-3xl mx-auto pl-6 sm:pl-0">
+                    <div class="absolute left-6 sm:left-1/2 top-2 bottom-2 w-1 bg-doodle-ink/20 -translate-x-1/2 border-r-2 border-dashed border-doodle-ink/40"></div>
+                    <div id="story-progress-line" class="absolute left-6 sm:left-1/2 top-2 bottom-2 w-1 bg-doodle-rose -translate-x-1/2 origin-top scale-y-0"></div>
+
+                    <!-- 节点 1 -->
+                    <div class="relative flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8">
+                        <div class="reveal-left sm:w-[44%] sm:text-right pl-8 sm:pl-0 order-2 sm:order-1 mt-1 sm:mt-0">
+                            <div class="doodle-card p-4 bg-white">
+                                <span class="font-cute text-xs font-bold text-doodle-rose">2021.07.18 · FIRST MEET</span>
+                                <h3 class="text-base sm:text-lg font-cute font-bold text-doodle-ink mt-0.5">初遇 · 图书馆转角的光斑</h3>
+                                <p class="font-cute text-xs text-doodle-ink/75 mt-1 leading-relaxed">
+                                    同时伸手去拿最后一本插画集，指尖碰到的那秒，盛夏窗外的蝉鸣仿佛被按下了静音键。
+                                </p>
+                            </div>
+                        </div>
+                        <div class="absolute left-0 sm:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-doodle-yellow border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A] flex items-center justify-center z-10 order-1 sm:order-2">
+                            <span class="text-sm">📚</span>
+                        </div>
+                        <div class="sm:w-[44%] order-3"></div>
+                    </div>
+
+                    <!-- 节点 2 -->
+                    <div class="relative flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8">
+                        <div class="sm:w-[44%] order-1"></div>
+                        <div class="absolute left-0 sm:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-doodle-pink border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A] flex items-center justify-center z-10 order-2">
+                            <span class="text-sm">🍊</span>
+                        </div>
+                        <div class="reveal-right sm:w-[44%] pl-8 sm:pl-0 order-3 mt-1 sm:mt-0">
+                            <div class="doodle-card p-4 bg-white">
+                                <span class="font-cute text-xs font-bold text-doodle-rose">2022.05.20 · FALL IN LOVE</span>
+                                <h3 class="text-base sm:text-lg font-cute font-bold text-doodle-ink mt-0.5">心动 · 橘子汽水味日落</h3>
+                                <p class="font-cute text-xs text-doodle-ink/75 mt-1 leading-relaxed">
+                                    海风把裙角吹得乱飞，两杯橘子汽水碰在一起。你把耳机分我一只，刚好在放我们都喜欢的歌。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 节点 3 -->
+                    <div class="relative flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8">
+                        <div class="reveal-left sm:w-[44%] sm:text-right pl-8 sm:pl-0 order-2 sm:order-1 mt-1 sm:mt-0">
+                            <div class="doodle-card p-4 bg-white">
+                                <span class="font-cute text-xs font-bold text-doodle-rose">2023.10.14 · SWEET HOME</span>
+                                <h3 class="text-base sm:text-lg font-cute font-bold text-doodle-ink mt-0.5">筑巢 · “年糕”空降成监工</h3>
+                                <p class="font-cute text-xs text-doodle-ink/75 mt-1 leading-relaxed">
+                                    小橘猫踩着小梅花印搬进小家，第一晚就霸占了新沙发，一屋两人，正式升级为幸福的三口之家！
+                                </p>
+                            </div>
+                        </div>
+                        <div class="absolute left-0 sm:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-doodle-green border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A] flex items-center justify-center z-10 order-1 sm:order-2">
+                            <span class="text-sm">🐱</span>
+                        </div>
+                        <div class="sm:w-[44%] order-3"></div>
+                    </div>
+
+                    <!-- 节点 4 -->
+                    <div class="relative flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                        <div class="sm:w-[44%] order-1"></div>
+                        <div class="absolute left-0 sm:left-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-doodle-rose text-white border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A] flex items-center justify-center z-10 order-2">
+                            <span class="text-sm">💍</span>
+                        </div>
+                        <div class="reveal-right sm:w-[44%] pl-8 sm:pl-0 order-3 mt-1 sm:mt-0">
+                            <div class="doodle-card p-4 bg-[#FFF6F6]">
+                                <span class="font-cute text-xs font-bold text-doodle-rose">2025.12.24 · SHE SAID YES</span>
+                                <h3 class="text-base sm:text-lg font-cute font-bold text-doodle-ink mt-0.5">求婚 · 慌乱却浪漫的星空</h3>
+                                <p class="font-cute text-xs text-doodle-ink/75 mt-1 leading-relaxed">
+                                    手抖得把戒指盒拿反了，惹得知意哭笑不得直点头。2026年10月24日，约定正式兑现！
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 6. 🍬 恋爱默契小问答（3D 卡通翻牌）
+                 ========================================== -->
+            <section id="section-quiz" class="stage-clip py-7">
+                <div class="reveal-up doodle-card p-5 sm:p-7 bg-[#FFFEFC]">
+                    <div class="washi-tape-top washi-tape-yellow"></div>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                        <div>
+                            <span class="font-cute text-xs tracking-widest text-doodle-rose font-bold block">♥ LOVE QUIZ ♥</span>
+                            <h3 class="text-xl sm:text-2xl font-cute font-bold text-doodle-ink mt-0.5">🍬 恋爱默契小问答 · 翻牌揭秘</h3>
+                        </div>
+                        <span class="font-cute text-xs text-doodle-ink/70">轻触任意卡片即可 3D 丝滑翻转</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+                        <div class="h-44 flip-perspective cursor-pointer" onclick="toggleQuizCard(this)">
+                            <div class="flip-inner">
+                                <div class="flip-face doodle-card p-4 flex flex-col items-center justify-between text-center bg-white">
+                                    <span class="px-2.5 py-0.5 doodle-pill bg-doodle-warm text-doodle-ink font-cute text-xs font-bold">Q1 · 心动瞬间</span>
+                                    <div>
+                                        <div class="text-2xl mb-1">💌</div>
+                                        <h4 class="font-cute font-bold text-doodle-ink text-sm sm:text-base">猜猜当年是谁先主动表白的？</h4>
+                                    </div>
+                                    <span class="font-cute text-xs text-doodle-rose font-bold">翻牌看答案 ↻</span>
+                                </div>
+                                <div class="flip-face flip-back doodle-card p-4 flex flex-col items-center justify-center text-center bg-doodle-warm">
+                                    <span class="font-cute text-xs text-doodle-rose font-bold mb-1">✨ 答案：默契到同时开口！</span>
+                                    <p class="font-cute text-xs text-doodle-ink/80 leading-relaxed">
+                                        橘子海落日那天，陆工备好了信，知意恰好递出了速写手绘本，两人对视三秒同时笑了！
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="h-44 flip-perspective cursor-pointer" onclick="toggleQuizCard(this)">
+                            <div class="flip-inner">
+                                <div class="flip-face doodle-card p-4 flex flex-col items-center justify-between text-center bg-white">
+                                    <span class="px-2.5 py-0.5 doodle-pill bg-doodle-warm text-doodle-ink font-cute text-xs font-bold">Q2 · 喵星机密</span>
+                                    <div>
+                                        <div class="text-2xl mb-1">🐱</div>
+                                        <h4 class="font-cute font-bold text-doodle-ink text-sm sm:text-base">家里的小橘猫为什么叫“年糕”？</h4>
+                                    </div>
+                                    <span class="font-cute text-xs text-doodle-rose font-bold">翻牌看答案 ↻</span>
+                                </div>
+                                <div class="flip-face flip-back doodle-card p-4 flex flex-col items-center justify-center text-center bg-doodle-warm">
+                                    <span class="font-cute text-xs text-doodle-rose font-bold mb-1">🐾 答案：因为又粘又软糯！</span>
+                                    <p class="font-cute text-xs text-doodle-ink/80 leading-relaxed">
+                                        抱回家第一天就粘在脚边打呼噜，也寓意着以后的日子年年岁岁甜如年糕！
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="h-44 flip-perspective cursor-pointer" onclick="toggleQuizCard(this)">
+                            <div class="flip-inner">
+                                <div class="flip-face doodle-card p-4 flex flex-col items-center justify-between text-center bg-white">
+                                    <span class="px-2.5 py-0.5 doodle-pill bg-doodle-warm text-doodle-ink font-cute text-xs font-bold">Q3 · 求婚花絮</span>
+                                    <div>
+                                        <div class="text-2xl mb-1">💍</div>
+                                        <h4 class="font-cute font-bold text-doodle-ink text-sm sm:text-base">求婚时发生了什么可爱小插曲？</h4>
+                                    </div>
+                                    <span class="font-cute text-xs text-doodle-rose font-bold">翻牌看答案 ↻</span>
+                                </div>
+                                <div class="flip-face flip-back doodle-card p-4 flex flex-col items-center justify-center text-center bg-doodle-warm">
+                                    <span class="font-cute text-xs text-doodle-rose font-bold mb-1">😂 答案：戒盒紧张拿反啦！</span>
+                                    <p class="font-cute text-xs text-doodle-ink/80 leading-relaxed">
+                                        画图纸从不手抖的严谨陆工，单膝跪地时把盒子完全拿反了，现场朋友笑出眼泪！
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 7. 📜 爱情永恒契约书（手绘盖章）
+                 ========================================== -->
+            <section id="section-contract" class="stage-clip py-7">
+                <div class="reveal-up doodle-card p-4 sm:p-7 relative bg-[#FFFEFC]">
+                    <div class="washi-tape-top washi-tape-pink"></div>
+
+                    <div class="section-header text-center mb-4">
+                        <span class="font-cute text-xs tracking-widest text-doodle-rose font-bold block">♥ MARRIAGE COVENANT ♥</span>
+                        <h2 class="text-2xl sm:text-3xl font-cute font-bold text-doodle-ink mt-0.5">📜 爱情终身契约书</h2>
+                        <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                            <path d="M10 8 Q45 2 80 8 T150 8 Q165 4 170 8" stroke="#F28482" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                        <p class="font-cute text-xs text-doodle-ink/70 mt-1">诚邀您按下喜印 · 成为我们的官方幸福见证人</p>
+                    </div>
+
+                    <div class="max-w-xl mx-auto my-4 space-y-2.5 text-xs sm:text-sm font-cute text-doodle-ink leading-relaxed">
+                        <div class="p-3 rounded-2xl bg-doodle-warm/70 border-2 border-dashed border-doodle-ink/30 flex items-start gap-2">
+                            <span class="text-doodle-rose font-bold">01.</span>
+                            <p>建筑师负责搭建坚固安心的避风港湾，插画师负责把每个柴米油盐的清晨涂满彩虹色。</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-doodle-warm/70 border-2 border-dashed border-doodle-ink/30 flex items-start gap-2">
+                            <span class="text-doodle-rose font-bold">02.</span>
+                            <p>吵架绝不冷战过夜，一盘草莓大福或一个熊抱即可解决；橘猫“年糕”享有终身罐头监督权！</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-doodle-warm/70 border-2 border-dashed border-doodle-ink/30 flex items-start gap-2">
+                            <span class="text-doodle-rose font-bold">03.</span>
+                            <p>自 <strong>2026年10月24日</strong> 起正式生效，有效期：<strong>岁岁年年 · 直到宇宙尽头</strong>。</p>
+                        </div>
+                    </div>
+
+                    <div class="max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t-2 border-dashed border-doodle-ink/20 relative">
+                        <div class="flex items-center gap-5 text-xs font-cute text-doodle-ink">
+                            <div>
+                                <span class="text-doodle-ink/60 block text-[10px]">新郎盖章：</span>
+                                <span class="text-sm font-bold">陆景行 ✍️</span>
+                            </div>
+                            <div>
+                                <span class="text-doodle-ink/60 block text-[10px]">新娘盖章：</span>
+                                <span class="text-sm font-bold">沈知意 ✍️</span>
+                            </div>
+                            <div>
+                                <span class="text-doodle-ink/60 block text-[10px]">特邀喵证婚：</span>
+                                <span class="text-sm font-bold text-doodle-rose">年糕 🐾</span>
+                            </div>
+                        </div>
+
+                        <!-- 盖下的喜字印章 -->
+                        <div id="contract-stamp-mark" class="hidden absolute right-4 sm:right-36 -top-3 sm:-top-6 w-20 h-20 sm:w-24 sm:h-24 pointer-events-none select-none z-20">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none">
+                                <circle cx="50" cy="50" r="42" stroke="#E56B6F" stroke-width="2.5" stroke-dasharray="6 3" fill="rgba(229,107,111,0.15)"/>
+                                <circle cx="50" cy="50" r="36" stroke="#E56B6F" stroke-width="1.8"/>
+                                <text x="50" y="44" text-anchor="middle" fill="#E56B6F" font-size="16" font-weight="bold" font-family="'ZCOOL KuaiLe', cursive">囍·见证</text>
+                                <text x="50" y="62" text-anchor="middle" fill="#E56B6F" font-size="9" font-family="'ZCOOL KuaiLe', cursive">百年好合</text>
+                                <text x="50" y="74" text-anchor="middle" fill="#E56B6F" font-size="8" font-family="sans-serif">2026.10.24</text>
+                            </svg>
+                        </div>
+
+                        <div class="flex flex-col items-center sm:items-end">
+                            <button id="stamp-contract-btn" onclick="stampLoveContract(event)" class="px-5 py-2 doodle-btn bg-doodle-rose text-white text-xs font-cute font-bold flex items-center gap-1.5">
+                                <span>💮</span>
+                                <span id="stamp-btn-text">加盖见证喜印</span>
+                            </button>
+                            <span class="font-cute text-[11px] text-doodle-ink/70 mt-1">已有 <strong id="witness-count" class="font-en text-doodle-rose text-sm">186</strong> 位亲友盖章</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 8. 婚礼流程与伴手礼开箱
+                 ========================================== -->
+            <section id="section-schedule" class="stage-clip py-7">
+                <div class="section-header reveal-up text-center mb-6">
+                    <span class="font-cute text-xs tracking-widest text-doodle-rose font-bold block">♥ WEDDING TIMELINE ♥</span>
+                    <h2 class="text-2xl sm:text-3xl font-cute font-bold text-doodle-ink mt-0.5">⏳ 婚礼流程小画报</h2>
+                    <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                        <path d="M10 8 Q45 2 80 8 T150 8 Q165 4 170 8" stroke="#F28482" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                    <p class="font-cute text-xs text-doodle-ink/70 mt-1">2026年10月24日 · 云栖湖畔大酒店三楼星河宴会厅</p>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 mb-5">
+                    <div class="reveal-up doodle-card p-3 sm:p-4 bg-white flex flex-col justify-between">
+                        <div>
+                            <span class="px-2 py-0.5 doodle-pill bg-doodle-yellow text-[10px] sm:text-xs font-cute font-bold text-doodle-ink">11:00 AM</span>
+                            <h3 class="text-sm sm:text-base font-cute font-bold text-doodle-ink mt-2">📸 签到与拍立得</h3>
+                            <p class="text-[11px] font-cute text-doodle-ink/75 mt-1 leading-relaxed">领取伴手礼，复古手绘相框前拍立得留影。</p>
+                        </div>
+                        <div class="mt-2 pt-1.5 border-t border-doodle-ink/20 font-cute text-[10px] text-doodle-rose font-bold">📍 3F 迎宾长廊</div>
+                    </div>
+
+                    <div class="reveal-up doodle-card p-3 sm:p-4 bg-white flex flex-col justify-between">
+                        <div>
+                            <span class="px-2 py-0.5 doodle-pill bg-doodle-pink text-[10px] sm:text-xs font-cute font-bold text-doodle-rose">11:38 AM</span>
+                            <h3 class="text-sm sm:text-base font-cute font-bold text-doodle-ink mt-2">🧁 甜品下午茶</h3>
+                            <p class="text-[11px] font-cute text-doodle-ink/75 mt-1 leading-relaxed">新郎亲研的树莓马卡龙与法式鲜果特饮无限享。</p>
+                        </div>
+                        <div class="mt-2 pt-1.5 border-t border-doodle-ink/20 font-cute text-[10px] text-doodle-rose font-bold">📍 3F 甜品台区</div>
+                    </div>
+
+                    <div class="reveal-up doodle-card p-3 sm:p-4 bg-white flex flex-col justify-between">
+                        <div>
+                            <span class="px-2 py-0.5 doodle-pill bg-doodle-rose text-white text-[10px] sm:text-xs font-cute font-bold">12:08 PM</span>
+                            <h3 class="text-sm sm:text-base font-cute font-bold text-doodle-ink mt-2">💍 交换誓言礼</h3>
+                            <p class="text-[11px] font-cute text-doodle-ink/75 mt-1 leading-relaxed">星河穹顶亮起，在亲友欢笑中交换承诺。</p>
+                        </div>
+                        <div class="mt-2 pt-1.5 border-t border-doodle-ink/20 font-cute text-[10px] text-doodle-rose font-bold">📍 3F 星河主礼堂</div>
+                    </div>
+
+                    <div class="reveal-up doodle-card p-3 sm:p-4 bg-white flex flex-col justify-between">
+                        <div>
+                            <span class="px-2 py-0.5 doodle-pill bg-doodle-green text-[10px] sm:text-xs font-cute font-bold text-doodle-ink">12:38 PM</span>
+                            <h3 class="text-sm sm:text-base font-cute font-bold text-doodle-ink mt-2">🥂 喜宴与锦鲤</h3>
+                            <p class="text-[11px] font-cute text-doodle-ink/75 mt-1 leading-relaxed">美味开席，席间开启手捧花与神秘伴手礼抽奖！</p>
+                        </div>
+                        <div class="mt-2 pt-1.5 border-t border-doodle-ink/20 font-cute text-[10px] text-doodle-rose font-bold">📍 3F 宴会席位</div>
+                    </div>
+                </div>
+
+                <!-- 穿搭与拆礼盒 -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                    <div class="reveal-up lg:col-span-6 doodle-card p-4 sm:p-5 bg-white flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-base sm:text-lg font-cute font-bold text-doodle-ink">👗 宾客穿搭调色板</h3>
+                                <span class="font-cute text-[11px] text-doodle-ink/60">点击颜色试看建议</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2 my-2.5">
+                                <button onclick="selectDressSwatch('香槟暖金', '#FCE794', '柔和米金色、香槟丝绸或浅卡其，像秋日阳光般明亮高级。')" class="flex flex-col items-center gap-1 p-2 doodle-btn bg-doodle-warm">
+                                    <span class="w-6 h-6 rounded-full bg-[#FCE794] border border-doodle-ink"></span>
+                                    <span class="font-cute text-[10px] font-bold text-doodle-ink">香槟金</span>
+                                </button>
+                                <button onclick="selectDressSwatch('蜜桃粉橘', '#FFCCD2', '温柔显白，粉白调小衬衫或针织开衫，出片满分！')" class="flex flex-col items-center gap-1 p-2 doodle-btn bg-doodle-warm">
+                                    <span class="w-6 h-6 rounded-full bg-[#FFCCD2] border border-doodle-ink"></span>
+                                    <span class="font-cute text-[10px] font-bold text-doodle-ink">蜜桃粉</span>
+                                </button>
+                                <button onclick="selectDressSwatch('奶油柔杏', '#FFF4E6', '法式松弛感，浅杏或奶白外套，大方舒适。')" class="flex flex-col items-center gap-1 p-2 doodle-btn bg-doodle-warm">
+                                    <span class="w-6 h-6 rounded-full bg-[#FFF4E6] border border-doodle-ink"></span>
+                                    <span class="font-cute text-[10px] font-bold text-doodle-ink">奶油杏</span>
+                                </button>
+                                <button onclick="selectDressSwatch('鼠尾嫩绿', '#CBE5B8', '清爽淡雅的莫兰迪浅绿，像微风拂过山丘。')" class="flex flex-col items-center gap-1 p-2 doodle-btn bg-doodle-warm">
+                                    <span class="w-6 h-6 rounded-full bg-[#CBE5B8] border border-doodle-ink"></span>
+                                    <span class="font-cute text-[10px] font-bold text-doodle-ink">嫩芽绿</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-2.5 rounded-2xl bg-doodle-warm border border-doodle-ink/30 font-cute text-xs text-doodle-ink flex items-start gap-2">
+                            <span id="dress-swatch-dot" class="w-3 h-3 rounded-full bg-[#FCE794] border border-doodle-ink shrink-0 mt-0.5"></span>
+                            <p id="dress-swatch-desc" class="leading-relaxed"><strong>香槟暖金</strong>：柔和米金色、香槟丝绸或浅卡其，像秋日阳光般明亮高级。</p>
+                        </div>
+                    </div>
+
+                    <div class="reveal-up lg:col-span-6 doodle-card p-4 sm:p-5 bg-white flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-base sm:text-lg font-cute font-bold text-doodle-ink">🎁 伴手礼盒剧透拆箱</h3>
+                                <button onclick="toggleGiftBox()" id="gift-toggle-btn" class="px-3 py-1 doodle-btn bg-doodle-yellow text-xs font-cute font-bold text-doodle-ink">✨ 拆开看</button>
+                            </div>
+                            <div id="gift-closed-view" onclick="toggleGiftBox()" class="cursor-pointer my-2 py-4 px-3 rounded-2xl bg-doodle-warm border-2 border-dashed border-doodle-ink/40 flex flex-col items-center justify-center text-center">
+                                <span class="text-3xl animate-bounce">🎀</span>
+                                <p class="font-cute text-xs font-bold text-doodle-ink mt-1">戳一下蝴蝶结 · 提前揭秘 4 款定制手作伴手礼</p>
+                            </div>
+                            <div id="gift-opened-view" class="hidden grid-cols-2 gap-2 my-2">
+                                <div class="p-2 rounded-xl bg-doodle-warm border border-doodle-ink/30 flex items-center gap-2">
+                                    <span class="text-lg">🍵</span>
+                                    <div class="font-cute"><h5 class="text-xs font-bold text-doodle-ink">手采桂花茶</h5><p class="text-[10px] text-doodle-ink/60">秋日限定清香</p></div>
+                                </div>
+                                <div class="p-2 rounded-xl bg-doodle-warm border border-doodle-ink/30 flex items-center gap-2">
+                                    <span class="text-lg">🍬</span>
+                                    <div class="font-cute"><h5 class="text-xs font-bold text-doodle-ink">手工牛轧喜糖</h5><p class="text-[10px] text-doodle-ink/60">树莓与海盐脆糖</p></div>
+                                </div>
+                                <div class="p-2 rounded-xl bg-doodle-warm border border-doodle-ink/30 flex items-center gap-2">
+                                    <span class="text-lg">☕</span>
+                                    <div class="font-cute"><h5 class="text-xs font-bold text-doodle-ink">手绘骨瓷对杯</h5><p class="text-[10px] text-doodle-ink/60">陆工线稿手绘版</p></div>
+                                </div>
+                                <div class="p-2 rounded-xl bg-doodle-pink/50 border border-doodle-ink/30 flex items-center gap-2">
+                                    <span class="text-lg">🐱</span>
+                                    <div class="font-cute"><h5 class="text-xs font-bold text-doodle-rose">“年糕”香氛片</h5><p class="text-[10px] text-doodle-ink/60">知意亲手绘制</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="font-cute text-[11px] text-doodle-ink/70">💡 抵达现场出示回执姓名，即可在 3F 迎宾台领取专属定制礼盒。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 9. 📍 星河宴会厅手绘插画地图导览
+                 ========================================== -->
+            <section id="section-venue" class="stage-clip py-7 sm:py-10">
+                <div class="section-header reveal-up text-center mb-6">
+                    <span class="font-cute text-xs tracking-widest text-doodle-rose font-bold block">♥ VENUE GUIDE ♥</span>
+                    <h2 class="text-2xl sm:text-3xl font-cute font-bold text-doodle-ink mt-0.5">📍 宴会厅手绘探秘地图</h2>
+                    <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                        <path d="M10 8 Q45 2 80 8 T150 8 Q165 4 170 8" stroke="#F28482" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                    <p class="font-cute text-xs text-doodle-ink/70 mt-1">云栖湖畔大酒店 3F · 点击地图热点 ①②③④ 查看手绘攻略</p>
+                </div>
+
+                <div class="reveal-up doodle-card p-4 sm:p-6 bg-[#FFFEFC]">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+                        <div class="lg:col-span-7">
+                            <div class="rounded-2xl bg-doodle-warm p-2 border-2 border-doodle-ink">
+                                <!-- 手绘童话感 SVG 平面地图 -->
+                                <svg class="w-full h-auto rounded-xl bg-white border border-doodle-ink/30" viewBox="0 0 520 310" fill="none">
+                                    <rect x="12" y="12" width="496" height="286" rx="16" stroke="#3D312A" stroke-width="2" stroke-dasharray="6 4" fill="#FAF5EB"/>
+
+                                    <!-- ① 迎宾区 -->
+                                    <g onclick="selectHallZone('welcome')" class="cursor-pointer">
+                                        <rect id="map-rect-welcome" x="26" y="26" width="138" height="120" rx="14" fill="#FFCCD2" stroke="#3D312A" stroke-width="2.2"/>
+                                        <text x="95" y="60" text-anchor="middle" fill="#3D312A" font-size="13" font-family="'ZCOOL KuaiLe', cursive" font-weight="bold">迎宾留影长廊</text>
+                                        <circle cx="95" cy="100" r="15" fill="#F28482" stroke="#3D312A" stroke-width="1.8"/>
+                                        <text x="95" y="105" text-anchor="middle" fill="#FFFFFF" font-size="12" font-family="'ZCOOL KuaiLe', cursive" font-weight="bold">①</text>
+                                    </g>
+
+                                    <!-- ④ 景观电梯 -->
+                                    <g onclick="selectHallZone('parking')" class="cursor-pointer">
+                                        <rect id="map-rect-parking" x="26" y="160" width="138" height="124" rx="14" fill="#FFFFFF" stroke="#3D312A" stroke-width="1.8"/>
+                                        <text x="95" y="196" text-anchor="middle" fill="#3D312A" font-size="13" font-family="'ZCOOL KuaiLe', cursive" font-weight="bold">直达电梯厅</text>
+                                        <circle cx="95" cy="240" r="15" fill="#FCE794" stroke="#3D312A" stroke-width="1.8"/>
+                                        <text x="95" y="245" text-anchor="middle" fill="#3D312A" font-size="12" font-family="'ZCOOL KuaiLe', cursive" font-weight="bold">④</text>
+                                    </g>
+
+                                    <!-- ② 主礼堂 -->
+                                    <g onclick="selectHallZone('stage')" class="cursor-pointer">
+                                        <rect id="map-rect-stage" x="180" y="26" width="176" height="258" rx="16" fill="#FFFFFF" stroke="#3D312A" stroke-width="1.8"/>
+                                        <!-- 舞台 -->
+                                        <rect x="216" y="38" width="104" height="34" rx="8" fill="#FCE794" stroke="#3D312A" stroke-width="1.8"/>
+                                        <text x="268" y="59" text-anchor="middle" fill="#3D312A" font-size="11" font-family="'ZCOOL KuaiLe', cursive" font-weight="bold">✦ 星河主舞台 ✦</text>
+                                        <path d="M268 76 V215" stroke="#F28482" stroke-width="2.5" stroke-dasharray="5 4"/>
+                                        <text x="268" y="235" text-anchor="middle" fill="#3D312A" font-size="13" font-family="'ZCOOL KuaiLe', cursive" font-weight="bold">无柱星河礼堂</text>
+                                        <circle cx="268" cy="256" r="15" fill="#CBE5B8" stroke="#3D312A" stroke-width="1.8"/>
+                                        <text x="268" y="261" text-anchor="middle" fill="#3D312A" font-size="12" font-family="'ZCOOL KuaiLe', cursive" font-weight="bold">②</text>
+                                    </g>
+
+                                    <!-- ③ 甜品区 -->
+                                    <g onclick="selectHallZone('dessert')" class="cursor-pointer">
+                                        <rect id="map-rect-dessert" x="372" y="26" width="124" height="258" rx="14" fill="#FFFFFF" stroke="#3D312A" stroke-width="1.8"/>
+                                        <text x="434" y="95" text-anchor="middle" fill="#3D312A" font-size="13" font-family="'ZCOOL KuaiLe', cursive" font-weight="bold">法式甜品茶歇</text>
+                                        <circle cx="434" cy="165" r="15" fill="#D2E7F9" stroke="#3D312A" stroke-width="1.8"/>
+                                        <text x="434" y="170" text-anchor="middle" fill="#3D312A" font-size="12" font-family="'ZCOOL KuaiLe', cursive" font-weight="bold">③</text>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 flex flex-col justify-between gap-3">
+                            <div class="grid grid-cols-4 gap-1">
+                                <button onclick="selectHallZone('welcome')" id="zone-btn-welcome" class="py-1.5 px-1 doodle-btn bg-doodle-pink text-doodle-ink text-xs font-cute font-bold">① 迎宾区</button>
+                                <button onclick="selectHallZone('stage')" id="zone-btn-stage" class="py-1.5 px-1 doodle-btn bg-white text-doodle-ink text-xs font-cute font-bold">② 主礼堂</button>
+                                <button onclick="selectHallZone('dessert')" id="zone-btn-dessert" class="py-1.5 px-1 doodle-btn bg-white text-doodle-ink text-xs font-cute font-bold">③ 甜品台</button>
+                                <button onclick="selectHallZone('parking')" id="zone-btn-parking" class="py-1.5 px-1 doodle-btn bg-white text-doodle-ink text-xs font-cute font-bold">④ 停车梯</button>
+                            </div>
+
+                            <div class="p-3.5 rounded-2xl bg-doodle-warm border-2 border-doodle-ink">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span id="zone-badge" class="px-2.5 py-0.5 doodle-pill bg-doodle-rose text-white text-[10px] font-cute font-bold">热点 ① · 迎宾留影区</span>
+                                    <span id="zone-time" class="font-cute text-xs text-doodle-rose font-bold">11:00 开放</span>
+                                </div>
+                                <h4 id="zone-title" class="text-base font-cute font-bold text-doodle-ink">星河迎宾长廊 &amp; 拍立得留影</h4>
+                                <p id="zone-desc" class="font-cute text-xs text-doodle-ink/80 mt-1 leading-relaxed">
+                                    出三楼电梯右转即达。现场备有复古拍立得相机与手写祝福册，凭签到即可领取定制伴手礼袋！
+                                </p>
+                            </div>
+
+                            <div class="p-3 rounded-2xl bg-white border-2 border-doodle-ink space-y-2 font-cute text-xs">
+                                <p class="text-doodle-ink">📍 <strong>详细地址：</strong>上海市长宁区云栖湖畔大道 520 号（云栖湖畔大酒店 3F 星河宴会厅）</p>
+                                <div class="grid grid-cols-2 gap-2 pt-0.5">
+                                    <button onclick="copyVenueAddress()" class="py-1.5 doodle-btn bg-doodle-warm text-xs font-cute font-bold text-doodle-ink">📋 复制地址</button>
+                                    <button onclick="openNavModal()" class="py-1.5 doodle-btn bg-doodle-yellow text-xs font-cute font-bold text-doodle-ink">🧭 开启导航</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 10. 赴宴回执 RSVP & 实时亲友祝福墙
+                 ========================================== -->
+            <section id="section-rsvp" class="stage-clip py-7 sm:py-10">
+                <div class="section-header reveal-up text-center mb-6">
+                    <span class="font-cute text-xs tracking-widest text-doodle-rose font-bold block">♥ RSVP &amp; BLESSINGS ♥</span>
+                    <h2 class="text-2xl sm:text-3xl font-cute font-bold text-doodle-ink mt-0.5">💌 赴宴回执与手账留言墙</h2>
+                    <svg class="section-line-svg w-44 h-4 mx-auto mt-1" viewBox="0 0 180 16" fill="none">
+                        <path d="M10 8 Q45 2 80 8 T150 8 Q165 4 170 8" stroke="#F28482" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                    <p class="font-cute text-xs text-doodle-ink/70 mt-1">填写回执发射专属手绘席位卡 · 祝福将同步飘过顶部弹幕</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                    <!-- 左侧 RSVP 表单 -->
+                    <form id="rsvp-form" onsubmit="submitRSVP(event)" class="reveal-up lg:col-span-6 doodle-card p-5 sm:p-6 bg-[#FFFEFC] space-y-3.5">
+                        <div class="washi-tape-top washi-tape-yellow"></div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block font-cute text-xs text-doodle-ink font-bold mb-1">您的姓名 *</label>
+                                <input id="rsvp-name" type="text" required placeholder="请输入大名" class="w-full px-3 py-2 rounded-xl bg-doodle-warm border-2 border-doodle-ink font-cute text-xs text-doodle-ink focus:outline-none focus:bg-white">
+                            </div>
+                            <div>
+                                <label class="block font-cute text-xs text-doodle-ink font-bold mb-1">出席状态</label>
+                                <select id="rsvp-status" class="w-full px-3 py-2 rounded-xl bg-doodle-warm border-2 border-doodle-ink font-cute text-xs text-doodle-ink focus:outline-none focus:bg-white">
+                                    <option value="欣然赴约">✨ 欣然赴约</option>
+                                    <option value="礼到人未到">🎁 礼到人未到</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-2.5 rounded-2xl bg-doodle-warm border border-doodle-ink/30">
+                            <span class="font-cute text-xs font-bold text-doodle-ink">👨‍👩‍👧 赴宴随行人数</span>
+                            <div class="flex items-center gap-2">
+                                <button type="button" onclick="adjustGuests(-1)" class="w-6 h-6 doodle-btn bg-white text-xs font-bold">-</button>
+                                <span id="rsvp-guest-count" class="font-cute text-xs font-bold text-doodle-ink w-10 text-center">1 人</span>
+                                <button type="button" onclick="adjustGuests(1)" class="w-6 h-6 doodle-btn bg-white text-xs font-bold">+</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <label class="font-cute text-xs font-bold text-doodle-ink">手写美好祝福 *</label>
+                                <div class="flex gap-1">
+                                    <button type="button" onclick="fillQuickWish('祝景行和知意新婚快乐，百年好合，永远热烈浪漫！🥂')" class="text-[10px] px-2 py-0.5 doodle-pill bg-doodle-pink text-doodle-rose font-cute font-bold">✨ 甜美祝福</button>
+                                    <button type="button" onclick="fillQuickWish('恭喜陆工抱得美人归！周六星河宴会厅准时赴约沾喜气！🎉')" class="text-[10px] px-2 py-0.5 doodle-pill bg-doodle-yellow text-doodle-ink font-cute font-bold">🎊 准时赴约</button>
+                                </div>
+                            </div>
+                            <textarea id="rsvp-wish" rows="3" required placeholder="写下一句给新人的悄悄话，提交后将立刻在顶部弹幕飘过哦..." class="w-full px-3 py-2 rounded-xl bg-doodle-warm border-2 border-doodle-ink font-cute text-xs text-doodle-ink focus:outline-none focus: 
+    <textarea id="rsvp-wish" rows="3" required placeholder="写下一句给新人的悄悄话，提交后将立刻在顶部弹幕飘过哦..." class="w-full px-3 py-2 rounded-xl bg-doodle-warm border-2 border-doodle-ink font-cute text-xs text-doodle-ink focus:outline-none focus:bg-white resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-2.5 doodle-btn bg-doodle-rose text-white font-cute text-sm font-bold flex items-center justify-center gap-1.5 cursor-pointer">
+                            <span>💌</span>
+                            <span>提交回执 · 发射祝福弹幕</span>
+                        </button>
+
+                        <!-- 提交后生成的专属手绘席位卡 -->
+                        <div id="rsvp-ticket-card" class="hidden p-3.5 rounded-2xl bg-doodle-yellow/50 border-2 border-dashed border-doodle-ink text-left font-cute">
+                            <div class="flex items-center justify-between border-b border-doodle-ink/20 pb-1.5 mb-1.5">
+                                <span class="text-xs font-bold text-doodle-rose">🎟️ 专属电子喜帖席位卡</span>
+                                <span id="ticket-code" class="font-en text-xs font-bold bg-white px-2 py-0.5 rounded-full border border-doodle-ink">VIP #1024</span>
+                            </div>
+                            <p id="ticket-guest-info" class="text-xs text-doodle-ink font-bold"></p>
+                            <p class="text-[11px] text-doodle-ink/75 mt-0.5">📍 席位区：三楼星河宴会厅 · 甜蜜主宾席区（现场凭姓名签到领伴手礼）</p>
+                        </div>
+                    </form>
+
+                    <!-- 右侧：实时手账祝福墙 + 快捷发弹幕 -->
+                    <div class="reveal-up lg:col-span-6 doodle-card p-5 sm:p-6 bg-[#FFFEFC] flex flex-col justify-between">
+                        <div class="washi-tape-top washi-tape-green"></div>
+                        <div>
+                            <div class="flex items-center justify-between border-b-2 border-dashed border-doodle-ink/20 pb-2 mb-3">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="text-base">✨</span>
+                                    <h3 class="font-cute font-bold text-sm sm:text-base text-doodle-ink">亲友手账祝福墙</h3>
+                                </div>
+                                <span class="px-2.5 py-0.5 doodle-pill bg-doodle-pink text-[11px] font-cute font-bold text-doodle-rose">
+                                    已收 <strong id="wall-count-num" class="font-en">68</strong> 条祝福
+                                </span>
+                            </div>
+
+                            <!-- 祝福滚动列表 -->
+                            <div id="blessing-wall-list" class="space-y-2.5 max-h-64 overflow-y-auto pr-1"></div>
+                        </div>
+
+                        <!-- 底部一键发弹幕条 -->
+                        <div class="mt-4 pt-3 border-t-2 border-dashed border-doodle-ink/20">
+                            <div class="flex items-center gap-2">
+                                <input id="quick-barrage-input" type="text" placeholder="随手发条可爱弹幕飘过屏幕..." class="flex-1 px-3 py-2 rounded-xl bg-doodle-warm border-2 border-doodle-ink font-cute text-xs text-doodle-ink focus:outline-none focus:bg-white">
+                                <button type="button" onclick="sendQuickBarrage()" class="px-3.5 py-2 doodle-btn bg-doodle-yellow font-cute text-xs font-bold text-doodle-ink shrink-0">
+                                    发射 🚀
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 11. 页脚手绘致谢与庆祝撒花
+                 ========================================== -->
+            <footer class="pt-6 pb-12 text-center font-cute">
+                <div class="reveal-up doodle-card p-5 sm:p-6 max-w-xl mx-auto bg-[#FFFEFC]">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-doodle-pink border-2 border-doodle-ink shadow-[2px_2px_0px_#3D312A] mb-2">
+                        <span class="text-xl">🥂</span>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-doodle-ink">期待与您在秋日星河相见</h3>
+                    <p class="text-xs text-doodle-ink/75 mt-1 leading-relaxed">
+                        “故事很长，我们长话短说；余生很美，盼您亲临见证。”
+                    </p>
+                    <div class="mt-4 flex flex-wrap items-center justify-center gap-2.5">
+                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-4 py-1.5 doodle-btn bg-white text-xs font-bold text-doodle-ink flex items-center gap-1">
+                            <span>⬆️</span><span>回到顶部</span>
+                        </button>
+                    </div>
+                    <p class="font-en text-xs text-doodle-ink/50 mt-4">Lu Jingxing &amp; Shen Zhiyi · 2026.10.24 Wedding</p>
+                </div>
+            </footer>
+        </main>
+
+        <!-- ==========================================
+             12. 左右底角常驻手绘礼花筒 (滚动到底部自动喷射糖果彩纸)
+             ========================================== -->
+        <button id="corner-popper-l" onclick="fireCornerPopper('left')" aria-label="左侧庆祝礼花，点击喷射" class="fixed bottom-4 left-3 z-40 w-11 h-11 rounded-full bg-doodle-yellow border-2 border-doodle-ink shadow-[2px_3px_0px_#3D312A] flex items-center justify-center text-lg popper-idle-l cursor-pointer">
+            <svg viewBox="0 0 48 48" class="w-8 h-8" aria-hidden="true">
+                <path d="M8 36L27 17l8 8-19 19-8-8Z" fill="#F28482" stroke="#3D312A" stroke-width="2.4" stroke-linejoin="round"/>
+                <path d="m23 21 8 8M9 35l5 5" stroke="#FFF7EB" stroke-width="2" stroke-linecap="round"/>
+                <path d="m29 14 3-6m3 10 7-2m-5-7 2-4" stroke="#3D312A" stroke-width="2" stroke-linecap="round"/>
+                <path d="m36 4 1.5 3.5L41 9l-3.5 1.5L36 14l-1.5-3.5L31 9l3.5-1.5L36 4Z" fill="#FFCCD2" stroke="#3D312A" stroke-width="1.3"/>
+                <circle cx="43" cy="19" r="2" fill="#F28482" stroke="#3D312A" stroke-width="1"/><path d="m27 7 2 2-2 2-2-2Z" fill="#D2E7F9" stroke="#3D312A" stroke-width="1"/>
+            </svg>
+        </button>
+        <button id="corner-popper-r" onclick="fireCornerPopper('right')" aria-label="右侧庆祝礼花，点击喷射" class="fixed bottom-4 right-3 z-40 w-11 h-11 rounded-full bg-doodle-pink border-2 border-doodle-ink shadow-[2px_3px_0px_#3D312A] flex items-center justify-center text-lg popper-idle-r cursor-pointer">
+            <svg viewBox="0 0 48 48" class="w-8 h-8" aria-hidden="true">
+                <g transform="translate(48 0) scale(-1 1)">
+                    <path d="M8 36L27 17l8 8-19 19-8-8Z" fill="#F28482" stroke="#3D312A" stroke-width="2.4" stroke-linejoin="round"/>
+                    <path d="m23 21 8 8M9 35l5 5" stroke="#FFF7EB" stroke-width="2" stroke-linecap="round"/>
+                    <path d="m29 14 3-6m3 10 7-2m-5-7 2-4" stroke="#3D312A" stroke-width="2" stroke-linecap="round"/>
+                    <path d="m36 4 1.5 3.5L41 9l-3.5 1.5L36 14l-1.5-3.5L31 9l3.5-1.5L36 4Z" fill="#FCE794" stroke="#3D312A" stroke-width="1.3"/>
+                    <circle cx="43" cy="19" r="2" fill="#F28482" stroke="#3D312A" stroke-width="1"/><path d="m27 7 2 2-2 2-2-2Z" fill="#D2E7F9" stroke="#3D312A" stroke-width="1"/>
+                </g>
+            </svg>
+        </button>
+
+        <!-- ==========================================
+             13. 全屏拍立得照片灯箱弹窗 (Lightbox)
+             ========================================== -->
+        <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-doodle-ink/80 p-4 select-none" onclick="closeLightbox()">
+            <div class="doodle-card p-3 sm:p-4 bg-white max-w-lg w-full relative" onclick="event.stopPropagation()">
+                <button onclick="closeLightbox()" class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-doodle-rose text-white border-2 border-doodle-ink font-bold text-xs flex items-center justify-center shadow-[2px_2px_0px_#3D312A]">✕</button>
+                <div class="rounded-2xl overflow-hidden aspect-[4/5] bg-doodle-warm border border-doodle-ink/30">
+                    <img id="lightbox-img" src="" alt="婚纱照大图" class="w-full h-full object-cover">
+                </div>
+                <div class="mt-3 flex items-center justify-between px-1 font-cute">
+                    <div>
+                        <h4 id="lightbox-title" class="text-sm font-bold text-doodle-ink"></h4>
+                        <p id="lightbox-sub" class="text-xs text-doodle-ink/70"></p>
+                    </div>
+                    <div class="flex gap-1.5">
+                        <button onclick="stepGallery(-1); syncLightboxContent();" class="px-2.5 py-1 doodle-btn bg-doodle-warm text-xs font-bold">上一张</button>
+                        <button onclick="stepGallery(1); syncLightboxContent();" class="px-2.5 py-1 doodle-btn bg-doodle-yellow text-xs font-bold">下一张</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             14. 地图导航选择弹窗
+             ========================================== -->
+        <div id="nav-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-doodle-ink/70 p-4" onclick="closeNavModal()">
+            <div class="doodle-card p-5 bg-[#FFFEFC] max-w-xs w-full text-center font-cute space-y-3" onclick="event.stopPropagation()">
+                <span class="text-2xl">🧭</span>
+                <h4 class="text-base font-bold text-doodle-ink">选择导航方式</h4>
+                <p class="text-xs text-doodle-ink/75">目的地：云栖湖畔大酒店（长宁区云栖湖畔大道520号）</p>
+                <div class="space-y-2 pt-1">
+                    <a href="https://uri.amap.com/search?keyword=云栖湖畔大酒店" target="_blank" rel="noopener" class="block w-full py-2 doodle-btn bg-doodle-yellow text-xs font-bold text-doodle-ink">🗺️ 高德地图导航</a>
+                    <a href="https://api.map.baidu.com/geocoder?address=上海市长宁区云栖湖畔大道520号&output=html" target="_blank" rel="noopener" class="block w-full py-2 doodle-btn bg-doodle-blue text-xs font-bold text-doodle-ink">🐾 百度地图导航</a>
+                    <button onclick="copyVenueAddress(); closeNavModal();" class="w-full py-2 doodle-btn bg-doodle-pink text-xs font-bold text-doodle-rose">📋 直接复制地址</button>
+                </div>
+                <button onclick="closeNavModal()" class="text-xs text-doodle-ink/60 underline pt-1">取消关闭</button>
+            </div>
+        </div>
+
+        <!-- 轻提示 Toast -->
+        <div id="doodle-toast" class="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 px-4 py-2 doodle-pill bg-doodle-ink text-white font-cute text-xs shadow-lg">
+            提示信息
+        </div>
+
+    </div>
+
+    <!-- =========================================================
+         全站核心丝滑交互与 60fps 动画脚本
+         ========================================================= -->
+    <script>
+        /* ---------------------------------------------------------
+           0. 通用轻提示 Toast
+        --------------------------------------------------------- */
+        let toastTimer = null;
+        function showToast(msg) {
+            const el = document.getElementById('doodle-toast');
+            if (!el) return;
+            el.textContent = msg;
+            el.style.opacity = '1';
+            el.style.transform = 'translate(-50%, -6px)';
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                el.style.opacity = '0';
+                el.style.transform = 'translate(-50%, 0)';
+            }, 2400);
+        }
+
+        /* 将页面内所有彩色 emoji 统一替换为可控颜色的手绘 SVG 图标 */
+        const emojiPattern = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu;
+        function doodleSvgForEmoji(char) {
+            let shape = '<path d="M12 20 C3 13 7 5 12 10 C17 5 21 13 12 20Z"/>';
+            if (/[🎉🎊🎈]/u.test(char)) shape = '<path d="M12 3 C17 3 20 7 19 11 C18 16 14 18 12 20 C10 18 6 16 5 11 C4 7 7 3 12 3Z"/><path d="M12 20v3M8 23h8"/>';
+            else if (/[📸📷🔍]/u.test(char)) shape = '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M7 7l2-3h6l2 3M12 11a3.5 3.5 0 1 0 0 7a3.5 3.5 0 1 0 0-7Z"/>';
+            else if (/[🎵🎶]/u.test(char)) shape = '<path d="M16 4v12.5a3 3 0 1 1-2-2.8V7l7-2v9.5a3 3 0 1 1-2-2.8V3Z"/>';
+            else if (/[📍🧭🗺️]/u.test(char)) shape = '<path d="M12 22s7-6.8 7-12a7 7 0 1 0-14 0c0 5.2 7 12 7 12Z"/><circle cx="12" cy="10" r="2.2"/>';
+            else if (/[💍]/u.test(char)) shape = '<ellipse cx="12" cy="13" rx="7" ry="5"/><path d="M7 12c0-5 10-5 10 0"/><path d="M9 7l3-3 3 3"/>';
+            else if (/[🌸🌺]/u.test(char)) shape = '<path d="M12 12c-6-1-6-7-2-8c1 0 2 1 2 3c0-2 1-3 2-3c4 1 4 7-2 8Z"/><path d="M12 12c6-1 6 5 2 8c-1 0-2-1-2-3c0 2-1 3-2 3c-4-1-4-7 2-8Z"/>';
+            else if (/[✨✦⭐]/u.test(char)) shape = '<path d="M12 2l2.2 6.1L20 10l-5.8 2.2L12 19l-2.2-6.8L4 10l5.8-1.9L12 2Z"/>';
+            return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g>${shape}</g></svg>`;
+        }
+        function replaceEmojiText(root = document.body) {
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+                acceptNode(node) {
+                    const parent = node.parentElement;
+                    if (!parent || parent.closest('script,style,svg,.svg-doodle-icon') || !emojiPattern.test(node.nodeValue || '')) {
+                        emojiPattern.lastIndex = 0;
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    emojiPattern.lastIndex = 0;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            const nodes = [];
+            while (walker.nextNode()) nodes.push(walker.currentNode);
+            nodes.forEach(node => {
+                const text = node.nodeValue;
+                const frag = document.createDocumentFragment();
+                let last = 0;
+                text.replace(emojiPattern, (match, offset) => {
+                    if (offset > last) frag.appendChild(document.createTextNode(text.slice(last, offset)));
+                    const span = document.createElement('span');
+                    span.className = 'svg-doodle-icon';
+                    span.dataset.emoji = match;
+                    span.setAttribute('aria-label', match);
+                    span.innerHTML = doodleSvgForEmoji(match);
+                    frag.appendChild(span);
+                    last = offset + match.length;
+                    return match;
+                });
+                if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            });
+        }
+        replaceEmojiText();
+        new MutationObserver(records => records.forEach(record => {
+            record.addedNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) replaceEmojiText(node.parentNode);
+                else if (node.nodeType === Node.ELEMENT_NODE && !node.closest('script,style,.svg-doodle-icon')) replaceEmojiText(node);
+            });
+        })).observe(document.body, { childList: true, subtree: true });
+
+        /* ---------------------------------------------------------
+           1. MP3 婚礼背景音乐（含 Web Audio 八音盒柔美保底旋律）
+        --------------------------------------------------------- */
+        const mp3Tracks = [
+            { name: '浪漫钢琴曲', url: './一年.mp3' },
+            { name: '甜茶圆舞曲', url: './有点甜.mp3' },
+            { name: '橘子海微风', url: './执子之手.mp3' }
+        ];
+        let currentTrackIdx = 0;
+        let isMusicPlaying = false;
+        let synthTimer = null;
+        let audioCtx = null;
+
+        const bgmAudio = document.getElementById('bgm-audio');
+        bgmAudio.src = mp3Tracks[0].url;
+
+        function startFallbackMusicBox() {
+            if (synthTimer) return;
+            try {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!audioCtx) audioCtx = new AudioContextClass();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const notes = [523.25, 659.25, 783.99, 1046.5, 783.99, 659.25, 587.33, 698.46, 880.0, 698.46];
+                let step = 0;
+                synthTimer = setInterval(() => {
+                    if (!isMusicPlaying) return;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.05, audioCtx.currentTime + 0.04);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.55);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.6);
+                    step++;
+                }, 480);
+            } catch (e) {}
+        }
+
+        function stopFallbackMusicBox() {
+            if (synthTimer) {
+                clearInterval(synthTimer);
+                synthTimer = null;
+            }
+        }
+
+        function updateMusicUI(playing) {
+            isMusicPlaying = playing;
+            const disc = document.getElementById('vinyl-disc');
+            const notes = document.getElementById('floating-notes');
+            if (playing) {
+                disc.classList.remove('vinyl-paused');
+                notes.classList.remove('hidden');
+            } else {
+                disc.classList.add('vinyl-paused');
+                notes.classList.add('hidden');
+            }
+        }
+
+        function toggleMp3Music(forcePlay = false) {
+            if (isMusicPlaying && !forcePlay) {
+                bgmAudio.pause();
+                stopFallbackMusicBox();
+                updateMusicUI(false);
+                showToast('🎵 背景音乐已暂停');
+                return;
+            }
+            updateMusicUI(true);
+            bgmAudio.play().then(() => {
+                stopFallbackMusicBox();
+            }).catch(() => {
+                startFallbackMusicBox();
+            });
+        }
+
+        function switchMp3Track() {
+            currentTrackIdx = (currentTrackIdx + 1) % mp3Tracks.length;
+            const track = mp3Tracks[currentTrackIdx];
+            document.getElementById('track-name-label').textContent = track.name;
+            bgmAudio.src = track.url;
+            toggleMp3Music(true);
+            showToast(`🎶 已切换曲目：《${track.name}》`);
+        }
+
+        /* ---------------------------------------------------------
+           2. 婚礼大帐篷帷幔开场与重播
+        --------------------------------------------------------- */
+        function openWeddingCurtains(skip = false) {
+            const overlay = document.getElementById('curtain-overlay');
+            if (!overlay || overlay.classList.contains('is-open')) return;
+            overlay.classList.add('is-open');
+            toggleMp3Music(true);
+            if (!skip) {
+                burstConfetti(window.innerWidth / 2, window.innerHeight / 2, 45);
+            }
+            setTimeout(() => {
+                overlay.style.visibility = 'hidden';
+                overlay.style.pointerEvents = 'none';
+            }, 1250);
+        }
+
+        function replayWeddingCurtains() {
+            const overlay = document.getElementById('curtain-overlay');
+            if (!overlay) return;
+            overlay.style.visibility = 'visible';
+            overlay.style.pointerEvents = 'auto';
+            overlay.classList.remove('is-open');
+            showToast('🎪 已为您合上婚礼帷幔，点击猫爪印章可再次拉开！');
+        }
+
+        /* ---------------------------------------------------------
+           3. 60fps 顶部双轨祝福弹幕引擎
+        --------------------------------------------------------- */
+        const barragePool = [
+            { user: '伴娘小鹿', text: '知意今天美得像童话公主！要永远幸福呀 💖', bg: '#FFCCD2' },
+            { user: '大学室友阿泽', text: '恭喜陆工抱得美人归！百年好合！🥂', bg: '#FCE794' },
+            { user: '橘猫年糕', text: '喵呜~ 本喵批准你们一辈子锁死！🐾', bg: '#CBE5B8' },
+            { user: '表姐林琳', text: '神仙眷侣天作之合，早生贵子哟 ✨', bg: '#D2E7F9' },
+            { user: '设计院老王', text: '陆工的图纸画得稳，老婆追得更稳！🎉', bg: '#FFF7EB' },
+            { user: '插画社团团长', text: '祝你们每天都像橘子汽水一样冒泡甜蜜 🍊', bg: '#FFCCD2' }
+        ];
+        let barrageEnabled = true;
+        let barrageCursor = 0;
+
+        function spawnSingleBarrage(item, trackIdx = null) {
+            if (!barrageEnabled) return;
+            const tIdx = trackIdx !== null ? trackIdx : (barrageCursor % 2);
+            const track = document.getElementById(`barrage-track-${tIdx}`);
+            if (!track) return;
+
+            const pill = document.createElement('div');
+            pill.className = 'barrage-pill doodle-pill px-3 py-1 text-xs font-cute font-bold text-doodle-ink flex items-center gap-1.5';
+            pill.style.backgroundColor = item.bg || '#FFF9F0';
+            const duration = (9.5 + Math.random() * 2.5).toFixed(2);
+            pill.style.animationDuration = `${duration}s`;
+            pill.innerHTML = `<span class="text-doodle-rose">♥</span><span>${item.user}：${item.text}</span>`;
+
+            pill.addEventListener('animationend', () => pill.remove());
+            track.appendChild(pill);
+            barrageCursor++;
+        }
+
+        setInterval(() => {
+            if (!barrageEnabled || document.hidden) return;
+            const item = barragePool[barrageCursor % barragePool.length];
+            spawnSingleBarrage(item);
+        }, 2400);
+
+        function toggleBarrage() {
+            barrageEnabled = !barrageEnabled;
+            const stage = document.getElementById('barrage-stage');
+            const dot = document.getElementById('barrage-dot');
+            const txt = document.getElementById('barrage-btn-text');
+            if (barrageEnabled) {
+                stage.style.opacity = '1';
+                dot.className = 'w-2 h-2 rounded-full bg-emerald-500 border border-doodle-ink';
+                txt.textContent = '弹幕开';
+                showToast('💬 顶部祝福弹幕已开启');
+            } else {
+                stage.style.opacity = '0';
+                dot.className = 'w-2 h-2 rounded-full bg-rose-400 border border-doodle-ink';
+                txt.textContent = '弹幕关';
+                showToast('🙈 顶部祝福弹幕已隐藏');
+            }
+        }
+
+        function sendQuickBarrage() {
+            const input = document.getElementById('quick-barrage-input');
+            const val = (input.value || '').trim();
+            if (!val) {
+                showToast('✏️ 先写一句甜甜的弹幕吧~');
+                return;
+            }
+            const newItem = { user: '现场亲友', text: val, bg: '#FCE794' };
+            barragePool.unshift(newItem);
+            if (!barrageEnabled) toggleBarrage();
+            spawnSingleBarrage(newItem, 0);
+            addWallItem('现场亲友', '✨ 欣然赴约', val);
+            input.value = '';
+            burstConfetti(window.innerWidth * 0.75, window.innerHeight * 0.7, 25);
+            showToast('🚀 弹幕已发射上墙！');
+        }
+
+        /* ---------------------------------------------------------
+           4. 实时婚礼倒计时 (目标：2026-10-24 12:08:00)
+        --------------------------------------------------------- */
+        const weddingTargetTime = new Date('2026-10-24T12:08:00+08:00').getTime();
+        function updateCountdown() {
+            const now = Date.now();
+            let diff = weddingTargetTime - now;
+            if (diff < 0) {
+                // 若已过设定时间，自动展示甜蜜进行中循环倒数
+                diff = (7 * 86400000) - (Math.abs(diff) % (7 * 86400000));
+            }
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+            document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+            document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        /* ---------------------------------------------------------
+           5. 新郎 & 新娘左右合体与 3D 翻面交互
+        --------------------------------------------------------- */
+        let allCoupleFlipped = false;
+        function flipSingleAvatar(who) {
+            const el = document.getElementById(`${who}-flip-inner`);
+            if (el) el.classList.toggle('is-flipped');
+        }
+
+        function toggleAllCoupleAvatars() {
+            allCoupleFlipped = !allCoupleFlipped;
+            const g = document.getElementById('groom-flip-inner');
+            const b = document.getElementById('bride-flip-inner');
+            const txt = document.getElementById('couple-avatar-mode-text');
+            if (allCoupleFlipped) {
+                g.classList.add('is-flipped');
+                b.classList.add('is-flipped');
+                txt.textContent = '切换真人婚纱';
+            } else {
+                g.classList.remove('is-flipped');
+                b.classList.remove('is-flipped');
+                txt.textContent = '切换Q版手绘';
+            }
+        }
+
+        function replayCoupleMerge(e) {
+            const stage = document.getElementById('couple-merge-stage');
+            if (!stage) return;
+            stage.classList.remove('is-merged');
+            void stage.offsetWidth;
+            setTimeout(() => {
+                stage.classList.add('is-merged');
+                if (e && e.currentTarget) burstConfettiFromElement(e.currentTarget, 28);
+            }, 80);
+        }
+
+        function likeCoupleCard(e, who) {
+            const span = document.getElementById(`${who}-like-num`);
+            if (span) span.textContent = parseInt(span.textContent, 10) + 1;
+            burstConfetti(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 18);
+            showToast(who === 'groom' ? '💖 为新郎陆景行点了个赞！' : '🌸 为新娘沈知意点了个赞！');
+        }
+
+        /* ---------------------------------------------------------
+           6. 丝滑 3D 拍立得婚纱画廊 (支持立体/叠卡/柔光 + 触控滑动)
+        --------------------------------------------------------- */
+        const galleryPhotos = [
+            {
+                url: 'image/2.jpg',
+                title: '晨光里的第一封情书',
+                sub: '微风吹动头纱的温柔瞬间，定格我们的永恒序曲',
+                likes: 128
+            },
+            {
+                url: 'image/3.jpg',
+                title: '橘子海的落日华尔兹',
+                sub: '在暮色与海浪之间起舞，连影子都写满浪漫',
+                likes: 156
+            },
+            {
+                url: 'image/4.jpg',
+                title: '草坪上的手绘誓言',
+                sub: '十指紧扣走过鲜花拱门，把四季都装进相册',
+                likes: 142
+            },
+            {
+                url: 'image/5.jpg',
+                title: '旋转楼梯的回眸心动',
+                sub: '建筑师计算过最美的光影角度，恰好落在你眉眼间',
+                likes: 189
+            },
+            {
+                url: 'image/6.jpg',
+                title: '森林秘境的童话午后',
+                sub: '阳光穿过树梢洒在裙摆，像极了知意笔下的插画',
+                likes: 164
+            },
+            {
+                url: 'image/7.jpg',
+                title: '星河夜幕下的烟火之吻',
+                sub: '从此万家灯火里，有一盏永远为我们而亮',
+                likes: 215
+            },
+              {
+                url: 'image/8.jpg',
+                title: '星河夜幕下的烟火之吻',
+                sub: '从此万家灯火里，有一盏永远为我们而亮',
+                likes: 215
+            }
+        ];
+
+        let curSlide = 0;
+        let galleryMode = 'coverflow';
+        let galleryAutoplay = true;
+        let galleryAutoplayTimer = null;
+        const slidesTrack = document.getElementById('gallery-slides-track');
+        const thumbStrip = document.getElementById('thumb-strip');
+
+        function initGalleryDOM() {
+            slidesTrack.innerHTML = '';
+            thumbStrip.innerHTML = '';
+            galleryPhotos.forEach((p, idx) => {
+                const card = document.createElement('div');
+                card.className = 'gallery-slide-card doodle-card p-2 sm:p-3 bg-white cursor-pointer flex flex-col';
+                card.onclick = () => {
+                    if (curSlide === idx) openLightboxCurrent();
+                    else goToSlide(idx);
+                };
+                card.innerHTML = `
+                    <div class="relative w-full h-full rounded-xl overflow-hidden bg-doodle-warm border border-doodle-ink/30">
+                        <img src="${p.url}" alt="${p.title}" decoding="async" class="w-full h-full object-cover pointer-events-none">
+                        <div class="absolute top-2 right-2 px-2 py-0.5 doodle-pill bg-white/90 text-[10px] font-cute font-bold text-doodle-ink">
+                            #${String(idx + 1).padStart(2, '0')}
+                        </div>
+                    </div>
+                `;
+                slidesTrack.appendChild(card);
+
+                const thumb = document.createElement('button');
+                thumb.className = 'aspect-square rounded-xl overflow-hidden border-2 border-doodle-ink transition-all';
+                thumb.onclick = () => goToSlide(idx);
+                thumb.innerHTML = `<img src="${p.url}" alt="${p.title}" class="w-full h-full object-cover">`;
+                thumbStrip.appendChild(thumb);
+            });
+            renderGalleryTransforms();
+        }
+
+        function renderGalleryTransforms() {
+            const cards = slidesTrack.children;
+            const thumbs = thumbStrip.children;
+            const total = galleryPhotos.length;
+
+            for (let i = 0; i < total; i++) {
+                let offset = i - curSlide;
+                if (offset > total / 2) offset -= total;
+                if (offset < -total / 2) offset += total;
+
+                const card = cards[i];
+                const absOff = Math.abs(offset);
+                card.style.zIndex = String(20 - absOff);
+
+                if (galleryMode === 'coverflow') {
+                    if (absOff > 2) {
+                        card.style.opacity = '0';
+                        card.style.pointerEvents = 'none';
+                        card.style.transform = `translate3d(${offset * 55}%, 0, -260px) scale(0.75)`;
+                    } else {
+                        card.style.opacity = offset === 0 ? '1' : '0.72';
+                        card.style.pointerEvents = 'auto';
+                        const tx = offset * 42;
+                        const tz = -absOff * 110;
+                        const ry = offset * -22;
+                        const rot = offset * 3;
+                        card.style.transform = `translate3d(${tx}%, 0, ${tz}px) rotateY(${ry}deg) rotateZ(${rot}deg)`;
+                    }
+                } else if (galleryMode === 'cards') {
+                    if (offset < 0 || offset > 3) {
+                        card.style.opacity = '0';
+                        card.style.pointerEvents = 'none';
+                        card.style.transform = `translate3d(-35%, 10px, -120px) rotate(-8deg)`;
+                    } else {
+                        card.style.opacity = String(1 - offset * 0.22);
+                        card.style.pointerEvents = offset === 0 ? 'auto' : 'none';
+                        card.style.transform = `translate3d(${offset * 14}px, ${-offset * 8}px, ${-offset * 60}px) rotate(${offset * 3.5}deg)`;
+                    }
+                } else if (galleryMode === 'filmstrip') {
+                    card.style.opacity = absOff > 2 ? '0' : (offset === 0 ? '1' : '0.62');
+                    card.style.pointerEvents = absOff <= 1 ? 'auto' : 'none';
+                    card.style.transform = `translate3d(${offset * 34}%, ${absOff ? 15 : 0}px, ${-absOff * 90}px) scale(${offset === 0 ? 1 : 0.78}) rotate(${offset * 2}deg)`;
+                } else {
+                    card.style.opacity = offset === 0 ? '1' : '0';
+                    card.style.pointerEvents = offset === 0 ? 'auto' : 'none';
+                    card.style.transform = offset === 0 ? 'scale(1) rotate(0deg)' : 'scale(0.92) rotate(2deg)';
+                }
+
+                if (thumbs[i]) {
+                    thumbs[i].style.transform = i === curSlide ? 'scale(1.06)' : 'scale(0.95)';
+                    thumbs[i].style.opacity = i === curSlide ? '1' : '0.5';
+                }
+            }
+
+            const curData = galleryPhotos[curSlide];
+            document.getElementById('gallery-index-badge').textContent = `${String(curSlide + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+            document.getElementById('gallery-caption-title').textContent = curData.title;
+            document.getElementById('gallery-caption-sub').textContent = curData.sub;
+            document.getElementById('photo-like-count').textContent = curData.likes;
+        }
+
+        function goToSlide(idx) {
+            const total = galleryPhotos.length;
+            curSlide = (idx + total) % total;
+            renderGalleryTransforms();
+        }
+
+        function stepGallery(dir) {
+            goToSlide(curSlide + dir);
+        }
+
+        function toggleGalleryAutoplay() {
+            galleryAutoplay = !galleryAutoplay;
+            const btn = document.getElementById('gallery-autoplay-btn');
+            if (galleryAutoplay) {
+                clearInterval(galleryAutoplayTimer);
+                galleryAutoplayTimer = setInterval(() => {
+                    if (!document.hidden) stepGallery(1);
+                }, 4200);
+                btn.innerHTML = '<span aria-hidden="true">Ⅱ</span><span>暂停轮播</span>';
+                btn.className = 'px-2.5 py-1 doodle-btn bg-doodle-ink text-xs font-cute font-bold text-white flex items-center gap-1';
+                btn.setAttribute('aria-pressed', 'true');
+            } else {
+                clearInterval(galleryAutoplayTimer);
+                galleryAutoplayTimer = null;
+                btn.innerHTML = '<span aria-hidden="true">▶</span><span>开启轮播</span>';
+                btn.className = 'px-2.5 py-1 doodle-btn bg-doodle-yellow text-xs font-cute font-bold text-doodle-ink flex items-center gap-1';
+                btn.setAttribute('aria-pressed', 'false');
+            }
+        }
+
+        function switchGalleryMode(mode) {
+            galleryMode = mode;
+            ['coverflow', 'cards', 'fade', 'filmstrip'].forEach(m => {
+                const btn = document.getElementById(`mode-btn-${m}`);
+                if (m === mode) {
+                    btn.className = 'px-2.5 py-1 rounded-xl text-xs font-cute font-bold transition-all bg-doodle-ink text-white';
+                } else {
+                    btn.className = 'px-2.5 py-1 rounded-xl text-xs font-cute font-bold transition-all text-doodle-ink';
+                }
+            });
+            renderGalleryTransforms();
+        }
+
+        function likeCurrentPhoto(e) {
+            galleryPhotos[curSlide].likes++;
+            document.getElementById('photo-like-count').textContent = galleryPhotos[curSlide].likes;
+            burstConfetti(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 20);
+            showToast('♥ 已为这张甜蜜婚纱照沾喜气！');
+        }
+
+        // 画廊手指滑动支持
+        const galleryViewport = document.getElementById('gallery-viewport');
+        let touchStartX = 0;
+        galleryViewport.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        galleryViewport.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 36) stepGallery(dx < 0 ? 1 : -1);
+        }, { passive: true });
+
+        // 灯箱预览
+        function syncLightboxContent() {
+            const cur = galleryPhotos[curSlide];
+            document.getElementById('lightbox-img').src = cur.url;
+            document.getElementById('lightbox-title').textContent = cur.title;
+            document.getElementById('lightbox-sub').textContent = cur.sub;
+        }
+        function openLightboxCurrent() {
+            syncLightboxContent();
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        initGalleryDOM();
+        galleryAutoplayTimer = setInterval(() => {
+            if (!document.hidden) stepGallery(1);
+        }, 4200);
+
+        /* ---------------------------------------------------------
+           7. 恋爱问答翻牌、契约书盖章、穿搭与伴手礼开箱
+        --------------------------------------------------------- */
+        function toggleQuizCard(cardEl) {
+            const inner = cardEl.querySelector('.flip-inner');
+            if (inner) {
+                inner.classList.toggle('is-flipped');
+                burstConfettiFromElement(cardEl, 14);
+            }
+        }
+
+        let hasStampedContract = false;
+        function stampLoveContract(e) {
+            const mark = document.getElementById('contract-stamp-mark');
+            const countEl = document.getElementById('witness-count');
+            const btnText = document.getElementById('stamp-btn-text');
+            mark.classList.remove('hidden', 'stamp-active');
+            void mark.offsetWidth;
+            mark.classList.add('stamp-active');
+
+            if (!hasStampedContract) {
+                hasStampedContract = true;
+                countEl.textContent = parseInt(countEl.textContent, 10) + 1;
+                btnText.textContent = '已盖喜印 · 再盖一次';
+            }
+            burstConfetti(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2, 36);
+            showToast('💮 喜印加盖成功！感谢您成为我们的幸福见证人！');
+        }
+
+        function selectDressSwatch(name, hex, desc) {
+            const dot = document.getElementById('dress-swatch-dot');
+            const text = document.getElementById('dress-swatch-desc');
+            dot.style.backgroundColor = hex;
+            text.innerHTML = `<strong>${name}</strong>：${desc}`;
+        }
+
+        let giftBoxOpen = false;
+        function toggleGiftBox() {
+            giftBoxOpen = !giftBoxOpen;
+            const closedView = document.getElementById('gift-closed-view');
+            const openedView = document.getElementById('gift-opened-view');
+            const btn = document.getElementById('gift-toggle-btn');
+            if (giftBoxOpen) {
+                closedView.classList.add('hidden');
+                openedView.classList.remove('hidden');
+                openedView.classList.add('grid');
+                btn.textContent = '🎀 收起礼盒';
+                burstConfettiFromElement(btn, 22);
+            } else {
+                closedView.classList.remove('hidden');
+                openedView.classList.add('hidden');
+                openedView.classList.remove('grid');
+                btn.textContent = '✨ 拆开看';
+            }
+        }
+
+        /* ---------------------------------------------------------
+           8. 星河宴会厅手绘地图热点切换与导航
+        --------------------------------------------------------- */
+        const hallZones = {
+            welcome: {
+                badge: '热点 ① · 迎宾留影区',
+                time: '11:00 开放',
+                title: '星河迎宾长廊 & 拍立得留影',
+                desc: '出三楼电梯右转即达。现场备有复古拍立得相机与手写祝福册，凭签到即可领取定制伴手礼袋！',
+                color: '#FFCCD2'
+            },
+            stage: {
+                badge: '热点 ② · 星河主礼堂',
+                time: '12:08 典礼',
+                title: '无柱全景星河主舞台',
+                desc: '全场挑高 9 米无柱星空顶设计，12:08 准时熄灯亮起漫天星河，见证新人交换戒指与誓言。',
+                color: '#CBE5B8'
+            },
+            dessert: {
+                badge: '热点 ③ · 法式甜品台',
+                time: '11:38 供应',
+                title: '树莓马卡龙与鲜果特饮茶歇',
+                desc: '新郎亲自挑选的甜品单！提供低糖树莓马卡龙、草莓大福及无酒精气泡特饮，拍照打卡超好看。',
+                color: '#D2E7F9'
+            },
+            parking: {
+                badge: '热点 ④ · 停车与直达梯',
+                time: '全天免费',
+                title: 'B1/B2 专属免费停车 & 观光梯',
+                desc: '自驾宾客请导航至酒店南门地下车库，停妥后乘 C 区景观电梯直达 3F，签到台可领免费停车券。',
+                color: '#FCE794'
+            }
+        };
+
+        function selectHallZone(key) {
+            const data = hallZones[key];
+            if (!data) return;
+            document.getElementById('zone-badge').textContent = data.badge;
+            document.getElementById('zone-time').textContent = data.time;
+            document.getElementById('zone-title').textContent = data.title;
+            document.getElementById('zone-desc').textContent = data.desc;
+
+            ['welcome', 'stage', 'dessert', 'parking'].forEach(k => {
+                const rect = document.getElementById(`map-rect-${k}`);
+                const btn = document.getElementById(`zone-btn-${k}`);
+                if (k === key) {
+                    rect.setAttribute('fill', hallZones[k].color);
+                    rect.setAttribute('stroke-width', '2.6');
+                    btn.className = 'py-1.5 px-1 doodle-btn bg-doodle-pink text-doodle-ink text-xs font-cute font-bold';
+                } else {
+                    rect.setAttribute('fill', '#FFFFFF');
+                    rect.setAttribute('stroke-width', '1.8');
+                    btn.className = 'py-1.5 px-1 doodle-btn bg-white text-doodle-ink text-xs font-cute font-bold';
+                }
+            });
+        }
+
+        function copyVenueAddress() {
+            const addr = '上海市长宁区云栖湖畔大道520号（云栖湖畔大酒店3F星河宴会厅）';
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(addr).then(() => showToast('📋 酒店详细地址已复制到剪贴板！'));
+            } else {
+                showToast('📍 地址：' + addr);
+            }
+        }
+
+        function openNavModal() {
+            const m = document.getElementById('nav-modal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+        function closeNavModal() {
+            const m = document.getElementById('nav-modal');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        /* ---------------------------------------------------------
+           9. RSVP 赴宴回执表单与实时手账留言墙
+        --------------------------------------------------------- */
+        let guestCount = 1;
+        const initialWallData = [
+            { name: '沈妈妈 & 沈爸爸', status: '✨ 主婚家属', wish: '看着知意从小姑娘长成今天的新娘，愿景行永远宠她护她，小家红红火火！', time: '刚刚' },
+            { name: '伴郎陈宇', status: '✨ 欣然赴约', wish: '见证陆工从图书馆暗恋到今天修成正果，周六伴郎团全员到位！', time: '3分钟前' },
+            { name: '闺蜜棠棠', status: '✨ 欣然赴约', wish: '备好纸巾准备在台下为神仙爱情落泪了！百年好合，永远甜如蜜糖！', time: '8分钟前' },
+            { name: '建筑所周总监', status: '✨ 欣然赴约', wish: '祝景行与知意新婚大喜，人生最重要的“幸福工程”圆满落成！', time: '15分钟前' }
+        ];
+
+        function renderInitialWall() {
+            const list = document.getElementById('blessing-wall-list');
+            list.innerHTML = '';
+            initialWallData.forEach(item => {
+                list.appendChild(createWallCard(item.name, item.status, item.wish, item.time));
+            });
+        }
+
+        function createWallCard(name, status, wish, timeStr = '刚刚') {
+            const div = document.createElement('div');
+            div.className = 'p-3 rounded-2xl bg-doodle-warm/80 border border-doodle-ink/35 font-cute text-xs';
+            div.innerHTML = `
+                <div class="flex items-center justify-between mb-1">
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-bold text-doodle-ink">${name}</span>
+                        <span class="px-2 py-0.2 rounded-full bg-white border border-doodle-ink/30 text-[10px] text-doodle-rose font-bold">${status}</span>
+                    </div>
+                    <span class="text-[10px] text-doodle-ink/50">${timeStr}</span>
+                </div>
+                <p class="text-doodle-ink/85 leading-relaxed">${wish}</p>
+            `;
+            return div;
+        }
+
+        function addWallItem(name, status, wish) {
+            const list = document.getElementById('blessing-wall-list');
+            const card = createWallCard(name, status, wish, '刚刚');
+            list.prepend(card);
+            const numEl = document.getElementById('wall-count-num');
+            numEl.textContent = parseInt(numEl.textContent, 10) + 1;
+        }
+
+        function adjustGuests(delta) {
+            guestCount = Math.max(1, Math.min(10, guestCount + delta));
+            document.getElementById('rsvp-guest-count').textContent = `${guestCount} 人`;
+        }
+
+        function fillQuickWish(text) {
+            document.getElementById('rsvp-wish').value = text;
+        }
+
+        function submitRSVP(e) {
+            e.preventDefault();
+            const name = document.getElementById('rsvp-name').value.trim();
+            const status = document.getElementById('rsvp-status').value;
+            const wish = document.getElementById('rsvp-wish').value.trim();
+            if (!name || !wish) return;
+
+            addWallItem(name, `${status} (${guestCount}人)`, wish);
+            const barrageItem = { user: name, text: wish, bg: '#FFCCD2' };
+            barragePool.unshift(barrageItem);
+            if (!barrageEnabled) toggleBarrage();
+            spawnSingleBarrage(barrageItem, 0);
+
+            // 展示专属电子席位卡
+            const ticket = document.getElementById('rsvp-ticket-card');
+            document.getElementById('ticket-code').textContent = `VIP #${Math.floor(1000 + Math.random() * 9000)}`;
+            document.getElementById('ticket-guest-info').textContent = `尊贵宾客：${name}（${status} · 共 ${guestCount} 位）`;
+            ticket.classList.remove('hidden');
+
+            showToast(`🎉 感谢 ${name}！回执已登记，祝福弹幕已飘过屏幕！`);
+            document.getElementById('rsvp-wish').value = '';
+        }
+
+        renderInitialWall();
+
+        /* ---------------------------------------------------------
+           10. 双向滚动重播动画观察器 & 姻缘红线跟随滚动
+        --------------------------------------------------------- */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-inview');
+                    if (entry.target.id === 'couple-merge-stage') {
+                        entry.target.classList.add('is-merged');
+                    }
+                } else {
+                    entry.target.classList.remove('is-inview');
+                    if (entry.target.id === 'couple-merge-stage') {
+                        entry.target.classList.remove('is-merged');
+                    }
+                }
+            });
+        }, { threshold: 0.14 });
+
+        document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .section-header, #couple-merge-stage').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        const scrollLinePath = document.getElementById('scroll-line-path');
+        const storyProgressLine = document.getElementById('story-progress-line');
+        const storySection = document.getElementById('section-story');
+        let scrollTicking = false;
+
+        let wasAtBottom = false;
+        window.addEventListener('scroll', () => {
+            if (scrollTicking) return;
+            scrollTicking = true;
+            requestAnimationFrame(() => {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                const ratio = Math.min(1, Math.max(0, scrollTop / docHeight));
+                const isAtBottom = scrollTop + window.innerHeight >= document.documentElement.scrollHeight - 72;
+                if (isAtBottom && !wasAtBottom) {
+                    fireBothCornerPoppers();
+                    showToast('礼花为你们的幸福自动绽放！');
+                }
+                wasAtBottom = isAtBottom;
+                if (scrollLinePath) {
+                    scrollLinePath.style.strokeDashoffset = String(3200 * (1 - ratio));
+                }
+                if (storySection && storyProgressLine) {
+                    const rect = storySection.getBoundingClientRect();
+                    const p = Math.min(1, Math.max(0, (window.innerHeight * 0.65 - rect.top) / Math.max(1, rect.height)));
+                    storyProgressLine.style.transform = `translateX(-50%) scaleY(${p})`;
+                }
+                scrollTicking = false;
+            });
+        }, { passive: true });
+
+        /* ---------------------------------------------------------
+           11. 60fps 统一特效 Canvas（漂浮小爱心 + 礼花彩纸喷射）
+        --------------------------------------------------------- */
+        const fxCanvas = document.getElementById('fx-canvas');
+        const ctx = fxCanvas.getContext('2d');
+        let cw = window.innerWidth;
+        let ch = window.innerHeight;
+
+        function resizeFxCanvas() {
+            cw = window.innerWidth;
+            ch = window.innerHeight;
+            fxCanvas.width = cw;
+            fxCanvas.height = ch;
+        }
+        resizeFxCanvas();
+        window.addEventListener('resize', resizeFxCanvas);
+
+        const doodleColors = ['#F28482', '#FCE794', '#FFCCD2', '#CBE5B8', '#D2E7F9'];
+        const ambientFloaters = Array.from({ length: 34 }, (_, index) => ({
+            x: Math.random() * cw,
+            y: Math.random() * ch,
+            size: 3.2 + Math.random() * 3.2,
+            vy: 0.42 + Math.random() * 0.68,
+            vx: (Math.random() - 0.5) * 0.48,
+            type: ['petal', 'leaf', 'sparkle', 'dot'][index % 4],
+            color: ['#F28482', '#FFCCD2', '#E7A2A8', '#CBE5B8', '#93B87C', '#FCE794'][Math.floor(Math.random() * 6)],
+            angle: Math.random() * Math.PI * 2
+        }));
+        const confettiParticles = [];
+
+        function burstConfetti(x, y, count = 28) {
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 2.5 + Math.random() * 6.5;
+                confettiParticles.push({
+                    x,
+                    y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed - 2.2,
+                    size: 5 + Math.random() * 5,
+                    color: doodleColors[Math.floor(Math.random() * doodleColors.length)],
+                    rot: Math.random() * 360,
+                    vRot: (Math.random() - 0.5) * 12,
+                    alpha: 1
+                });
+            }
+        }
+
+        function burstConfettiFromElement(el, count = 24) {
+            if (!el) return;
+            const r = el.getBoundingClientRect();
+            burstConfetti(r.left + r.width / 2, r.top + r.height / 2, count);
+        }
+
+        function fireCornerPopper(side) {
+            const btn = document.getElementById(side === 'left' ? 'corner-popper-l' : 'corner-popper-r');
+            const cls = side === 'left' ? 'popper-firing-l' : 'popper-firing-r';
+            if (btn) {
+                btn.classList.remove(cls);
+                void btn.offsetWidth;
+                btn.classList.add(cls);
+            }
+            const x = side === 'left' ? 40 : cw - 40;
+            const y = ch - 40;
+            burstConfetti(x, y, 32);
+        }
+
+        function releaseCelebrationBalloons() {
+            const layer = document.getElementById('balloon-rise-layer');
+            if (!layer) return;
+            layer.innerHTML = '';
+            const colors = ['pink', 'yellow', 'blue'];
+            for (let i = 0; i < 12; i++) {
+                const balloon = document.createElement('span');
+                balloon.className = `rise-balloon ${colors[i % colors.length]}`;
+                balloon.style.left = `${8 + Math.random() * 84}%`;
+                balloon.style.setProperty('--drift', `${-90 + Math.random() * 180}px`);
+                balloon.style.animationDelay = `${Math.random() * 0.7}s`;
+                balloon.style.transform = `rotate(${-12 + Math.random() * 24}deg)`;
+                balloon.addEventListener('animationend', () => balloon.remove(), { once: true });
+                layer.appendChild(balloon);
+            }
+        }
+
+        function fireBothCornerPoppers() {
+            fireCornerPopper('left');
+            fireCornerPopper('right');
+            releaseCelebrationBalloons();
+        }
+
+        function renderFxLoop() {
+            ctx.clearRect(0, 0, cw, ch);
+
+            // 小尺寸花瓣、嫩叶与星屑缓慢飘落
+            for (let i = 0; i < ambientFloaters.length; i++) {
+                const f = ambientFloaters[i];
+                f.y += f.vy;
+                f.x += f.vx + Math.sin(f.angle) * 0.28;
+                f.angle += f.type === 'leaf' ? 0.018 : 0.012;
+                if (f.y > ch + 12) {
+                    f.y = -12;
+                    f.x = Math.random() * cw;
+                }
+                ctx.save();
+                ctx.globalAlpha = f.type === 'sparkle' ? 0.48 : 0.58;
+                ctx.fillStyle = f.color;
+                ctx.strokeStyle = f.color;
+                ctx.lineWidth = 0.8;
+                ctx.translate(f.x, f.y);
+                ctx.rotate(Math.sin(f.angle) * 0.65);
+                ctx.beginPath();
+                if (f.type === 'petal') {
+                    ctx.moveTo(0, -f.size);
+                    ctx.bezierCurveTo(f.size * 0.9, -f.size * 0.65, f.size * 0.85, f.size * 0.55, 0, f.size);
+                    ctx.bezierCurveTo(-f.size * 0.8, f.size * 0.45, -f.size * 0.85, -f.size * 0.55, 0, -f.size);
+                    ctx.fill();
+                } else if (f.type === 'leaf') {
+                    ctx.moveTo(0, -f.size);
+                    ctx.quadraticCurveTo(f.size * 1.15, -f.size * 0.15, 0, f.size);
+                    ctx.quadraticCurveTo(-f.size * 1.05, f.size * 0.1, 0, -f.size);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.moveTo(0, -f.size * 0.72);
+                    ctx.lineTo(0, f.size * 0.72);
+                    ctx.stroke();
+                } else if (f.type === 'sparkle') {
+                    ctx.moveTo(0, -f.size);
+                    ctx.lineTo(f.size * 0.35, 0);
+                    ctx.lineTo(0, f.size);
+                    ctx.lineTo(-f.size * 0.35, 0);
+                    ctx.closePath();
+                    ctx.fill();
+                } else {
+                    ctx.arc(0, 0, f.size * 0.42, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            // 绘制互动爆发礼花粒子
+            for (let i = confettiParticles.length - 1; i >= 0; i--) {
+                const p = confettiParticles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.18; // 重力
+                p.rot += p.vRot;
+                p.alpha -= 0.016;
+                if (p.alpha <= 0) {
+                    confettiParticles.splice(i, 1);
+                    continue;
+                }
+                ctx.save();
+                ctx.globalAlpha = p.alpha;
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rot * Math.PI) / 180);
+                ctx.fillStyle = p.color;
+                ctx.strokeStyle = '#3D312A';
+                ctx.lineWidth = 1;
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+                ctx.strokeRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+                ctx.restore();
+            }
+
+            requestAnimationFrame(renderFxLoop);
+        }
+        requestAnimationFrame(renderFxLoop);
+    </script>
+</body>
+</html>
